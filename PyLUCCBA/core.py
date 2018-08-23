@@ -2,10 +2,9 @@
 from __future__ import print_function
 import warnings;warnings.filterwarnings('ignore')
 import pprint as pp
-import tools as ts
 import numpy as np
+import tools as ts
 import os
-
 
 _pyLUCCBA_ =\
 u"""
@@ -25,7 +24,7 @@ u"""
 * laurent.faucheux@hotmail.fr                                                       * ╚═╝╩╩╚═╚═╝═╩╝ *
 *****************************************************************************************************
 """
-__version__ = '0.1.0'
+__version__ = '0.1.14'
 __authors__ = [
     "Marion Dupoux <marion.dupoux@gu.se>",
     "Laurent Faucheux <laurent.faucheux@hotmail.fr>"
@@ -199,7 +198,7 @@ class VegetationsAndSoilSpecificities(ts.Cache):
         ... )
         >>> soc_spec = o.carbon_stock_specificities['soc']
         >>> soc_spec['infos']
-        {u'unit': 'Tonne/ha'}
+        {'unit': 'Tonne/ha'}
         >>> soc_spec['values']['DEBUG']
         51.33333333
         """
@@ -443,7 +442,7 @@ class VGCAndSOCDeltas(ts.Cache):
         ...     verbose         = False
         ... )
         >>> o.vegetation_carbon_stock_infos
-        {u'unit': 'Tonne/ha'}
+        {'unit': 'Tonne/ha'}
 
         """
         return self.vegetations_and_so_specificities\
@@ -466,7 +465,7 @@ class VGCAndSOCDeltas(ts.Cache):
         show that the value is actually not involved within the present example.
         
         >>> o.soil_carbon_stock_infos
-        {u'unit': 'Tonne/ha'}
+        {'unit': 'Tonne/ha'}
         """
         return self.vegetations_and_so_specificities\
                .soil_carbon_stock_specificities['infos']
@@ -1327,7 +1326,7 @@ class OutputFlows(ts.Cache):
         involved within the present example.
         
         >>> o.eligible_scenarios
-        [u'DEBUG', u'O']
+        ['DEBUG', 'O']
         """
         return [s for s in sorted(
             self.output_flows_and_infos\
@@ -1418,7 +1417,7 @@ class OutputFlows(ts.Cache):
         involved within the present example.
         
         >>> sorted(o.scenarized_output_infos.items())
-        [(u'unit', 'tonne[Output]/tonne[Output]'), (u'yrb', 2007)]
+        [('unit', 'tonne[Output]/tonne[Output]'), ('yrb', 2007)]
         """
         return self.output_flows_and_infos\
                .keys_and_infos[self.output_flows_scenario.lower()]
@@ -1462,7 +1461,7 @@ class InputFlows(ts.Cache):
         involved within the present example.
 
         >>> o.eligible_scenarios
-        [u'DEBUG', u'DOE']
+        ['DEBUG', 'DOE']
 
         Scenarios depend on the value set for `final_landuse`.
         >>> o = InputFlows(
@@ -1472,7 +1471,7 @@ class InputFlows(ts.Cache):
         ...     first_year      = 2030,
         ... )
         >>> o.eligible_scenarios
-        [u'CRISTANOL', u'DEBUG']
+        ['CRISTANOL', 'DEBUG']
         """
         return [s for s in sorted(
             self.input_flows_and_infos\
@@ -1509,7 +1508,7 @@ class InputFlows(ts.Cache):
         Let's figure out what the possible scenrii are when
         `final_landuse = 'miscanthus'`.
         >> o.eligible_scenarios
-        [u'DEBUG', u'DOE']
+        ['DEBUG', 'DOE']
 
         Note that values associated to each scenario for the year
         2030 are empty strings (i.e. `''`). Those will be automatically
@@ -1534,7 +1533,7 @@ class InputFlows(ts.Cache):
         Let's figure out what the possible scenrii are when
         `final_landuse = 'wheat'`.
         >> o.eligible_scenarios
-        [u'CRISTANOL', u'DEBUG']
+        ['CRISTANOL', 'DEBUG']
 
         Note that the parameter used to set the scenario is named `scenario`.
         However, for testing purpose, we may have reasons for checking which
@@ -1651,7 +1650,7 @@ class InputFlows(ts.Cache):
         >>> sorted(
         ...     o.scenarized_unitary_input_infos.keys()
         ... )
-        ['power', u'unit', u'yrb']
+        ['power', 'unit', 'yrb']
         >>> o.scenarized_unitary_input_infos['unit']
         'tonne[Output]/tonne[Input]'
         >>> o.scenarized_unitary_input_infos['power']
@@ -1743,7 +1742,7 @@ class LandSurfaceFlows(ts.Cache):
         involved within the present example.
         
         >>> o.eligible_scenarios
-        [u'DEBUG', u'MISCANTHUS', u'SUGARBEET', u'WHEAT', u'WHEATSTRAW', u'WOODRESIDUES']
+        ['DEBUG', 'MISCANTHUS', 'SUGARBEET', 'WHEAT', 'WHEATSTRAW', 'WOODRESIDUES']
 
         As it reads above, names of eligible LandSurface-scenarios consist of
         all possible values that can be set for `final_landuse`. Indeed, the
@@ -1875,7 +1874,7 @@ class LandSurfaceFlows(ts.Cache):
         >>> sorted(
         ...     o.scenarized_unitary_land_surface_infos.keys()
         ... )
-        ['power', u'unit']
+        ['power', 'unit']
         >>> o.scenarized_unitary_land_surface_infos['unit']
         'Tonne[Output]/ha'
         
@@ -1961,7 +1960,7 @@ class Co2Prices(ts.Cache):
         involved within the present example.
 
         >>> o.eligible_scenarios
-        [u'A', u'B', u'C', u'DEBUG', u'O', u'SPC', u'WEO2015-450S', u'WEO2015-CPS', u'WEO2015-NPS']
+        ['A', 'B', 'C', 'DEBUG', 'O', 'SPC', 'WEO2015-450S', 'WEO2015-CPS', 'WEO2015-NPS']
         """
         return [s for s in sorted(
             self.co2_prices_and_infos\
@@ -2134,7 +2133,7 @@ class Co2Prices(ts.Cache):
         involved within the present example.
         
         >>> sorted(o.scenarized_co2_infos.items())
-        [('toConvert', False), (u'unit', 'EUR/tonne'), (u'yrb', 'none')]
+        [('toConvert', False), ('unit', 'EUR/tonne'), ('yrb', 'none')]
         
         The value associated with the key `'toConvert'` is not manually filled.
         It is deduced depending on whether the value set for `final_currency`
@@ -2429,7 +2428,7 @@ class CBACalculator(ts.Cache):
         [2050, 2051, 2052, 2053]
         """
         y0 = 1 + self.project_first_year - self.project_timing
-        return range(y0, y0 + self.project_horizon)
+        return list(range(y0, y0 + self.project_horizon))
 
     @ts.Cache._property
     def economic_horizon(self):
@@ -3442,7 +3441,7 @@ class CBACalculator(ts.Cache):
         return self.dashboard.plot(
             abs_=self.horizon,
             imas=self.co2_prices_traj.T,
-            labels=[u'CO2 %s prices [%s/tonne]'%(
+            labels=['CO2 %s prices [%s/tonne]'%(
                 self.co2_prices_scenario, self.final_currency
             )],
             colors=['red'],
@@ -3495,7 +3494,7 @@ class CBACalculator(ts.Cache):
         return self.dashboard.plot(
             abs_=self.horizon,
             imas=self.co2_disc_prices_traj.T,
-            labels=[u'CO2 %s prices-d [%s/tonne]'%(
+            labels=['CO2 %s prices-d [%s/tonne]'%(
                 self.co2_prices_scenario,
                 self.final_currency
             )],
@@ -8362,10 +8361,10 @@ class CBAParametersEndogenizer(object):
     def _ENDOGENIZER_of_the_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows(self, _disc_rate_):
         """ Semi-private method used by the solver when endogenizing the discount rate."""
         self._CBAcI.discount_rate = _disc_rate_
-        map(
-            self._caches_cleaner,
-            self._CBAcI._cache.keys()
-        )
+
+        for key in list(self._CBAcI._cache):
+            self._caches_cleaner(key)
+
         self._CBAcI._cache['endogenizing'] = True
 
         _obj_ = self.OBJECTIVE_NPV_total_unif_co2_flows_VS_NPV_total_diff_co2_flows

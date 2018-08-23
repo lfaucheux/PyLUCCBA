@@ -1,4 +1,4 @@
-﻿# -*- coding: utf8 -*-
+#-*- coding: utf8 -*-
 
 import studies_constant_settings as cs
 import PyLUCCBA as cc

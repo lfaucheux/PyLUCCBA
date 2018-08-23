@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import functools as ft
 import openpyxl as op
 import numpy as np
-import sys
 import os
 import re
+import sys
 
 __authors__ = [
     "Marion Dupoux <marion.dupoux@gu.se>",
@@ -32,7 +32,7 @@ __all__ = [
     'solver_ND',
     'tab',
     'txt_dicter',
-    'xlsx_file_writer'
+    'xlsx_file_writer',
 ]
 
 VERBOSE_DTESTS = False
@@ -78,13 +78,13 @@ def get_file_as_list_of_lines(fname):
     Example
     -------
     >>> get_file_as_list_of_lines('./resources/yields/Output/ETH_yields_FR.txt')[:2]
-    [u'O:unit:tonne[Output]/tonne[Output]', u'O:yrb:2007']
+    ['O:unit:tonne[Output]/tonne[Output]', 'O:yrb:2007']
     """
     with open(fname, 'r') as f:
-        return map(
-            lambda l:l.replace('\n','').decode('latin1'),
-            f.readlines()
-        )
+        return [
+            l.replace('\n','').replace('\r','')
+            for l in f.readlines()
+        ]
 
 ##******************************************
 ##    ┌─┐┌─┐┬  ┬   ┬┌┐┌╔╦╗┬┌┐┌┌┬┐
@@ -144,11 +144,11 @@ def txt_dicter(fname):
     
     >>> scenario_name = 'spc'
     >>> sorted(txt_as_dict[scenario_name].items())
-    [(u'unit', 'EUR/tonne'), (u'yrb', 'none')]
+    [('unit', 'EUR/tonne'), ('yrb', 'none')]
     
     >>> scenario_name = 'weo2015-450s'
     >>> sorted(txt_as_dict[scenario_name].items())
-    [(u'unit', 'USD/tonne'), (u'yrb', 2014)]
+    [('unit', 'USD/tonne'), ('yrb', 2014)]
     """
     splitted_fName   = fname.split(OS_SEP)[:-1]
     containing_foler = splitted_fName[-1]
@@ -253,7 +253,7 @@ def solver_ND(display, title, func, _Z_, bforce, *args, **kwargs):
     >>> solver_ND(
     ...     display = True,
     ...     title   = 'Phi and Pi',
-    ...     func    = lambda (x, y): [x**2 - x - 1, np.sin(y)],
+    ...     func    = lambda xy: [xy[0]**2 - xy[0] - 1, np.sin(xy[1])],
     ...     _Z_     = [1.7, 3.2],
     ...     bforce  = False,
     ... )
@@ -534,40 +534,40 @@ class Cache(object):
         >>> o.verboser(o._cache, 'an_array')
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         key   : an_array
-        value : [[1. 1. 1.]]
-        type  : <type 'numpy.ndarray'>
+        type  : ndarray
         shape : (1, 3)
         sum   : 3.0
         len   : 1
         minkey: 1.0
         maxkey: 1.0
+        value : [[1. 1. 1.]]
 
         >>> o._cache['a_float'] = 1.
         >>> o.verboser(o._cache, 'a_float')
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         key   : a_float
+        type  : float
         value : 1.0
-        type  : <type 'float'>
 
         >>> o._cache['a_list'] = [1., 1., 1.]
         >>> o.verboser(o._cache, 'a_list')
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         key   : a_list
-        value : [1.0, 1.0, 1.0]
-        type  : <type 'list'>
+        type  : list
         sum   : 3.0
         len   : 3
         minkey: 1.0
         maxkey: 1.0
+        value : [1.0, 1.0, 1.0]
 
         >>> o._cache['a_dict'] = {2000: 1., 2100:0.}
         >>> o.verboser(o._cache, 'a_dict')
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         key   : a_dict
-        value : {2000: 1.0, 2100: 0.0}
-        type  : <type 'dict'>
+        type  : dict
         minkey: 2000
         maxkey: 2100
+        value : [(2000, 1.0), (2100, 0.0)]
 
         >>> o._cache['endogenizing'] = True
         >>> o.verboser(o._cache, 'a_list')
@@ -576,9 +576,8 @@ class Cache(object):
             value = _cache[_key_]
             print(50*'~')
             print('key   :', _key_)
-            print('value :', value)
 
-            print('type  :', type(value))
+            print('type  :', type(value).__name__)
 
             if isinstance(value, np.ndarray):
                 print('shape :', value.shape)
@@ -593,6 +592,9 @@ class Cache(object):
                 v_keys = value.keys()
                 print('minkey:', min(v_keys))
                 print('maxkey:', max(v_keys))
+                print('value :', sorted(value.items()))
+            else:                
+                print('value :', value)
 
     @classmethod
     def _property(cls, meth):
@@ -690,11 +692,11 @@ class InMindWithCorrespondingUnit(Cache):
         ... )
         >>> soc = o.values_and_infos_per_key['soc']
         >>> soc['infos']
-        {u'unit': 'Tonne/ha'}
+        {'unit': 'Tonne/ha'}
         >>> sorted(
         ...     soc['values'].items()
         ... )[:3]
-        [(u'ANNUAL CROPLAND', 64.73754052), (u'DEBUG', 51.33333333), (u'DEGRADED GRASSLAND', 49.93333333)]
+        [('ANNUAL CROPLAND', 64.73754052), ('DEBUG', 51.33333333), ('DEGRADED GRASSLAND', 49.93333333)]
         """
         return {
             key: {
@@ -737,6 +739,11 @@ def save_dir_and_file_name(save_dir='', file_name='', save=True):
 ##    ─┐ ┬┬  ┌─┐─┐ ┬    ┌─┐┬┬  ┌─┐    ┬ ┬┬─┐┬┌┬┐┌─┐┬─┐
 ##    ┌┴┬┘│  └─┐┌┴┬┘    ├┤ ││  ├┤     │││├┬┘│ │ ├┤ ├┬┘
 ##    ┴ └─┴─┘└─┘┴ └─────└  ┴┴─┘└─┘────└┴┘┴└─┴ ┴ └─┘┴└─
+try:
+    op_get_column_letter = op.utils.get_column_letter
+except Exception as exc:
+    print(exc)
+    op_get_column_letter = op.cell.get_column_letter
 def xlsx_file_writer(listed_content, save_dir='', file_name=''):
     """ Function which writes lists' contents in xlsx files by assuming
     that `listed_content` is two-dimensional and using elements indexes
@@ -758,7 +765,7 @@ def xlsx_file_writer(listed_content, save_dir='', file_name=''):
     ws = wb.active
     for i_row, row in enumerate(listed_content):
         for i_col, col in enumerate(row):
-            ws['%s%s'%(op.cell.get_column_letter(i_col+1), i_row+1)] = col
+            ws['%s%s'%(op_get_column_letter(i_col+1), i_row+1)] = col
     wb.save('%s%s.xlsx'%(save_dir, file_name))
     return True
 
@@ -795,7 +802,7 @@ class DataReader(Cache):
     def __init__(self, **kwargs):
         super(DataReader, self).__init__()
         self.country          = country_from_kwargs_specifier(kwargs)
-        self.local_folder     = os.getcwd()
+        self.local_folder     = os.path.dirname(__file__)
         self.resources_folder = os.path.join(self.local_folder, 'resources')
 
     def show_resources_tree(self):
@@ -906,7 +913,7 @@ class DataReader(Cache):
                     dict.fromkeys(files).keys()
                 )
             }
-            parent              = reduce(dict.get, folders[:-1], dir_)
+            parent              = ft.reduce(dict.get, folders[:-1], dir_)
             parent[folders[-1]] = subdir
         return dir_['resources']
 
@@ -979,9 +986,10 @@ class Dashboard(object):
             if bar:
                 self.dashB.bar(
                     abs_, ima,
+                    align='center',
                     label=label.upper(),
                     color=color,
-                    align='center'
+                    linewidth=0
                 )
             else:
                 self.dashB.plot(
