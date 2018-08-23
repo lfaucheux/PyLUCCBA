@@ -19,7 +19,7 @@ u"""
 * laurent.faucheux@hotmail.fr                                                       * ╚═╝╩╩╚═╚═╝═╩╝ *
 *****************************************************************************************************
 """
-__version__ = '0.1.16'
+__version__ = '0.1.17'
 __authors__ = [
     "Marion Dupoux <marion.dupoux@gu.se>",
     "Laurent Faucheux <laurent.faucheux@hotmail.fr>"
@@ -43,7 +43,10 @@ __all__ = [
 import warnings;warnings.filterwarnings('ignore')
 import pprint as pp
 import numpy as np
-import PyLUCCBA.tools as ts
+try:
+    import tools as ts
+except:
+    import PyLUCCBA.tools as ts
 import os
 
 VERBOSE        = True
