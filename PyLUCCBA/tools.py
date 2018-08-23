@@ -1,14 +1,5 @@
 # -*- coding: utf8 -*-
 from __future__ import print_function
-from matplotlib.font_manager import FontProperties
-from scipy.optimize import fsolve
-import matplotlib.pyplot as plt
-import functools as ft
-import openpyxl as op
-import numpy as np
-import os
-import re
-import sys
 
 __authors__ = [
     "Marion Dupoux <marion.dupoux@gu.se>",
@@ -29,11 +20,22 @@ __all__ = [
     'poler',
     'redim_row_array',
     'save_dir_and_file_name',
+    'solver_msgr',
     'solver_ND',
     'tab',
     'txt_dicter',
     'xlsx_file_writer',
 ]
+
+from matplotlib.font_manager import FontProperties
+from scipy.optimize import fsolve
+import matplotlib.pyplot as plt
+import functools as ft
+import openpyxl as op
+import numpy as np
+import os
+import re
+import sys
 
 VERBOSE_DTESTS = False
 OS_SEP = os.sep

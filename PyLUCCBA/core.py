@@ -1,10 +1,5 @@
 # -*- coding: utf8 -*-
 from __future__ import print_function, absolute_import
-import warnings;warnings.filterwarnings('ignore')
-import pprint as pp
-import numpy as np
-import PyLUCCBA.tools as ts
-import os
 
 _pyLUCCBA_ =\
 u"""
@@ -24,7 +19,7 @@ u"""
 * laurent.faucheux@hotmail.fr                                                       * ╚═╝╩╩╚═╚═╝═╩╝ *
 *****************************************************************************************************
 """
-__version__ = '0.1.15'
+__version__ = '0.1.16'
 __authors__ = [
     "Marion Dupoux <marion.dupoux@gu.se>",
     "Laurent Faucheux <laurent.faucheux@hotmail.fr>"
@@ -44,6 +39,12 @@ __all__ = [
     'VGCAndSOCDeltas',
     'VegetationsAndSoilSpecificities',
 ]
+
+import warnings;warnings.filterwarnings('ignore')
+import pprint as pp
+import numpy as np
+import PyLUCCBA.tools as ts
+import os
 
 VERBOSE        = True
 VERBOSE_SOLVER = True
