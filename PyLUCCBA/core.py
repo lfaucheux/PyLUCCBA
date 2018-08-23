@@ -1,9 +1,9 @@
 # -*- coding: utf8 -*-
-from __future__ import print_function
+from __future__ import print_function, absolute_import
 import warnings;warnings.filterwarnings('ignore')
 import pprint as pp
 import numpy as np
-import tools as ts
+import PyLUCCBA.tools as ts
 import os
 
 _pyLUCCBA_ =\
@@ -24,7 +24,7 @@ u"""
 * laurent.faucheux@hotmail.fr                                                       * ╚═╝╩╩╚═╚═╝═╩╝ *
 *****************************************************************************************************
 """
-__version__ = '0.1.14'
+__version__ = '0.1.15'
 __authors__ = [
     "Marion Dupoux <marion.dupoux@gu.se>",
     "Laurent Faucheux <laurent.faucheux@hotmail.fr>"
