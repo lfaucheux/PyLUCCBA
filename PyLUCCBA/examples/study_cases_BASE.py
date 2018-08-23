@@ -1,11 +1,6 @@
 # -*- coding: utf8 -*-
 
-__authors__ = [
-    "Marion Dupoux <marion.dupoux@u-paris10.fr>",
-    "Laurent Faucheux <faucheux@centre-cired.fr>"
-]
-
-import constant_settings as cs
+import studies_constant_settings as cs
 import PyLUCCBA as cc
 
 
@@ -27,11 +22,11 @@ cba = cc.CBACalculator(
 cba.all_XLSXed
 objects[cba.run_name] = {'summary':cba.summary_args,'object':cba}
 
-print u"""
+print(u"""
 *******************************************************************************
             ╔═╗┬ ┬┌┬┐┌┬┐┌─┐┬─┐┬┌─┐┌─┐                                         *
             ╚═╗│ │││││││├─┤├┬┘│├┤ └─┐                                         *
             ╚═╝└─┘┴ ┴┴ ┴┴ ┴┴└─┴└─┘└─┘                                         *
-*******************************************************************************"""
+*******************************************************************************""")
 for run_name, dico in objects.items():
-    print dico['summary']
+    print(dico['summary'])
