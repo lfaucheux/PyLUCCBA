@@ -49,4 +49,19 @@ o	“name of the scenario”:yrb: “year”
 ## Acknowledgements 
 I am particularly grateful to Laurent Faucheux from CIRED for the coding of the CBA calculator I conceived. Researchers from l’Institut Français du Pétrole et des énergies nouvelles (Frédérique Bouvart, Cécile Querleu, Daphné Lorne, Pierre Collet) and from l’Institut National de la Recherche Agronomique (Serge Garcia, Stéphane de Cara Alexandra Niedwiedth, Raja Chakir) are also acknowledged for their valuable advice in the search for input data.
 
+## References 
+Hoefnagels, R., E. Smeets, and A. Faaij (2010). “Greenhouse gas footprints of different biofuel production systems”. _Renewable and Sustainable Energy Reviews_ 14.7, pp. 1661–1694.
+
+IEA (2015). _World Energy Outlook 2015_. Tech. rep. International Energy Agency.
+
+IPCC (2006). “Volume 4: Agriculture, Forestry and Other Land Use”. _IPCC guidelines for national greenhouse gas inventories 4_.
+
+Levasseur, A., Lesage, P., Margni, M., Deschênes, L., and Samson, R (2010). “Considering Time in LCA: Dynamic LCA and Its Application to Global Warming Impact Assessments”. _Environmental Science & Technology_ 44.8, pp. 3169-3174 
+
+Poeplau, C., A. Don, L. Vesterdal, J. Leifeld, B. VanWesemael, J. Schumacher, and A. Gensior (2011). “Temporal dynamics of soil organic carbon after land-use change in the temperate zone - carbon response functions as a model approach”. _Global Change Biology_ 17.7, pp. 2415–2427.
+
+The European Commission (2010). “Commission decision of 10 June 2010 on guidelines for the calculation of land carbon stocks for the purpose of Annex V to Directive 2009/28/EC”. _Official Journal of The European Union_ 2010/335/E.
+
+Dupoux, M. “The land use change time-accounting failure” (in press).
+
 
