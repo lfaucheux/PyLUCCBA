@@ -20,6 +20,7 @@ cba = cc.CBACalculator(
 )
 ##cba = cc.CBAParametersEndogenizer(cba).ENDOGENOUS_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows  
 cba.all_XLSXed
+cba.all_charts
 objects[cba.run_name] = {'summary':cba.summary_args,'object':cba}
 
 print(u"""

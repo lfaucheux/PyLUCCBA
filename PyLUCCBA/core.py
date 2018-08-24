@@ -8203,7 +8203,9 @@ class CBACalculator(ts.Cache):
             file_name='_NPVs'
         )
 
-        print('xlsx files saved in {}'.format(self.save_dir))
+        print('xlsx files saved in {}'.format(
+            os.path.abspath(self.save_dir)
+        ))
         return True
 
     @ts.Cache._property
