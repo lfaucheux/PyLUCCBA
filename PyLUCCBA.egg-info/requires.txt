@@ -1,4 +1,0 @@
-numpy>=1.14.0
-scipy>=1.0.0
-openpyxl>=2.2.2
-matplotlib>=1.4.3

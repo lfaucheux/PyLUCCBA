@@ -22,7 +22,7 @@ __all__ = [
     'save_dir_and_file_name',
     'solver_msgr',
     'solver_ND',
-    'tab',
+    'taber',
     'txt_dicter',
     'xlsx_file_writer',
 ]
@@ -31,11 +31,11 @@ from matplotlib.font_manager import FontProperties
 from scipy.optimize import fsolve
 import matplotlib.pyplot as plt
 import functools as ft
-import openpyxl as op
+import openpyxl as xl
 import numpy as np
+import sys
 import os
 import re
-import sys
 
 VERBOSE_DTESTS = False
 OS_SEP = os.sep
@@ -181,12 +181,12 @@ def txt_dicter(fname):
 ##    ┌┬┐┌─┐┌┐ 
 ##     │ ├─┤├┴┐
 ##     ┴ ┴ ┴└─┘
-def tab(msg, size):
+def taber(msg, size):
     """ Function which tabulates strings.
 
     Example
     -------
-    >>> tab(msg='Example string', size=42)
+    >>> taber(msg='Example string', size=42)
     'Example string                            '
     """
     try:
@@ -199,7 +199,7 @@ def tab(msg, size):
 ##    └─┐│ ││ └┐┌┘├┤ ├┬┘    ║║║ ║║
 ##    └─┘└─┘┴─┘└┘ └─┘┴└─────╝╚╝═╩╝
 def solver_msgr(t, c, s, v, e):
-    """ Enriching wrapper of the function `tab` defined for solver's
+    """ Enriching wrapper of the function `taber` defined for solver's
     messages
 
     Testing/Example
@@ -215,7 +215,7 @@ def solver_msgr(t, c, s, v, e):
     ---- Title of what is going on and whose sol=0.0
     ---- [???]The solution (may not have) converged.[1.000000e-15][???]
     """
-    sol_section = tab(
+    sol_section = taber(
         '---- %s sol=%s'%(t[:70], s), 0
     )
     com_section = '\n---- {0}{1}[{2}]{0}'.format(
@@ -742,10 +742,10 @@ def save_dir_and_file_name(save_dir='', file_name='', save=True):
 ##    ┌┴┬┘│  └─┐┌┴┬┘    ├┤ ││  ├┤     │││├┬┘│ │ ├┤ ├┬┘
 ##    ┴ └─┴─┘└─┘┴ └─────└  ┴┴─┘└─┘────└┴┘┴└─┴ ┴ └─┘┴└─
 try:
-    op_get_column_letter = op.utils.get_column_letter
+    op_get_column_letter = xl.utils.get_column_letter
 except Exception as exc:
     print(exc)
-    op_get_column_letter = op.cell.get_column_letter
+    op_get_column_letter = xl.cell.get_column_letter
 def xlsx_file_writer(listed_content, save_dir='', file_name=''):
     """ Function which writes lists' contents in xlsx files by assuming
     that `listed_content` is two-dimensional and using elements indexes
@@ -763,7 +763,7 @@ def xlsx_file_writer(listed_content, save_dir='', file_name=''):
         save_dir=save_dir,
         file_name=file_name
     )
-    wb = op.Workbook()
+    wb = xl.Workbook()
     ws = wb.active
     for i_row, row in enumerate(listed_content):
         for i_col, col in enumerate(row):

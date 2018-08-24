@@ -1,32 +1,48 @@
-#from distutils.core import setup
+# -*- coding: utf8 -*-
+from __future__ import absolute_import
 from setuptools import setup
-from PyLUCCBA import __version__ as v
+import pathlib as pa
+import codecs as cd
+
+package_version = '0.1.18'
+package_name    = 'PyLUCCBA'
+
+with pa.Path('requirements.txt').open() as requirements:
+    requires = [l.strip() for l in requirements]
+
+with cd.open('README.md', encoding='utf-8') as readme_f:
+    readme = readme_f.read()
 
 setup(
-    name='PyLUCCBA',
-    packages=['PyLUCCBA'],
-    package_data={
-        'PyLUCCBA': [
+    license      = 'MIT',
+    name         = package_name,
+    version      = package_version,
+    packages     = [package_name],
+    package_data = {
+        package_name: [
             'examples/*',
             'resources/*',
             'resources/*/*',
             'resources/*/*/*',
         ]
     },
-    version=v,
-    description="A Land-Use-Change Cost-Benefit-Analysis calculator coded in Python2&3, PyLUCCBA.",
-    author='Laurent Faucheux',
-    author_email="laurent.faucheux@hotmail.fr",
-    url='https://github.com/lfaucheux/PyLUCCBA',
-    download_url = 'https://github.com/lfaucheux/PyLUCCBA/archive/{}.tar.gz'.format(v),
-    keywords = ['land use change', 'cost benefit analysis', 'environmental economics'],
-    classifiers=[
-        'Programming Language :: Python'
+    description      =  "A Land-Use-Change Cost-Benefit-Analysis calculator coded in Python27&3, %s."%package_name,
+    long_description = readme,
+    author       = 'Laurent Faucheux',
+    author_email = "laurent.faucheux@hotmail.fr",
+    url          = 'https://github.com/lfaucheux/%s'%package_name,
+    download_url = 'https://github.com/lfaucheux/{}/archive/{}.tar.gz'.format(package_name, package_version),
+    classifiers  = [
+        'Programming Language :: Python 2.7',
+        'Programming Language :: Python 3',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'Topic :: Scientific/Modeling :: Economics',
     ],
-    install_requires=[
-        'numpy>=1.14.0',
-        'scipy>=1.0.0',
-        'openpyxl>=2.2.2',
-        'matplotlib>=1.4.3'
-    ]
+    keywords = [
+        'land use change',
+        'cost benefit analysis',
+        'environmental economics'
+    ],
+    install_requires = requires,
 )

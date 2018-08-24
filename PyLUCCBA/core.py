@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from __future__ import print_function, absolute_import
 
-_pyLUCCBA_ =\
+__pyLUCCBA__ =\
 u"""
 *****************************************************************************************************                                                                                                  *
 *          ___       __   __  _______________  ___                                  * ╦╔═╗╔═╗┌─┐┌┐┌ *
@@ -19,14 +19,14 @@ u"""
 * laurent.faucheux@hotmail.fr                                                       * ╚═╝╩╩╚═╚═╝═╩╝ *
 *****************************************************************************************************
 """
-__version__ = '0.1.17'
+
 __authors__ = [
     "Marion Dupoux <marion.dupoux@gu.se>",
     "Laurent Faucheux <laurent.faucheux@hotmail.fr>"
 ]
 __all__ = [
     '__authors__',
-    '__version__',
+    '__pyLUCCBA__',
     'BlackOutputAndSubstitutesSpecificities',
     'CBACalculator',
     'CBAParametersEndogenizer',
@@ -40,13 +40,10 @@ __all__ = [
     'VegetationsAndSoilSpecificities',
 ]
 
-import warnings;warnings.filterwarnings('ignore')
+import warnings#;warnings.filterwarnings('ignore')
+from . import tools as ts
 import pprint as pp
 import numpy as np
-try:
-    import tools as ts
-except:
-    import PyLUCCBA.tools as ts
 import os
 
 VERBOSE        = True
