@@ -195,9 +195,9 @@ def taber(msg, size):
         return str(msg) + (size - len(str(msg)))*' '
 
 ##******************************************
-##    ┌─┐┌─┐┬ ┬  ┬┌─┐┬─┐    ╔╗╔╔╦╗
-##    └─┐│ ││ └┐┌┘├┤ ├┬┘    ║║║ ║║
-##    └─┘└─┘┴─┘└┘ └─┘┴└─────╝╚╝═╩╝
+##    ┌─┐┌─┐┬ ┬  ┬┌─┐┬─┐    ┌┬┐┌─┐┌─┐┬─┐
+##    └─┐│ ││ └┐┌┘├┤ ├┬┘    │││└─┐│ ┬├┬┘
+##    └─┘└─┘┴─┘└┘ └─┘┴└─────┴ ┴└─┘└─┘┴└─
 def solver_msgr(t, c, s, v, e):
     """ Enriching wrapper of the function `taber` defined for solver's
     messages
@@ -222,6 +222,11 @@ def solver_msgr(t, c, s, v, e):
         v, c.replace(' \n ', ''), '%e'%e
     )
     return  sol_section + com_section
+
+##******************************************
+##    ┌─┐┌─┐┬ ┬  ┬┌─┐┬─┐    ╔╗╔╔╦╗
+##    └─┐│ ││ └┐┌┘├┤ ├┬┘    ║║║ ║║
+##    └─┘└─┘┴─┘└┘ └─┘┴└─────╝╚╝═╩╝
 def solver_ND(display, title, func, _Z_, bforce, *args, **kwargs):
     """ N dimensions solver.
 
@@ -510,7 +515,6 @@ def poler(sparse_trajectory_as_dict, repeated_pattern_polation, **kwargs):
     #---------------------< control for empty dictionnary and return >
     return polated_values if len(polated_values)\
            else {year : 1 for year in year_polate}
-
 
 ##******************************************
 ##    ╔═╗┌─┐┌─┐┬ ┬┌─┐
@@ -1001,6 +1005,7 @@ class Dashboard(object):
                 )
         self.dashB.legend(
             prop=self.prop,
+            loc = 'upper right',
             labelspacing = 0.2,
             bbox_to_anchor =(1.1, 1.)
         )

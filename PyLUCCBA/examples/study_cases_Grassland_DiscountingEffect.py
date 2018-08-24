@@ -22,7 +22,6 @@ discount_rates = [.0, .01, .03, .05]
 objects = {}
 for d_rate in discount_rates:    
     cba = scenarizer(d_rate)
-    cba.all_XLSXed
     objects[cba.run_name] = {'summary':cba.summary_args,'object':cba}
 
 
@@ -35,3 +34,4 @@ print(u"""
 *******************************************************************************""")
 for run_name, dico in objects.items():
     print(dico['summary'])
+    dico['object'].all_XLSXed

@@ -40,11 +40,14 @@ __all__ = [
     'VegetationsAndSoilSpecificities',
 ]
 
-import warnings;warnings.filterwarnings('ignore')
-from . import tools as ts
-import pprint as pp
-import numpy as np
 import os
+import pprint as pp
+import warnings;warnings.filterwarnings('ignore')
+import numpy as np;np.seterr(divide='ignore', invalid='ignore')
+if __name__ == '__main__':
+    import tools as ts
+else:
+    from . import tools as ts
 
 VERBOSE        = True
 VERBOSE_SOLVER = True
@@ -8211,120 +8214,76 @@ class CBACalculator(ts.Cache):
     @ts.Cache._property
     def all_charts(self):
         """ Charts of computed data, stored in `self.save_dir`."""
-        #< FLOWS CHARTS >
-        self.chart_of_soc_unif_flows
-        self.chart_of_soc_diff_flows
-        self.chart_of_vgc_unif_flows
-        self.chart_of_vgc_diff_flows
-        self.chart_of_unif_carbon_flows
-        self.chart_of_diff_carbon_flows
-        self.chart_of_soco2_unif_flows
-        self.chart_of_soco2_diff_flows
-        self.chart_of_vgco2_unif_flows
-        self.chart_of_vgco2_diff_flows
-        self.chart_of_unif_co2_flows
-        self.chart_of_diff_co2_flows
-        self.chart_of_scenarized_cultivated_input_co2eq_flows
-        self.chart_of_scenarized_processed_input_co2eq_flows
-        self.chart_of_scenarized_cultivated_unitary_input_co2eq_flows_traj #GWP-like
-        self.chart_of_scenarized_processed_unitary_input_co2eq_flows_traj  #GWP-like
-        self.chart_of_scenarized_output_flows
-        self.chart_of_scenarized_black_output_flows
-        self.chart_of_scenarized_input_flows
-        self.chart_of_scenarized_land_surface_flows
-        self.chart_of_scenarized_total_diff_co2_flows
-        self.chart_of_scenarized_total_unif_co2_flows
-        #< BASELINE FLOWS >
-        self.chart_of_scenarized_black_output_co2_flows
-        #< VALUE CHARTS >
-        self.chart_of_scenarized_co2_prices
-        self.chart_of_scenarized_proc_co2_flows_value
-        self.chart_of_scenarized_cult_co2_flows_value
-        self.chart_of_scenarized_proc_plus_cult_co2_flows_value
-        #< DIFF >
-        self.chart_of_scenarized_so_diff_co2_flows_value
-        self.chart_of_scenarized_vg_diff_co2_flows_value
-        self.chart_of_scenarized_so_plus_vg_diff_co2_flows_value
-        self.chart_of_scenarized_total_diff_co2_flows_value
-        #< UNIF >
-        self.chart_of_scenarized_so_unif_co2_flows_value
-        self.chart_of_scenarized_vg_unif_co2_flows_value
-        self.chart_of_scenarized_so_plus_vg_unif_co2_flows_value
-        self.chart_of_scenarized_total_unif_co2_flows_value
-        #< BASELINE VALUE >
-        self.chart_of_scenarized_black_output_co2_flows_value
-        #< DISCOUNTED EUR CHARTS >
-        self.chart_of_scenarized_co2_disc_prices
-        self.chart_of_scenarized_proc_co2_flows_disc_value
-        self.chart_of_scenarized_cult_co2_flows_disc_value
-        self.chart_of_scenarized_proc_plus_cult_co2_flows_disc_value
-        #< DIFF >
-        self.chart_of_scenarized_so_diff_co2_flows_disc_value
-        self.chart_of_scenarized_vg_diff_co2_flows_disc_value
-        self.chart_of_scenarized_so_plus_vg_diff_co2_flows_disc_value
-        self.chart_of_scenarized_total_diff_co2_flows_disc_value
-        #< UNIF >
-        self.chart_of_scenarized_so_unif_co2_flows_disc_value
-        self.chart_of_scenarized_vg_unif_co2_flows_disc_value
-        self.chart_of_scenarized_so_plus_vg_unif_co2_flows_disc_value
-        self.chart_of_scenarized_total_unif_co2_flows_disc_value
-        #< BASELINE >
-        self.chart_of_scenarized_black_output_co2_flows_disc_value
-
-        #< NPV EUR CHARTS >
-        self.chart_of_scenarized_NPV_proc_co2_flows
-        self.chart_of_scenarized_NPV_cult_co2_flows
-        self.chart_of_scenarized_NPV_proc_plus_cult_co2_flows
-        #< DIFF >
-        self.chart_of_scenarized_NPV_so_diff_co2_flows
-        self.chart_of_scenarized_NPV_vg_diff_co2_flows
-        self.chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows
-        self.chart_of_scenarized_NPV_total_diff_co2_flows
-        #< UNIF >
-        self.chart_of_scenarized_NPV_so_unif_co2_flows
-        self.chart_of_scenarized_NPV_vg_unif_co2_flows
-        self.chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows
-        self.chart_of_scenarized_NPV_total_unif_co2_flows
-        #< BASELINE >
-        self.chart_of_scenarized_NPV_black_output_co2_flows
-
-
-        #< NPV per tonne ouf cumulated output flows >
-        self.chart_of_scenarized_NPV_proc_co2_flows_per_cum_output_flows
-        self.chart_of_scenarized_NPV_cult_co2_flows_per_cum_output_flows
-        self.chart_of_scenarized_NPV_proc_plus_cult_co2_flows_per_cum_output_flows
-        #< DIFF >
-        self.chart_of_scenarized_NPV_so_diff_co2_flows_per_cum_output_flows
-        self.chart_of_scenarized_NPV_vg_diff_co2_flows_per_cum_output_flows
-        self.chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows
-        self.chart_of_scenarized_NPV_total_diff_co2_flows_per_cum_output_flows
-        #< UNIF >
-        self.chart_of_scenarized_NPV_so_unif_co2_flows_per_cum_output_flows
-        self.chart_of_scenarized_NPV_vg_unif_co2_flows_per_cum_output_flows
-        self.chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows
-        self.chart_of_scenarized_NPV_total_unif_co2_flows_per_cum_output_flows
-        #< BASELINE >
-        self.chart_of_scenarized_NPV_black_output_co2_flows_per_cum_black_output_flows
-
-
-        #< NPV per tonne ouf cumulated output flows >
-        self.chart_of_scenarized_NPV_proc_co2_flows_per_cum_MJs_output_flows
-        self.chart_of_scenarized_NPV_cult_co2_flows_per_cum_MJs_output_flows
-        self.chart_of_scenarized_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows
-        #< DIFF >
-        self.chart_of_scenarized_NPV_so_diff_co2_flows_per_cum_MJs_output_flows
-        self.chart_of_scenarized_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows
-        self.chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows
-        self.chart_of_scenarized_NPV_total_diff_co2_flows_per_cum_MJs_output_flows
-        #< UNIF >
-        self.chart_of_scenarized_NPV_so_unif_co2_flows_per_cum_MJs_output_flows
-        self.chart_of_scenarized_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows
-        self.chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows
-        self.chart_of_scenarized_NPV_total_unif_co2_flows_per_cum_MJs_output_flows
-        #< BASELINE >
-        self.chart_of_scenarized_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows
-
+        nb_keys = len(self._charts_keys)
+        for i, ckey in enumerate(self._charts_keys):
+            getattr(self, ckey)
+            if i%4 == 0:
+                print("Rendering all charts: {0:.2f}%".format(
+                    100.*(i + 1)/nb_keys)
+                )
         return True
+    
+    _charts_keys = [
+        #< FLOWS CHARTS >
+        'chart_of_soc_unif_flows',
+        'chart_of_soc_diff_flows',
+        'chart_of_vgc_unif_flows',
+        'chart_of_vgc_diff_flows',
+        'chart_of_unif_carbon_flows',
+        'chart_of_diff_carbon_flows',
+        'chart_of_soco2_unif_flows',
+        'chart_of_soco2_diff_flows',
+        'chart_of_vgco2_unif_flows',
+        'chart_of_vgco2_diff_flows',
+        'chart_of_unif_co2_flows',
+        'chart_of_diff_co2_flows',
+        'chart_of_scenarized_cultivated_input_co2eq_flows',
+        'chart_of_scenarized_processed_input_co2eq_flows',
+        'chart_of_scenarized_cultivated_unitary_input_co2eq_flows_traj', #GWP-like
+        'chart_of_scenarized_processed_unitary_input_co2eq_flows_traj',  #GWP-like
+        'chart_of_scenarized_output_flows',
+        'chart_of_scenarized_black_output_flows',
+        'chart_of_scenarized_input_flows',
+        'chart_of_scenarized_land_surface_flows',
+        'chart_of_scenarized_total_diff_co2_flows',
+        'chart_of_scenarized_total_unif_co2_flows',
+        #< BASELINE FLOWS >
+        'chart_of_scenarized_black_output_co2_flows',
+        #< VALUE CHARTS >
+        'chart_of_scenarized_co2_prices',
+        'chart_of_scenarized_proc_co2_flows_value',
+        'chart_of_scenarized_cult_co2_flows_value',
+        'chart_of_scenarized_proc_plus_cult_co2_flows_value',
+        #< DIFF >
+        'chart_of_scenarized_so_diff_co2_flows_value',
+        'chart_of_scenarized_vg_diff_co2_flows_value',
+        'chart_of_scenarized_so_plus_vg_diff_co2_flows_value',
+        'chart_of_scenarized_total_diff_co2_flows_value',
+        #< UNIF >
+        'chart_of_scenarized_so_unif_co2_flows_value',
+        'chart_of_scenarized_vg_unif_co2_flows_value',
+        'chart_of_scenarized_so_plus_vg_unif_co2_flows_value',
+        'chart_of_scenarized_total_unif_co2_flows_value',
+        #< BASELINE VALUE >
+        'chart_of_scenarized_black_output_co2_flows_value',
+        #< DISCOUNTED EUR CHARTS >
+        'chart_of_scenarized_co2_disc_prices',
+        'chart_of_scenarized_proc_co2_flows_disc_value',
+        'chart_of_scenarized_cult_co2_flows_disc_value',
+        'chart_of_scenarized_proc_plus_cult_co2_flows_disc_value',
+        #< DIFF >
+        'chart_of_scenarized_so_diff_co2_flows_disc_value',
+        'chart_of_scenarized_vg_diff_co2_flows_disc_value',
+        'chart_of_scenarized_so_plus_vg_diff_co2_flows_disc_value',
+        'chart_of_scenarized_total_diff_co2_flows_disc_value',
+        #< UNIF >
+        'chart_of_scenarized_so_unif_co2_flows_disc_value',
+        'chart_of_scenarized_vg_unif_co2_flows_disc_value',
+        'chart_of_scenarized_so_plus_vg_unif_co2_flows_disc_value',
+        'chart_of_scenarized_total_unif_co2_flows_disc_value',
+        #< BASELINE >
+        'chart_of_scenarized_black_output_co2_flows_disc_value',
+    ]
 
 
 ##******************************************

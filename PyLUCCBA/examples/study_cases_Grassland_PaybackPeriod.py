@@ -29,7 +29,6 @@ co2_prices_scenarios = [
 objects = {}
 for s_name in co2_prices_scenarios:    
     cba = scenarizer(s_name)
-    cba.all_XLSXed
     #cba.all_charts
     objects[cba.run_name] = {'summary':cba.summary_args,'object':cba}
 
@@ -43,4 +42,5 @@ print(u"""
 *******************************************************************************""")
 for run_name, dico in objects.items():
     print(dico['summary'])
+    dico['object'].all_XLSXed
 

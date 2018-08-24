@@ -18,8 +18,7 @@ cba = cc.CBACalculator(
     input_flows_scenario   = ['CRISTANOL','DOE'][1],
     **cs.other_parameters
 )
-##cba = cc.CBAParametersEndogenizer(cba).ENDOGENOUS_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows  
-cba.all_XLSXed
+##cba = cc.CBAParametersEndogenizer(cba).ENDOGENOUS_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows
 cba.all_charts
 objects[cba.run_name] = {'summary':cba.summary_args,'object':cba}
 
@@ -31,3 +30,4 @@ print(u"""
 *******************************************************************************""")
 for run_name, dico in objects.items():
     print(dico['summary'])
+    dico['object'].all_XLSXed
