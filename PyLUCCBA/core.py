@@ -2567,8 +2567,8 @@ class CBACalculator(ts.Cache):
         ->\ absolute_SOC_differential
         -->\ so_emitting
         --->| soc_unitary_unif_flows_traj
-        \---------------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-        >| scenarized_unitary_land_surface_infos                                    |
+        \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
+        >| scenarized_unitary_land_surface_infos                              |
         >| scenarized_unitary_land_surface_flows_sparse_traj                  |
         ->\ scenarized_unitary_land_surface_flows_full_traj_as_dict           |
         -->| scenarized_unitary_land_surface_flows_full_traj (as array)       |
@@ -2576,9 +2576,9 @@ class CBACalculator(ts.Cache):
         ->\ scenarized_output_flows_full_traj_as_dict                         |
         -->| scenarized_output_flows_full_traj (as array)                     |
         -->| output_flows_traj                                                |
-                                                                                    |
+                                                                              |
         ---->\ land_surface_flows_traj                                        |
-              \---------------------------------------------------------------------|
+              \---------------------------------------------------------------|
         =======
         ------>| soc_unif_flows_traj
 
@@ -2606,8 +2606,8 @@ class CBACalculator(ts.Cache):
         ->| a_parameter_which_solves_soc_chosen_CRF_constrained
         -->\ soc_unitary_stock_traj
         --->| soc_unitary_diff_flows_traj
-        \---------------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-        >| scenarized_unitary_land_surface_infos                                    |
+        \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
+        >| scenarized_unitary_land_surface_infos                              |
         >| scenarized_unitary_land_surface_flows_sparse_traj                  |
         ->\ scenarized_unitary_land_surface_flows_full_traj_as_dict           |
         -->| scenarized_unitary_land_surface_flows_full_traj (as array)       |
@@ -2615,9 +2615,9 @@ class CBACalculator(ts.Cache):
         ->\ scenarized_output_flows_full_traj_as_dict                         |
         -->| scenarized_output_flows_full_traj (as array)                     |
         -->| output_flows_traj                                                |
-                                                                                    |
+                                                                              |
         ---->\ land_surface_flows_traj                                        |
-              \---------------------------------------------------------------------|
+              \---------------------------------------------------------------|
         =======
         ------>| soc_diff_flows_traj
 
@@ -2749,8 +2749,8 @@ class CBACalculator(ts.Cache):
         ->\ absolute_VGC_differential
         -->\ vg_emitting
         --->| vgc_unitary_unif_flows_traj
-        \---------------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-        >| scenarized_unitary_land_surface_infos                                    |
+        \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
+        >| scenarized_unitary_land_surface_infos                              |
         >| scenarized_unitary_land_surface_flows_sparse_traj                  |
         ->\ scenarized_unitary_land_surface_flows_full_traj_as_dict           |
         -->| scenarized_unitary_land_surface_flows_full_traj (as array)       |
@@ -2758,9 +2758,9 @@ class CBACalculator(ts.Cache):
         ->\ scenarized_output_flows_full_traj_as_dict                         |
         -->| scenarized_output_flows_full_traj (as array)                     |
         -->| output_flows_traj                                                |
-                                                                                    |
+                                                                              |
         ---->\ land_surface_flows_traj                                        |
-              \---------------------------------------------------------------------|
+              \---------------------------------------------------------------|
         =======
         ------>| vgc_unif_flows_traj
 
@@ -2785,7 +2785,7 @@ class CBACalculator(ts.Cache):
         ->\ absolute_VGC_differential
         -->| vg_emitting
         >| T_vg_years_after_LUC
-        ->| a_parameter_which_solves_vgc_chosen_CRF_/Exampleconstrained
+        ->| a_parameter_which_solves_vgc_chosen_CRF_constrained
         -->\ vgc_unitary_stock_traj
         --->| vgc_unitary_diff_flows_traj
         \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
@@ -2877,10 +2877,10 @@ class CBACalculator(ts.Cache):
         --->| soc_unitary_unif_flows_traj
             |
         ---->\ unitary_unif_carbon_flows_traj
-             |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-             | ...                                                              |
-        ----->\ land_surface_flows_traj                                   |
-               \----------------------------------------------------------------|
+             |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
+             | ...                                 |
+        ----->\ land_surface_flows_traj            |
+               \-----------------------------------|
         ========
         ------->\ unif_carbon_flows_traj
 
@@ -2905,10 +2905,10 @@ class CBACalculator(ts.Cache):
         --->| soc_unitary_diff_flows_traj
             |
         ---->\ unitary_diff_carbon_flows_traj
-             |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-             | ...                                                              |
-        ----->\ land_surface_flows_traj                                   |
-               \----------------------------------------------------------------|
+             |---------------------------------|NON-ANNUALIZATION-SPECIFIC
+             | ...                             |
+        ----->\ land_surface_flows_traj        |
+               \-------------------------------|
         ========
         ------->\ diff_carbon_flows_traj
 
@@ -2989,10 +2989,10 @@ class CBACalculator(ts.Cache):
            \ ...
         --->\ soc_unitary_unif_flows_traj
         ---->\ soco2_unitary_unif_flows_traj
-             |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-             | ...                                                              |
-        ----->\ land_surface_flows_traj                                   |
-               \----------------------------------------------------------------|
+             |----------------------------------|NON-ANNUALIZATION-SPECIFIC
+             | ...                              |
+        ----->\ land_surface_flows_traj         |
+               \--------------------------------|
         ========
         ------->\ soco2_unif_flows_traj
 
@@ -3023,10 +3023,10 @@ class CBACalculator(ts.Cache):
            \ ...
         --->\ soc_unitary_diff_flows_traj
         ---->\ soco2_unitary_diff_flows_traj
-             |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-             | ...                                                              |
-        ----->\ land_surface_flows_traj                                   |
-               \----------------------------------------------------------------|
+             |------------------------------------|NON-ANNUALIZATION-SPECIFIC
+             | ...                                |
+        ----->\ land_surface_flows_traj           |
+               \----------------------------------|
         ========
         ------->\ soco2_diff_flows_traj
 
@@ -3110,10 +3110,10 @@ class CBACalculator(ts.Cache):
            \ ...
         --->\ vgc_unitary_unif_flows_traj
         ---->\ vgco2_unitary_unif_flows_traj
-             |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-             | ...                                                              |
-        ----->\ land_surface_flows_traj                                   |
-               \----------------------------------------------------------------|
+             |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
+             | ...                                 |
+        ----->\ land_surface_flows_traj            |
+               \-----------------------------------|
         ========
         ------->\ vgco2_unif_flows_traj
 
@@ -3143,10 +3143,10 @@ class CBACalculator(ts.Cache):
            \ ...
         --->\ vgc_unitary_diff_flows_traj
         ---->\ vgco2_unitary_diff_flows_traj
-             |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-             | ...                                                              |
-        ----->\ land_surface_flows_traj                                   |
-               \----------------------------------------------------------------|
+             |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
+             | ...                                 |
+        ----->\ land_surface_flows_traj            |
+               \-----------------------------------|
         ========
         ------->\ vgco2_diff_flows_traj
 
@@ -3234,10 +3234,10 @@ class CBACalculator(ts.Cache):
             |
         ---->\ unitary_unif_carbon_flows_traj
         ----->\ unitary_unif_co2_flows_traj
-             |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-             | ...                                                              |
-        ----->\ land_surface_flows_traj                                   |
-               \----------------------------------------------------------------|
+             |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
+             | ...                                 |
+        ----->\ land_surface_flows_traj            |
+               \-----------------------------------|
         ========
         ------->\ unif_co2_flows_traj
 
@@ -3270,10 +3270,10 @@ class CBACalculator(ts.Cache):
             |
         ---->\ unitary_diff_carbon_flows_traj
         ----->\ unitary_diff_co2_flows_traj
-             |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-             | ...                                                              |
-        ----->\ land_surface_flows_traj                                   |
-               \----------------------------------------------------------------|
+             |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
+             | ...                                 |
+        ----->\ land_surface_flows_traj            |
+               \-----------------------------------|
         ========
         ------->\ diff_co2_flows_traj
 
@@ -5858,10 +5858,10 @@ class CBACalculator(ts.Cache):
         |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
          ...                                                               |
             \ ...                                                          |
-        ---->\ timed_processed_input_co2eq_flows_traj                |
+        ---->\ timed_processed_input_co2eq_flows_traj                      |
          ...                                                               |
             \ ...                                                          |
-        ---->\ timed_cultivated_input_co2eq_flows_traj               |
+        ---->\ timed_cultivated_input_co2eq_flows_traj                     |
               \------------------------------------------------------------|
             ...
                \ ...
@@ -7038,10 +7038,10 @@ class CBACalculator(ts.Cache):
         |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
          ...                                                               |
             \ ...                                                          |
-        ---->\ timed_processed_input_co2eq_flows_traj                |
+        ---->\ timed_processed_input_co2eq_flows_traj                      |
          ...                                                               |
             \ ...                                                          |
-        ---->\ timed_cultivated_input_co2eq_flows_traj               |
+        ---->\ timed_cultivated_input_co2eq_flows_traj                     |
               \------------------------------------------------------------|
             ...
                \ ...
@@ -8186,10 +8186,24 @@ class CBACalculator(ts.Cache):
             'um_NPV_total_unif_co2_flows_per_cum_MJs_output_flows',
             'um_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows',
         ]
-        ts.xlsx_file_writer([q_content_heads] + np.vstack(q_listed_content).T.tolist(),save_dir=self.save_dir,file_name='_quantities')
-        ts.xlsx_file_writer([v_content_heads] + np.vstack(v_listed_content).T.tolist(),save_dir=self.save_dir,file_name='_values')
-        ts.xlsx_file_writer([n_content_heads] + np.vstack(n_listed_content).T.tolist(),save_dir=self.save_dir,file_name='_NPVs')
 
+        ts.xlsx_file_writer(
+            [q_content_heads] + np.vstack(q_listed_content).T.tolist(),
+            save_dir=self.save_dir,
+            file_name='_quantities'
+        )
+        ts.xlsx_file_writer(
+            [v_content_heads] + np.vstack(v_listed_content).T.tolist(),
+            save_dir=self.save_dir,
+            file_name='_values'
+        )
+        ts.xlsx_file_writer(
+            [n_content_heads] + np.vstack(n_listed_content).T.tolist(),
+            save_dir=self.save_dir,
+            file_name='_NPVs'
+        )
+
+        print('xlsx files saved in {}'.format(self.save_dir))
         return True
 
     @ts.Cache._property
@@ -8337,7 +8351,6 @@ class CBAParametersEndogenizer(object):
     def OBJECTIVE_NPV_total_unif_co2_flows_VS_NPV_total_diff_co2_flows(self):
         """ Method which computes the objective of the discount rate
         endogenizing process.
-
 
         Testing/Example
         ---------------

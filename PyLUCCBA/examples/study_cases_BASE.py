@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
-
-import studies_constant_settings as cs
+from __future__ import print_function
+from PyLUCCBA.examples import studies_constant_settings as cs
 import PyLUCCBA as cc
 
 

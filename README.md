@@ -1,9 +1,7 @@
 # PyLUCCBA
 A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www.python.org/downloads/).
 
-## Code coverage
-<details><summary><i>(click to expand)</i></summary>
-<p>
+#### Code coverage
 
 |  Module  | statements | missing | excluded | coverage |
 | -------- | ---------- | ------- | -------- | -------- |
@@ -11,16 +9,11 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www
 | tools.py | 290        | 58      | 0        | 80%      |
 | Total    | 1183       | 161     | 0        | 86%      |
 
-</p>
-</details> 
-
 ## Installation
 <details><summary><i>(click to expand)</i></summary>
 <p>
 
-First, you need Python installed, either [Python27](https://www.python.org/downloads/) or [Python3.+](https://www.python.org/downloads/). Either versions are good for our purpose.
-
-Then, we are going to use a package management system to install [PyLUCCBA](https://github.com/lfaucheux/PyLUCCBA), namely [pip](https://en.wikipedia.org/wiki/Pip_(package_manager)), _already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4_. Open a session in your OS shell prompt and type
+First, you need Python installed, either [Python2.7.+](https://www.python.org/downloads/) or [Python3.+](https://www.python.org/downloads/). Either versions are good for our purpose. Then, we are going to use a package management system to install [PyLUCCBA](https://github.com/lfaucheux/PyLUCCBA), namely [pip](https://en.wikipedia.org/wiki/Pip_(package_manager)), _already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4_. Open a session in your OS shell prompt and type
 
     pip install pyluccba
 
@@ -28,9 +21,19 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
 
     git clone git://github.com/lfaucheux/PyLUCCBA.git
     cd PyLUCCBA
-    python setup.py install
+    python setup.py install 
 
-## Example usage:
+
+</p>
+</details> 
+
+## Example usage
+<details><summary><i>(click to expand)</i></summary>
+<p>
+    
+The example that follows is done via the Python Shell. Let's first import the module `PyLUCCBA`.
+
+    >>> import PyLUCCBA as cc  
 
 
 </p>
@@ -98,6 +101,8 @@ Note that each column has a title that is very verbose -- so as to make things a
 </details>  
 
 ## References
+<details><summary><i>(click to expand)</i></summary>
+<p>
 
 Hoefnagels, R., E. Smeets, and A. Faaij (2010). “[Greenhouse gas footprints of different biofuel production systems](https://www.sciencedirect.com/science/article/pii/S1364032110000535)”. _Renewable and Sustainable Energy Reviews_ 14.7, pp. 1661–1694.
 
@@ -113,3 +118,5 @@ The European Commission (2010). “[Commission decision of 10 June 2010 on guide
 
 Dupoux, M. “[The land use change time-accounting failure](https://www.researchgate.net/publication/304170193_The_land_use_change_time-accounting_failure)” (in press).
 
+</p>
+</details>
