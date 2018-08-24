@@ -14,6 +14,27 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www
 </p>
 </details> 
 
+## Installation
+<details><summary><i>(click to expand)</i></summary>
+<p>
+
+First, you need Python installed, either [Python27](https://www.python.org/downloads/) or [Python3.+](https://www.python.org/downloads/). Either versions are good for our purpose.
+
+Then, we are going to use a package management system to install [PyLUCCBA](https://github.com/lfaucheux/PyLUCCBA), namely [pip](https://en.wikipedia.org/wiki/Pip_(package_manager)), _already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4_. Open a session in your OS shell prompt and type
+
+    pip install pyluccba
+
+Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloads),
+
+    git clone git://github.com/lfaucheux/PyLUCCBA.git
+    cd PyLUCCBA
+    python setup.py install
+
+## Example usage:
+
+
+</p>
+</details>  
 
 ## Value of the data
 <details><summary><i>(click to expand)</i></summary>
