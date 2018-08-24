@@ -1,5 +1,5 @@
 # PyLUCCBA
-A Land-Use-Change Cost-Benefit-Analysis calculator coded in python.
+A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www.python.org/downloads/).
 
 ## Code coverage
 
@@ -14,7 +14,7 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in python.
 
 •	The calculator offers a compilation of environmental and economic data to generate environment-related net present values of any project with impacts to the environment (GHG emissions or sequestrations).
 
-•	The calculator is coded in Python (2 and 3). Python is a cross platform and a comprehensive extensible and editable language with a large community of users.
+•	The calculator is coded in [Python](https://www.python.org/downloads/) (compatible with both versions: 2 and 3). [Python](https://www.python.org/downloads/) is a cross platform and a comprehensive extensible and editable language with a large community of users.
 
 •	The structure of the code is simple with accessible input data to which it is possible to add or suppress one’s own trajectories (of prices, carbon stocks, etc).
 
@@ -23,6 +23,7 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in python.
 •	Note that constant returns to scale (biofuel production) are assumed in the tool.
 
 ## Data
+
   Raw data from the public repository as listed above are first used in the “Data_CarbonStocks_Emissions” Excel file to generate (i) land use change carbon stock changes for the scenarios studied in the paper, and (ii) emissions from the process and cultivation of bioethanol. This data is then directly used in the tool (either in the “resources” folder or the code) which is described below. The output data is not directly provided but as explained below, it can be generated easily with the “ready-to-use” study cases provided.
 
 ## Materials and Methods
@@ -35,11 +36,9 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in python.
   
 •	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder in which the dluc calculations are reported (see calculations in the provided “Data” Excel file). The .txt file indicates the units of data.
 
-•	The [prices](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices) folder which includes the carbon price trajectories scenarios. When only one-time prices are provided such as in the World Energy Outlook, there is an automatic process which extrapolates the values for each year in an exponential way. For example, if prices are provided at year 2020 and 2025, then the prices at 2021, 2022, 2023 and 2024 are generated in an exponential way. The .txt file provides the unit and year base for the monetary used in scenarios (e.g. EUR 2012).
+•	The [prices](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices) folder which includes the carbon price trajectories scenarios. When only one-time prices are provided, such as in the World Energy Outlook, there is an automatic process which extrapolates the values for each year in an exponential way. For example, if prices are provided at year 2020 and 2025, then the prices at 2021, 2022, 2023 and 2024 are generated in an exponential way. The .txt file provides the unit and year base for the monetary used in scenarios (e.g. EUR 2012).
 
-•	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders:
-  o	The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to the calculations: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare.
-  o	The second one, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), is only instrumental and tautologically states than one tonne of biofuel is produced per tonne of output.
+•	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders. The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to the calculations: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare. The second folder, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), is only instrumental and tautologically states than one tonne of biofuel is produced per tonne of output.
 
 #### Generated results
 
@@ -54,9 +53,11 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in python.
 Note that each column has a title that is very verbose -- so as to make things as explicit as possible -- regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
 
 ## Acknowledgements 
+
   I am particularly grateful to Laurent Faucheux from [CIRED](http://www.centre-cired.fr/index.php/fr/) for the coding of the tool I conceived. Researchers from l’[Institut Français du Pétrole et des énergies nouvelles](http://www.ifpenergiesnouvelles.fr/), Frédérique Bouvart, Cécile Querleu, Daphné Lorne, Pierre Collet, and from l’[Institut National de la Recherche Agronomique](http://www.inra.fr/), Serge Garcia, Stéphane de Cara Alexandra Niedwiedth, Raja Chakir are also acknowledged for their valuable advice in the search for input data.
 
-## References 
+## References
+
 Hoefnagels, R., E. Smeets, and A. Faaij (2010). “[Greenhouse gas footprints of different biofuel production systems](https://www.sciencedirect.com/science/article/pii/S1364032110000535)”. _Renewable and Sustainable Energy Reviews_ 14.7, pp. 1661–1694.
 
 IEA (2015). _World Energy Outlook 2015_. Tech. rep. International Energy Agency.
