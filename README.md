@@ -81,25 +81,25 @@ The following table enumerates all parameters that can be used to create an inst
 
 Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonder what are the scenarized trajectories over which we are about to conduct our study, *e.g.* of carbon dioxide prices, produced quantities of biofuel, etc. In this case, we can simply type:
 
-    >>> cba.chart_of_output_flows.show()
+    >>> cba.chart_of_scenarized_output_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20ETH%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
 As it reads in the above chart, we are about to work with a constant level of production over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough miscanthus to produce biofuel. We may wonder what is the counterfactual trajectory in terms of gasoline -- targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis: 
 
-    >>> cba.chart_of_black_output_flows.show()
+    >>> cba.chart_of_scenarized_black_output_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20OIL%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
 Now, let's see which trajectory of carbon dioxide prices is behind the name `'SPC'` -- which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
 
-    >>> cba.chart_of_co2_prices.show()
+    >>> cba.chart_of_scenarized_co2_prices.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/PRICES%20co2%20%5BSPC%5D.png?raw=true" width="60%"/><img></p>
 
 We may also wonder which quantities trajectory of miscanthus is implied, one the one hand, by that of biofuel and, on the other hand, by the value we set for the parameter `input_flows_scenario`, that is `'DOE'` -- where *D.O.E* stands for the Department of Energy of the USA -- who communicated in [2012](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) that, with 1 tonne of miscantus, on can produce [0.31847714](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/MISCANTHUS_yields_FR.csv) tonnes of bioethanol. Let's see that:
 
-    >>> cba.chart_of_input_flows.show()
+    >>> cba.chart_of_scenarized_input_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20input%20%5BDOE%5D%5BMISCANTHUS%5D.png?raw=true" width="60%"/><img></p>
 
@@ -112,7 +112,7 @@ The land use change from `initial_landuse='annual cropland'` to `final_landuse='
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20so%20%5Bunif-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20so%20%5Bdiff-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
 
-Of course, the comparison makes sens since the total emited stocks are identical:
+Of course, the comparison makes sense since the total emited stocks are identical:
 
     >>> import numpy as np
     >>> np.sum(cba.soco2_unif_flows_traj)
@@ -128,7 +128,13 @@ That being shown, note that on the side of vegetation, there is no emission-diff
     ---- [***]The solution converged.[0.000000e+00][***]
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20vg%20%5Bunif-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20vg%20%5Bdiff-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
+
+Independenttly from how we annualize the LUC-related emissions, the cultivation and the processing of miscanthus annualy generate less emissions than annual croplands. See
+
+    >>> cba.chart_of_cultivated_input_co2eq_flows.show()
+    >>> cba.chart_of_processed_input_co2eq_flows.show()
     
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2eq%20%5Bcult-MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2eq%20%5Bproc-MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
 
 
 
