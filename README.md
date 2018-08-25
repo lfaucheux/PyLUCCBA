@@ -57,23 +57,25 @@ The following table enumerates all parameters and their meaning
 
  parameter's name         | meaning
  ------------------------ | -------
- `run_name`               |
- `country`                |
- `project_first_year`     |
- `project_horizon`        |
- `discount_rate`          |
- `co2_prices_scenario`    |
- `output_flows_scenario`  |
- `initial_landuse`        |
- `final_landuse`          |
- `input_flows_scenario`   |
- `T_so`                   |
- `T_vg_diff`              |
- `T_vg_unif`              |
- `polat_repeated_pattern` |
- `change_rates`           |
- `return_plts`            |
+ `run_name`               | name of the folder that will contain the generated results and charts
+ `country`                | name the country under study. Only on possible choice currently: `France`
+ `project_first_year`     | first year of the project (for the sake legibility)
+ `project_horizon`        | duration of the biofuel production project (years)
+ `discount_rate`          | rate involved in the calculations of net present values (\*\*)
+ `co2_prices_scenario`    | name of the trajectory of carbon (dioxide) prices (\*\*\*)
+ `output_flows_scenario`  | name of the trajectory of annually produced quantities of biofuel
+ `initial_landuse`        | use of the land *before* land conversion
+ `final_landuse`          | use of the land *after* land conversion
+ `input_flows_scenario`   | name of the trajectory of input-to-ouput yields
+ `T_so`                   | period over which soil carbon emissions due to LUC are considered
+ `T_vg_diff`              | period over which vegetation carbon emissions due to LUC are considered in the differentiated annualization approach (\*\*\*\*)
+ `T_vg_unif`              | period over which vegetation carbon emissions due to LUC are considered in the uniform annualization approach (\*\*\*\*)
+ `polat_repeated_pattern` | if `True`, retro/extra-polation pattern is repeated before/after the first/last mentioned value. Otherwise, it is maintained constant.
+ `change_rates`           | EUR-based exchange rate name and value to consider calculations
+ `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved on the disk.
 
+(\*)
+(\*\*)
 
 
 
