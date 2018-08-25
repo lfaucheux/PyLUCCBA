@@ -79,11 +79,25 @@ The following table enumerates tall parameters that can be used to create an int
  `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved on the disk. Set to `False` by default.
  `save_charts`            | if `True` charts are on the disk. Otherwise, they are shown to users. Set to `True` by default. **NB** `return_plts=True` has priority over `save_charts`.
 
-Once we have `cba` in hand, we may wonder what are the scenarized trajectories on which we are about to make our study, *e.g.* of carbon dioxid prices, produced quantities of biofuel, etc. In this case, we can simply type:
+Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonder what are the scenarized trajectories over which we are about to conduct our study, *e.g.* of carbon dioxid prices, produced quantities of biofuel, etc. In this case, we can simply type:
 
     >>> cba.chart_of_scenarized_output_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20ETH%20%5BO%5D.png?raw=true" width="60%"/><img></p>
+
+As it reads in the chart above, we are about to work with a constant level of productions over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough miscanthus to produce biofuel. We may wonder what is the counterfactual trajectory in oil terms -- targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis? 
+
+    >>> cba.chart_of_scenarized_black_output_flows.show()
+
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20OIL%20%5BO%5D.png?raw=true" width="60%"/><img></p>
+
+Now, let's see which trajectory of carbon dioxid prices is behind the name `'SPC'` -- which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
+
+    >>> cba.chart_of_scenarized_co2_prices.show()
+
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/PRICES%20co2%20%5BSPC%5D.png?raw=true" width="60%"/><img></p>
+
+
 
 
 

@@ -1,0 +1,194 @@
+MANIFEST.in
+README.md
+requirements.txt
+setup.py
+PyLUCCBA/__init__.py
+PyLUCCBA/core.py
+PyLUCCBA/tools.py
+PyLUCCBA.egg-info/PKG-INFO
+PyLUCCBA.egg-info/SOURCES.txt
+PyLUCCBA.egg-info/dependency_links.txt
+PyLUCCBA.egg-info/requires.txt
+PyLUCCBA.egg-info/top_level.txt
+PyLUCCBA/examples/__init__.py
+PyLUCCBA/examples/studies_constant_settings.py
+PyLUCCBA/examples/study_cases_BASE.py
+PyLUCCBA/examples/study_cases_Forest_CarbonPriceEffect.py
+PyLUCCBA/examples/study_cases_Forest_CombinedEffect.py
+PyLUCCBA/examples/study_cases_Forest_CompensatoryRate.py
+PyLUCCBA/examples/study_cases_Forest_DiscountingEffect.py
+PyLUCCBA/examples/study_cases_Grassland_CarbonPriceEffect.py
+PyLUCCBA/examples/study_cases_Grassland_CombinedEffect.py
+PyLUCCBA/examples/study_cases_Grassland_CompensatoryRate.py
+PyLUCCBA/examples/study_cases_Grassland_DiscountingEffect.py
+PyLUCCBA/examples/study_cases_Grassland_PaybackPeriod.py
+PyLUCCBA/examples/Forest-Cropland_DR=0.01_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.01_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.01_CP=O/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=A/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=A/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=A/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=B/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=B/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=B/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=C/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=C/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=C/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=O/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=SPC/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=SPC/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.03_CP=SPC/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.05_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.05_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.05_CP=O/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.0_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.0_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0.0_CP=O/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=A/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=A/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=A/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=B/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=B/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=B/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=C/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=C/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=C/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=O/_values.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=SPC/_NPVs.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=SPC/_quantities.xlsx
+PyLUCCBA/examples/Forest-Cropland_DR=0_CP=SPC/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=SPC/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=SPC/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=SPC/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-450S/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-450S/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-450S/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-CPS/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-CPS/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-CPS/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-NPS/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-NPS/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_CP=WEO2015-NPS/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.01_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.01_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.01_CP=O/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=A/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=A/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=A/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=B/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=B/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=B/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS HA land [MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES ETH [O].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES OIL [O].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES carbon so [diff-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES carbon so [unif-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES carbon vg [diff-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES carbon vg [unif-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES carbon vg+so [diff-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES carbon vg+so [unif-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 so [diff-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 so [unif-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 total [OIL].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 total [diff-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 total [unif-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 vg [diff-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 vg [unif-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 vg+so [diff-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2 vg+so [unif-ANNUAL CROPLAND~MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2eq [cult-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES co2eq [proc-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/FLOWS TONNES input [DOE][MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/GWP FLOWS TONNES co2eq [cult-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/GWP FLOWS TONNES co2eq [proc-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/PRICES co2 [SPC].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/PRICES-D co2 [SPC].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 culture [SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 process [SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 process+culture [SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 so [diff-SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 so [unif-SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 so+vg [diff-SPC-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 so+vg [unif-SPC-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 total [SPC-OIL].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 total [diff-SPC-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 total [unif-SPC-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 vg [diff-SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE co2 vg [unif-SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 culture [SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 process [SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 process+culture [SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 so [diff-SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 so [unif-SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 so+vg [diff-SPC-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 so+vg [unif-SPC-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 total [SPC-OIL].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 total [diff-SPC-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 total [unif-SPC-ETH].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 vg [diff-SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/VALUE-D co2 vg [unif-SPC-MISCANTHUS].png
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=C_TH=XX/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=O/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=O_PbLookup/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=O_PbLookup/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=O_PbLookup/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=SPC/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=SPC/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=SPC/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=SPC_PbLookup/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=SPC_PbLookup/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=SPC_PbLookup/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-450S_PbLookup/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-450S_PbLookup/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-450S_PbLookup/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-CPS_PbLookup/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-CPS_PbLookup/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-CPS_PbLookup/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-NPS_PbLookup/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-NPS_PbLookup/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.03_CP=WEO2015-NPS_PbLookup/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.05_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.05_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.05_CP=O/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.0_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.0_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0.0_CP=O/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=A/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=A/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=A/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=B/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=B/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=B/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=C/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=C/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=C/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=O/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=O/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=O/_values.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=SPC/_NPVs.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=SPC/_quantities.xlsx
+PyLUCCBA/examples/Grassland-Cropland_DR=0_CP=SPC/_values.xlsx
+PyLUCCBA/resources/dluc/CS_yields_FR.csv
+PyLUCCBA/resources/dluc/CS_yields_FR.txt
+PyLUCCBA/resources/prices/Exput/CO2_prices_FR.csv
+PyLUCCBA/resources/prices/Exput/Exput.txt
+PyLUCCBA/resources/yields/Input/DEBUG_yields_FR.csv
+PyLUCCBA/resources/yields/Input/HAETH_yields_FR.csv
+PyLUCCBA/resources/yields/Input/HAETH_yields_FR.txt
+PyLUCCBA/resources/yields/Input/Input.txt
+PyLUCCBA/resources/yields/Input/MISCANTHUS_yields_FR.csv
+PyLUCCBA/resources/yields/Input/SUGARBEET_yields_FR.csv
+PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv
+PyLUCCBA/resources/yields/Output/ETH_yields_FR.csv
+PyLUCCBA/resources/yields/Output/ETH_yields_FR.txt
