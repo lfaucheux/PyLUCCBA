@@ -105,6 +105,8 @@ We may also wonder which quantities trajectory of miscanthus is implied, on the 
 
 The land use change from `initial_landuse='annual cropland'` to `final_landuse='miscanthus'` has effects in terms of carbon dioxide emissions. These emissions clearly don't exhibit the same profile depending on how we chose to consider them over the project horizon. First, regarding soil carbon dioxide emissions:
 
+    >>> cba.carbon_and_co2_flows_annualizer.so_emitting
+    False # sequestration
     >>> cba.chart_of_soco2_unif_flows.show()
     >>> cba.chart_of_soco2_diff_flows.show()
     ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.55669472]
@@ -120,8 +122,10 @@ Of course, the comparison makes sense since the total emited stocks are identica
     >>> np.sum(cba.soco2_diff_flows_traj)
     3.3716504519976764 # tonnes
     
-That being shown, note that on the side of vegetation, there is no emission-differentials between annual croplands and miscanthus since both are harvested on an annual basis, be that under differentiated or uniform anualization, see 
+That being shown, note that on the side of vegetation, there is no emission-differentials between annual croplands and miscanthus since both are harvested on an annual basis, be that under a differentiated or uniform anualization approach, see 
 
+    >>> cba.carbon_and_co2_flows_annualizer.vg_emitting
+    None
     >>> cba.chart_of_vgco2_unif_flows.show()
     >>> cba.chart_of_vgco2_diff_flows.show()
     ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[1.]
