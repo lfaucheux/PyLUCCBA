@@ -14,7 +14,7 @@ scenarizer = lambda name : cc.CBACalculator(
     co2_prices_scenario    = name,
     initial_landuse        = 'FORESTLAND30',
     final_landuse          = 'wheat',
-    input_flows_scenario   = 'CRISTANOL',
+    input_flows_scenario   = 'IFP',
     **cs.other_parameters
 )
 

@@ -13,7 +13,7 @@ scenarizer = lambda rate : cc.CBACalculator(
     co2_prices_scenario    = 'O',
     initial_landuse        = 'FORESTLAND30',
     final_landuse          = 'wheat',
-    input_flows_scenario   = 'CRISTANOL',
+    input_flows_scenario   = 'IFP',
     **cs.other_parameters
 )
 

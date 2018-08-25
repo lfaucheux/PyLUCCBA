@@ -1475,7 +1475,7 @@ class InputFlows(ts.Cache):
         ...     first_year      = 2030,
         ... )
         >>> o.eligible_scenarios
-        ['CRISTANOL', 'DEBUG']
+        ['DEBUG', 'IFP']
         """
         return [s for s in sorted(
             self.input_flows_and_infos\
@@ -1537,7 +1537,7 @@ class InputFlows(ts.Cache):
         Let's figure out what the possible scenrii are when
         `final_landuse = 'wheat'`.
         >> o.eligible_scenarios
-        ['CRISTANOL', 'DEBUG']
+        ['IFP', 'DEBUG']
 
         Note that the parameter used to set the scenario is named `scenario`.
         However, for testing purpose, we may have reasons for checking which
@@ -1548,9 +1548,9 @@ class InputFlows(ts.Cache):
         ...     final_landuse   = 'wheat',
         ...     project_horizon = float('nan'),
         ...     first_year      = float('nan'),
-        ...     scenario        = 'CRISTANOL'
+        ...     scenario        = 'IFP'
         ... ).input_flows_scenario
-        'CRISTANOL'
+        'IFP'
         """
         return ts.InMindWithCorrespondingUnit(
             'year', self.resources['%s_yields'%self.final_landuse], pop=False
@@ -2172,7 +2172,7 @@ class CBACalculator(ts.Cache):
             initial_landuse        = kws.pop('il', 'improved grassland'),
             final_landuse          = kws.pop('fl', 'wheat'),
             co2_prices_scenario    = kws.pop('sc', 'O'),
-            input_flows_scenario   = kws.pop('si', 'CRISTANOL'),
+            input_flows_scenario   = kws.pop('si', 'IFP'),
             output_flows_scenario  = kws.pop('so', 'O'),
             country                = kws.pop('co', 'france'),
             project_first_year     = kws.pop('y0', 2020),
@@ -2272,7 +2272,7 @@ class CBACalculator(ts.Cache):
         ...     co2_prices_scenario    = 'O',
         ...     initial_landuse        = 'improved grassland',
         ...     final_landuse          = 'wheat',
-        ...     input_flows_scenario   = 'CRISTANOL',
+        ...     input_flows_scenario   = 'IFP',
         ...     output_flows_scenario  = 'O',
         ...     country                = 'france',
         ...     project_first_year     = 2020,
@@ -2284,7 +2284,7 @@ class CBACalculator(ts.Cache):
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         **************************************************************************************
-        run_name                : [ETH(O)][IMPROVEDGRASSLAND~WHEAT(CRISTANOL)][T151Y2020D1][Tvgd1Tvgu20Tso20][Tgwp100STATIC][CO2p(O)DR(0.03)]VS[OIL][EUR]
+        run_name                : [ETH(O)][IMPROVEDGRASSLAND~WHEAT(IFP)][T151Y2020D1][Tvgd1Tvgu20Tso20][Tgwp100STATIC][CO2p(O)DR(0.03)]VS[OIL][EUR]
         output                  : ETH
         black_output            : OIL
         initial_landuse         : IMPROVED GRASSLAND
@@ -2303,7 +2303,7 @@ class CBACalculator(ts.Cache):
         final_currency          : EUR
         change_rates            : {'USD/EUR': 1.14}
         output_flows_scenario   : O
-        input_flows_scenario    : CRISTANOL
+        input_flows_scenario    : IFP
 
         Note the difference between the value originally set for `project_horizon`
         (of 150) and that that is returned above. The difference between the two
@@ -2359,14 +2359,14 @@ class CBACalculator(ts.Cache):
         ...     co2_prices_scenario    = 'O',
         ...     initial_landuse        = 'improved grassland',
         ...     final_landuse          = 'wheat',
-        ...     input_flows_scenario   = 'CRISTANOL',
+        ...     input_flows_scenario   = 'IFP',
         ...     output_flows_scenario  = 'O',
         ...     country                = 'france',
         ...     project_first_year     = 2020,
         ...     polat_repeated_pattern = True,
         ...     change_rates           = {'EUR':{'USD/EUR':1.14}},
         ... ).run_name
-        '[ETH(O)][IMPROVEDGRASSLAND~WHEAT(CRISTANOL)][T151Y2020D1][Tvgd1Tvgu20Tso20][Tgwp100STATIC][CO2p(O)DR(0.03)]VS[OIL][EUR]'
+        '[ETH(O)][IMPROVEDGRASSLAND~WHEAT(IFP)][T151Y2020D1][Tvgd1Tvgu20Tso20][Tgwp100STATIC][CO2p(O)DR(0.03)]VS[OIL][EUR]'
 
         Probably better to set your own meaningful name, admittedly.
         >>> CBACalculator(run_name='myIdentifyingRunName').run_name
@@ -2417,7 +2417,7 @@ class CBACalculator(ts.Cache):
 
         >>> o = CBACalculator._testing_instancer()
         >>> o.save_dir
-        '[ETH(O)][IMPROVEDGRASSLAND~WHEAT(CRISTANOL)][T21Y2020D1][Tvgd1Tvgu20Tso20][Tgwp100STATIC][CO2p(O)DR(0.03)]VS[OIL][EUR]'
+        '[ETH(O)][IMPROVEDGRASSLAND~WHEAT(IFP)][T21Y2020D1][Tvgd1Tvgu20Tso20][Tgwp100STATIC][CO2p(O)DR(0.03)]VS[OIL][EUR]'
         """
         return self.run_name
 
@@ -3724,7 +3724,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
-        ...     ph=3, so='O', fl='wheat', si='CRISTANOL'
+        ...     ph=3, so='O', fl='wheat', si='IFP'
         ... ).input_flows_traj
         array([[3.5161744, 3.5161744, 3.5161744, 3.5161744]])
 
@@ -3752,7 +3752,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
-        ...     ph=3, so='O', fl='wheat', si='CRISTANOL'
+        ...     ph=3, so='O', fl='wheat', si='IFP'
         ... ).timed_input_flows_traj
         array([[3.5161744, 3.5161744, 3.5161744, 0.       ]])
 
@@ -8347,7 +8347,7 @@ class CBAParametersEndogenizer(object):
         return _obj_ + pow(_obj_, 3.) - pow(_obj_, 3.)
 
     @property
-    def ENDOGENOUS_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows(self):
+    def endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows(self):
         """
         Returns a CBACalculator instance configured with the discount rate
         which equates NPV_total_unif_co2_flows TO NPV_total_diff_co2_flows.
@@ -8360,17 +8360,17 @@ class CBAParametersEndogenizer(object):
         >>> o = CBAParametersEndogenizer(
         ...     CBACalculator_instance = cba
         ... )
-        >>> o.ENDOGENOUS_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows.discount_rate[0]
+        >>> o.endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows.discount_rate[0]
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
-        ---- ENDOGENOUS_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_tot sol=[0.03847488]
+        ---- endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_tot sol=[0.03847488]
         ---- [***]The solution converged.[2.220446e-16][***]
         0.038474875757994256
         """
         _S_ = self._ENDOGENIZER(
-            _key_   = 'ENDOGENOUS_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows',
+            _key_   = 'endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows',
             _method_= self._ENDOGENIZER_of_the_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows,
             _ci_    = [.0]
         )

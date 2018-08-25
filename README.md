@@ -24,7 +24,7 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
 
 ## Example usage
     
-*The example that follows is done with the idea of reproducing the results presented in Dupoux 2018. via the Python Shell*.
+*The example that follows is done with the idea of reproducing the results presented in Dupoux (2018) via the Python Shell*.
 
 Let's first import the module `PyLUCCBA`
 
@@ -32,7 +32,7 @@ Let's first import the module `PyLUCCBA`
 
 The alias of `PyLUCCBA`, namely `cc`, actually contains many objects definitions, such as that of the calculator that we are going to use in examples. The name of the calculator is `CBACalculator`.
 
-But before using the calculator as such, let's define (and introduce) the set of parameters that we are going to use to configure `CBACalculator`. As can be expected when performing a cost-benefit-analysis, these parameters are related to: *(i)* the horizon of the project, *(ii)* the discount rate that we want to use in our calculations, *(iii)* the scenarized price trajectory of carbon dioxide, *(iv)* the scenarized trajectory of quantities of bio-ethanol to produce annualy and *(...)* so on. Let's introduce them all in practice:.
+But before using the calculator as such, let's define (and introduce) the set of parameters that we are going to use to configure `CBACalculator`. As can be expected when performing a cost benefit analysis, these parameters are related to: *(i)* the horizon of the project, *(ii)* the discount rate that we want to use in our calculations, *(iii)* the scenarized price trajectory of carbon dioxide, *(iv)* the scenarized trajectory of quantities of bio-ethanol to produce annually and *(...)* so on. Let's introduce them all in practice:
 
     >>> cba = cc.CBACalculator(
             run_name               = 'introduction example 1',
@@ -54,22 +54,22 @@ But before using the calculator as such, let's define (and introduce) the set of
             return_plts            = True,
         )
 
-The following table enumerates tall parameters that can be used to create an intance of `CBACalculator`.
+The following table enumerates all parameters that can be used to create an instance of `CBACalculator`.
 
  Parameter's name         | and signification
  ------------------------ | -------
  `run_name`               | name of the folder that will contain the generated results and charts, *e.g.* `'introduction example 1'`.
- `country`                | name the country under study. Only *one* possible choice currently: `France`.
- `project_first_year`     | first year of the project (for the sake legibility).
+ `country`                | name of the country under study. Only *one* possible choice currently: `France`.
+ `project_first_year`     | first year of the project.
  `project_horizon`        | duration of the biofuel production project (years).
  `discount_rate`          | rate involved in the calculations of net present values. Set to `0.` by default.
  `co2_prices_scenario`    | name of the trajectory of carbon (dioxide) prices. The current choices are `'A'`, `'B'`, `'C'`, `'DEBUG'`, `'O'`, `'SPC'`, `'WEO2015-450S'`, `'WEO2015-CPS'` or `'WEO2015-NPS'`.
- `output`                 | name of the produced output. Set to `'eth'` by default. Only *one* possible choice currently: `'eth'`.
- `black_output`           | name of the counterfactual produced output. Serves as the reference according to which the production of bioethanol (`'eth'`) is considered (or not) as pro-environmental. Set to `'oil'` by default. Only *one* possible choice currently: `'oil'`. 
+ `output`                 | name of the produced biofuel. Set to `'eth'` by default. Only *one* possible choice currently: `'eth'`. ***NB***: `'eth'` actually stands for **bio**ethanol.
+ `black_output`           | name of the counterfactual produced output. Serves as the reference according to which the production of bioethanol (`'eth'`) is considered (or not) as pro-environmental. Set to `'oil'` by default. Only *one* possible choice currently: `'oil'`. ***NB***: `'oil'` actually stands for gasoline.
  `output_flows_scenario`  | name of the trajectory of annually produced quantities of biofuel. The current choices are `'DEBUG'` or `'O'`.
  `initial_landuse`        | use of the land *before* land conversion. The current choices are `'forestland30'`, `'improved grassland'`, `'annual cropland'` or `'degraded grassland'`.
  `final_landuse`          | use of the land *after* land conversion. The current choices are `'miscanthus'`, `'sugarbeet'` or `'wheat'`.
- `input_flows_scenario`   | name of the trajectory of input-to-ouput yields. The current choices depend on the value set for `final_landuse`. If `final_landuse` is set to `'miscanthus'`, the possibilities are `'DEBUG'` and `'DOE'`. If `final_landuse` is set to `'wheat'` or `'sugarbeet'`, the possibilities are `'CRISTANOL'` and `'DEBUG'`.
+ `input_flows_scenario`   | name of the trajectory of input-to-ouput yields. The current choices depend on the value set for `final_landuse`. If `final_landuse` is set to `'miscanthus'`, the possibilities are `'DEBUG'` and `'DOE'`. If `final_landuse` is set to `'wheat'` or `'sugarbeet'`, the possibilities are `'IFP'` and `'DEBUG'`.
  `T_so`                   | period over which soil carbon emissions due to LUC are considered.
  `T_vg_diff`              | period over which vegetation carbon emissions due to LUC are considered in the differentiated annualization approach.
  `T_vg_unif`              | period over which vegetation carbon emissions due to LUC are considered in the uniform annualization approach.
