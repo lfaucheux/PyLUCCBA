@@ -10,8 +10,6 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www
 | Total    | 1183       | 161     | 0        | 86%      |
 
 ## Installation
-<details><summary><i>(click to expand)</i></summary>
-<p>
 
 First, you need Python installed, either [Python2.7.+](https://www.python.org/downloads/) or [Python3.+](https://www.python.org/downloads/). Either versions are good for our purpose. Then, we are going to use a package management system to install [PyLUCCBA](https://github.com/lfaucheux/PyLUCCBA), namely [pip](https://en.wikipedia.org/wiki/Pip_(package_manager)), _already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4_. Open a session in your OS shell prompt and type
 
@@ -24,20 +22,60 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
     python setup.py install 
 
 
-</p>
-</details> 
-
 ## Example usage
-<details><summary><i>(click to expand)</i></summary>
-<p>
     
-The example that follows is done via the Python Shell. Let's first import the module `PyLUCCBA`.
+*The example that follows is done with the idea of reproducing the results presented in Dupoux 2018. via the Python Shell*.
 
-    >>> import PyLUCCBA as cc  
+Let's first import the module `PyLUCCBA`
+
+    >>> import PyLUCCBA as cc
+
+The alias of `PyLUCCBA`, namely `cc`, actually contains many objects definitions, such as that of the calculator that we are going to use in examples. The name of the calculator is `CBACalculator`.
+
+But before using the calculator as such, let's define (and introduce) the set of parameters that we are going to use to configure `CBACalculator`. As can be expected when performing a cost-benefit-analysis, these parameters are related to: *(i)* the horizon of the project, *(ii)* the discount rate that we want to use in our calculations, *(iii)* the scenarized price trajectory of carbon dioxide, *(iv)* the scenarized trajectory of quantities of bio-ethanol to produce annualy and *(...)* so on. Let's introduce them all in practice and [instantiate](https://www.techopedia.com/definition/26857/instantiate) `CBACalculator`.
+
+    >>> cba = cc.CBACalculator(
+            run_name               = 'introduction example 1',
+            country                = 'france',
+            project_first_year     = 2020,
+            project_horizon        = 20,
+            discount_rate          = .03,
+            co2_prices_scenario    = 'SPC',
+            output_flows_scenario  = 'O',
+            initial_landuse        = 'annual cropland',
+            final_landuse          = 'miscanthus',
+            input_flows_scenario   = 'DOE',
+            T_so                   = 20,
+            T_vg_diff              = 1,
+            T_vg_unif              = 20,
+            polat_repeated_pattern = True,
+            change_rates           = {'EUR':{'USD/EUR':1.14}}, # https://www.google.fr/#q=EUR+USD
+            return_plts            = True,
+        )
+
+The following table enumerates all parameters and their meaning
+
+ parameter's name         | meaning
+ ------------------------ | -------
+ `run_name`               |
+ `country`                |
+ `project_first_year`     |
+ `project_horizon`        |
+ `discount_rate`          |
+ `co2_prices_scenario`    |
+ `output_flows_scenario`  |
+ `initial_landuse`        |
+ `final_landuse`          |
+ `input_flows_scenario`   |
+ `T_so`                   |
+ `T_vg_diff`              |
+ `T_vg_unif`              |
+ `polat_repeated_pattern` |
+ `change_rates`           |
+ `return_plts`            |
 
 
-</p>
-</details>  
+
 
 ## Value of the data
 <details><summary><i>(click to expand)</i></summary>
