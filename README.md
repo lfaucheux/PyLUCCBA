@@ -32,7 +32,7 @@ Let's first import the module `PyLUCCBA`
 
 The alias of `PyLUCCBA`, namely `cc`, actually contains many objects definitions, such as that of the calculator that we are going to use in examples. The name of the calculator is `CBACalculator`.
 
-But before using the calculator as such, let's define (and introduce) the set of parameters that we are going to use to configure `CBACalculator`. As can be expected when performing a cost-benefit-analysis, these parameters are related to: *(i)* the horizon of the project, *(ii)* the discount rate that we want to use in our calculations, *(iii)* the scenarized price trajectory of carbon dioxide, *(iv)* the scenarized trajectory of quantities of bio-ethanol to produce annualy and *(...)* so on. Let's introduce them all in practice and [instantiate](https://www.techopedia.com/definition/26857/instantiate) `CBACalculator`.
+But before using the calculator as such, let's define (and introduce) the set of parameters that we are going to use to configure `CBACalculator`. As can be expected when performing a cost-benefit-analysis, these parameters are related to: *(i)* the horizon of the project, *(ii)* the discount rate that we want to use in our calculations, *(iii)* the scenarized price trajectory of carbon dioxide, *(iv)* the scenarized trajectory of quantities of bio-ethanol to produce annualy and *(...)* so on. Let's introduce them all in practice:.
 
     >>> cba = cc.CBACalculator(
             run_name               = 'introduction example 1',
@@ -49,33 +49,44 @@ But before using the calculator as such, let's define (and introduce) the set of
             T_vg_diff              = 1,
             T_vg_unif              = 20,
             polat_repeated_pattern = True,
+            final_currency         = 'EUR',
             change_rates           = {'EUR':{'USD/EUR':1.14}}, # https://www.google.fr/#q=EUR+USD
             return_plts            = True,
         )
 
-The following table enumerates all parameters and their meaning
+The following table enumerates tall parameters that can be used to create an intance of `CBACalculator`.
 
- parameter's name         | meaning
+ Parameter's name         | and signification
  ------------------------ | -------
- `run_name`               | name of the folder that will contain the generated results and charts
- `country`                | name the country under study. Only on possible choice currently: `France`
- `project_first_year`     | first year of the project (for the sake legibility)
- `project_horizon`        | duration of the biofuel production project (years)
- `discount_rate`          | rate involved in the calculations of net present values (\*\*)
- `co2_prices_scenario`    | name of the trajectory of carbon (dioxide) prices (\*\*\*)
- `output_flows_scenario`  | name of the trajectory of annually produced quantities of biofuel
- `initial_landuse`        | use of the land *before* land conversion
- `final_landuse`          | use of the land *after* land conversion
- `input_flows_scenario`   | name of the trajectory of input-to-ouput yields
- `T_so`                   | period over which soil carbon emissions due to LUC are considered
- `T_vg_diff`              | period over which vegetation carbon emissions due to LUC are considered in the differentiated annualization approach (\*\*\*\*)
- `T_vg_unif`              | period over which vegetation carbon emissions due to LUC are considered in the uniform annualization approach (\*\*\*\*)
+ `run_name`               | name of the folder that will contain the generated results and charts, *e.g.* `'introduction example 1'`.
+ `country`                | name the country under study. Only *one* possible choice currently: `France`.
+ `project_first_year`     | first year of the project (for the sake legibility).
+ `project_horizon`        | duration of the biofuel production project (years).
+ `discount_rate`          | rate involved in the calculations of net present values. Set to `0.` by default.
+ `co2_prices_scenario`    | name of the trajectory of carbon (dioxide) prices. The current choices are `'A'`, `'B'`, `'C'`, `'DEBUG'`, `'O'`, `'SPC'`, `'WEO2015-450S'`, `'WEO2015-CPS'` or `'WEO2015-NPS'`.
+ `output`                 | name of the produced output. Set to `'eth'` by default. Only *one* possible choice currently: `'eth'`.
+ `black_output`           | name of the counterfactual produced output. Serves as the reference according to which the production of bioethanol (`'eth'`) is considered (or not) as pro-environmental. Set to `'oil'` by default. Only *one* possible choice currently: `'oil'`. 
+ `output_flows_scenario`  | name of the trajectory of annually produced quantities of biofuel. The current choices are `'DEBUG'` or `'O'`.
+ `initial_landuse`        | use of the land *before* land conversion. The current choices are `'forestland30'`, `'improved grassland'`, `'annual cropland'` or `'degraded grassland'`.
+ `final_landuse`          | use of the land *after* land conversion. The current choices are `'miscanthus'`, `'sugarbeet'` or `'wheat'`.
+ `input_flows_scenario`   | name of the trajectory of input-to-ouput yields. The current choices depend on the value set for `final_landuse`. If `final_landuse` is set to `'miscanthus'`, the possibilities are `'DEBUG'` and `'DOE'`. If `final_landuse` is set to `'wheat'` or `'sugarbeet'`, the possibilities are `'CRISTANOL'` and `'DEBUG'`.
+ `T_so`                   | period over which soil carbon emissions due to LUC are considered.
+ `T_vg_diff`              | period over which vegetation carbon emissions due to LUC are considered in the differentiated annualization approach.
+ `T_vg_unif`              | period over which vegetation carbon emissions due to LUC are considered in the uniform annualization approach.
  `polat_repeated_pattern` | if `True`, retro/extra-polation pattern is repeated before/after the first/last mentioned value. Otherwise, it is maintained constant.
- `change_rates`           | EUR-based exchange rate name and value to consider calculations
- `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved on the disk.
+ `final_currency`         | currency used to express the results. The current choices are `'EUR'` or `'USD'`. Set to `'EUR'` by default.
+ `change_rates`           | `final_currency`-dependent exchange rate value to consider in calculations, *e.g.* `{'EUR':{'USD/EUR':1.14,}}` *(or `{'EUR':{'EUR/USD':0.8772,}}` since the tool ensures dimensional homogeneity)*.
+ `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved on the disk. Set to `False` by default.
+ `save_charts`            | if `True` charts are on the disk. Otherwise, they are shown to users. Set to `True` by default. **NB** `return_plts=True` has priority over `save_charts`.
 
-(\*)
-(\*\*)
+We may wonder what the scenarized trajectories of carbon dioxid prices and produced quantities of biofuel are. In this case, we can simply type:
+
+    >>> cba.chart_of_scenarized_output_flows.show()
+
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20ETH%20%5BO%5D.png?raw=true" width="60%"/><img></p>
+
+
+
 
 
 
