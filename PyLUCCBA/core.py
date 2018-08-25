@@ -3319,7 +3319,7 @@ class CBACalculator(ts.Cache):
         return self.dashboard.plot(
             abs_=self.horizon,
             imas=self.unif_co2_flows_traj.T,
-            labels=['UNIF [VG+SO] C-TRAJ [tonnes]'],
+            labels=['UNIF [VG+SO] CO2-TRAJ [tonnes]'],
             colors=['grey'],
             save=self.save_charts,
             save_dir=self.save_dir,
@@ -3348,7 +3348,7 @@ class CBACalculator(ts.Cache):
         return self.dashboard.plot(
             abs_=self.horizon,
             imas=self.diff_co2_flows_traj.T,
-            labels=['DIFF [VG+SO] C-TRAJ [tonnes]'],
+            labels=['DIFF [VG+SO] CO2-TRAJ [tonnes]'],
             colors=['black'],
             save=self.save_charts,
             save_dir=self.save_dir,
@@ -3431,14 +3431,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_co2_prices(self):
+    def chart_of_co2_prices(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_co2_prices
+        >>> c = o.chart_of_co2_prices
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """ 
@@ -3484,14 +3484,14 @@ class CBACalculator(ts.Cache):
         return self.co2_prices_traj*self.discounting_factors
 
     @property
-    def chart_of_scenarized_co2_disc_prices(self):
+    def chart_of_co2_disc_prices(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_co2_disc_prices
+        >>> c = o.chart_of_co2_disc_prices
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """ 
@@ -3587,14 +3587,14 @@ class CBACalculator(ts.Cache):
         ))[:, :(-_D_ if _D_ else None)]
 
     @property
-    def chart_of_scenarized_output_flows(self):
+    def chart_of_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_output_flows
+        >>> c = o.chart_of_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -3768,14 +3768,14 @@ class CBACalculator(ts.Cache):
         ))
 
     @property
-    def chart_of_scenarized_input_flows(self):
+    def chart_of_input_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_input_flows
+        >>> c = o.chart_of_input_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -3846,14 +3846,14 @@ class CBACalculator(ts.Cache):
         )
             
     @property
-    def chart_of_scenarized_cultivated_unitary_input_co2eq_flows_traj(self):
+    def chart_of_cultivated_unitary_input_co2eq_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_cultivated_unitary_input_co2eq_flows_traj
+        >>> c = o.chart_of_cultivated_unitary_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -3920,14 +3920,14 @@ class CBACalculator(ts.Cache):
         ))
 
     @property
-    def chart_of_scenarized_cultivated_input_co2eq_flows(self):
+    def chart_of_cultivated_input_co2eq_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_cultivated_input_co2eq_flows
+        >>> c = o.chart_of_cultivated_input_co2eq_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -3971,14 +3971,14 @@ class CBACalculator(ts.Cache):
         )
         
     @property
-    def chart_of_scenarized_processed_unitary_input_co2eq_flows_traj(self):
+    def chart_of_processed_unitary_input_co2eq_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_processed_unitary_input_co2eq_flows_traj
+        >>> c = o.chart_of_processed_unitary_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4043,14 +4043,14 @@ class CBACalculator(ts.Cache):
         ))[:, :(-_D_ if _D_ else None)]
         
     @property
-    def chart_of_scenarized_processed_input_co2eq_flows(self):
+    def chart_of_processed_input_co2eq_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_processed_input_co2eq_flows
+        >>> c = o.chart_of_processed_input_co2eq_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4139,14 +4139,14 @@ class CBACalculator(ts.Cache):
         ))
 
     @property
-    def chart_of_scenarized_land_surface_flows(self):
+    def chart_of_land_surface_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_land_surface_flows
+        >>> c = o.chart_of_land_surface_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4189,14 +4189,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_proc_co2_flows_value(self):
+    def chart_of_proc_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_proc_co2_flows_value
+        >>> c = o.chart_of_proc_co2_flows_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4240,14 +4240,14 @@ class CBACalculator(ts.Cache):
         return self.timed_proc_co2_flows_value*self.discounting_factors
 
     @property
-    def chart_of_scenarized_proc_co2_flows_disc_value(self):
+    def chart_of_proc_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_proc_co2_flows_disc_value
+        >>> c = o.chart_of_proc_co2_flows_disc_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4293,14 +4293,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_cult_co2_flows_value(self):
+    def chart_of_cult_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_cult_co2_flows_value
+        >>> c = o.chart_of_cult_co2_flows_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4344,14 +4344,14 @@ class CBACalculator(ts.Cache):
         return self.timed_cult_co2_flows_value*self.discounting_factors
 
     @property
-    def chart_of_scenarized_cult_co2_flows_disc_value(self):
+    def chart_of_cult_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_cult_co2_flows_disc_value
+        >>> c = o.chart_of_cult_co2_flows_disc_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4395,14 +4395,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_cult_co2_flows(self):
+    def chart_of_NPV_cult_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_cult_co2_flows
+        >>> c = o.chart_of_NPV_cult_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4448,14 +4448,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_cult_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_cult_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_cult_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_cult_co2_flows_per_cum_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4500,14 +4500,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_cult_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_cult_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_cult_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_cult_co2_flows_per_cum_MJs_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4557,14 +4557,14 @@ class CBACalculator(ts.Cache):
         )*self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_proc_plus_cult_co2_flows_value(self):
+    def chart_of_proc_plus_cult_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_proc_plus_cult_co2_flows_value
+        >>> c = o.chart_of_proc_plus_cult_co2_flows_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4607,14 +4607,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_proc_co2_flows(self):
+    def chart_of_NPV_proc_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_proc_co2_flows
+        >>> c = o.chart_of_NPV_proc_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4660,14 +4660,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_proc_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_proc_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_proc_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_proc_co2_flows_per_cum_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4712,14 +4712,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_proc_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_proc_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_proc_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_proc_co2_flows_per_cum_MJs_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4764,14 +4764,14 @@ class CBACalculator(ts.Cache):
         *self.discounting_factors
 
     @property
-    def chart_of_scenarized_proc_plus_cult_co2_flows_disc_value(self):
+    def chart_of_proc_plus_cult_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_proc_plus_cult_co2_flows_disc_value
+        >>> c = o.chart_of_proc_plus_cult_co2_flows_disc_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4815,14 +4815,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_proc_plus_cult_co2_flows(self):
+    def chart_of_NPV_proc_plus_cult_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_proc_plus_cult_co2_flows
+        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4867,14 +4867,14 @@ class CBACalculator(ts.Cache):
         + self.NPV_cult_co2_flows_per_cum_output_flows
 
     @property
-    def chart_of_scenarized_NPV_proc_plus_cult_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_proc_plus_cult_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_per_cum_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4920,14 +4920,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4986,14 +4986,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_vg_diff_co2_flows_value(self):
+    def chart_of_vg_diff_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_vg_diff_co2_flows_value
+        >>> c = o.chart_of_vg_diff_co2_flows_value
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5044,14 +5044,14 @@ class CBACalculator(ts.Cache):
         *self.discounting_factors
 
     @property
-    def chart_of_scenarized_vg_diff_co2_flows_disc_value(self):
+    def chart_of_vg_diff_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_vg_diff_co2_flows_disc_value
+        >>> c = o.chart_of_vg_diff_co2_flows_disc_value
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5101,14 +5101,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_vg_diff_co2_flows(self):
+    def chart_of_NPV_vg_diff_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_vg_diff_co2_flows
+        >>> c = o.chart_of_NPV_vg_diff_co2_flows
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5161,14 +5161,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_vg_diff_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_vg_diff_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_vg_diff_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_vg_diff_co2_flows_per_cum_output_flows
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5220,14 +5220,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5277,14 +5277,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_so_diff_co2_flows_value(self):
+    def chart_of_so_diff_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_so_diff_co2_flows_value
+        >>> c = o.chart_of_so_diff_co2_flows_value
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5335,14 +5335,14 @@ class CBACalculator(ts.Cache):
         *self.discounting_factors
 
     @property
-    def chart_of_scenarized_so_diff_co2_flows_disc_value(self):
+    def chart_of_so_diff_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_so_diff_co2_flows_disc_value
+        >>> c = o.chart_of_so_diff_co2_flows_disc_value
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5392,14 +5392,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_so_diff_co2_flows(self):
+    def chart_of_NPV_so_diff_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_diff_co2_flows
+        >>> c = o.chart_of_NPV_so_diff_co2_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5452,14 +5452,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_so_diff_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_so_diff_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_diff_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_so_diff_co2_flows_per_cum_output_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5511,14 +5511,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_so_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_so_diff_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_diff_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_so_diff_co2_flows_per_cum_MJs_output_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5571,14 +5571,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_so_plus_vg_diff_co2_flows_value(self):
+    def chart_of_so_plus_vg_diff_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_so_plus_vg_diff_co2_flows_value
+        >>> c = o.chart_of_so_plus_vg_diff_co2_flows_value
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5633,14 +5633,14 @@ class CBACalculator(ts.Cache):
         *self.discounting_factors
 
     @property
-    def chart_of_scenarized_so_plus_vg_diff_co2_flows_disc_value(self):
+    def chart_of_so_plus_vg_diff_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_so_plus_vg_diff_co2_flows_disc_value
+        >>> c = o.chart_of_so_plus_vg_diff_co2_flows_disc_value
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5694,14 +5694,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows(self):
+    def chart_of_NPV_so_plus_vg_diff_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5756,14 +5756,14 @@ class CBACalculator(ts.Cache):
         + self.NPV_vg_diff_co2_flows_per_cum_output_flows
 
     @property
-    def chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5819,14 +5819,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5889,14 +5889,14 @@ class CBACalculator(ts.Cache):
         + self.diff_co2_flows_traj
 
     @property
-    def chart_of_scenarized_total_diff_co2_flows(self):
+    def chart_of_total_diff_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_total_diff_co2_flows
+        >>> c = o.chart_of_total_diff_co2_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5944,14 +5944,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_total_diff_co2_flows_value(self):
+    def chart_of_total_diff_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_total_diff_co2_flows_value
+        >>> c = o.chart_of_total_diff_co2_flows_value
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6006,14 +6006,14 @@ class CBACalculator(ts.Cache):
         *self.discounting_factors
 
     @property
-    def chart_of_scenarized_total_diff_co2_flows_disc_value(self):
+    def chart_of_total_diff_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_total_diff_co2_flows_disc_value
+        >>> c = o.chart_of_total_diff_co2_flows_disc_value
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6067,14 +6067,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_total_diff_co2_flows(self):
+    def chart_of_NPV_total_diff_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_total_diff_co2_flows
+        >>> c = o.chart_of_NPV_total_diff_co2_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6129,14 +6129,14 @@ class CBACalculator(ts.Cache):
         + self.NPV_proc_plus_cult_co2_flows_per_cum_output_flows
 
     @property
-    def chart_of_scenarized_NPV_total_diff_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_total_diff_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_total_diff_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_total_diff_co2_flows_per_cum_output_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6192,14 +6192,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_total_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_total_diff_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_total_diff_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_total_diff_co2_flows_per_cum_MJs_output_flows
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6252,14 +6252,14 @@ class CBACalculator(ts.Cache):
         return self.vgco2_unif_flows_traj*self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_vg_unif_co2_flows_value(self):
+    def chart_of_vg_unif_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_vg_unif_co2_flows_value
+        >>> c = o.chart_of_vg_unif_co2_flows_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6304,14 +6304,14 @@ class CBACalculator(ts.Cache):
         return self.timed_vg_unif_co2_flows_value*self.discounting_factors
 
     @property
-    def chart_of_scenarized_vg_unif_co2_flows_disc_value(self):
+    def chart_of_vg_unif_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_vg_unif_co2_flows_disc_value
+        >>> c = o.chart_of_vg_unif_co2_flows_disc_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6357,14 +6357,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_vg_unif_co2_flows(self):
+    def chart_of_NPV_vg_unif_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_vg_unif_co2_flows
+        >>> c = o.chart_of_NPV_vg_unif_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6413,14 +6413,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_vg_unif_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_vg_unif_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_vg_unif_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_vg_unif_co2_flows_per_cum_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6466,14 +6466,14 @@ class CBACalculator(ts.Cache):
         /self.output_flows_converter.tonnes_to_MJs_computer(self.output, 1. )
 
     @property
-    def chart_of_scenarized_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6520,14 +6520,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_so_unif_co2_flows_value(self):
+    def chart_of_so_unif_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_so_unif_co2_flows_value
+        >>> c = o.chart_of_so_unif_co2_flows_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6573,14 +6573,14 @@ class CBACalculator(ts.Cache):
         return self.timed_so_unif_co2_flows_value*self.discounting_factors
 
     @property
-    def chart_of_scenarized_so_unif_co2_flows_disc_value(self):
+    def chart_of_so_unif_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_so_unif_co2_flows_disc_value
+        >>> c = o.chart_of_so_unif_co2_flows_disc_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6625,14 +6625,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_so_unif_co2_flows(self):
+    def chart_of_NPV_so_unif_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_unif_co2_flows
+        >>> c = o.chart_of_NPV_so_unif_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6681,14 +6681,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_so_unif_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_so_unif_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_unif_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_so_unif_co2_flows_per_cum_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6734,14 +6734,14 @@ class CBACalculator(ts.Cache):
         /self.output_flows_converter.tonnes_to_MJs_computer(self.output, 1.)
 
     @property
-    def chart_of_scenarized_NPV_so_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_so_unif_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_unif_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_so_unif_co2_flows_per_cum_MJs_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6789,14 +6789,14 @@ class CBACalculator(ts.Cache):
         return self.unif_co2_flows_traj*self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_so_plus_vg_unif_co2_flows_value(self):
+    def chart_of_so_plus_vg_unif_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_so_plus_vg_unif_co2_flows_value
+        >>> c = o.chart_of_so_plus_vg_unif_co2_flows_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6843,14 +6843,14 @@ class CBACalculator(ts.Cache):
         *self.discounting_factors
 
     @property
-    def chart_of_scenarized_so_plus_vg_unif_co2_flows_disc_value(self):
+    def chart_of_so_plus_vg_unif_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_so_plus_vg_unif_co2_flows_disc_value
+        >>> c = o.chart_of_so_plus_vg_unif_co2_flows_disc_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6896,14 +6896,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows(self):
+    def chart_of_NPV_so_plus_vg_unif_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -6950,14 +6950,14 @@ class CBACalculator(ts.Cache):
         + self.NPV_vg_unif_co2_flows_per_cum_output_flows
 
     @property
-    def chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7003,14 +7003,14 @@ class CBACalculator(ts.Cache):
         /self.output_flows_converter.tonnes_to_MJs_computer(self.output, 1. )
 
     @property
-    def chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7065,14 +7065,14 @@ class CBACalculator(ts.Cache):
         + self.unif_co2_flows_traj
 
     @property
-    def chart_of_scenarized_total_unif_co2_flows(self):
+    def chart_of_total_unif_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_total_unif_co2_flows
+        >>> c = o.chart_of_total_unif_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7110,14 +7110,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_total_unif_co2_flows_value(self):
+    def chart_of_total_unif_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_total_unif_co2_flows_value
+        >>> c = o.chart_of_total_unif_co2_flows_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7163,14 +7163,14 @@ class CBACalculator(ts.Cache):
         return self.timed_total_unif_co2_flows_value*self.discounting_factors
 
     @property
-    def chart_of_scenarized_total_unif_co2_flows_disc_value(self):
+    def chart_of_total_unif_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_total_unif_co2_flows_disc_value
+        >>> c = o.chart_of_total_unif_co2_flows_disc_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7215,14 +7215,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_total_unif_co2_flows(self):
+    def chart_of_NPV_total_unif_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_total_unif_co2_flows
+        >>> c = o.chart_of_NPV_total_unif_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7269,14 +7269,14 @@ class CBACalculator(ts.Cache):
         + self.NPV_proc_plus_cult_co2_flows_per_cum_output_flows
 
     @property
-    def chart_of_scenarized_NPV_total_unif_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_total_unif_co2_flows_per_cum_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_total_unif_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_total_unif_co2_flows_per_cum_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7322,14 +7322,14 @@ class CBACalculator(ts.Cache):
         /self.output_flows_converter.tonnes_to_MJs_computer(self.output, 1.)
 
     @property
-    def chart_of_scenarized_NPV_total_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_total_unif_co2_flows_per_cum_MJs_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_total_unif_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_total_unif_co2_flows_per_cum_MJs_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7472,14 +7472,14 @@ class CBACalculator(ts.Cache):
         return np.cumsum(self.timed_output_MJs_flows_traj, axis=1)
 
     @property
-    def chart_of_scenarized_black_output_flows(self):
+    def chart_of_black_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_black_output_flows
+        >>> c = o.chart_of_black_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7551,14 +7551,14 @@ class CBACalculator(ts.Cache):
         ))[:, :(-_D_ if _D_ else None)]
 
     @property
-    def chart_of_scenarized_black_output_co2_flows(self):
+    def chart_of_black_output_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_black_output_co2_flows
+        >>> c = o.chart_of_black_output_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7598,14 +7598,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_scenarized_black_output_co2_flows_value(self):
+    def chart_of_black_output_co2_flows_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_black_output_co2_flows_value
+        >>> c = o.chart_of_black_output_co2_flows_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7651,14 +7651,14 @@ class CBACalculator(ts.Cache):
         return self.timed_black_output_co2_flows_value*self.discounting_factors
 
     @property
-    def chart_of_scenarized_black_output_co2_flows_disc_value(self):
+    def chart_of_black_output_co2_flows_disc_value(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_black_output_co2_flows_disc_value
+        >>> c = o.chart_of_black_output_co2_flows_disc_value
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7703,14 +7703,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_black_output_co2_flows(self):
+    def chart_of_NPV_black_output_co2_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_black_output_co2_flows
+        >>> c = o.chart_of_NPV_black_output_co2_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7759,14 +7759,14 @@ class CBACalculator(ts.Cache):
         )
     
     @property
-    def chart_of_scenarized_NPV_black_output_co2_flows_per_cum_black_output_flows(self):
+    def chart_of_NPV_black_output_co2_flows_per_cum_black_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_black_output_co2_flows_per_cum_black_output_flows
+        >>> c = o.chart_of_NPV_black_output_co2_flows_per_cum_black_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7814,14 +7814,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_scenarized_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows(self):
+    def chart_of_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_scenarized_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows
+        >>> c = o.chart_of_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -8237,52 +8237,52 @@ class CBACalculator(ts.Cache):
         'chart_of_vgco2_diff_flows',
         'chart_of_unif_co2_flows',
         'chart_of_diff_co2_flows',
-        'chart_of_scenarized_cultivated_input_co2eq_flows',
-        'chart_of_scenarized_processed_input_co2eq_flows',
-        'chart_of_scenarized_cultivated_unitary_input_co2eq_flows_traj', #GWP-like
-        'chart_of_scenarized_processed_unitary_input_co2eq_flows_traj',  #GWP-like
-        'chart_of_scenarized_output_flows',
-        'chart_of_scenarized_black_output_flows',
-        'chart_of_scenarized_input_flows',
-        'chart_of_scenarized_land_surface_flows',
-        'chart_of_scenarized_total_diff_co2_flows',
-        'chart_of_scenarized_total_unif_co2_flows',
+        'chart_of_cultivated_input_co2eq_flows',
+        'chart_of_processed_input_co2eq_flows',
+        'chart_of_cultivated_unitary_input_co2eq_flows_traj', #GWP-like
+        'chart_of_processed_unitary_input_co2eq_flows_traj',  #GWP-like
+        'chart_of_output_flows',
+        'chart_of_black_output_flows',
+        'chart_of_input_flows',
+        'chart_of_land_surface_flows',
+        'chart_of_total_diff_co2_flows',
+        'chart_of_total_unif_co2_flows',
         #< BASELINE FLOWS >
-        'chart_of_scenarized_black_output_co2_flows',
+        'chart_of_black_output_co2_flows',
         #< VALUE CHARTS >
-        'chart_of_scenarized_co2_prices',
-        'chart_of_scenarized_proc_co2_flows_value',
-        'chart_of_scenarized_cult_co2_flows_value',
-        'chart_of_scenarized_proc_plus_cult_co2_flows_value',
+        'chart_of_co2_prices',
+        'chart_of_proc_co2_flows_value',
+        'chart_of_cult_co2_flows_value',
+        'chart_of_proc_plus_cult_co2_flows_value',
         #< DIFF >
-        'chart_of_scenarized_so_diff_co2_flows_value',
-        'chart_of_scenarized_vg_diff_co2_flows_value',
-        'chart_of_scenarized_so_plus_vg_diff_co2_flows_value',
-        'chart_of_scenarized_total_diff_co2_flows_value',
+        'chart_of_so_diff_co2_flows_value',
+        'chart_of_vg_diff_co2_flows_value',
+        'chart_of_so_plus_vg_diff_co2_flows_value',
+        'chart_of_total_diff_co2_flows_value',
         #< UNIF >
-        'chart_of_scenarized_so_unif_co2_flows_value',
-        'chart_of_scenarized_vg_unif_co2_flows_value',
-        'chart_of_scenarized_so_plus_vg_unif_co2_flows_value',
-        'chart_of_scenarized_total_unif_co2_flows_value',
+        'chart_of_so_unif_co2_flows_value',
+        'chart_of_vg_unif_co2_flows_value',
+        'chart_of_so_plus_vg_unif_co2_flows_value',
+        'chart_of_total_unif_co2_flows_value',
         #< BASELINE VALUE >
-        'chart_of_scenarized_black_output_co2_flows_value',
+        'chart_of_black_output_co2_flows_value',
         #< DISCOUNTED EUR CHARTS >
-        'chart_of_scenarized_co2_disc_prices',
-        'chart_of_scenarized_proc_co2_flows_disc_value',
-        'chart_of_scenarized_cult_co2_flows_disc_value',
-        'chart_of_scenarized_proc_plus_cult_co2_flows_disc_value',
+        'chart_of_co2_disc_prices',
+        'chart_of_proc_co2_flows_disc_value',
+        'chart_of_cult_co2_flows_disc_value',
+        'chart_of_proc_plus_cult_co2_flows_disc_value',
         #< DIFF >
-        'chart_of_scenarized_so_diff_co2_flows_disc_value',
-        'chart_of_scenarized_vg_diff_co2_flows_disc_value',
-        'chart_of_scenarized_so_plus_vg_diff_co2_flows_disc_value',
-        'chart_of_scenarized_total_diff_co2_flows_disc_value',
+        'chart_of_so_diff_co2_flows_disc_value',
+        'chart_of_vg_diff_co2_flows_disc_value',
+        'chart_of_so_plus_vg_diff_co2_flows_disc_value',
+        'chart_of_total_diff_co2_flows_disc_value',
         #< UNIF >
-        'chart_of_scenarized_so_unif_co2_flows_disc_value',
-        'chart_of_scenarized_vg_unif_co2_flows_disc_value',
-        'chart_of_scenarized_so_plus_vg_unif_co2_flows_disc_value',
-        'chart_of_scenarized_total_unif_co2_flows_disc_value',
+        'chart_of_so_unif_co2_flows_disc_value',
+        'chart_of_vg_unif_co2_flows_disc_value',
+        'chart_of_so_plus_vg_unif_co2_flows_disc_value',
+        'chart_of_total_unif_co2_flows_disc_value',
         #< BASELINE >
-        'chart_of_scenarized_black_output_co2_flows_disc_value',
+        'chart_of_black_output_co2_flows_disc_value',
     ]
 
 
