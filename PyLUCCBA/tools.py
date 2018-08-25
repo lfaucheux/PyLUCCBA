@@ -984,6 +984,7 @@ class Dashboard(object):
             abs_.shape = (lenabs_, 1)
         imas = imas.T.tolist()
 
+        self.dashB.clf()
         for ima, label,color in zip(imas, labels,colors):
             if type(ima).__module__ != np.__name__:
                 lenOrd    = len(ima)
@@ -1030,7 +1031,6 @@ class Dashboard(object):
                 bbox_inches=0,
                 dpi=200
             ) if save else self.dashB.show()
-            self.dashB.clf()
             self.dashB.close()
 
 if __name__ == '__main__':

@@ -79,7 +79,7 @@ The following table enumerates tall parameters that can be used to create an int
  `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved on the disk. Set to `False` by default.
  `save_charts`            | if `True` charts are on the disk. Otherwise, they are shown to users. Set to `True` by default. **NB** `return_plts=True` has priority over `save_charts`.
 
-We may wonder what the scenarized trajectories of carbon dioxid prices and produced quantities of biofuel are. In this case, we can simply type:
+Once we have `cba` in hand, we may wonder what are the scenarized trajectories on which we are about to make our study, *e.g.* of carbon dioxid prices, produced quantities of biofuel, etc. In this case, we can simply type:
 
     >>> cba.chart_of_scenarized_output_flows.show()
 
