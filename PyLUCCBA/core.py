@@ -1520,7 +1520,7 @@ class InputFlows(ts.Cache):
         existing value for the scenario named DOE is that of 2013, which
         implies that the only possible "polation" is about generating a
         time-constant yield.        
-        >>> o.input_flows_and_infos.keys_and_values[2013]['DOE']
+        >>> o.input_flows_and_infos.keys_and_values[2012]['DOE']
         0.31847714
         
         >>> o = InputFlows(

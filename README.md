@@ -76,26 +76,32 @@ The following table enumerates all parameters that can be used to create an inst
  `polat_repeated_pattern` | if `True`, retro/extra-polation pattern is repeated before/after the first/last mentioned value. Otherwise, it is maintained constant.
  `final_currency`         | currency used to express the results. The current choices are `'EUR'` or `'USD'`. Set to `'EUR'` by default.
  `change_rates`           | `final_currency`-dependent exchange rate value to consider in calculations, *e.g.* `{'EUR':{'USD/EUR':1.14,}}` *(or `{'EUR':{'EUR/USD':0.8772,}}` since the tool ensures dimensional homogeneity)*.
- `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved on the disk. Set to `False` by default.
- `save_charts`            | if `True` charts are on the disk. Otherwise, they are shown to users. Set to `True` by default. **NB** `return_plts=True` has priority over `save_charts`.
+ `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved or shown to users depending on the value set for `save_charts`. Set to `False` by default.
+ `save_charts`            | if `True` charts are saved on the disk. Otherwise, they are shown to users. Set to `True` by default. **NB** `return_plts=True` has priority over `save_charts`.
 
-Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonder what are the scenarized trajectories over which we are about to conduct our study, *e.g.* of carbon dioxid prices, produced quantities of biofuel, etc. In this case, we can simply type:
+Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonder what are the scenarized trajectories over which we are about to conduct our study, *e.g.* of carbon dioxide prices, produced quantities of biofuel, etc. In this case, we can simply type:
 
     >>> cba.chart_of_scenarized_output_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20ETH%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
-As it reads in the chart above, we are about to work with a constant level of productions over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough miscanthus to produce biofuel. We may wonder what is the counterfactual trajectory in oil terms -- targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis? 
+As it reads in the above chart, we are about to work with a constant level of production over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough miscanthus to produce biofuel. We may wonder what is the counterfactual trajectory in terms of gasoline -- targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis: 
 
     >>> cba.chart_of_scenarized_black_output_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20OIL%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
-Now, let's see which trajectory of carbon dioxid prices is behind the name `'SPC'` -- which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
+Now, let's see which trajectory of carbon dioxide prices is behind the name `'SPC'` -- which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
 
     >>> cba.chart_of_scenarized_co2_prices.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/PRICES%20co2%20%5BSPC%5D.png?raw=true" width="60%"/><img></p>
+
+We may also wonder which quantities trajectory of miscanthus is implied, one the one hand, by that of biofuel and, on the other hand, by the value we set for the parameter `input_flows_scenario`, that is `'DOE'` -- where *D.O.E* stands for the Department of Energy of the USA -- who communicated in [2012](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) that, with 1 tonne of miscantus, on can produce [0.31847714](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/MISCANTHUS_yields_FR.csv) tonnes of bioethanol. Let's see that:
+
+    >>> cba.chart_of_scenarized_input_flows.show()
+
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20input%20%5BDOE%5D%5BMISCANTHUS%5D.png?raw=true" width="60%"/><img></p>
 
 
 
