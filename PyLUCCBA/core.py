@@ -650,8 +650,8 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
     @ts.Cache._property
     def so_emitting(self):
         """ Boolean specifying whether carbon is emitted (True) or sequestered
-        (False)."""
-        return self.delta_soc < 0
+        (False). Returns `None` if the delta is null."""
+        return None if self.delta_soc == 0 else self.delta_soc < 0
     
     @ts.Cache._property
     def soc_unitary_unif_flows_traj(self):
@@ -833,8 +833,8 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
     @ts.Cache._property
     def vg_emitting(self):
         """ Boolean specifying whether carbon is emitted (True) or sequestered
-        (False)."""
-        return self.delta_vgc < 0
+        (False). Returns `None` if the delta is null."""
+        return None if self.delta_vgc == 0 else self.delta_vgc < 0
 
     @ts.Cache._property
     def vgc_unitary_unif_flows_traj(self):

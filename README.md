@@ -81,25 +81,25 @@ The following table enumerates all parameters that can be used to create an inst
 
 Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonder what are the scenarized trajectories over which we are about to conduct our study, *e.g.* of carbon dioxide prices, produced quantities of biofuel, etc. In this case, we can simply type:
 
-    >>> cba.chart_of_scenarized_output_flows.show()
+    >>> cba.chart_of_output_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20ETH%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
 As it reads in the above chart, we are about to work with a constant level of production over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough miscanthus to produce biofuel. We may wonder what is the counterfactual trajectory in terms of gasoline -- targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis: 
 
-    >>> cba.chart_of_scenarized_black_output_flows.show()
+    >>> cba.chart_of_black_output_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20OIL%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
 Now, let's see which trajectory of carbon dioxide prices is behind the name `'SPC'` -- which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
 
-    >>> cba.chart_of_scenarized_co2_prices.show()
+    >>> cba.chart_of_co2_prices.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/PRICES%20co2%20%5BSPC%5D.png?raw=true" width="60%"/><img></p>
 
-We may also wonder which quantities trajectory of miscanthus is implied, one the one hand, by that of biofuel and, on the other hand, by the value we set for the parameter `input_flows_scenario`, that is `'DOE'` -- where *D.O.E* stands for the Department of Energy of the USA -- who communicated in [2012](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) that, with 1 tonne of miscantus, on can produce [0.31847714](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/MISCANTHUS_yields_FR.csv) tonnes of bioethanol. Let's see that:
+We may also wonder which quantities trajectory of miscanthus is implied, on the one hand, by that of biofuel and, on the other hand, by the value we set for the parameter `input_flows_scenario`, that is `'DOE'` -- where *D.O.E* stands for the Department of Energy of the USA -- who communicated in [2012](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) that, with 1 tonne of miscantus, on can produce [0.31847714](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/MISCANTHUS_yields_FR.csv) tonnes of bioethanol. Let's vizualize that:
 
-    >>> cba.chart_of_scenarized_input_flows.show()
+    >>> cba.chart_of_input_flows.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20input%20%5BDOE%5D%5BMISCANTHUS%5D.png?raw=true" width="60%"/><img></p>
 
@@ -136,7 +136,9 @@ Independenttly from how we annualize the LUC-related carbon dioxide emissions, t
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2eq%20%5Bcult-MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2eq%20%5Bproc-MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
 
-Note that the emissions shown above are in ![equation](https://latex.codecogs.com/gif.latex?\text{CO}_2\text{eq}) since ![equation](https://latex.codecogs.com/gif.latex?\text{CH}_4) and ![equation](https://latex.codecogs.com/gif.latex?\text{N}_2\text{O}) are considered, using as a conversion basis their absolute global warming potentials compared to that of ![equation](https://latex.codecogs.com/gif.latex?\text{CO}_2). Note that the computing horizon that is used for these conversions is of 100 years. 
+Note that the emissions shown above are in ![equation](https://latex.codecogs.com/gif.latex?\text{CO}_2\text{eq}) since ![equation](https://latex.codecogs.com/gif.latex?\text{CH}_4) and ![equation](https://latex.codecogs.com/gif.latex?\text{N}_2\text{O}) are considered as well, using their global warming potentials relatively to that of ![equation](https://latex.codecogs.com/gif.latex?\text{CO}_2) to convert them. Note that the computing horizon that is used for these conversions is of 100 years. Those are computed exactly as in [PyGWP](https://github.com/lfaucheux/PyGWP).
+
+Finally, let's monetize and discount all these emissions flows and conclude whether or not changes in land-use from annual croplands to miscanthus are profitable from a public perspective. 
 
 
 
