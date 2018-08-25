@@ -103,6 +103,11 @@ We may also wonder which quantities trajectory of miscanthus is implied, one the
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20input%20%5BDOE%5D%5BMISCANTHUS%5D.png?raw=true" width="60%"/><img></p>
 
+The land use change from `initial_landuse='annual cropland'` to `final_landuse='miscanthus'` has effects in terms of carbon dioxide emissions. These emissions clarly don't exhibit the same profile depending on how we chose to consider them over the project horizon. First, regarding soil emissions:
+
+    >>> cba.chart_of_soco2_unif_flows.show();  cba.chart_of_soco2_diff_flows.show()
+    
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20so%20%5Bunif-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20so%20%5Bdiff-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
 
 
 
