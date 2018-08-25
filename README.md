@@ -129,12 +129,14 @@ That being shown, note that on the side of vegetation, there is no emission-diff
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20vg%20%5Bunif-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20vg%20%5Bdiff-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
 
-Independenttly from how we annualize the LUC-related emissions, the cultivation and the processing of miscanthus annualy generate less emissions than annual croplands. See
+Independenttly from how we annualize the LUC-related carbon dioxide emissions, the cultivation and the processing of miscanthus annualy generate less emissions than annual croplands. See
 
     >>> cba.chart_of_cultivated_input_co2eq_flows.show()
     >>> cba.chart_of_processed_input_co2eq_flows.show()
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2eq%20%5Bcult-MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2eq%20%5Bproc-MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
+
+Note that the emissions shown above are in ![equation](https://latex.codecogs.com/gif.latex?\text{CO}_2\text{eq}) since ![equation](https://latex.codecogs.com/gif.latex?\text{CH}_4) and ![equation](https://latex.codecogs.com/gif.latex?\text{N}_2\text{O}) are considered, using as a conversion basis their absolute global warming potentials compared to that of ![equation](https://latex.codecogs.com/gif.latex?\text{CO}_2). Note that the computing horizon that is used for these conversions is of 100 years. 
 
 
 
