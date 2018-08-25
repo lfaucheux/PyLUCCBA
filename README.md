@@ -103,11 +103,26 @@ We may also wonder which quantities trajectory of miscanthus is implied, one the
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20input%20%5BDOE%5D%5BMISCANTHUS%5D.png?raw=true" width="60%"/><img></p>
 
-The land use change from `initial_landuse='annual cropland'` to `final_landuse='miscanthus'` has effects in terms of carbon dioxide emissions. These emissions clarly don't exhibit the same profile depending on how we chose to consider them over the project horizon. First, regarding soil emissions:
+The land use change from `initial_landuse='annual cropland'` to `final_landuse='miscanthus'` has effects in terms of carbon dioxide emissions. These emissions clearly don't exhibit the same profile depending on how we chose to consider them over the project horizon. First, regarding soil carbon dioxide emissions:
 
     >>> cba.chart_of_soco2_unif_flows.show();  cba.chart_of_soco2_diff_flows.show()
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20so%20%5Bunif-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20so%20%5Bdiff-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
+
+Of course, the comparison makes sens since the total emited stocks are identical:
+
+    >>> import numpy as np
+    >>> np.sum(cba.soco2_unif_flows_traj)
+    3.371650451997678 # tonnes
+    >>> np.sum(cba.soco2_diff_flows_traj)
+    3.3716504519976764 # tonnes
+    
+That being shown, note that on the side of vegetation, there is no emission-differentials between annual croplands and miscanthus since both are harvested on an annual basis, be that under differentiated or uniform anualization, see 
+
+    >>> cba.chart_of_vgco2_unif_flows.show();  cba.chart_of_vgco2_diff_flows.show()
+    
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20vg%20%5Bunif-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20co2%20vg%20%5Bdiff-ANNUAL%20CROPLAND~MISCANTHUS%5D.png?raw=true" width="50%"/><img></p>
+    
 
 
 
