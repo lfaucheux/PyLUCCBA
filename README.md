@@ -35,16 +35,16 @@ The alias of `PyLUCCBA`, namely `cc`, actually contains many objects definitions
 But before using the calculator as such, let's define (and introduce) the set of parameters that we are going to use to configure `CBACalculator`. As can be expected when performing a cost benefit analysis, these parameters are related to: *(i)* the horizon of the project, *(ii)* the discount rate that we want to use in our calculations, *(iii)* the scenarized price trajectory of carbon dioxide, *(iv)* the scenarized trajectory of quantities of bio-ethanol to produce annually and *(...)* so on. Let's introduce them all in practice:
 
     >>> cba = cc.CBACalculator(
-            run_name               = 'introduction example 1',
+            run_name               = 'Example-1',
             country                = 'france',
             project_first_year     = 2020,
             project_horizon        = 20,
             discount_rate          = .03,
             co2_prices_scenario    = 'SPC',
             output_flows_scenario  = 'O',
-            initial_landuse        = 'annual cropland',
-            final_landuse          = 'miscanthus',
-            input_flows_scenario   = 'DOE',
+            initial_landuse        = 'improved grassland',
+            final_landuse          = 'wheat',
+            input_flows_scenario   = 'IFP',
             T_so                   = 20,
             T_vg_diff              = 1,
             T_vg_unif              = 20,
@@ -85,7 +85,7 @@ Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonde
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20ETH%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
-As it reads in the above chart, we are about to work with a constant level of production over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough miscanthus to produce biofuel. We may wonder what is the counterfactual trajectory in terms of gasoline -- targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis: 
+As it reads in the above chart, we are about to work with a constant level of production over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough wheat to produce biofuel. We may wonder what is the counterfactual trajectory in terms of gasoline -- targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis: 
 
     >>> cba.chart_of_black_output_flows.show()
 
