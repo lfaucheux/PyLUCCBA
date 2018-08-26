@@ -101,7 +101,7 @@ We may also wonder which quantities trajectory of wheat is implied, on the one h
 
     >>> cba.chart_of_input_flows.show()
 
-<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Grassland-Cropland_DR%3D0.03_CP%3DC_TH%3DXX/FLOWS%20TONNES%20input%20%5BDOE%5D%5BMISCANTHUS%5D.png?raw=true" width="60%"/><img></p>
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20input%20%5BIFP%5D%5BWHEAT%5D.png?raw=true" width="60%"/><img></p>
 
 The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of carbon dioxide emissions. These emissions clearly don't exhibit the same profile depending on how we chose to consider them over the project horizon. First, regarding soil carbon dioxide emissions:
 
@@ -144,9 +144,18 @@ Independenttly from how we annualize the LUC-related carbon dioxide emissions, t
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bcult-WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bproc-WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Note that the emissions shown above are in ![equation](https://latex.codecogs.com/gif.latex?\text{CO}_2\text{eq}) since ![equation](https://latex.codecogs.com/gif.latex?\text{CH}_4) and ![equation](https://latex.codecogs.com/gif.latex?\text{N}_2\text{O}) are considered as well, using their global warming potentials relatively to that of ![equation](https://latex.codecogs.com/gif.latex?\text{CO}_2) to convert them. Note that the computing horizon that is used for these conversions is of 100 years. Those are computed exactly as in [PyGWP](https://github.com/lfaucheux/PyGWP).
+Note that the emissions shown above are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using as a basis of conversion, their global warming potentials relatively to that of *CO2*. See caculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
 
-Finally, let's monetize and discount all these emissions flows and conclude whether or not changes in land-use from annual croplands to miscanthus are profitable from a public perspective. 
+Finally the total emissions following a change in land use from improved grassland to wheat are:
+
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bunif-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bdiff-ETH%5D.png?raw=true" width="50%"/><img></p>
+
+which, when monetized with a non-zero discount rate, lead to sensitivly different profile of profitability, see rather
+
+
+...
+
+
 
 
 
