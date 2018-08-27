@@ -5,9 +5,9 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www
 
 |  Module  | statements | missing | excluded | coverage |
 | -------- | ---------- | ------- | -------- | -------- |
-| core.py  | 893        | 103     | 0        | 88%      |
-| tools.py | 290        | 58      | 0        | 80%      |
-| Total    | 1183       | 161     | 0        | 86%      |
+| core.py  | 858        | 27      | 0        | 97%      |
+| tools.py | 294        | 58      | 0        | 80%      |
+| Total    | 1152       | 85      | 0        | 93%      |
 
 ## Installation
 
@@ -178,17 +178,11 @@ Put differently,
 
 ...
 
-
-
-
-
-
-
+<details><summary><i>(...)</i></summary>
+<p>
 
 
 ## Value of the data
-<details><summary><i>(click to expand)</i></summary>
-<p>
 
 •	The calculator offers a compilation of environmental and economic data to generate environment-related net present values of any project with impacts to the environment (GHG emissions or sequestrations).
 
@@ -200,12 +194,8 @@ Put differently,
 
 •	Note that constant returns to scale (biofuel production) are assumed in the tool.
 
-</p>
-</details>  
 
 ## Data
-<details><summary><i>(click to expand)</i></summary>
-<p>
 
   Raw data from the public repository as listed above are first used in the “Data_CarbonStocks_Emissions” Excel file to generate (i) land use change carbon stock changes for the scenarios studied in the paper, and (ii) emissions from the process and cultivation of bioethanol. This data is then directly used in the tool (either in the “resources” folder or the code) which is described below. The output data is not directly provided but as explained below, it can be generated easily with the “ready-to-use” study cases provided.
 
@@ -235,21 +225,12 @@ Put differently,
 
 Note that each column has a title that is very verbose -- so as to make things as explicit as possible -- regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
 
-</p>
-</details>  
 
 ## Acknowledgements
-<details><summary><i>(click to expand)</i></summary>
-<p>
 
   I am particularly grateful to Laurent Faucheux from [CIRED](http://www.centre-cired.fr/index.php/fr/) for the coding of the tool I conceived. Researchers from l’[Institut Français du Pétrole et des énergies nouvelles](http://www.ifpenergiesnouvelles.fr/), Frédérique Bouvart, Cécile Querleu, Daphné Lorne, Pierre Collet, and from l’[Institut National de la Recherche Agronomique](http://www.inra.fr/), Serge Garcia, Stéphane de Cara Alexandra Niedwiedth, Raja Chakir are also acknowledged for their valuable advice in the search for input data.
 
-</p>
-</details>  
-
 ## References
-<details><summary><i>(click to expand)</i></summary>
-<p>
 
 Hoefnagels, R., E. Smeets, and A. Faaij (2010). “[Greenhouse gas footprints of different biofuel production systems](https://www.sciencedirect.com/science/article/pii/S1364032110000535)”. _Renewable and Sustainable Energy Reviews_ 14.7, pp. 1661–1694.
 
