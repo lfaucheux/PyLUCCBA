@@ -162,7 +162,7 @@ which, when monetized with a non-zero discount rate and compared in terms of abs
 
 Actually, it looks like extending the horizon of the project may be a good idea to see whether one of those two temporal profiles exhibit positive values over the long run.
 
-    >>> cba._cache.clear() # we clear the cache of our instance since we are going to change three calculation parameters.
+    >>> cba._cache.clear() # we clear the cache of our instance since we are going to change a calculation parameter.
     >>> cba.project_horizon = 40 # double the project horizon
     >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
     >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
