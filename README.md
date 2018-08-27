@@ -160,8 +160,9 @@ which, when monetized with a non-zero discount rate and compared in terms of dev
     >>> # cba.chart_of_NPV_total_diff_co2_flows_traj.show()
     >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
 
-[comment]: <> (<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bunif-SPC-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bdiff-SPC-ETH%5D.png?raw=true" width="50%"/><img></p>)
-<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bunif-SPC-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bdiff-SPC-ETH%5D.png?raw=true" width="50%"/><img></p>
+[//]: # (<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bunif-SPC-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bdiff-SPC-ETH%5D.png?raw=true" width="50%"/><img></p>)
+
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
 
 
 ...
