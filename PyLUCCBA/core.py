@@ -430,8 +430,8 @@ class VGCAndSOCDeltas(ts.Cache):
     def __init__(self, initial_landuse, final_landuse, **kwargs):
         super(VGCAndSOCDeltas, self).__init__(**kwargs)
         self.vegetations_and_so_specificities = VegetationsAndSoilSpecificities(**kwargs)
-        self.initial_landuse                    = initial_landuse.upper()
-        self.final_landuse                      = final_landuse.upper()
+        self.initial_landuse                  = initial_landuse.upper()
+        self.final_landuse                    = final_landuse.upper()
 
     @ts.Cache._property
     def vegetation_carbon_stock_infos(self):
@@ -450,7 +450,7 @@ class VGCAndSOCDeltas(ts.Cache):
 
         """
         return self.vegetations_and_so_specificities\
-               .vegetation_carbon_stock_specificities['infos']
+        .vegetation_carbon_stock_specificities['infos']
     
     @ts.Cache._property
     def soil_carbon_stock_infos(self):
@@ -472,7 +472,7 @@ class VGCAndSOCDeltas(ts.Cache):
         {'unit': 'Tonne/ha'}
         """
         return self.vegetations_and_so_specificities\
-               .soil_carbon_stock_specificities['infos']
+        .soil_carbon_stock_specificities['infos']
 
     @ts.Cache._property
     def initial_vg_carbon_stock_value(self):
@@ -2179,7 +2179,31 @@ class CBACalculator(ts.Cache):
             polat_repeated_pattern = kws.pop('pr', True),
             change_rates           = kws.pop('cr', {'EUR':{'USD/EUR':1.14}}),
             **kws
-        )
+        )  
+
+    def _clear_caches(self):
+        """
+        Testing
+        -------
+        >>> o = CBACalculator._testing_instancer(ph=3)
+        >>> o.NPV_total_diff_minus_black_output_co2_flows_trajs
+        ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
+        ---- [***]The solution converged.[0.000000e+00][***]
+        ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
+        ---- [***]The solution converged.[0.000000e+00][***]
+        array([[-698.15962588, -736.06138037, -728.6245138 , -676.94620099]])
+        >>> o._clear_caches()
+        GlobalWarmingPotential
+        OutputFlows
+        CarbonAndCo2FlowsAnnualizer
+        LandSurfaceFlows
+        Co2Prices
+        CBACalculator
+        """
+        for obj in self.__caobjs + [self]:
+            print(type(obj).__name__)
+            obj._clear_cache()
+        self.__caobjs = []
 
     def __init__(self,
             run_name               ='',
@@ -2202,11 +2226,12 @@ class CBACalculator(ts.Cache):
             input_flows_scenario   ='none',
             polat_repeated_pattern =True,
             save_charts            =True,
-            GWP_horizon            =100, #[!!!] EXODATA IMPLICITLY IMPLY GWP100 [!!!]
-            GWP_static             =True,#[!!!] EXODATA IMPLICITLY IMPLY STATIC [!!!]
+            GWP_horizon            =100, #[!!!] EXOGENOUS DATA IMPLICITLY IMPLY GWP100 [!!!]
+            GWP_static             =True,#[!!!] EXOGENOUS DATA IMPLICITLY IMPLY STATIC [!!!]
             **kwargs
         ):
         
+        self.__caobjs = []
         super(CBACalculator, self).__init__(**kwargs)
         self.delay_between_luc_and_production = VegetationsAndSoilSpecificities(
             verbose=kwargs.get('verbose')
@@ -2221,7 +2246,7 @@ class CBACalculator(ts.Cache):
         self.final_landuse          = final_landuse.upper()
         self.project_timing         = self.delay_between_luc_and_production\
                                       .get(self.final_landuse, 0)
-        self.project_horizon        = project_horizon + self.project_timing
+        self._project_horizon       = project_horizon + self.project_timing
         self.T_so                   = T_so
         self.T_vg_diff              = T_vg_diff
         self.T_vg_unif              = T_vg_unif
@@ -2248,6 +2273,37 @@ class CBACalculator(ts.Cache):
         self.pre_run_name           = run_name.replace(' ', '_')
         self.msg                    = None
         self.stdout_off             = False
+
+    @property
+    def project_horizon(self):
+        """ Horizon of the project (years).
+        NB: is a public property-like wrapper of `_project_horizon`.
+
+        Testing/Example
+        ---------------
+        >>> o = CBACalculator._testing_instancer(ph=3)
+        >>> o.project_timing
+        1
+        >>> o.project_horizon
+        4
+        """
+        return self._project_horizon
+
+    @project_horizon.setter
+    def project_horizon(self, v):
+        """ Horizon of the project (years).
+        NB: is a public property-like setter of `_project_horizon`.
+
+        Testing/Example
+        ---------------
+        >>> o = CBACalculator._testing_instancer(ph=3)
+        >>> o.project_timing
+        1
+        >>> o.project_horizon = 9
+        10
+        """
+        self._project_horizon = v + self.project_timing
+        return self._project_horizon
 
     @property
     def GWP_horizon(self):
@@ -2484,6 +2540,7 @@ class CBACalculator(ts.Cache):
             country         = self.country,
             verbose         = self.verbose
         )
+        #self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
             obj._cache['endogenizing'] = True
         return obj
@@ -2555,6 +2612,7 @@ class CBACalculator(ts.Cache):
             T_vg_unif       = self.T_vg_unif,
             verbose         = self.verbose
         )
+        self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
             obj._cache['endogenizing'] = True
         return obj
@@ -3502,6 +3560,7 @@ class CBACalculator(ts.Cache):
             country                   = self.country,
             verbose                   = self.verbose
         )
+        self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
             obj._cache['endogenizing'] = True
         return obj                
@@ -3653,6 +3712,7 @@ class CBACalculator(ts.Cache):
             country                   = self.country,
             verbose                   = self.verbose
         )
+        self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
             obj._cache['endogenizing'] = True
         return obj
@@ -3824,6 +3884,7 @@ class CBACalculator(ts.Cache):
             country                   = self.country,
             verbose                   = self.verbose
         )
+        self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
             obj._cache['endogenizing'] = True
         return obj
@@ -3935,6 +3996,7 @@ class CBACalculator(ts.Cache):
             static          = self.GWP_static,
             verbose         = self.verbose
         )
+        self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
             obj._cache['endogenizing'] = True
         return obj
@@ -4206,6 +4268,7 @@ class CBACalculator(ts.Cache):
             country                   = self.country,
             verbose                   = self.verbose
         )
+        self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
             obj._cache['endogenizing'] = True
         return obj
@@ -8004,6 +8067,10 @@ class CBACalculator(ts.Cache):
         ...     rn='.tmp', return_plts=True
         ... )
         >>> c = o.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs
+        ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
+        ---- [***]The solution converged.[0.000000e+00][***]
+        ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
+        ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -8046,7 +8113,7 @@ class CBACalculator(ts.Cache):
         s_ = np.sign(self.NPV_total_diff_minus_black_output_co2_flows_trajs)
         s  = ((np.roll(s_, 1) - s_) != 0).astype(int) 
         z  = np.where(s.flatten()==1)[0]
-        return z[1] if len(z) else z
+        return z[1] if len(z) else []
 
     @ts.Cache._property
     def NPV_total_unif_minus_black_output_co2_flows_trajs(self):
@@ -8119,7 +8186,7 @@ class CBACalculator(ts.Cache):
         s_ = np.sign(self.NPV_total_unif_minus_black_output_co2_flows_trajs)
         s  = ((np.roll(s_, 1) - s_) != 0).astype(int) 
         z  = np.where(s.flatten()==1)[0]
-        return z[1] if len(z) else z
+        return z[1] if len(z) else []
 
 
     """**[FINALIZE]*********************************************************************************"""

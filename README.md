@@ -169,6 +169,13 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
+Put differently,
+
+    >>> cba.unif_payback_period
+    []
+    >>> cba.diff_payback_period
+    35
+
 ...
 
 

@@ -182,9 +182,9 @@ def txt_dicter(fname):
     return dico
 
 ##******************************************
-##    ┌┬┐┌─┐┌┐ 
-##     │ ├─┤├┴┐
-##     ┴ ┴ ┴└─┘
+##    ┌┬┐┌─┐┌┐ ┌─┐┬─┐
+##     │ ├─┤├┴┐├┤ ├┬┘
+##     ┴ ┴ ┴└─┘└─┘┴└─
 def taber(msg, size):
     """ Function which tabulates strings.
 
@@ -530,6 +530,19 @@ class Cache(object):
         """ Homemade cache class which aims at being inherited """
         self._cache  = {}
         self.verbose = kwargs.get('verbose', False)
+
+    def _clear_cache(self):
+        """
+        Testing
+        -------
+        >>> c = Cache()
+        >>> c._cache['key'] = 'value'
+        >>> c._clear_cache()
+        (1, 0)
+        """
+        l0 = len(self._cache)
+        self._cache.clear()
+        return (l0, len(self._cache))
 
     def verboser(self, _cache, _key_):
         """ Function which traces calculations and returns infos about
