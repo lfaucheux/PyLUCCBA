@@ -97,7 +97,7 @@ Now, let's see which trajectory of carbon dioxide prices is behind the name `'SP
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/PRICES%20co2%20%5BSPC%5D.png?raw=true" width="60%"/><img></p>
 
-We may also wonder which quantities trajectory of wheat is implied, on the one hand, by that of biofuel and, on the other hand, by the value we set for the parameter `input_flows_scenario`, that is `'IFP'` -- where *I.F.P* stands for *Institut Français du Pétrole énergies nouvelles* -- who made a report in [2013](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) in which it reads that, with 1 tonne of wheat, on can produce [0.2844](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) tonnes of bioethanol. Let's vizualize that:
+We may also wonder which quantities trajectory of wheat is implied by that of biofuel on the one hand, and by the value we set for the parameter `input_flows_scenario`, that is `'IFP'` , on the other hand -- where *I.F.P* stands for *Institut Français du Pétrole énergies nouvelles* -- which made a report in [2013](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) in which it reads that, with 1 tonne of wheat, one can produce [0.2844](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) tonnes of bioethanol. Let's vizualize that:
 
     >>> cba.chart_of_input_flows_traj.show()
 
