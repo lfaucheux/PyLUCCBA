@@ -97,13 +97,13 @@ Now, let's see which trajectory of carbon dioxide prices is behind the name `'SP
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/PRICES%20co2%20%5BSPC%5D.png?raw=true" width="60%"/><img></p>
 
-We may also wonder which quantities trajectory of wheat is implied, on the one hand, by that of biofuel and, on the other hand, by the value we set for the parameter `input_flows_scenario`, that is `'IFP'` -- where *I.F.P* stands for *Institut Français du Pétrole énergie nouvelle* -- who made a report in [2013](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) in which it reads that, with 1 tonne of wheat, on can produce [0.2844](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) tonnes of bioethanol. Let's vizualize that:
+We may also wonder which quantities trajectory of wheat is implied, on the one hand, by that of biofuel and, on the other hand, by the value we set for the parameter `input_flows_scenario`, that is `'IFP'` -- where *I.F.P* stands for *Institut Français du Pétrole énergies nouvelles* -- who made a report in [2013](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) in which it reads that, with 1 tonne of wheat, on can produce [0.2844](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) tonnes of bioethanol. Let's vizualize that:
 
     >>> cba.chart_of_input_flows_traj.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20input%20%5BIFP%5D%5BWHEAT%5D.png?raw=true" width="60%"/><img></p>
 
-The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of carbon dioxide emissions. These emissions clearly don't exhibit the same profile depending on how we chose to consider them over the project horizon. First, regarding soil carbon dioxide emissions:
+The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of carbon dioxide emissions. These emissions clearly don't exhibit the same profile depending on how we choose to consider them over the project horizon. First, regarding soil carbon dioxide emissions:
 
     >>> cba.carbon_and_co2_flows_traj_annualizer.so_emitting
     True
@@ -114,7 +114,7 @@ The land use change from `initial_landuse='improved grassland'` to `final_landus
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20so%20%5Bunif-IMPROVED%20GRASSLAND~WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20so%20%5Bdiff-IMPROVED%20GRASSLAND~WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Of course, the comparison makes sense since the total emited stocks are identical:
+Of course, the comparison makes sense since the total emitted stocks are identical:
 
     >>> import numpy as np
     >>> np.sum(cba.soco2_unif_flows_traj)
@@ -122,7 +122,7 @@ Of course, the comparison makes sense since the total emited stocks are identica
     >>> np.sum(cba.soco2_diff_flows_traj)
     -10.90041830757967 # tonnes
     
-On the side of vegetation related emissions, converting grassland into wheat field generates a loss of carbon since the latter is harvested annualy while the former sequestrates carbon on a pertpetual basis. Here again, emissions' profiles are clearly different under a differentiated or uniform anualization approach, see 
+On the side of vegetation-related emissions, converting grassland into wheat field generates a loss of carbon since the latter is harvested annually while the former sequestrates carbon on a pertpetual basis. Here again, emissions' profiles are clearly different under differentiated or uniform anualization approach, see 
 
     >>> cba.carbon_and_co2_flows_traj_annualizer.vg_emitting
     True
@@ -137,16 +137,16 @@ On the side of vegetation related emissions, converting grassland into wheat fie
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20vg%20%5Bunif-IMPROVED%20GRASSLAND~WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20vg%20%5Bdiff-IMPROVED%20GRASSLAND~WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Independenttly from how we annualize the LUC-related carbon dioxide emissions, the cultivation and the processing of wheat annualy generate emissions as well. See
+Independently of how we annualize the LUC-related carbon dioxide emissions, the cultivation and the processing of wheat generate emissions annually as well. See
 
     >>> cba.chart_of_cult_input_co2eq_flows_traj.show()
     >>> cba.chart_of_proc_input_co2eq_flows_traj.show()
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bcult-WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bproc-WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Note that the emissions shown above are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using as a basis of conversion, their global warming potentials relatively to that of *CO2*. See caculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
+Note that the emissions shown above are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using as a basis of conversion, their global warming potentials relatively to that of *CO2*. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
 
-Finally the total emissions following a change in land use from improved grassland into wheat field are -- under the tww types of annualization approach:
+Finally the total emissions following a change in land use from improved grassland into wheat field are -- under the two types of annualization approach:
 
     >>> cba.chart_of_total_unif_co2_flows_traj.show()
     >>> cba.chart_of_total_diff_co2_flows_traj.show()
@@ -160,19 +160,23 @@ which, when monetized with a non-zero discount rate and compared in terms of abs
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
 
-Actually, it looks like extending the horizon of the project may be a good idea to see whether one those two temporal profiles exhibit positive values over the long run.
+Actually, it looks like extending the horizon of the project may be a good idea to see whether one of those two temporal profiles exhibit positive values over the long run.
 
     >>> cba._cache.clear() # we clear the cache of our instance since we are going to change three calculation parameters.
-    >>> cba.T_vg_unif = cba.T_so = cba.project_horizon = 40 # double the project horizon
+    >>> cba.project_horizon = 40 # double the project horizon
     >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
     >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
+    ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
+    ---- [***]The solution converged.[0.000000e+00][***]
+    ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
+    ---- [***]The solution converged.[0.000000e+00][***]
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
 Put differently,
 
     >>> cba.unif_payback_period
-    []
+    40
     >>> cba.diff_payback_period
     35
 
