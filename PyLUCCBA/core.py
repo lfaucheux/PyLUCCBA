@@ -7968,7 +7968,7 @@ class CBACalculator(ts.Cache):
 
     """**[PAYBACK*RELATED-OBJECTS]******************************************************************"""
     @ts.Cache._property
-    def NPV_total_diff_minus_black_output_co2_flows_traj(self):
+    def NPV_total_diff_minus_black_output_co2_flows_trajs(self):
         """
         Resolution order:
                ...
@@ -7978,13 +7978,13 @@ class CBACalculator(ts.Cache):
                   \ ...
         ---------->\ NPV_black_output_co2_flows_traj
         ===========
-        ---------->| NPV_total_diff_minus_black_output_co2_flows_traj
+        ---------->| NPV_total_diff_minus_black_output_co2_flows_trajs
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4, ts=3, td=2
-        ... ).NPV_total_diff_minus_black_output_co2_flows_traj
+        ... ).NPV_total_diff_minus_black_output_co2_flows_trajs
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.0613595]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -7994,6 +7994,38 @@ class CBACalculator(ts.Cache):
         """
         return self.NPV_total_diff_co2_flows_traj\
         - self.NPV_black_output_co2_flows_traj
+    
+    @property
+    def chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs(self):
+        """
+        Testing/Example
+        ---------------
+        >>> o = CBACalculator._testing_instancer(
+        ...     rn='.tmp', return_plts=True
+        ... )
+        >>> c = o.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs
+        >>> c.show()  # doctest: +SKIP
+        >>> c.close()
+        """
+        return self.dashboard.plot(
+            abs_=self.horizon,
+            imas=self.NPV_total_diff_minus_black_output_co2_flows_trajs.T,
+			labels=['DIFF %s minus %s NPVs [%s][%s]'%(
+                self.output,
+                self.black_output,
+                self.co2_prices_scenario,
+                self.final_currency
+            )],
+            colors=['orange'],
+            save=self.save_charts,
+            save_dir=self.save_dir,
+            file_name='dNPV co2 total [diff-%s-%svs%s]'%(
+                self.co2_prices_scenario,
+                self.output,
+                self.black_output
+            ),
+            bar=False
+        )
 
     @ts.Cache._property
     def diff_payback_period(self):
@@ -8011,13 +8043,13 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[0.000000e+00][***]
         45
         """
-        s_ = np.sign(self.NPV_total_diff_minus_black_output_co2_flows_traj)
+        s_ = np.sign(self.NPV_total_diff_minus_black_output_co2_flows_trajs)
         s  = ((np.roll(s_, 1) - s_) != 0).astype(int) 
         z  = np.where(s.flatten()==1)[0]
         return z[1] if len(z) else z
 
     @ts.Cache._property
-    def NPV_total_unif_minus_black_output_co2_flows_traj(self):
+    def NPV_total_unif_minus_black_output_co2_flows_trajs(self):
         """
         Resolution order:
                ...
@@ -8027,18 +8059,50 @@ class CBACalculator(ts.Cache):
                   \ ...
         ---------->\ NPV_black_output_co2_flows_traj
         ===========
-        ---------->| NPV_total_unif_minus_black_output_co2_flows_traj
+        ---------->| NPV_total_unif_minus_black_output_co2_flows_trajs
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4, ts=3, tu=2
-        ... ).NPV_total_unif_minus_black_output_co2_flows_traj
+        ... ).NPV_total_unif_minus_black_output_co2_flows_trajs
         array([[-329.57392003, -593.54457854, -715.39429952, -700.68930754,
                 -649.4376947 ]])
         """
         return self.NPV_total_unif_co2_flows_traj\
         - self.NPV_black_output_co2_flows_traj
+    
+    @property
+    def chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs(self):
+        """
+        Testing/Example
+        ---------------
+        >>> o = CBACalculator._testing_instancer(
+        ...     rn='.tmp', return_plts=True
+        ... )
+        >>> c = o.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs
+        >>> c.show()  # doctest: +SKIP
+        >>> c.close()
+        """
+        return self.dashboard.plot(
+            abs_=self.horizon,
+            imas=self.NPV_total_unif_minus_black_output_co2_flows_trajs.T,
+            labels=['UNIF %s minus %s NPVs [%s][%s]'%(
+                self.output,
+                self.black_output,
+                self.co2_prices_scenario,
+                self.final_currency
+            )],
+            colors=['orange'],
+            save=self.save_charts,
+            save_dir=self.save_dir,
+            file_name='dNPV co2 total [unif-%s-%svs%s]'%(
+                self.co2_prices_scenario,
+                self.output,
+                self.black_output
+            ),
+            bar=False
+        )
 
     @ts.Cache._property
     def unif_payback_period(self):
@@ -8052,7 +8116,7 @@ class CBACalculator(ts.Cache):
         ... ).unif_payback_period
         49
         """
-        s_ = np.sign(self.NPV_total_unif_minus_black_output_co2_flows_traj)
+        s_ = np.sign(self.NPV_total_unif_minus_black_output_co2_flows_trajs)
         s  = ((np.roll(s_, 1) - s_) != 0).astype(int) 
         z  = np.where(s.flatten()==1)[0]
         return z[1] if len(z) else z
@@ -8151,8 +8215,8 @@ class CBACalculator(ts.Cache):
             self.NPV_total_diff_co2_flows_traj,
             self.NPV_total_unif_co2_flows_traj,
             self.NPV_black_output_co2_flows_traj,
-            self.NPV_total_diff_minus_black_output_co2_flows_traj,
-            self.NPV_total_unif_minus_black_output_co2_flows_traj,
+            self.NPV_total_diff_minus_black_output_co2_flows_trajs,
+            self.NPV_total_unif_minus_black_output_co2_flows_trajs,
 
             self.NPV_cult_co2_flows_traj_per_cum_output_flows_traj,
             self.NPV_proc_co2_flows_traj_per_cum_output_flows_traj,
@@ -8275,8 +8339,8 @@ class CBACalculator(ts.Cache):
             'NPV_total_diff_co2_flows_traj',
             'NPV_total_unif_co2_flows_traj',
             'NPV_black_output_co2_flows_traj',
-            'NPV_total_diff_minus_black_output_co2_flows_traj',
-            'NPV_total_unif_minus_black_output_co2_flows_traj',
+            'NPV_total_diff_minus_black_output_co2_flows_trajs',
+            'NPV_total_unif_minus_black_output_co2_flows_trajs',
 
             'ut_NPV_cult_co2_flows_traj_per_cum_output_flows_traj',
             'ut_NPV_proc_co2_flows_traj_per_cum_output_flows_traj',
@@ -8372,9 +8436,11 @@ class CBACalculator(ts.Cache):
         'chart_of_NPV_total_diff_co2_flows_traj',
         'chart_of_NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
         'chart_of_NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj',
+		'chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs',
         'chart_of_NPV_total_unif_co2_flows_traj',
         'chart_of_NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
         'chart_of_NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj',
+		'chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs',
         'chart_of_NPV_vg_diff_co2_flows_traj',
         'chart_of_NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
         'chart_of_NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj',

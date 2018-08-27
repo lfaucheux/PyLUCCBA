@@ -153,11 +153,14 @@ Finally the total emissions following a change in land use from improved grassla
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bunif-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bdiff-ETH%5D.png?raw=true" width="50%"/><img></p>
 
-which, when monetized with a non-zero discount rate, lead to sensitivly different profile of profitability, see rather
+which, when monetized with a non-zero discount rate and compared in terms of deviations from gasoline valorized CO2 emissions, lead to sensitivly different profile of profitability, see rather
 
-    >>> cba.chart_of_NPV_total_unif_co2_flows_traj.show()
-    >>> cba.chart_of_NPV_total_diff_co2_flows_traj.show()
+    >>> # cba.chart_of_NPV_total_unif_co2_flows_traj.show()
+    >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
+    >>> # cba.chart_of_NPV_total_diff_co2_flows_traj.show()
+    >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
 
+[comment]: <> (<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bunif-SPC-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bdiff-SPC-ETH%5D.png?raw=true" width="50%"/><img></p>)
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bunif-SPC-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/NPV%20co2%20total%20%5Bdiff-SPC-ETH%5D.png?raw=true" width="50%"/><img></p>
 
 
