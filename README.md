@@ -56,7 +56,7 @@ But before using the calculator as such, let's define (and introduce) the set of
 
 The following table enumerates all parameters that can be used to create an instance of `CBACalculator`.
 
- Parameter's name         | and signification
+ Parameter's name         | and description
  ------------------------ | -------
  `run_name`               | name of the folder that will contain the generated results and charts, *e.g.* `'introduction example 1'`.
  `country`                | name of the country under study. Only *one* possible choice currently: `France`.
@@ -176,15 +176,22 @@ Actually, it looks like extending the horizon of the project may be a good idea 
 Put differently,
 
     >>> cba.unif_payback_period
-    40
+    40 # years
     >>> cba.diff_payback_period
-    35
+    35 # years
+
+
+
+## Paper's results replication
+
+All the results presented in Dupoux (2018) can easily be reproduced. To do so, first type
+
+    >>> 
 
 ...
 
 <details><summary><i>(...)</i></summary>
 <p>
-
 
 ## Value of the data
 
