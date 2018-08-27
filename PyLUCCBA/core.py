@@ -654,7 +654,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         return None if self.delta_soc == 0 else self.delta_soc < 0
     
     @ts.Cache._property
-    def soc_unitary_unif_flows_traj(self):
+    def soc_unit_unif_flows_traj(self):
         """ Soil carbon flows per HA of land in the uniform annualization case.
 
         Example
@@ -670,7 +670,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         Note the values of parameters set to `'none'`. This is set so simply to
         show that those are actually not involved within the present example.
 
-        >>> o.soc_unitary_unif_flows_traj
+        >>> o.soc_unit_unif_flows_traj
         array([[-3.29789641, -3.29789641,  0.        ,  0.        ,  0.        ]])
         """
         _D_ = self.Delay_so_unif if self.so_emitting else 0
@@ -769,7 +769,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         )[0]
 
     @ts.Cache._property
-    def soc_unitary_stock_traj(self):
+    def soc_unit_stock_traj(self):
         """ Evolution trajectory of the soil carbon stock.
 
         Example
@@ -787,7 +787,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         >>> a = 0.0795301617017074
         >>> o.soc_chosen_CRF(a)
         array([[-0.        , -6.59576998, -6.59579281, -6.59579281]])
-        >>> o.soc_unitary_stock_traj
+        >>> o.soc_unit_stock_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.07902303]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-0.        , -6.59577175, -6.59579281, -6.59579281]])
@@ -797,7 +797,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         )
 
     @ts.Cache._property
-    def soc_unitary_diff_flows_traj(self):
+    def soc_unit_diff_flows_traj(self):
         """ Soil carbon flows per HA of land in the differentiated
         annualization case.
 
@@ -813,7 +813,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         Note the values of parameters set to `'none'`. This is set so simply to
         show that those are actually not involved within the present example.
 
-        >>> o.soc_unitary_diff_flows_traj
+        >>> o.soc_unit_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.07902303]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-6.59577175e+00, -2.10605417e-05, -6.72475409e-11]])
@@ -822,8 +822,8 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         return ts.redim_row_array(
             np.hstack((
                 np.zeros((1, _D_)),
-                self.soc_unitary_stock_traj[:, 1:]\
-                - self.soc_unitary_stock_traj[:, :-1]
+                self.soc_unit_stock_traj[:, 1:]\
+                - self.soc_unit_stock_traj[:, :-1]
             )),
             self.T_so_diff,
             self.project_horizon
@@ -837,7 +837,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         return None if self.delta_vgc == 0 else self.delta_vgc < 0
 
     @ts.Cache._property
-    def vgc_unitary_unif_flows_traj(self):
+    def vgc_unit_unif_flows_traj(self):
         """ Vegetation carbon flows per HA of land in the uniform annualization
         case.
 
@@ -853,7 +853,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         Note the value set for `delta_soc`. This is set so simply to show
         that it is actually not involved within the present example.
         
-        >>> o.vgc_unitary_unif_flows_traj
+        >>> o.vgc_unit_unif_flows_traj
         array([[-28., -28., -28.]])
         """
         _D_ = self.Delay_vg_unif if self.vg_emitting else 0
@@ -949,7 +949,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         )[0]
 
     @ts.Cache._property
-    def vgc_unitary_stock_traj(self):
+    def vgc_unit_stock_traj(self):
         """ Evolution trajectory of the vegetation carbon stock.
 
         Example
@@ -967,7 +967,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         >>> a = 0.0795301617017074
         >>> o.vgc_chosen_CRF(a)
         array([[ -0.        , -83.99970924, -84.        , -84.        ]])
-        >>> o.vgc_unitary_stock_traj
+        >>> o.vgc_unit_stock_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.07953016]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[ -0.        , -83.99970924, -84.        , -84.        ]])
@@ -977,7 +977,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         )
 
     @ts.Cache._property
-    def vgc_unitary_diff_flows_traj(self):
+    def vgc_unit_diff_flows_traj(self):
         """ Vegetation carbon flows per HA of land in the differentiated
         annualization case.
 
@@ -993,7 +993,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         Note the values of parameters set to `'none'`. This is set so simply to
         show that those are actually not involved within the present example.
 
-        >>> o.vgc_unitary_diff_flows_traj
+        >>> o.vgc_unit_diff_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04725381]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-8.39999999e+01, -5.41505898e-08]])
@@ -1002,8 +1002,8 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         return ts.redim_row_array(
             np.hstack((
                 np.zeros((1, _D_)),
-                self.vgc_unitary_stock_traj[:, 1:]\
-                - self.vgc_unitary_stock_traj[:, :-1]
+                self.vgc_unit_stock_traj[:, 1:]\
+                - self.vgc_unit_stock_traj[:, :-1]
             )),
             self.T_vg_diff,
             self.project_horizon
@@ -1011,7 +1011,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
 
     """**[VGC+SOC]*********************************************************************************"""
     @ts.Cache._property
-    def unitary_unif_carbon_flows_traj(self):
+    def unit_unif_carbon_flows_traj(self):
         """ Total (so+vg) carbon flows per HA of land in the uniform
         annualization case.
 
@@ -1027,14 +1027,14 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         Note the value set for `final_landuse`. This is set so simply to show
         that the value is actually not involved within the present example.
         
-        >>> o.unitary_unif_carbon_flows_traj
+        >>> o.unit_unif_carbon_flows_traj
         array([[-45.29789641, -45.29789641]])
         """
-        return 1.*self.soc_unitary_unif_flows_traj\
-               + 1.*self.vgc_unitary_unif_flows_traj
+        return 1.*self.soc_unit_unif_flows_traj\
+               + 1.*self.vgc_unit_unif_flows_traj
 
     @ts.Cache._property
-    def unitary_diff_carbon_flows_traj(self):
+    def unit_diff_carbon_flows_traj(self):
         """ Total (so+vg) carbon flows per HA of land in the differentiated
         annualization case.
 
@@ -1050,18 +1050,18 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         Note the value set for `final_landuse`. This is set so simply to show
         that the value is actually not involved within the present example.
         
-        >>> o.unitary_diff_carbon_flows_traj
+        >>> o.unit_diff_carbon_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05214615]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04725381]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-9.05957927e+01, -8.51145954e-08]])
         """
-        return 1.*self.soc_unitary_diff_flows_traj\
-               + 1.*self.vgc_unitary_diff_flows_traj
+        return 1.*self.soc_unit_diff_flows_traj\
+               + 1.*self.vgc_unit_diff_flows_traj
 
     """**[VGC+TO*VGCO2][SOC*TO*VGCO2]***************************************************************"""
-    def vg_and_so_co2_unitary_x_flows_trajecter(self, key, traj):
+    def vg_and_so_co2_unit_x_flows_trajecter(self, key, traj):
         return traj*self.vg_and_so_spec.biomass_share_translating_in_ghg_flow[
             self.final_landuse
         ][key][
@@ -1069,7 +1069,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         ]*(44./12.)
         
     @ts.Cache._property
-    def vgco2_unitary_unif_flows_traj(self):
+    def vgco2_unit_unif_flows_traj(self):
         """ Vegetation CO2 flows per HA of land in the uniform annualization
         case.
 
@@ -1088,21 +1088,21 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         >>> CarbonAndCo2FlowsAnnualizer(
         ...     T_vg_unif = 2,
         ...     **base_kwargs
-        ... ).vgco2_unitary_unif_flows_traj
+        ... ).vgco2_unit_unif_flows_traj
         array([[-138.6, -138.6,    0. ,    0. ,    0. ,    0. ]])
 
         >>> CarbonAndCo2FlowsAnnualizer(
         ...     T_vg_unif = 4,
         ...     **base_kwargs
-        ... ).vgco2_unitary_unif_flows_traj
+        ... ).vgco2_unit_unif_flows_traj
         array([[-69.3, -69.3, -69.3, -69.3,   0. ,   0. ]])
         """
-        return self.vg_and_so_co2_unitary_x_flows_trajecter(
-            'vg', self.vgc_unitary_unif_flows_traj
+        return self.vg_and_so_co2_unit_x_flows_trajecter(
+            'vg', self.vgc_unit_unif_flows_traj
         )
 
     @ts.Cache._property
-    def vgco2_unitary_diff_flows_traj(self):
+    def vgco2_unit_diff_flows_traj(self):
         """ Vegetation CO2 flows per HA of land in the differentiated
         annualization case.
 
@@ -1121,7 +1121,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         >>> CarbonAndCo2FlowsAnnualizer(
         ...     T_vg_diff = 2,
         ...     **base_kwargs
-        ... ).vgco2_unitary_diff_flows_traj
+        ... ).vgco2_unit_diff_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04725381]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-2.77200000e+02, -1.78696946e-07,  0.00000000e+00,
@@ -1130,18 +1130,18 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         >>> CarbonAndCo2FlowsAnnualizer(
         ...     T_vg_diff = 4,
         ...     **base_kwargs
-        ... ).vgco2_unitary_diff_flows_traj
+        ... ).vgco2_unit_diff_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.10617162]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-2.77177494e+02, -2.25041722e-02, -1.82712438e-06,
                 -1.48378376e-10,  0.00000000e+00,  0.00000000e+00]])
         """
-        return self.vg_and_so_co2_unitary_x_flows_trajecter(
-            'vg', self.vgc_unitary_diff_flows_traj
+        return self.vg_and_so_co2_unit_x_flows_trajecter(
+            'vg', self.vgc_unit_diff_flows_traj
         )
     
     @ts.Cache._property
-    def soco2_unitary_unif_flows_traj(self):
+    def soco2_unit_unif_flows_traj(self):
         """ Soil CO2 flows per HA of land in the uniform annualization
         case.
 
@@ -1160,23 +1160,23 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         >>> CarbonAndCo2FlowsAnnualizer(
         ...     T_so = 2,
         ...     **base_kwargs
-        ... ).soco2_unitary_unif_flows_traj
+        ... ).soco2_unit_unif_flows_traj
         array([[-3.62768605, -3.62768605,  0.        ,  0.        ,  0.        ,
                  0.        ]])
 
         >>> CarbonAndCo2FlowsAnnualizer(
         ...     T_so = 4,
         ...     **base_kwargs
-        ... ).soco2_unitary_unif_flows_traj
+        ... ).soco2_unit_unif_flows_traj
         array([[-1.81384302, -1.81384302, -1.81384302, -1.81384302,  0.        ,
                  0.        ]])
         """
-        return self.vg_and_so_co2_unitary_x_flows_trajecter(
-            'so', self.soc_unitary_unif_flows_traj
+        return self.vg_and_so_co2_unit_x_flows_trajecter(
+            'so', self.soc_unit_unif_flows_traj
         )
 
     @ts.Cache._property
-    def soco2_unitary_diff_flows_traj(self):
+    def soco2_unit_diff_flows_traj(self):
         """ Soil CO2 flows per HA of land in the differentiated annualization
         case.
 
@@ -1195,7 +1195,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         >>> CarbonAndCo2FlowsAnnualizer(
         ...     T_so = 2,
         ...     **base_kwargs
-        ... ).soco2_unitary_diff_flows_traj
+        ... ).soco2_unit_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05214615]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-7.25537206e+00, -3.40604061e-08,  0.00000000e+00,
@@ -1204,19 +1204,19 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         >>> CarbonAndCo2FlowsAnnualizer(
         ...     T_so = 4,
         ...     **base_kwargs
-        ... ).soco2_unitary_diff_flows_traj
+        ... ).soco2_unit_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.11195753]
         ---- [***]The solution converged.[1.776357e-15][***]
         array([[-7.25441366e+00, -9.58300932e-04, -1.26590613e-07,
                 -1.67232450e-11,  0.00000000e+00,  0.00000000e+00]])
         """
-        return self.vg_and_so_co2_unitary_x_flows_trajecter(
-            'so', self.soc_unitary_diff_flows_traj
+        return self.vg_and_so_co2_unit_x_flows_trajecter(
+            'so', self.soc_unit_diff_flows_traj
         )
 
     """**[VGCO2+SOCO2]*****************************************************************************"""
     @ts.Cache._property
-    def unitary_unif_co2_flows_traj(self):
+    def unit_unif_co2_flows_traj(self):
         """ Total (so+vg) CO2 flows per HA of land in the uniform annualization
         case.
 
@@ -1228,16 +1228,16 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         ...     final_landuse   = 'wheat',
         ...     T_vg_unif       = 10,
         ...     project_horizon = 12,
-        ... ).unitary_unif_co2_flows_traj
+        ... ).unit_unif_co2_flows_traj
         array([[-28.32461434, -28.32461434, -28.32461434, -28.32461434,
                 -28.32461434, -28.32461434, -28.32461434, -28.32461434,
                 -28.32461434, -28.32461434,  -0.60461434,  -0.60461434]])
         """
-        return 1.*self.soco2_unitary_unif_flows_traj\
-               + 1.*self.vgco2_unitary_unif_flows_traj
+        return 1.*self.soco2_unit_unif_flows_traj\
+               + 1.*self.vgco2_unit_unif_flows_traj
 
     @ts.Cache._property
-    def unitary_diff_co2_flows_traj(self):
+    def unit_diff_co2_flows_traj(self):
         """ Total (so+vg) CO2 flows per HA of land in the differentiated
         annualization case.
 
@@ -1249,7 +1249,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         ...     final_landuse   = 'wheat',
         ...     T_vg_diff       = 3,
         ...     project_horizon = 12,
-        ... ).unitary_diff_co2_flows_traj
+        ... ).unit_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.31576933]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.07953016]
@@ -1259,8 +1259,8 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
                 -3.88903874e-08, -1.63865916e-09, -6.90453028e-11,
                 -2.90949487e-12, -1.22124533e-13, -5.86197757e-15]])
         """
-        return 1.*self.soco2_unitary_diff_flows_traj\
-               + 1.*self.vgco2_unitary_diff_flows_traj
+        return 1.*self.soco2_unit_diff_flows_traj\
+               + 1.*self.vgco2_unit_diff_flows_traj
 
 
 
@@ -1284,7 +1284,7 @@ class OutputFlows(ts.Cache):
         self.repeated_pattern_polation = repeated_pattern_polation
 
     @ts.Cache._property
-    def output_flows_and_infos(self):
+    def output_flows_traj_and_infos(self):
         r""" All scenarized trajectories of annual tonnes of output flows among
         which the wanted one is chosen. To add an other selectable scenario,
         edit the following files:
@@ -1305,7 +1305,7 @@ class OutputFlows(ts.Cache):
         involved within the present example.
         
         >>> os.path.relpath(
-        ...     o.output_flows_and_infos.fname
+        ...     o.output_flows_traj_and_infos.fname
         ... )
         'resources\\yields\\Output\\ETH_yields_FR.csv'
         """
@@ -1333,12 +1333,12 @@ class OutputFlows(ts.Cache):
         ['DEBUG', 'O']
         """
         return [s for s in sorted(
-            self.output_flows_and_infos\
+            self.output_flows_traj_and_infos\
             .keys_and_values[self.first_year].keys()
         )  if s != 'year']
 
     @ts.Cache._property
-    def scenarized_output_flows_sparse_traj(self):
+    def scenarized_output_flows_traj_sparse_traj(self):
         """ Chosen scenario of annual output flows, whose trajectory is still
         sparse.
 
@@ -1350,16 +1350,16 @@ class OutputFlows(ts.Cache):
         ...     project_horizon = 20,
         ...     scenario        = 'O',
         ... )        
-        >>> o.scenarized_output_flows_sparse_traj[2025]
+        >>> o.scenarized_output_flows_traj_sparse_traj[2025]
         1
         """
         return {
             year : dic[self.output_flows_scenario] for year, dic
-            in self.output_flows_and_infos.keys_and_values.items()
+            in self.output_flows_traj_and_infos.keys_and_values.items()
         }
 
     @ts.Cache._property
-    def scenarized_output_flows_full_traj_as_dict(self):
+    def scenarized_output_flows_traj_full_traj_as_dict(self):
         """ Chosen scenario of annual output flows, whose trajectory is now
         completed.
 
@@ -1371,19 +1371,19 @@ class OutputFlows(ts.Cache):
         ...     project_horizon = 20,
         ...     scenario        = 'O',
         ... )
-        >>> o.scenarized_output_flows_full_traj_as_dict[2025]
+        >>> o.scenarized_output_flows_traj_full_traj_as_dict[2025]
         1.0
         """
         return {
             year : price for year, price
             in ts.poler(
-                self.scenarized_output_flows_sparse_traj,
+                self.scenarized_output_flows_traj_sparse_traj,
                 self.repeated_pattern_polation
             ).items() if self.first_year<=year<=self.last_year
         }
 
     @ts.Cache._property
-    def scenarized_output_flows_full_traj(self):
+    def scenarized_output_flows_traj_full_traj(self):
         """ Chosen scenario of annual output flows, whose trajectory is now
         in array format (needed for matrix-like calculations).
 
@@ -1395,12 +1395,12 @@ class OutputFlows(ts.Cache):
         ...     project_horizon = 20,
         ...     scenario        = 'O',
         ... )
-        >>> o.scenarized_output_flows_full_traj
+        >>> o.scenarized_output_flows_traj_full_traj
         array([[1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
                 1., 1., 1., 1.]])
         """
         return ts.dict_time_serie_as_row_array(
-            self.scenarized_output_flows_full_traj_as_dict
+            self.scenarized_output_flows_traj_full_traj_as_dict
         )
     
     @ts.Cache._property
@@ -1423,7 +1423,7 @@ class OutputFlows(ts.Cache):
         >>> sorted(o.scenarized_output_infos.items())
         [('unit', 'tonne[Output]/tonne[Output]'), ('yrb', 2007)]
         """
-        return self.output_flows_and_infos\
+        return self.output_flows_traj_and_infos\
                .keys_and_infos[self.output_flows_scenario.lower()]
 
 
@@ -1478,12 +1478,12 @@ class InputFlows(ts.Cache):
         ['DEBUG', 'IFP']
         """
         return [s for s in sorted(
-            self.input_flows_and_infos\
+            self.input_flows_traj_and_infos\
             .keys_and_values[self.first_year].keys()
         )  if s != 'year']
 
     @ts.Cache._property
-    def input_flows_and_infos(self):
+    def input_flows_traj_and_infos(self):
         r""" All scenarized trajectories of annual input flows [1/tonne or tonne]
         (times or per tonne of output) among which the wanted one is chosen.
         To add an other selectable scenario, edit the following files:
@@ -1505,7 +1505,7 @@ class InputFlows(ts.Cache):
         involved within the present example.
         
         >>> os.path.relpath(
-        ...     o.input_flows_and_infos.fname
+        ...     o.input_flows_traj_and_infos.fname
         ... )
         'resources\\yields\\Input\\MISCANTHUS_yields_FR.csv'
         
@@ -1520,7 +1520,7 @@ class InputFlows(ts.Cache):
         existing value for the scenario named DOE is that of 2013, which
         implies that the only possible "polation" is about generating a
         time-constant yield.        
-        >>> o.input_flows_and_infos.keys_and_values[2012]['DOE']
+        >>> o.input_flows_traj_and_infos.keys_and_values[2012]['DOE']
         0.31847714
         
         >>> o = InputFlows(
@@ -1530,7 +1530,7 @@ class InputFlows(ts.Cache):
         ...     first_year      = float('nan'),
         ... )
         >>> os.path.relpath(
-        ...     o.input_flows_and_infos.fname
+        ...     o.input_flows_traj_and_infos.fname
         ... )
         'resources\\yields\\Input\\WHEAT_yields_FR.csv'
 
@@ -1557,7 +1557,7 @@ class InputFlows(ts.Cache):
         )
 
     @ts.Cache._property
-    def scenarized_unitary_input_flows_sparse_traj(self):
+    def scenarized_unit_input_flows_traj_sparse_traj(self):
         """ Chosen scenario of annual unitary input flows, whose trajectory
         is still sparse.
 
@@ -1573,17 +1573,17 @@ class InputFlows(ts.Cache):
 
         Note that the set of values from which the "polation" is performed will
         likely not be of the same size as that involved by `project_horizon`.
-        >>> len(o.scenarized_unitary_input_flows_sparse_traj)
+        >>> len(o.scenarized_unit_input_flows_traj_sparse_traj)
         60
         
         """
         return {
             year : dic[self.input_flows_scenario] for year, dic
-            in self.input_flows_and_infos.keys_and_values.items()
+            in self.input_flows_traj_and_infos.keys_and_values.items()
         }
     
     @ts.Cache._property
-    def scenarized_unitary_input_flows_full_traj_as_dict(self):
+    def scenarized_unit_input_flows_traj_full_traj_as_dict(self):
         """ Chosen scenario of annual unitary input flows, whose trajectory is
          now completed.
 
@@ -1600,20 +1600,20 @@ class InputFlows(ts.Cache):
         The "polated" values that are ultimately considered for calculations
         are those involved by `project_horizon`.
         >>> sorted(
-        ...     o.scenarized_unitary_input_flows_full_traj_as_dict.items()
+        ...     o.scenarized_unit_input_flows_traj_full_traj_as_dict.items()
         ... )
         [(2020, 0.31847714), (2021, 0.31847714), (2022, 0.31847714), (2023, 0.31847714), (2024, 0.31847714)]
 
         """
         return {
             year : price for year, price in ts.poler(
-                self.scenarized_unitary_input_flows_sparse_traj,
+                self.scenarized_unit_input_flows_traj_sparse_traj,
                 self.repeated_pattern_polation
             ).items() if self.first_year<=year<=self.last_year
         }
     
     @ts.Cache._property
-    def scenarized_unitary_input_flows_full_traj(self):
+    def scenarized_unit_input_flows_traj_full_traj(self):
         """ Chosen scenario of annual unitary input flows, whose trajectory is
         now in array format (needed for matrix-like calculations).
 
@@ -1626,15 +1626,15 @@ class InputFlows(ts.Cache):
         ...     first_year      = 2020,
         ...     project_horizon = 5,
         ... )
-        >>> o.scenarized_unitary_input_flows_full_traj
+        >>> o.scenarized_unit_input_flows_traj_full_traj
         array([[0.31847714, 0.31847714, 0.31847714, 0.31847714, 0.31847714]])
         """
         return ts.dict_time_serie_as_row_array(
-            self.scenarized_unitary_input_flows_full_traj_as_dict
+            self.scenarized_unit_input_flows_traj_full_traj_as_dict
         )
 
     @ts.Cache._property
-    def scenarized_unitary_input_infos(self):
+    def scenarized_unit_input_infos(self):
         """ Informations (unit, year, etc...) about unitary input scenarii.
 
         Example
@@ -1652,25 +1652,25 @@ class InputFlows(ts.Cache):
         involved within the present example.
 
         >>> sorted(
-        ...     o.scenarized_unitary_input_infos.keys()
+        ...     o.scenarized_unit_input_infos.keys()
         ... )
         ['power', 'unit', 'yrb']
-        >>> o.scenarized_unitary_input_infos['unit']
+        >>> o.scenarized_unit_input_infos['unit']
         'tonne[Output]/tonne[Input]'
-        >>> o.scenarized_unitary_input_infos['power']
+        >>> o.scenarized_unit_input_infos['power']
         -1.0
 
         The value associated with the key `'power'` is not manually filled.
         It is deduced from `'unit'`, depending on whether `'tonne[Output]'`
         is in the numerator or in the denominator.
         
-        >>> o.scenarized_unitary_input_infos['yrb']
+        >>> o.scenarized_unit_input_infos['yrb']
         2012
 
         The `'yrb'` key (stands for "year-base") shown above could be, say,
         used to scenarize any temporal trajectory of technological progress.
         """
-        _info_ = self.input_flows_and_infos\
+        _info_ = self.input_flows_traj_and_infos\
                  .keys_and_infos[self.input_flows_scenario.lower()]
         _info_['power'] = 1. if 'Output' in _info_['unit'].split('/')[1]\
                           else -1.
@@ -1698,7 +1698,7 @@ class LandSurfaceFlows(ts.Cache):
         self.last_year = first_year+self.project_horizon
 
     @ts.Cache._property
-    def land_surface_flows_and_infos(self):
+    def land_surface_flows_traj_and_infos(self):
         r""" All scenarized trajectories of annual land surfaces [1/HA or HA]
         (times or per tonne of output) among which the wanted one is chosen.
         To add an other selectable scenario, edit the following files:
@@ -1720,7 +1720,7 @@ class LandSurfaceFlows(ts.Cache):
         involved within the present example.
         
         >>> os.path.relpath(
-        ...     o.land_surface_flows_and_infos.fname
+        ...     o.land_surface_flows_traj_and_infos.fname
         ... )
         'resources\\yields\\Input\\HAETH_yields_FR.csv'
         """
@@ -1754,12 +1754,12 @@ class LandSurfaceFlows(ts.Cache):
         those that are involved by this parameter.
         """
         return [s for s in sorted(
-            self.land_surface_flows_and_infos\
+            self.land_surface_flows_traj_and_infos\
             .keys_and_values[self.first_year].keys()
         )  if s != 'year']
 
     @ts.Cache._property
-    def scenarized_unitary_land_surface_flows_sparse_traj(self):
+    def scenarized_unit_land_surface_flows_traj_sparse_traj(self):
         """ Chosen scenario of annual unitary land surfaces, whose trajectory
         is still sparse.
 
@@ -1776,9 +1776,9 @@ class LandSurfaceFlows(ts.Cache):
         performed in the present case, is that of 2007. The only possible
         "polation" will about generating a time-constant yield.  
         
-        >>> o.scenarized_unitary_land_surface_flows_sparse_traj[2006]
+        >>> o.scenarized_unit_land_surface_flows_traj_sparse_traj[2006]
         ''
-        >>> o.scenarized_unitary_land_surface_flows_sparse_traj[2007]
+        >>> o.scenarized_unit_land_surface_flows_traj_sparse_traj[2007]
         5.254872818
 
         Note that unitary land surface "flows" depend on the value set for
@@ -1789,25 +1789,25 @@ class LandSurfaceFlows(ts.Cache):
         ...     first_year      = 2020,
         ...     project_horizon = 20,
         ... )
-        >>> o.scenarized_unitary_land_surface_flows_sparse_traj[2007]
+        >>> o.scenarized_unit_land_surface_flows_traj_sparse_traj[2007]
         2.576086957
 
         Here again, the only existing value from which the "polation" will be
         performed is that of 2007. We know that since we have filled-up the
         files from which those values are red. We can also figure this out by
         calling the entire dictionary, doing
-        >> o.scenarized_unitary_land_surface_flows_sparse_traj
+        >> o.scenarized_unit_land_surface_flows_traj_sparse_traj
         ......, 2060: '', 2061: '', ...... , 2006: '', 2007: 2.576086957, 2008: '', ...... , 2047: ''}
 
         NB: Remember that in python, dictionaries are unordered objects.
         """
         return {
             year : dic[self.final_landuse] for year, dic
-            in self.land_surface_flows_and_infos.keys_and_values.items()
+            in self.land_surface_flows_traj_and_infos.keys_and_values.items()
         }
 
     @ts.Cache._property
-    def scenarized_unitary_land_surface_flows_full_traj_as_dict(self):
+    def scenarized_unit_land_surface_flows_traj_full_traj_as_dict(self):
         """ Chosen scenario of annual unitary land surfaces, whose trajectory
         is now completed.
 
@@ -1824,7 +1824,7 @@ class LandSurfaceFlows(ts.Cache):
         The "polated" values that are ultimately considered for calculations
         are those involved by `project_horizon`.
         >>> sorted(
-        ...     o.scenarized_unitary_land_surface_flows_full_traj_as_dict.items()
+        ...     o.scenarized_unit_land_surface_flows_traj_full_traj_as_dict.items()
         ... )
         [(2020, 5.254872818), (2021, 5.254872818), (2022, 5.254872818), (2023, 5.254872818), (2024, 5.254872818)]
 
@@ -1832,13 +1832,13 @@ class LandSurfaceFlows(ts.Cache):
         return {
             year : price for year, price
             in ts.poler(
-                self.scenarized_unitary_land_surface_flows_sparse_traj,
+                self.scenarized_unit_land_surface_flows_traj_sparse_traj,
                 self.repeated_pattern_polation
             ).items() if self.first_year<=year<=self.last_year
         }
 
     @ts.Cache._property
-    def scenarized_unitary_land_surface_flows_full_traj(self):
+    def scenarized_unit_land_surface_flows_traj_full_traj(self):
         """ Chosen scenario of annual unitary land surfaces, whose trajectory
         is now in array format (needed for matrix-like calculations).
 
@@ -1850,15 +1850,15 @@ class LandSurfaceFlows(ts.Cache):
         ...     first_year      = 2020,
         ...     project_horizon = 5,
         ... )
-        >>> o.scenarized_unitary_land_surface_flows_full_traj
+        >>> o.scenarized_unit_land_surface_flows_traj_full_traj
         array([[5.25487282, 5.25487282, 5.25487282, 5.25487282, 5.25487282]])
         """
         return ts.dict_time_serie_as_row_array(
-            self.scenarized_unitary_land_surface_flows_full_traj_as_dict
+            self.scenarized_unit_land_surface_flows_traj_full_traj_as_dict
         )
 
     @ts.Cache._property
-    def scenarized_unitary_land_surface_infos(self):
+    def scenarized_unit_land_surface_infos(self):
         """ Informations (unit, year, etc...) about unitary land scenarii.
 
         Example
@@ -1876,20 +1876,20 @@ class LandSurfaceFlows(ts.Cache):
         involved within the present example.
     
         >>> sorted(
-        ...     o.scenarized_unitary_land_surface_infos.keys()
+        ...     o.scenarized_unit_land_surface_infos.keys()
         ... )
         ['power', 'unit']
-        >>> o.scenarized_unitary_land_surface_infos['unit']
+        >>> o.scenarized_unit_land_surface_infos['unit']
         'Tonne[Output]/ha'
         
-        >>> o.scenarized_unitary_land_surface_infos['power']
+        >>> o.scenarized_unit_land_surface_infos['power']
         -1.0
 
         The value associated with the key `'power'` is not manually filled.
         It is deduced from `'unit'`, depending on whether `'Tonne[Output]'`
         is in the numerator or in the denominator.
         """
-        _infos_ = self.land_surface_flows_and_infos.keys_and_infos
+        _infos_ = self.land_surface_flows_traj_and_infos.keys_and_infos
         _info_  = _infos_[self.final_landuse.lower()]\
                   if self.final_landuse.lower() in _infos_ else _infos_['*']
         _info_['power'] = 1. if 'Output' in _info_['unit'].split('/')[1]\
@@ -2490,32 +2490,32 @@ class CBACalculator(ts.Cache):
 
     """**[ANNUALIZED*DELTAS]***********************************************************************"""
     @ts.Cache._property
-    def carbon_and_co2_flows_annualizer(self):
+    def carbon_and_co2_flows_traj_annualizer(self):
         """ Instantiated class-like object whose methodes and properties will be
         used for the uniform and differentiated annualizing calculations.
 
         Testing/Example (emission)
         ---------------
         >>> o = CBACalculator._testing_instancer()
-        >>> type(o.carbon_and_co2_flows_annualizer)
+        >>> type(o.carbon_and_co2_flows_traj_annualizer)
         <class '__main__.CarbonAndCo2FlowsAnnualizer'>
 
-        >>> o.carbon_and_co2_flows_annualizer.delta_soc
+        >>> o.carbon_and_co2_flows_traj_annualizer.delta_soc
         -25.527659479999997
-        >>> o.carbon_and_co2_flows_annualizer.so_emitting
+        >>> o.carbon_and_co2_flows_traj_annualizer.so_emitting
         True
-        >>> o.carbon_and_co2_flows_annualizer.soc_chosen_CRF.__name__
+        >>> o.carbon_and_co2_flows_traj_annualizer.soc_chosen_CRF.__name__
         'soc_POEPLAU_et_al_eq7_p2418'
-        >>> o.carbon_and_co2_flows_annualizer.soc_chosen_CRF_constrained(1)
+        >>> o.carbon_and_co2_flows_traj_annualizer.soc_chosen_CRF_constrained(1)
         5.261642499476693e-08
 
-        >>> o.carbon_and_co2_flows_annualizer.delta_vgc
+        >>> o.carbon_and_co2_flows_traj_annualizer.delta_vgc
         -5.566666667
-        >>> o.carbon_and_co2_flows_annualizer.vg_emitting
+        >>> o.carbon_and_co2_flows_traj_annualizer.vg_emitting
         True
-        >>> o.carbon_and_co2_flows_annualizer.vgc_chosen_CRF.__name__
+        >>> o.carbon_and_co2_flows_traj_annualizer.vgc_chosen_CRF.__name__
         'vgc_POEPLAU_et_al_eq7_p2418'
-        >>> o.carbon_and_co2_flows_annualizer.vgc_chosen_CRF_constrained(1)
+        >>> o.carbon_and_co2_flows_traj_annualizer.vgc_chosen_CRF_constrained(1)
         2.0478622226436554
 
         Testing/Example (sequestration)
@@ -2524,25 +2524,25 @@ class CBACalculator(ts.Cache):
         ...     il='degraded grassland', fl='miscanthus', si='none'
         ... )
 
-        >>> o.carbon_and_co2_flows_annualizer.delta_soc
+        >>> o.carbon_and_co2_flows_traj_annualizer.delta_soc
         30.91111111
-        >>> o.carbon_and_co2_flows_annualizer.so_emitting
+        >>> o.carbon_and_co2_flows_traj_annualizer.so_emitting
         False
-        >>> o.carbon_and_co2_flows_annualizer.soc_chosen_CRF.__name__
+        >>> o.carbon_and_co2_flows_traj_annualizer.soc_chosen_CRF.__name__
         'soc_DUPOUX'
-        >>> o.carbon_and_co2_flows_annualizer.soc_chosen_CRF_constrained(1)
+        >>> o.carbon_and_co2_flows_traj_annualizer.soc_chosen_CRF_constrained(1)
         -6.371254812620464e-08
         
         >>> o = CBACalculator._testing_instancer(
         ...     il='miscanthus', fl='degraded grassland', si='none'
         ... )
-        >>> o.carbon_and_co2_flows_annualizer.delta_vgc
+        >>> o.carbon_and_co2_flows_traj_annualizer.delta_vgc
         5.566666667
-        >>> o.carbon_and_co2_flows_annualizer.vg_emitting
+        >>> o.carbon_and_co2_flows_traj_annualizer.vg_emitting
         False
-        >>> o.carbon_and_co2_flows_annualizer.vgc_chosen_CRF.__name__
+        >>> o.carbon_and_co2_flows_traj_annualizer.vgc_chosen_CRF.__name__
         'vgc_DUPOUX'
-        >>> o.carbon_and_co2_flows_annualizer.vgc_chosen_CRF_constrained(1)
+        >>> o.carbon_and_co2_flows_traj_annualizer.vgc_chosen_CRF_constrained(1)
         -2.0478622226436554
         """ 
         obj = CarbonAndCo2FlowsAnnualizer(
@@ -2569,15 +2569,15 @@ class CBACalculator(ts.Cache):
         >| initial_so_carbon_stock_value
         ->\ absolute_SOC_differential
         -->\ so_emitting
-        --->| soc_unitary_unif_flows_traj
+        --->| soc_unit_unif_flows_traj
         \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-        >| scenarized_unitary_land_surface_infos                              |
-        >| scenarized_unitary_land_surface_flows_sparse_traj                  |
-        ->\ scenarized_unitary_land_surface_flows_full_traj_as_dict           |
-        -->| scenarized_unitary_land_surface_flows_full_traj (as array)       |
-        >| scenarized_output_flows_sparse_traj                                |
-        ->\ scenarized_output_flows_full_traj_as_dict                         |
-        -->| scenarized_output_flows_full_traj (as array)                     |
+        >| scenarized_unit_land_surface_infos                              |
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj                  |
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict           |
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)       |
+        >| scenarized_output_flows_traj_sparse_traj                                |
+        ->\ scenarized_output_flows_traj_full_traj_as_dict                         |
+        -->| scenarized_output_flows_traj_full_traj (as array)                     |
         -->| output_flows_traj                                                |
                                                                               |
         ---->\ land_surface_flows_traj                                        |
@@ -2592,8 +2592,7 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -9.909471188708787
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .soc_unitary_unif_flows_traj\
+        return self.soc_unit_unif_flows_traj\
         *self.land_surface_flows_traj
 
     @ts.Cache._property
@@ -2607,16 +2606,16 @@ class CBACalculator(ts.Cache):
         -->| so_emitting
         >| T_so_years_after_LUC
         ->| a_parameter_which_solves_soc_chosen_CRF_constrained
-        -->\ soc_unitary_stock_traj
-        --->| soc_unitary_diff_flows_traj
+        -->\ soc_unit_stock_traj
+        --->| soc_unit_diff_flows_traj
         \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-        >| scenarized_unitary_land_surface_infos                              |
-        >| scenarized_unitary_land_surface_flows_sparse_traj                  |
-        ->\ scenarized_unitary_land_surface_flows_full_traj_as_dict           |
-        -->| scenarized_unitary_land_surface_flows_full_traj (as array)       |
-        >| scenarized_output_flows_sparse_traj                                |
-        ->\ scenarized_output_flows_full_traj_as_dict                         |
-        -->| scenarized_output_flows_full_traj (as array)                     |
+        >| scenarized_unit_land_surface_infos                              |
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj                  |
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict           |
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)       |
+        >| scenarized_output_flows_traj_sparse_traj                                |
+        ->\ scenarized_output_flows_traj_full_traj_as_dict                         |
+        -->| scenarized_output_flows_traj_full_traj (as array)                     |
         -->| output_flows_traj                                                |
                                                                               |
         ---->\ land_surface_flows_traj                                        |
@@ -2633,19 +2632,18 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -9.909471188708789
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .soc_unitary_diff_flows_traj\
+        return self.soc_unit_diff_flows_traj\
         *self.land_surface_flows_traj
 
     @property
-    def chart_of_soc_unif_flows(self):
+    def chart_of_soc_unif_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_soc_unif_flows
+        >>> c = o.chart_of_soc_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """        
@@ -2663,21 +2661,31 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_soc_unitary_unif_flows(self):
+    def soc_unit_unif_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'soc_unit_unif_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .soc_unit_unif_flows_traj
+
+    @property
+    def chart_of_soc_unit_unif_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_soc_unitary_unif_flows
+        >>> c = o.chart_of_soc_unit_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """   
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.carbon_and_co2_flows_annualizer\
-                 .soc_unitary_unif_flows_traj.T,
+            imas=self.soc_unit_unif_flows_traj.T,
             labels=['UNIF U-SOC-TRAJ [tonnes]'],
             colors=['black'],
             save=self.save_charts,
@@ -2689,14 +2697,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_soc_diff_flows(self):
+    def chart_of_soc_diff_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_soc_diff_flows
+        >>> c = o.chart_of_soc_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -2714,15 +2722,27 @@ class CBACalculator(ts.Cache):
             ),
             bar=True
         )
+
     @property
-    def chart_of_soc_unitary_diff_flows(self):
+    def soc_unit_diff_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'soc_unit_diff_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .soc_unit_diff_flows_traj
+
+    @property
+    def chart_of_soc_unit_diff_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_soc_unitary_diff_flows
+        >>> c = o.chart_of_soc_unit_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -2730,8 +2750,7 @@ class CBACalculator(ts.Cache):
         """  
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.carbon_and_co2_flows_annualizer\
-                 .soc_unitary_diff_flows_traj.T,
+            imas=self.soc_unit_diff_flows_traj.T,
             labels=['DIFF U-SOC-TRAJ [tonnes]'],
             colors=['black'],
             save=self.save_charts,
@@ -2751,15 +2770,15 @@ class CBACalculator(ts.Cache):
         >| initial_vg_carbon_stock_value
         ->\ absolute_VGC_differential
         -->\ vg_emitting
-        --->| vgc_unitary_unif_flows_traj
+        --->| vgc_unit_unif_flows_traj
         \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-        >| scenarized_unitary_land_surface_infos                              |
-        >| scenarized_unitary_land_surface_flows_sparse_traj                  |
-        ->\ scenarized_unitary_land_surface_flows_full_traj_as_dict           |
-        -->| scenarized_unitary_land_surface_flows_full_traj (as array)       |
-        >| scenarized_output_flows_sparse_traj                                |
-        ->\ scenarized_output_flows_full_traj_as_dict                         |
-        -->| scenarized_output_flows_full_traj (as array)                     |
+        >| scenarized_unit_land_surface_infos                              |
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj                  |
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict           |
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)       |
+        >| scenarized_output_flows_traj_sparse_traj                                |
+        ->\ scenarized_output_flows_traj_full_traj_as_dict                         |
+        -->| scenarized_output_flows_traj_full_traj (as array)                     |
         -->| output_flows_traj                                                |
                                                                               |
         ---->\ land_surface_flows_traj                                        |
@@ -2774,9 +2793,19 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -2.1609001403751913
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .vgc_unitary_unif_flows_traj\
+        return self.vgc_unit_unif_flows_traj\
         *self.land_surface_flows_traj
+    
+    @property
+    def vgc_unit_unif_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'vgc_unit_unif_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .vgc_unit_unif_flows_traj
 
     @ts.Cache._property
     def vgc_diff_flows_traj(self):
@@ -2789,16 +2818,16 @@ class CBACalculator(ts.Cache):
         -->| vg_emitting
         >| T_vg_years_after_LUC
         ->| a_parameter_which_solves_vgc_chosen_CRF_constrained
-        -->\ vgc_unitary_stock_traj
-        --->| vgc_unitary_diff_flows_traj
+        -->\ vgc_unit_stock_traj
+        --->| vgc_unit_diff_flows_traj
         \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-        >| scenarized_unitary_land_surface_infos                              |
-        >| scenarized_unitary_land_surface_flows_sparse_traj                  |
-        ->\ scenarized_unitary_land_surface_flows_full_traj_as_dict           |
-        -->| scenarized_unitary_land_surface_flows_full_traj (as array)       |
-        >| scenarized_output_flows_sparse_traj                                |
-        ->\ scenarized_output_flows_full_traj_as_dict                         |
-        -->| scenarized_output_flows_full_traj (as array)                     |
+        >| scenarized_unit_land_surface_infos                              |
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj                  |
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict           |
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)       |
+        >| scenarized_output_flows_traj_sparse_traj                                |
+        ->\ scenarized_output_flows_traj_full_traj_as_dict                         |
+        -->| scenarized_output_flows_traj_full_traj (as array)                     |
         -->| output_flows_traj                                                |
                                                                               |
         ---->\ land_surface_flows_traj                                        |
@@ -2815,19 +2844,29 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -2.1609001403751917
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .vgc_unitary_diff_flows_traj\
+        return self.vgc_unit_diff_flows_traj\
         *self.land_surface_flows_traj
 
     @property
-    def chart_of_vgc_unif_flows(self):
+    def vgc_unit_diff_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'vgc_unit_diff_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .vgc_unit_diff_flows_traj
+
+    @property
+    def chart_of_vgc_unif_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_vgc_unif_flows
+        >>> c = o.chart_of_vgc_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """  
@@ -2844,14 +2883,14 @@ class CBACalculator(ts.Cache):
             bar=True
         )
     @property
-    def chart_of_vgc_diff_flows(self):
+    def chart_of_vgc_diff_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_vgc_diff_flows
+        >>> c = o.chart_of_vgc_diff_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -2876,10 +2915,10 @@ class CBACalculator(ts.Cache):
         Resolution order:
         ...
            \ ...
-        --->| vgc_unitary_unif_flows_traj
-        --->| soc_unitary_unif_flows_traj
+        --->| vgc_unit_unif_flows_traj
+        --->| soc_unit_unif_flows_traj
             |
-        ---->\ unitary_unif_carbon_flows_traj
+        ---->\ unit_unif_carbon_flows_traj
              |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
              | ...                                 |
         ----->\ land_surface_flows_traj            |
@@ -2894,9 +2933,19 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -12.070371329083983
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .unitary_unif_carbon_flows_traj\
+        return self.unit_unif_carbon_flows_traj\
         *self.land_surface_flows_traj
+
+    @property
+    def unit_unif_carbon_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'unit_unif_carbon_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .unit_unif_carbon_flows_traj
 
     @ts.Cache._property
     def diff_carbon_flows_traj(self):
@@ -2904,10 +2953,10 @@ class CBACalculator(ts.Cache):
         Resolution order:
         ...
            \ ...
-        --->| vgc_unitary_diff_flows_traj
-        --->| soc_unitary_diff_flows_traj
+        --->| vgc_unit_diff_flows_traj
+        --->| soc_unit_diff_flows_traj
             |
-        ---->\ unitary_diff_carbon_flows_traj
+        ---->\ unit_diff_carbon_flows_traj
              |---------------------------------|NON-ANNUALIZATION-SPECIFIC
              | ...                             |
         ----->\ land_surface_flows_traj        |
@@ -2926,19 +2975,29 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -12.07037132908398
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .unitary_diff_carbon_flows_traj\
+        return self.unit_diff_carbon_flows_traj\
         *self.land_surface_flows_traj
 
     @property
-    def chart_of_unif_carbon_flows(self):
+    def unit_diff_carbon_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'unit_diff_carbon_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .unit_diff_carbon_flows_traj
+
+    @property
+    def chart_of_unif_carbon_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_unif_carbon_flows
+        >>> c = o.chart_of_unif_carbon_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """ 
@@ -2955,14 +3014,14 @@ class CBACalculator(ts.Cache):
             bar=True
         )
     @property
-    def chart_of_diff_carbon_flows(self):
+    def chart_of_diff_carbon_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_diff_carbon_flows
+        >>> c = o.chart_of_diff_carbon_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -2990,8 +3049,8 @@ class CBACalculator(ts.Cache):
         Resolution order:
         ...
            \ ...
-        --->\ soc_unitary_unif_flows_traj
-        ---->\ soco2_unitary_unif_flows_traj
+        --->\ soc_unit_unif_flows_traj
+        ---->\ soco2_unit_unif_flows_traj
              |----------------------------------|NON-ANNUALIZATION-SPECIFIC
              | ...                              |
         ----->\ land_surface_flows_traj         |
@@ -3009,8 +3068,7 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -10.900418307579667
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .soco2_unitary_unif_flows_traj\
+        return self.soco2_unit_unif_flows_traj\
         *self.land_surface_flows_traj\
         *ts.dict_time_serie_as_row_array(
             self.co2eq_computer.co2eq_yields_GWP_traj_computer(
@@ -3018,14 +3076,25 @@ class CBACalculator(ts.Cache):
             )
         )
 
+    @property
+    def soco2_unit_unif_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'soco2_unit_unif_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .soco2_unit_unif_flows_traj 
+
     @ts.Cache._property
     def soco2_diff_flows_traj(self):
         """
         Resolution order:
         ...
            \ ...
-        --->\ soc_unitary_diff_flows_traj
-        ---->\ soco2_unitary_diff_flows_traj
+        --->\ soc_unit_diff_flows_traj
+        ---->\ soco2_unit_diff_flows_traj
              |------------------------------------|NON-ANNUALIZATION-SPECIFIC
              | ...                                |
         ----->\ land_surface_flows_traj           |
@@ -3045,8 +3114,7 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -10.900418307579667
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .soco2_unitary_diff_flows_traj\
+        return self.soco2_unit_diff_flows_traj\
         *self.land_surface_flows_traj\
         *ts.dict_time_serie_as_row_array(
             self.co2eq_computer.co2eq_yields_GWP_traj_computer(
@@ -3055,14 +3123,25 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_soco2_unif_flows(self):
+    def soco2_unit_diff_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'soco2_unit_diff_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .soco2_unit_diff_flows_traj      
+
+    @property
+    def chart_of_soco2_unif_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_soco2_unif_flows
+        >>> c = o.chart_of_soco2_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """ 
@@ -3079,14 +3158,14 @@ class CBACalculator(ts.Cache):
             bar=True
         )
     @property
-    def chart_of_soco2_diff_flows(self):
+    def chart_of_soco2_diff_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_soco2_diff_flows
+        >>> c = o.chart_of_soco2_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -3111,8 +3190,8 @@ class CBACalculator(ts.Cache):
         Resolution order:
         ...
            \ ...
-        --->\ vgc_unitary_unif_flows_traj
-        ---->\ vgco2_unitary_unif_flows_traj
+        --->\ vgc_unit_unif_flows_traj
+        ---->\ vgco2_unit_unif_flows_traj
              |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
              | ...                                 |
         ----->\ land_surface_flows_traj            |
@@ -3130,22 +3209,33 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -7.130970463238132
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .vgco2_unitary_unif_flows_traj\
+        return self.vgco2_unit_unif_flows_traj\
         *self.land_surface_flows_traj\
         *ts.dict_time_serie_as_row_array(
             self.co2eq_computer.co2eq_yields_GWP_traj_computer(
                 {'CO2':1., 'N2O':.0, 'CH4':.0}
             )
         )
+
+    @property
+    def vgco2_unit_unif_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'vgco2_unit_unif_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .vgco2_unit_unif_flows_traj
+
     @ts.Cache._property
     def vgco2_diff_flows_traj(self):
         """
         Resolution order:
         ...
            \ ...
-        --->\ vgc_unitary_diff_flows_traj
-        ---->\ vgco2_unitary_diff_flows_traj
+        --->\ vgc_unit_diff_flows_traj
+        ---->\ vgco2_unit_diff_flows_traj
              |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
              | ...                                 |
         ----->\ land_surface_flows_traj            |
@@ -3166,8 +3256,7 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -7.130970463238132
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .vgco2_unitary_diff_flows_traj\
+        return self.vgco2_unit_diff_flows_traj\
         *self.land_surface_flows_traj\
         *ts.dict_time_serie_as_row_array(
             self.co2eq_computer.co2eq_yields_GWP_traj_computer(
@@ -3176,14 +3265,25 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_vgco2_unif_flows(self):
+    def vgco2_unit_diff_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'vgco2_unit_diff_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .vgco2_unit_diff_flows_traj
+
+    @property
+    def chart_of_vgco2_unif_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_vgco2_unif_flows
+        >>> c = o.chart_of_vgco2_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """ 
@@ -3200,14 +3300,14 @@ class CBACalculator(ts.Cache):
             bar=True
         )
     @property
-    def chart_of_vgco2_diff_flows(self):
+    def chart_of_vgco2_diff_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_vgco2_diff_flows
+        >>> c = o.chart_of_vgco2_diff_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -3232,11 +3332,11 @@ class CBACalculator(ts.Cache):
         Resolution order:
         ...
            \ ...
-        --->| vgc_unitary_unif_flows_traj
-        --->| soc_unitary_unif_flows_traj
+        --->| vgc_unit_unif_flows_traj
+        --->| soc_unit_unif_flows_traj
             |
-        ---->\ unitary_unif_carbon_flows_traj
-        ----->\ unitary_unif_co2_flows_traj
+        ---->\ unit_unif_carbon_flows_traj
+        ----->\ unit_unif_co2_flows_traj
              |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
              | ...                                 |
         ----->\ land_surface_flows_traj            |
@@ -3254,25 +3354,36 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -18.0313887708178
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .unitary_unif_co2_flows_traj\
+        return self.unit_unif_co2_flows_traj\
         *self.land_surface_flows_traj\
         *ts.dict_time_serie_as_row_array(
             self.co2eq_computer.co2eq_yields_GWP_traj_computer(
                 {'CO2':1., 'N2O':.0, 'CH4':.0}
             )
         )
+
+    @property
+    def unit_unif_co2_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'unit_unif_co2_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .unit_unif_co2_flows_traj
+
     @ts.Cache._property
     def diff_co2_flows_traj(self):
         """
         Resolution order:
         ...
            \ ...
-        --->| vgc_unitary_diff_flows_traj
-        --->| soc_unitary_diff_flows_traj
+        --->| vgc_unit_diff_flows_traj
+        --->| soc_unit_diff_flows_traj
             |
-        ---->\ unitary_diff_carbon_flows_traj
-        ----->\ unitary_diff_co2_flows_traj
+        ---->\ unit_diff_carbon_flows_traj
+        ----->\ unit_diff_co2_flows_traj
              |-------------------------------------|NON-ANNUALIZATION-SPECIFIC
              | ...                                 |
         ----->\ land_surface_flows_traj            |
@@ -3295,8 +3406,7 @@ class CBACalculator(ts.Cache):
         >>> np.sum(t)
         -18.0313887708178
         """
-        return self.carbon_and_co2_flows_annualizer\
-        .unitary_diff_co2_flows_traj\
+        return self.unit_diff_co2_flows_traj\
         *self.land_surface_flows_traj\
         *ts.dict_time_serie_as_row_array(
             self.co2eq_computer.co2eq_yields_GWP_traj_computer(
@@ -3305,14 +3415,25 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_unif_co2_flows(self):
+    def unit_diff_co2_flows_traj(self):
+        """
+        Testing
+        -------
+        >>> hasattr(CarbonAndCo2FlowsAnnualizer, 'unit_diff_co2_flows_traj')
+        True
+        """
+        return self.carbon_and_co2_flows_traj_annualizer\
+        .unit_diff_co2_flows_traj
+
+    @property
+    def chart_of_unif_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_unif_co2_flows
+        >>> c = o.chart_of_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """ 
@@ -3330,14 +3451,14 @@ class CBACalculator(ts.Cache):
         )
     
     @property
-    def chart_of_diff_co2_flows(self):
+    def chart_of_diff_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_diff_co2_flows
+        >>> c = o.chart_of_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -3431,14 +3552,14 @@ class CBACalculator(ts.Cache):
         )
 
     @property
-    def chart_of_co2_prices(self):
+    def chart_of_co2_prices_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_co2_prices
+        >>> c = o.chart_of_co2_prices_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """ 
@@ -3484,14 +3605,14 @@ class CBACalculator(ts.Cache):
         return self.co2_prices_traj*self.discounting_factors
 
     @property
-    def chart_of_co2_disc_prices(self):
+    def chart_of_co2_disc_prices_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_co2_disc_prices
+        >>> c = o.chart_of_co2_disc_prices_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """ 
@@ -3512,7 +3633,7 @@ class CBACalculator(ts.Cache):
         )
     """**[OUTPUT*FLOWS]*****************************************************************************"""
     @ts.Cache._property
-    def output_flows_computer(self):
+    def output_flows_traj_computer(self):
         """ Instantiated class-like object whose methodes and properties will
         be used for calculations of the scenarized trajectory of annual tonnes
         of output flows.
@@ -3520,7 +3641,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer()
-        >>> type(o.output_flows_computer)
+        >>> type(o.output_flows_traj_computer)
         <class '__main__.OutputFlows'>
         """
         obj = OutputFlows(
@@ -3541,9 +3662,9 @@ class CBACalculator(ts.Cache):
         """
         Resolution order:
 
-        >| scenarized_output_flows_sparse_traj
-        ->\ scenarized_output_flows_full_traj_as_dict
-        -->| scenarized_output_flows_full_traj (as array)
+        >| scenarized_output_flows_traj_sparse_traj
+        ->\ scenarized_output_flows_traj_full_traj_as_dict
+        -->| scenarized_output_flows_traj_full_traj (as array)
         ===
         -->| output_flows_traj
 
@@ -3557,8 +3678,8 @@ class CBACalculator(ts.Cache):
         >>> o.output_flows_traj
         array([[1., 1., 1., 1., 1., 1.]])
         """
-        return self.output_flows_computer\
-        .scenarized_output_flows_full_traj
+        return self.output_flows_traj_computer\
+        .scenarized_output_flows_traj_full_traj
 
     @ts.Cache._property
     def timed_output_flows_traj(self):
@@ -3587,14 +3708,14 @@ class CBACalculator(ts.Cache):
         ))[:, :(-_D_ if _D_ else None)]
 
     @property
-    def chart_of_output_flows(self):
+    def chart_of_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_output_flows
+        >>> c = o.chart_of_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -3683,7 +3804,7 @@ class CBACalculator(ts.Cache):
 
     """**[INPUT*FLOWS]******************************************************************************"""
     @ts.Cache._property
-    def input_flows_computer(self):
+    def input_flows_traj_computer(self):
         """ Instantiated class-like object whose methodes and properties will
         be used for calculations of the scenarized trajectory of annual tonnes
         of input flows.
@@ -3691,7 +3812,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer()
-        >>> type(o.input_flows_computer)
+        >>> type(o.input_flows_traj_computer)
         <class '__main__.InputFlows'>
         """       
         obj = InputFlows(
@@ -3714,10 +3835,10 @@ class CBACalculator(ts.Cache):
         ..
           \ ...
         -->| output_flows_traj
-        >| scenarized_unitary_input_infos
-        >| scenarized_unitary_input_flows_sparse_traj
-        ->\ scenarized_unitary_input_flows_full_traj_as_dict
-        -->| scenarized_unitary_input_flows_full_traj (as array)
+        >| scenarized_unit_input_infos
+        >| scenarized_unit_input_flows_traj_sparse_traj
+        ->\ scenarized_unit_input_flows_traj_full_traj_as_dict
+        -->| scenarized_unit_input_flows_traj_full_traj (as array)
         ====
         --->\ input_flows_traj
 
@@ -3733,10 +3854,10 @@ class CBACalculator(ts.Cache):
         ... ).input_flows_traj
         array([[3.13994279, 3.13994279, 3.13994279, 3.13994279]])
         """
-        ifc = self.input_flows_computer
+        ifc = self.input_flows_traj_computer
         return pow(
-            ifc.scenarized_unitary_input_flows_full_traj,
-            ifc.scenarized_unitary_input_infos['power']
+            ifc.scenarized_unit_input_flows_traj_full_traj,
+            ifc.scenarized_unit_input_infos['power']
         )*self.output_flows_traj
 
     @ts.Cache._property
@@ -3768,14 +3889,14 @@ class CBACalculator(ts.Cache):
         ))
 
     @property
-    def chart_of_input_flows(self):
+    def chart_of_input_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_input_flows
+        >>> c = o.chart_of_input_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -3819,7 +3940,7 @@ class CBACalculator(ts.Cache):
         return obj
 
     @ts.Cache._property
-    def cultivated_unitary_input_co2eq_flows_traj_as_dict(self):
+    def cultivated_unit_input_co2eq_flows_traj_as_dict(self):
         """
         Resolution order:
 
@@ -3830,13 +3951,13 @@ class CBACalculator(ts.Cache):
         >| AGWP<project_horizon+1>_N2O_traj
         ->\ GWP<project_horizon+1>_N2O_traj
         ===
-        -->| cultivated_unitary_input_co2eq_flows_traj_as_dict
+        -->| cultivated_unit_input_co2eq_flows_traj_as_dict
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=3)
         >>> sorted(
-        ...     o.cultivated_unitary_input_co2eq_flows_traj_as_dict.items()
+        ...     o.cultivated_unit_input_co2eq_flows_traj_as_dict.items()
         ... )
         [(2020, -1.04039), (2021, -1.04039), (2022, -1.04039), (2023, -1.04039)]
         """
@@ -3846,21 +3967,21 @@ class CBACalculator(ts.Cache):
         )
             
     @property
-    def chart_of_cultivated_unitary_input_co2eq_flows_traj(self):
+    def chart_of_cult_unit_input_co2eq_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_cultivated_unitary_input_co2eq_flows_traj
+        >>> c = o.chart_of_cult_unit_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
             imas=ts.dict_time_serie_as_row_array(
-                self.cultivated_unitary_input_co2eq_flows_traj_as_dict
+                self.cultivated_unit_input_co2eq_flows_traj_as_dict
             ).T,
             labels=['%s-CO2eq unitary cult-flows [tonnes]'%(self.final_landuse)],
             colors=['mediumpurple'],
@@ -3878,7 +3999,7 @@ class CBACalculator(ts.Cache):
         Resolution order:
         ..
           \ ...
-        -->| as_row_array( cultivated_unitary_input_co2eq_flows_traj_as_dict )
+        -->| as_row_array( cultivated_unit_input_co2eq_flows_traj_as_dict )
         ..
           \ ...
         -->| output_flows_traj
@@ -3892,23 +4013,23 @@ class CBACalculator(ts.Cache):
         array([[-1.04039, -1.04039, -1.04039, -1.04039]])
         """
         return ts.dict_time_serie_as_row_array(
-            self.cultivated_unitary_input_co2eq_flows_traj_as_dict
+            self.cultivated_unit_input_co2eq_flows_traj_as_dict
         )*self.output_flows_traj
 
     @ts.Cache._property
-    def timed_cultivated_input_co2eq_flows_traj(self):
+    def timed_cult_input_co2eq_flows_traj(self):
         """
         Resolution order:
         ...
            \ ...
         --->| cultivated_input_co2eq_flows_traj
         =====
-        ---->\ timed_cultivated_input_co2eq_flows_traj
+        ---->\ timed_cult_input_co2eq_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=3)
-        >>> o.timed_cultivated_input_co2eq_flows_traj
+        >>> o.timed_cult_input_co2eq_flows_traj
         array([[-1.04039, -1.04039, -1.04039,  0.     ]])
         """
         _D_ = self.project_timing
@@ -3920,20 +4041,20 @@ class CBACalculator(ts.Cache):
         ))
 
     @property
-    def chart_of_cultivated_input_co2eq_flows(self):
+    def chart_of_cult_input_co2eq_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_cultivated_input_co2eq_flows
+        >>> c = o.chart_of_cult_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_cultivated_input_co2eq_flows_traj.T,
+            imas=self.timed_cult_input_co2eq_flows_traj.T,
             labels=['%s-CO2eq cult-flows [tonnes]'%(self.final_landuse)],
             colors=['mediumpurple'],
             save=self.save_charts,
@@ -3943,7 +4064,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def processed_unitary_input_co2eq_flows_traj_as_dict(self):
+    def processed_unit_input_co2eq_flows_traj_as_dict(self):
         """
         Resolution order:
 
@@ -3954,13 +4075,13 @@ class CBACalculator(ts.Cache):
         >| AGWP<project_horizon+1>_N2O_traj
         ->\ GWP<project_horizon+1>_N2O_traj
         ===
-        -->| processed_unitary_input_co2eq_flows_traj_as_dict
+        -->| processed_unit_input_co2eq_flows_traj_as_dict
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=3)
         >>> sorted(
-        ...     o.processed_unitary_input_co2eq_flows_traj_as_dict.items()
+        ...     o.processed_unit_input_co2eq_flows_traj_as_dict.items()
         ... )
         [(2020, -0.8895799999999999), (2021, -0.8895799999999999), (2022, -0.8895799999999999), (2023, -0.8895799999999999)]
         """
@@ -3971,21 +4092,21 @@ class CBACalculator(ts.Cache):
         )
         
     @property
-    def chart_of_processed_unitary_input_co2eq_flows_traj(self):
+    def chart_of_proc_unit_input_co2eq_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_processed_unitary_input_co2eq_flows_traj
+        >>> c = o.chart_of_proc_unit_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
             imas=ts.dict_time_serie_as_row_array(
-                self.processed_unitary_input_co2eq_flows_traj_as_dict
+                self.processed_unit_input_co2eq_flows_traj_as_dict
             ).T,
             labels=[
                 '%s-CO2eq unitary proc-flows [tonnes]'%(self.final_landuse)
@@ -4003,7 +4124,7 @@ class CBACalculator(ts.Cache):
         Resolution order:
         ..
           \ ...
-        -->| as_row_array( processed_unitary_input_co2eq_flows_traj_as_dict )
+        -->| as_row_array( processed_unit_input_co2eq_flows_traj_as_dict )
         ..
           \ ...
         -->| output_flows_traj
@@ -4017,23 +4138,23 @@ class CBACalculator(ts.Cache):
         array([[-0.88958, -0.88958, -0.88958, -0.88958]])
         """
         return ts.dict_time_serie_as_row_array(
-            self.processed_unitary_input_co2eq_flows_traj_as_dict
+            self.processed_unit_input_co2eq_flows_traj_as_dict
         )*self.output_flows_traj
 
     @ts.Cache._property
-    def timed_processed_input_co2eq_flows_traj(self):
+    def timed_proc_input_co2eq_flows_traj(self):
         """
         Resolution order:
         ...
            \ ...
         --->| processed_input_co2eq_flows_traj
         =====
-        ---->\ timed_processed_input_co2eq_flows_traj
+        ---->\ timed_proc_input_co2eq_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=3)
-        >>> o.timed_processed_input_co2eq_flows_traj
+        >>> o.timed_proc_input_co2eq_flows_traj
         array([[ 0.     , -0.88958, -0.88958, -0.88958]])
         """
         _D_ = self.project_timing
@@ -4043,20 +4164,20 @@ class CBACalculator(ts.Cache):
         ))[:, :(-_D_ if _D_ else None)]
         
     @property
-    def chart_of_processed_input_co2eq_flows(self):
+    def chart_of_proc_input_co2eq_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_processed_input_co2eq_flows
+        >>> c = o.chart_of_proc_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_processed_input_co2eq_flows_traj.T,
+            imas=self.timed_proc_input_co2eq_flows_traj.T,
             labels=['%s-CO2eq proc-flows [tonnes]'%(self.final_landuse)],
             colors=['darkslateblue'],save=self.save_charts,save_dir=self.save_dir,
             file_name='FLOWS TONNES co2eq [proc-%s]'%(self.final_landuse),
@@ -4065,7 +4186,7 @@ class CBACalculator(ts.Cache):
 
     """**[LAND*FLOWS]*******************************************************************************"""
     @ts.Cache._property
-    def land_surface_flows_computer(self):
+    def land_surface_flows_traj_computer(self):
         """ Instantiated class-like object whose methodes and properties will
         be used for calculations of the scenarized trajectory of annual HA of
         lands.
@@ -4073,7 +4194,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer()
-        >>> type(o.land_surface_flows_computer)
+        >>> type(o.land_surface_flows_traj_computer)
         <class '__main__.LandSurfaceFlows'>
         """
         obj = LandSurfaceFlows(
@@ -4094,10 +4215,10 @@ class CBACalculator(ts.Cache):
         """
         Resolution order:
 
-        >| scenarized_unitary_land_surface_infos
-        >| scenarized_unitary_land_surface_flows_sparse_traj
-        ->\ scenarized_unitary_land_surface_flows_full_traj_as_dict
-        -->| scenarized_unitary_land_surface_flows_full_traj (as array)
+        >| scenarized_unit_land_surface_infos
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)
         ..
           \ ...
         -->| output_flows_traj
@@ -4110,10 +4231,10 @@ class CBACalculator(ts.Cache):
         >>> o.land_surface_flows_traj
         array([[0.38818565, 0.38818565, 0.38818565]])
         """
-        lfc = self.land_surface_flows_computer
+        lfc = self.land_surface_flows_traj_computer
         return pow(
-            lfc.scenarized_unitary_land_surface_flows_full_traj,
-            lfc.scenarized_unitary_land_surface_infos['power']
+            lfc.scenarized_unit_land_surface_flows_traj_full_traj,
+            lfc.scenarized_unit_land_surface_infos['power']
         )*self.output_flows_traj
 
     @ts.Cache._property
@@ -4139,14 +4260,14 @@ class CBACalculator(ts.Cache):
         ))
 
     @property
-    def chart_of_land_surface_flows(self):
+    def chart_of_land_surface_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_land_surface_flows
+        >>> c = o.chart_of_land_surface_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -4154,7 +4275,7 @@ class CBACalculator(ts.Cache):
             abs_=self.horizon,
             imas=self.timed_land_surface_flows_traj.T,
             labels=['%s-%s flows [ha]'%(
-                self.land_surface_flows_computer.land_input, self.final_landuse
+                self.land_surface_flows_traj_computer.land_input, self.final_landuse
             )],
             colors=['yellow'],
             save=self.save_charts,
@@ -4167,7 +4288,7 @@ class CBACalculator(ts.Cache):
     #----------------------------------< NON ANNUALIZATION SPECIFIC >----------------------------------
 
     @ts.Cache._property
-    def timed_proc_co2_flows_value(self):
+    def timed_proc_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -4175,34 +4296,34 @@ class CBACalculator(ts.Cache):
         -->| co2_prices_traj
          ...
             \ ...
-        ---->| timed_processed_input_co2eq_flows_traj
+        ---->| timed_proc_input_co2eq_flows_traj
         ======
-        ----->\ timed_proc_co2_flows_value
+        ----->\ timed_proc_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=1)
-        >>> o.timed_proc_co2_flows_value
+        >>> o.timed_proc_co2_flows_traj_values
         array([[  0.    , -35.5832]])
         """
-        return self.timed_processed_input_co2eq_flows_traj\
+        return self.timed_proc_input_co2eq_flows_traj\
         *self.co2_prices_traj
 
     @property
-    def chart_of_proc_co2_flows_value(self):
+    def chart_of_proc_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_proc_co2_flows_value
+        >>> c = o.chart_of_proc_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_proc_co2_flows_value.T,
+            imas=self.timed_proc_co2_flows_traj_values.T,
             labels=['%s process co2 value [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4219,7 +4340,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_proc_co2_flows_disc_value(self):
+    def timed_proc_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -4227,33 +4348,33 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
           ...
              \ ...
-        ----->\ timed_proc_co2_flows_value
+        ----->\ timed_proc_co2_flows_traj_values
         =======
-        ------>\ timed_proc_co2_flows_disc_value
+        ------>\ timed_proc_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=1)
-        >>> o.timed_proc_co2_flows_disc_value
+        >>> o.timed_proc_co2_flows_traj_disc_values
         array([[  0.        , -34.54679612]])
         """
-        return self.timed_proc_co2_flows_value*self.discounting_factors
+        return self.timed_proc_co2_flows_traj_values*self.discounting_factors
 
     @property
-    def chart_of_proc_co2_flows_disc_value(self):
+    def chart_of_proc_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_proc_co2_flows_disc_value
+        >>> c = o.chart_of_proc_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_proc_co2_flows_disc_value.T,
+            imas=self.timed_proc_co2_flows_traj_disc_values.T,
             labels=['%s process co2 value-d [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4271,7 +4392,7 @@ class CBACalculator(ts.Cache):
 
 
     @ts.Cache._property
-    def timed_cult_co2_flows_value(self):
+    def timed_cult_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -4279,34 +4400,34 @@ class CBACalculator(ts.Cache):
         -->| co2_prices_traj
          ...
             \ ...
-        ---->| timed_cultivated_input_co2eq_flows_traj
+        ---->| timed_cult_input_co2eq_flows_traj
         ======
-        ----->\ timed_cult_co2_flows_value
+        ----->\ timed_cult_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.timed_cult_co2_flows_value
+        >>> o.timed_cult_co2_flows_traj_values
         array([[-41.6156, -41.6156,   0.    ]])
         """
-        return self.timed_cultivated_input_co2eq_flows_traj\
+        return self.timed_cult_input_co2eq_flows_traj\
         *self.co2_prices_traj
 
     @property
-    def chart_of_cult_co2_flows_value(self):
+    def chart_of_cult_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_cult_co2_flows_value
+        >>> c = o.chart_of_cult_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_cult_co2_flows_value.T,
+            imas=self.timed_cult_co2_flows_traj_values.T,
             labels=['%s culture co2 value [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4323,7 +4444,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_cult_co2_flows_disc_value(self):
+    def timed_cult_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -4331,33 +4452,33 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
           ...
              \ ...
-        ----->\ timed_cult_co2_flows_value
+        ----->\ timed_cult_co2_flows_traj_values
         =======
-        ------>\ timed_cult_co2_flows_disc_value
+        ------>\ timed_cult_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.timed_cult_co2_flows_disc_value
+        >>> o.timed_cult_co2_flows_traj_disc_values
         array([[-41.6156    , -40.40349515,   0.        ]])
         """
-        return self.timed_cult_co2_flows_value*self.discounting_factors
+        return self.timed_cult_co2_flows_traj_values*self.discounting_factors
 
     @property
-    def chart_of_cult_co2_flows_disc_value(self):
+    def chart_of_cult_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_cult_co2_flows_disc_value
+        >>> c = o.chart_of_cult_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_cult_co2_flows_disc_value.T,
+            imas=self.timed_cult_co2_flows_traj_disc_values.T,
             labels=['%s culture co2 value-d [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4374,41 +4495,41 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_cult_co2_flows(self):
+    def NPV_cult_co2_flows_traj(self):
         """
         Resolution order:
            ...
               \ ...
-        ------>\ timed_cult_co2_flows_disc_value
+        ------>\ timed_cult_co2_flows_traj_disc_values
         ========
-        ------->\ NPV_cult_co2_flows
+        ------->\ NPV_cult_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_cult_co2_flows
+        >>> o.NPV_cult_co2_flows_traj
         array([[-41.6156    , -82.01909515, -82.01909515]])
         """
         return np.cumsum(
-            self.timed_cult_co2_flows_disc_value,
+            self.timed_cult_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_cult_co2_flows(self):
+    def chart_of_NPV_cult_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_cult_co2_flows
+        >>> c = o.chart_of_NPV_cult_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_cult_co2_flows.T,
+            imas=self.NPV_cult_co2_flows_traj.T,
             labels=['%s culture co2 NPV [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4425,7 +4546,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_cult_co2_flows_per_cum_output_flows(self):
+    def NPV_cult_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
          ...
@@ -4433,35 +4554,35 @@ class CBACalculator(ts.Cache):
         ---->\ timed_C_cum_output_flows_traj
            ...
               \ ...
-        ------>\ NPV_cult_co2_flows
+        ------>\ NPV_cult_co2_flows_traj
         ========
-        ------->\ NPV_cult_co2_flows_per_cum_output_flows
+        ------->\ NPV_cult_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_cult_co2_flows_per_cum_output_flows
+        >>> o.NPV_cult_co2_flows_traj_per_cum_output_flows_traj
         array([[-41.6156    , -41.00954757, -41.00954757]])
         """
         return np.nan_to_num(
-            self.NPV_cult_co2_flows/self.timed_C_cum_output_flows_traj
+            self.NPV_cult_co2_flows_traj/self.timed_C_cum_output_flows_traj
         )
 
     @property
-    def chart_of_NPV_cult_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_cult_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_cult_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_cult_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_cult_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_cult_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['%s culture co2 NPV [%s][%s/TONNE]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4477,43 +4598,43 @@ class CBACalculator(ts.Cache):
             bar=False
         )
     @ts.Cache._property
-    def NPV_cult_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
             ...
                \ ...
-        ------->\ NPV_cult_co2_flows_per_cum_output_flows
+        ------->\ NPV_cult_co2_flows_traj_per_cum_output_flows_traj
         =========
-        -------->\ NPV_cult_co2_flows_per_cum_MJs_output_flows
+        -------->\ NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_cult_co2_flows_per_cum_MJs_output_flows
+        >>> o.NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
         array([[-0.00155812, -0.00153543, -0.00153543]])
         """
-        return self.NPV_cult_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.NPV_cult_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output, 1.
         )
 
     @property
-    def chart_of_NPV_cult_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_cult_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_cult_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['%s culture co2 NPV [%s][%s/MJ]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4530,7 +4651,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_proc_plus_cult_co2_flows_value(self):
+    def timed_proc_plus_cult_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -4538,39 +4659,39 @@ class CBACalculator(ts.Cache):
         -->| co2_prices_traj
          ...
             \ ...
-        ---->| timed_cultivated_input_co2eq_flows_traj
+        ---->| timed_cult_input_co2eq_flows_traj
          ...
             \ ...
-        ---->| timed_processed_input_co2eq_flows_traj
+        ---->| timed_proc_input_co2eq_flows_traj
         ======
-        ----->\ timed_proc_plus_cult_co2_flows_value
+        ----->\ timed_proc_plus_cult_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.timed_proc_plus_cult_co2_flows_value
+        >>> o.timed_proc_plus_cult_co2_flows_traj_values
         array([[-41.6156, -77.1988, -35.5832]])
         """
         return (
-            self.timed_processed_input_co2eq_flows_traj\
-            + self.timed_cultivated_input_co2eq_flows_traj
+            self.timed_proc_input_co2eq_flows_traj\
+            + self.timed_cult_input_co2eq_flows_traj
         )*self.co2_prices_traj
 
     @property
-    def chart_of_proc_plus_cult_co2_flows_value(self):
+    def chart_of_proc_plus_cult_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_proc_plus_cult_co2_flows_value
+        >>> c = o.chart_of_proc_plus_cult_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_proc_plus_cult_co2_flows_value.T,
+            imas=self.timed_proc_plus_cult_co2_flows_traj_values.T,
             labels=['%s process+culture co2 value [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,self.final_currency
@@ -4586,41 +4707,41 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_proc_co2_flows(self):
+    def NPV_proc_co2_flows_traj(self):
         """
         Resolution order:
            ...
               \ ...
-        ------>\ timed_proc_co2_flows_disc_value
+        ------>\ timed_proc_co2_flows_traj_disc_values
         ========
-        ------->\ NPV_proc_co2_flows
+        ------->\ NPV_proc_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_proc_co2_flows
+        >>> o.NPV_proc_co2_flows_traj
         array([[  0.        , -34.54679612, -68.08737487]])
         """
         return np.cumsum(
-            self.timed_proc_co2_flows_disc_value,
+            self.timed_proc_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_proc_co2_flows(self):
+    def chart_of_NPV_proc_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_proc_co2_flows
+        >>> c = o.chart_of_NPV_proc_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_proc_co2_flows.T,
+            imas=self.NPV_proc_co2_flows_traj.T,
             labels=['%s process co2 NPV [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4637,7 +4758,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_proc_co2_flows_per_cum_output_flows(self):
+    def NPV_proc_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
          ...
@@ -4645,35 +4766,35 @@ class CBACalculator(ts.Cache):
         ---->\ timed_P_cum_output_flows_traj
            ...
               \ ...
-        ------>\ NPV_proc_co2_flows
+        ------>\ NPV_proc_co2_flows_traj
         ========
-        ------->\ NPV_proc_co2_flows_per_cum_output_flows
+        ------->\ NPV_proc_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_proc_co2_flows_per_cum_output_flows
+        >>> o.NPV_proc_co2_flows_traj_per_cum_output_flows_traj
         array([[  0.        , -34.54679612, -34.04368744]])
         """
         return np.nan_to_num(
-            self.NPV_proc_co2_flows/self.timed_P_cum_output_flows_traj
+            self.NPV_proc_co2_flows_traj/self.timed_P_cum_output_flows_traj
         )
 
     @property
-    def chart_of_NPV_proc_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_proc_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_proc_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_proc_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_proc_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_proc_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['%s process co2 NPV [%s][%s/TONNE]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4689,43 +4810,43 @@ class CBACalculator(ts.Cache):
             bar=False
         )
     @ts.Cache._property
-    def NPV_proc_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
             ...
                \ ...
-        ------->\ NPV_proc_co2_flows_per_cum_output_flows
+        ------->\ NPV_proc_co2_flows_traj_per_cum_output_flows_traj
         =========
-        -------->\ NPV_proc_co2_flows_per_cum_MJs_output_flows
+        -------->\ NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_proc_co2_flows_per_cum_MJs_output_flows
+        >>> o.NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj
         array([[ 0.        , -0.00129346, -0.00127462]])
         """
-        return self.NPV_proc_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.NPV_proc_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output, 1.
         )
 
     @property
-    def chart_of_NPV_proc_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_proc_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_proc_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['%s process co2 NPV [%s][%s/MJ]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4742,7 +4863,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_proc_plus_cult_co2_flows_disc_value(self):
+    def timed_proc_plus_cult_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -4750,34 +4871,34 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
           ...
              \ ...
-        ----->\ timed_proc_plus_cult_co2_flows_value
+        ----->\ timed_proc_plus_cult_co2_flows_traj_values
         =======
-        ------>\ timed_proc_plus_cult_co2_flows_disc_value
+        ------>\ timed_proc_plus_cult_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.timed_proc_plus_cult_co2_flows_disc_value
+        >>> o.timed_proc_plus_cult_co2_flows_traj_disc_values
         array([[-41.6156    , -74.95029126, -33.54057875]])
         """
-        return self.timed_proc_plus_cult_co2_flows_value\
+        return self.timed_proc_plus_cult_co2_flows_traj_values\
         *self.discounting_factors
 
     @property
-    def chart_of_proc_plus_cult_co2_flows_disc_value(self):
+    def chart_of_proc_plus_cult_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_proc_plus_cult_co2_flows_disc_value
+        >>> c = o.chart_of_proc_plus_cult_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_proc_plus_cult_co2_flows_disc_value.T,
+            imas=self.timed_proc_plus_cult_co2_flows_traj_disc_values.T,
             labels=['%s process+culture co2 value-d [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4794,41 +4915,41 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_proc_plus_cult_co2_flows(self):
+    def NPV_proc_plus_cult_co2_flows_traj(self):
         """
         Resolution order:
            ...
               \ ...
-        ------>\ timed_proc_plus_cult_co2_flows_disc_value
+        ------>\ timed_proc_plus_cult_co2_flows_traj_disc_values
         ========
-        ------->\ NPV_proc_plus_cult_co2_flows
+        ------->\ NPV_proc_plus_cult_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_proc_plus_cult_co2_flows
+        >>> o.NPV_proc_plus_cult_co2_flows_traj
         array([[ -41.6156    , -116.56589126, -150.10647002]])
         """
         return np.cumsum(
-            self.timed_proc_plus_cult_co2_flows_disc_value,
+            self.timed_proc_plus_cult_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_proc_plus_cult_co2_flows(self):
+    def chart_of_NPV_proc_plus_cult_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows
+        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_proc_plus_cult_co2_flows.T,
+            imas=self.NPV_proc_plus_cult_co2_flows_traj.T,
             labels=['%s process+culture co2 NPV [%s][%s]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4845,42 +4966,42 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_proc_plus_cult_co2_flows_per_cum_output_flows(self):
+    def NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
             ...
                \ ...
-        ------->\ NPV_cult_co2_flows_per_cum_output_flows
+        ------->\ NPV_cult_co2_flows_traj_per_cum_output_flows_traj
             ...
                \ ...
-        ------->\ NPV_proc_co2_flows_per_cum_output_flows
+        ------->\ NPV_proc_co2_flows_traj_per_cum_output_flows_traj
         =========
-        -------->\ NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        -------->\ NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        >>> o.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
         array([[-41.6156    , -75.55634369, -75.05323501]])
         """
-        return self.NPV_proc_co2_flows_per_cum_output_flows\
-        + self.NPV_cult_co2_flows_per_cum_output_flows
+        return self.NPV_proc_co2_flows_traj_per_cum_output_flows_traj\
+        + self.NPV_cult_co2_flows_traj_per_cum_output_flows_traj
 
     @property
-    def chart_of_NPV_proc_plus_cult_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_proc_plus_cult_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['%s process+culture co2 NPV [%s][%s/TONNE]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4897,43 +5018,43 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
              ...
                 \ ...
-        -------->\ NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        -------->\ NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
         ==========
-        --------->\ NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows
+        --------->\ NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
-        >>> o.NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows
+        >>> o.NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
         array([[-0.00155812, -0.00282889, -0.00281005]])
         """
-        return self.NPV_proc_plus_cult_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output, 1.
         )
 
     @property
-    def chart_of_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['%s process+culture co2 NPV [%s][%s/MJ]'%(
                 self.final_landuse,
                 self.co2_prices_scenario,
@@ -4952,7 +5073,7 @@ class CBACalculator(ts.Cache):
 
     #---------------------------------------------< DIFF >---------------------------------------------
     @ts.Cache._property
-    def timed_vg_diff_co2_flows_value(self):
+    def timed_vg_diff_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -4962,13 +5083,13 @@ class CBACalculator(ts.Cache):
                \ ...
         ------->\ vgco2_diff_flows_traj
         =========
-        -------->\ timed_vg_diff_co2_flows_value
+        -------->\ timed_vg_diff_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, td=1
-        ... ).timed_vg_diff_co2_flows_value
+        ... ).timed_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-285.23881853,    0.        ,    0.        ,    0.        ,
@@ -4976,7 +5097,7 @@ class CBACalculator(ts.Cache):
 
         >>> CBACalculator._testing_instancer(
         ...     ph=5, td=2
-        ... ).timed_vg_diff_co2_flows_value
+        ... ).timed_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-2.85238818e+02, -2.05665410e-07,  0.00000000e+00,
@@ -4986,14 +5107,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_vg_diff_co2_flows_value(self):
+    def chart_of_vg_diff_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_vg_diff_co2_flows_value
+        >>> c = o.chart_of_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5001,7 +5122,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_vg_diff_co2_flows_value.T,
+            imas=self.timed_vg_diff_co2_flows_traj_values.T,
             labels=['diff-%s co2 vg value [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5018,7 +5139,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_vg_diff_co2_flows_disc_value(self):
+    def timed_vg_diff_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -5026,32 +5147,32 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
              ...
                 \ ...
-        -------->\ timed_vg_diff_co2_flows_value
+        -------->\ timed_vg_diff_co2_flows_traj_values
         ==========
-        --------->\ timed_vg_diff_co2_flows_disc_value
+        --------->\ timed_vg_diff_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, td=2
-        ... ).timed_vg_diff_co2_flows_disc_value
+        ... ).timed_vg_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-2.85238818e+02, -1.99675156e-07,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
-        return self.timed_vg_diff_co2_flows_value\
+        return self.timed_vg_diff_co2_flows_traj_values\
         *self.discounting_factors
 
     @property
-    def chart_of_vg_diff_co2_flows_disc_value(self):
+    def chart_of_vg_diff_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_vg_diff_co2_flows_disc_value
+        >>> c = o.chart_of_vg_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5059,7 +5180,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_vg_diff_co2_flows_disc_value.T,
+            imas=self.timed_vg_diff_co2_flows_traj_disc_values.T,
             labels=['diff-%s co2 vg value-d [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5076,39 +5197,39 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_vg_diff_co2_flows(self):
+    def NPV_vg_diff_co2_flows_traj(self):
         """
         Resolution order:
               ...
                  \ ...
-        --------->\ timed_vg_diff_co2_flows_disc_value
+        --------->\ timed_vg_diff_co2_flows_traj_disc_values
         ===========
-        ---------->\ NPV_vg_diff_co2_flows
+        ---------->\ NPV_vg_diff_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, td=2
-        ... ).NPV_vg_diff_co2_flows
+        ... ).NPV_vg_diff_co2_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-285.23881832, -285.23881852, -285.23881852, -285.23881852,
                 -285.23881852, -285.23881852]])
         """
         return np.cumsum(
-            self.timed_vg_diff_co2_flows_disc_value,
+            self.timed_vg_diff_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_vg_diff_co2_flows(self):
+    def chart_of_NPV_vg_diff_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_vg_diff_co2_flows
+        >>> c = o.chart_of_NPV_vg_diff_co2_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5116,7 +5237,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_vg_diff_co2_flows.T,
+            imas=self.NPV_vg_diff_co2_flows_traj.T,
             labels=['diff-%s co2 vg NPV [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5133,7 +5254,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_vg_diff_co2_flows_per_cum_output_flows(self):
+    def NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
          ...
@@ -5141,34 +5262,34 @@ class CBACalculator(ts.Cache):
         ---->\ timed_C_cum_output_flows_traj
                ...
                   \ ...
-        ---------->\ NPV_vg_diff_co2_flows
+        ---------->\ NPV_vg_diff_co2_flows_traj
         ============
-        ----------->\ NPV_vg_diff_co2_flows_per_cum_output_flows
+        ----------->\ NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, td=2
-        ... ).NPV_vg_diff_co2_flows_per_cum_output_flows
+        ... ).NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-285.23881832, -142.61940926,  -95.07960617,  -71.30970463,
                  -57.0477637 ,  -57.0477637 ]])
         """
         return np.nan_to_num(
-            self.NPV_vg_diff_co2_flows
+            self.NPV_vg_diff_co2_flows_traj
             /self.timed_C_cum_output_flows_traj
         )
 
     @property
-    def chart_of_NPV_vg_diff_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_vg_diff_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5176,7 +5297,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_vg_diff_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['diff-%s co2 vg NPV [%s][%s/TONNE]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5193,41 +5314,41 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_vg_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
                 ...
                    \ ...
-        ----------->\ NPV_vg_diff_co2_flows_per_cum_output_flows
+        ----------->\ NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         =============
-        ------------>\ NPV_vg_diff_co2_flows_per_cum_MJs_output_flows
+        ------------>\ NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, td=2
-        ... ).NPV_vg_diff_co2_flows_per_cum_MJs_output_flows
+        ... ).NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([[-0.01067956, -0.00533978, -0.00355985, -0.00266989, -0.00213591,
                 -0.00213591]])
         """
-        return self.NPV_vg_diff_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output, 1.
         )
 
     @property
-    def chart_of_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5235,7 +5356,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_vg_diff_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['diff-%s co2 vg NPV [%s][%s/MJ]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5251,7 +5372,7 @@ class CBACalculator(ts.Cache):
 
 
     @ts.Cache._property
-    def timed_so_diff_co2_flows_value(self):
+    def timed_so_diff_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -5261,13 +5382,13 @@ class CBACalculator(ts.Cache):
                \ ...
         ------->\ soco2_diff_flows_traj
         =========
-        -------->\ timed_so_diff_co2_flows_value
+        -------->\ timed_so_diff_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2
-        ... ).timed_so_diff_co2_flows_value
+        ... ).timed_so_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         array([[-4.36016727e+02, -5.33429544e-06,  0.00000000e+00,
@@ -5277,14 +5398,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_so_diff_co2_flows_value(self):
+    def chart_of_so_diff_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_so_diff_co2_flows_value
+        >>> c = o.chart_of_so_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5292,7 +5413,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_so_diff_co2_flows_value.T,
+            imas=self.timed_so_diff_co2_flows_traj_values.T,
             labels=['diff-%s co2 so value [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5309,7 +5430,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_so_diff_co2_flows_disc_value(self):
+    def timed_so_diff_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -5317,32 +5438,32 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
              ...
                 \ ...
-        -------->\ timed_so_diff_co2_flows_value
+        -------->\ timed_so_diff_co2_flows_traj_values
         ==========
-        --------->\ timed_so_diff_co2_flows_disc_value
+        --------->\ timed_so_diff_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2
-        ... ).timed_so_diff_co2_flows_disc_value
+        ... ).timed_so_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         array([[-4.36016727e+02, -5.17892761e-06,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
-        return self.timed_so_diff_co2_flows_value\
+        return self.timed_so_diff_co2_flows_traj_values\
         *self.discounting_factors
 
     @property
-    def chart_of_so_diff_co2_flows_disc_value(self):
+    def chart_of_so_diff_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_so_diff_co2_flows_disc_value
+        >>> c = o.chart_of_so_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5350,7 +5471,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_so_diff_co2_flows_disc_value.T,
+            imas=self.timed_so_diff_co2_flows_traj_disc_values.T,
             labels=['diff-%s co2 so value-d [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5367,39 +5488,39 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_diff_co2_flows(self):
+    def NPV_so_diff_co2_flows_traj(self):
         """
         Resolution order:
               ...
                  \ ...
-        --------->\ timed_so_diff_co2_flows_disc_value
+        --------->\ timed_so_diff_co2_flows_traj_disc_values
         ===========
-        ---------->\ NPV_so_diff_co2_flows
+        ---------->\ NPV_so_diff_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2
-        ... ).NPV_so_diff_co2_flows
+        ... ).NPV_so_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         array([[-436.01672697, -436.01673215, -436.01673215, -436.01673215,
                 -436.01673215, -436.01673215]])
         """
         return np.cumsum(
-            self.timed_so_diff_co2_flows_disc_value,
+            self.timed_so_diff_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_so_diff_co2_flows(self):
+    def chart_of_NPV_so_diff_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_diff_co2_flows
+        >>> c = o.chart_of_NPV_so_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5407,7 +5528,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_diff_co2_flows.T,
+            imas=self.NPV_so_diff_co2_flows_traj.T,
             labels=['diff-%s co2 so NPV [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5424,7 +5545,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_diff_co2_flows_per_cum_output_flows(self):
+    def NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
          ...
@@ -5432,34 +5553,34 @@ class CBACalculator(ts.Cache):
         ---->\ timed_C_cum_output_flows_traj
                ...
                   \ ...
-        ---------->\ NPV_so_diff_co2_flows
+        ---------->\ NPV_so_diff_co2_flows_traj
         ============
-        ----------->\ NPV_so_diff_co2_flows_per_cum_output_flows
+        ----------->\ NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2
-        ... ).NPV_so_diff_co2_flows_per_cum_output_flows
+        ... ).NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         array([[-436.01672697, -218.00836607, -145.33891072, -109.00418304,
                  -87.20334643,  -87.20334643]])
         """
         return np.nan_to_num(
-            self.NPV_so_diff_co2_flows
+            self.NPV_so_diff_co2_flows_traj
             /self.timed_C_cum_output_flows_traj
         )
 
     @property
-    def chart_of_NPV_so_diff_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_diff_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5467,7 +5588,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_diff_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['diff-%s co2 so NPV [%s][%s/TONNE]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5484,41 +5605,41 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
                 ...
                    \ ...
-        ----------->\ NPV_so_diff_co2_flows_per_cum_output_flows
+        ----------->\ NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj
         =============
-        ------------>\ NPV_so_diff_co2_flows_per_cum_MJs_output_flows
+        ------------>\ NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2
-        ... ).NPV_so_diff_co2_flows_per_cum_MJs_output_flows
+        ... ).NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         array([[-0.0163248 , -0.0081624 , -0.0054416 , -0.0040812 , -0.00326496,
                 -0.00326496]])
         """
-        return self.NPV_so_diff_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output, 1.
         )
 
     @property
-    def chart_of_NPV_so_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_diff_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         >>> c.show()  # doctest: +SKIP
@@ -5526,7 +5647,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_diff_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['diff-%s co2 so NPV [%s][%s/MJ]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5543,7 +5664,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_so_plus_vg_diff_co2_flows_value(self):
+    def timed_so_plus_vg_diff_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -5553,13 +5674,13 @@ class CBACalculator(ts.Cache):
                \ ...
         ------->\ diff_co2_flows_traj
         =========
-        -------->\ timed_so_plus_vg_diff_co2_flows_value
+        -------->\ timed_so_plus_vg_diff_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).timed_so_plus_vg_diff_co2_flows_value
+        ... ).timed_so_plus_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -5571,14 +5692,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_so_plus_vg_diff_co2_flows_value(self):
+    def chart_of_so_plus_vg_diff_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_so_plus_vg_diff_co2_flows_value
+        >>> c = o.chart_of_so_plus_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5588,7 +5709,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_so_plus_vg_diff_co2_flows_value.T,
+            imas=self.timed_so_plus_vg_diff_co2_flows_traj_values.T,
             labels=['diff-%s co2 so+vg value [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5605,7 +5726,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_so_plus_vg_diff_co2_flows_disc_value(self):
+    def timed_so_plus_vg_diff_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -5613,15 +5734,15 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
              ...
                 \ ...
-        -------->\ timed_so_plus_vg_diff_co2_flows_value
+        -------->\ timed_so_plus_vg_diff_co2_flows_traj_values
         ==========
-        --------->\ timed_so_plus_vg_diff_co2_flows_disc_value
+        --------->\ timed_so_plus_vg_diff_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).timed_so_plus_vg_diff_co2_flows_disc_value
+        ... ).timed_so_plus_vg_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -5629,18 +5750,18 @@ class CBACalculator(ts.Cache):
         array([[-7.21255545e+02, -5.37860276e-06,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
-        return self.timed_so_plus_vg_diff_co2_flows_value\
+        return self.timed_so_plus_vg_diff_co2_flows_traj_values\
         *self.discounting_factors
 
     @property
-    def chart_of_so_plus_vg_diff_co2_flows_disc_value(self):
+    def chart_of_so_plus_vg_diff_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_so_plus_vg_diff_co2_flows_disc_value
+        >>> c = o.chart_of_so_plus_vg_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5650,7 +5771,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_so_plus_vg_diff_co2_flows_disc_value.T,
+            imas=self.timed_so_plus_vg_diff_co2_flows_traj_disc_values.T,
             labels=['diff-%s co2 so+vg value-d [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5667,20 +5788,20 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_plus_vg_diff_co2_flows(self):
+    def NPV_so_plus_vg_diff_co2_flows_traj(self):
         """
         Resolution order:
               ...
                  \ ...
-        --------->\ timed_so_plus_vg_diff_co2_flows_disc_value
+        --------->\ timed_so_plus_vg_diff_co2_flows_traj_disc_values
         ===========
-        ---------->\ NPV_so_plus_vg_diff_co2_flows
+        ---------->\ NPV_so_plus_vg_diff_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).NPV_so_plus_vg_diff_co2_flows
+        ... ).NPV_so_plus_vg_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -5689,19 +5810,19 @@ class CBACalculator(ts.Cache):
                 -721.25555067, -721.25555067]])
         """
         return np.cumsum(
-            self.timed_so_plus_vg_diff_co2_flows_disc_value,
+            self.timed_so_plus_vg_diff_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_so_plus_vg_diff_co2_flows(self):
+    def chart_of_NPV_so_plus_vg_diff_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5711,7 +5832,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_plus_vg_diff_co2_flows.T,
+            imas=self.NPV_so_plus_vg_diff_co2_flows_traj.T,
             labels=['diff-%s co2 so+vg NPV [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5728,23 +5849,23 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows(self):
+    def NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
                 ...
                    \ ...
-        ----------->\ NPV_so_diff_co2_flows_per_cum_output_flows
+        ----------->\ NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj
                 ...
                    \ ...
-        ----------->\ NPV_vg_diff_co2_flows_per_cum_output_flows
+        ----------->\ NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         =============
-        ------------>\ NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows
+        ------------>\ NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows
+        ... ).NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -5752,18 +5873,18 @@ class CBACalculator(ts.Cache):
         array([[-721.25554529, -360.62777534, -240.41851689, -180.31388767,
                 -144.25111013, -144.25111013]])
         """
-        return self.NPV_so_diff_co2_flows_per_cum_output_flows\
-        + self.NPV_vg_diff_co2_flows_per_cum_output_flows
+        return self.NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj\
+        + self.NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
 
     @property
-    def chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5773,7 +5894,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['diff-%s co2 so+vg NPV [%s][%s/TONNE]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5790,22 +5911,22 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
                  ...
                     \ ...
-        ------------>\ NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows
+        ------------>\ NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         ==============
-        ------------->\ NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows
+        ------------->\ NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows
+        ... ).NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -5813,20 +5934,20 @@ class CBACalculator(ts.Cache):
         array([[-0.02700435, -0.01350218, -0.00900145, -0.00675109, -0.00540087,
                 -0.00540087]])
         """
-        return self.NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output, 1.
         )
 
     @property
-    def chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5836,7 +5957,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['diff-%s co2 so+vg NPV [%s][%s/MJ]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5861,10 +5982,10 @@ class CBACalculator(ts.Cache):
         |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
          ...                                                               |
             \ ...                                                          |
-        ---->\ timed_processed_input_co2eq_flows_traj                      |
+        ---->\ timed_proc_input_co2eq_flows_traj                      |
          ...                                                               |
             \ ...                                                          |
-        ---->\ timed_cultivated_input_co2eq_flows_traj                     |
+        ---->\ timed_cult_input_co2eq_flows_traj                     |
               \------------------------------------------------------------|
             ...
                \ ...
@@ -5884,19 +6005,19 @@ class CBACalculator(ts.Cache):
         array([[-19.07177863,  -1.92997014,  -1.92997   ,  -1.92997   ,
                  -1.92997   ,  -0.88958   ]])
         """
-        return self.timed_processed_input_co2eq_flows_traj\
-        + self.timed_cultivated_input_co2eq_flows_traj\
+        return self.timed_proc_input_co2eq_flows_traj\
+        + self.timed_cult_input_co2eq_flows_traj\
         + self.diff_co2_flows_traj
 
     @property
-    def chart_of_total_diff_co2_flows(self):
+    def chart_of_total_diff_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_total_diff_co2_flows
+        >>> c = o.chart_of_total_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5916,7 +6037,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_total_diff_co2_flows_value(self):
+    def timed_total_diff_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -5926,13 +6047,13 @@ class CBACalculator(ts.Cache):
                 \ ...
         -------->\ timed_total_diff_co2_flows_traj
         ==========
-        --------->\ timed_total_diff_co2_flows_value
+        --------->\ timed_total_diff_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).timed_total_diff_co2_flows_value
+        ... ).timed_total_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -5944,14 +6065,14 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_total_diff_co2_flows_value(self):
+    def chart_of_total_diff_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_total_diff_co2_flows_value
+        >>> c = o.chart_of_total_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5961,7 +6082,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_total_diff_co2_flows_value.T,
+            imas=self.timed_total_diff_co2_flows_traj_values.T,
             labels=['diff-%s co2 total value [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -5978,7 +6099,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_total_diff_co2_flows_disc_value(self):
+    def timed_total_diff_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         .
@@ -5986,15 +6107,15 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
               ...
                  \ ...
-        --------->\ timed_total_diff_co2_flows_value
+        --------->\ timed_total_diff_co2_flows_traj_values
         ===========
-        ---------->\ timed_total_diff_co2_flows_disc_value
+        ---------->\ timed_total_diff_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).timed_total_diff_co2_flows_disc_value
+        ... ).timed_total_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -6002,18 +6123,18 @@ class CBACalculator(ts.Cache):
         array([[-762.87114529,  -74.95029664,  -72.76727307,  -70.64783793,
                  -68.59013391,  -30.6943809 ]])
         """
-        return self.timed_total_diff_co2_flows_value\
+        return self.timed_total_diff_co2_flows_traj_values\
         *self.discounting_factors
 
     @property
-    def chart_of_total_diff_co2_flows_disc_value(self):
+    def chart_of_total_diff_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_total_diff_co2_flows_disc_value
+        >>> c = o.chart_of_total_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6023,7 +6144,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_total_diff_co2_flows_disc_value.T,
+            imas=self.timed_total_diff_co2_flows_traj_disc_values.T,
             labels=['diff-%s co2 total value-d [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6040,20 +6161,20 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_total_diff_co2_flows(self):
+    def NPV_total_diff_co2_flows_traj(self):
         """
         Resolution order:
                ...
                   \ ...
-        ---------->\ timed_total_diff_co2_flows_disc_value
+        ---------->\ timed_total_diff_co2_flows_traj_disc_values
         ===========
-        ---------->| NPV_total_diff_co2_flows
+        ---------->| NPV_total_diff_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).NPV_total_diff_co2_flows
+        ... ).NPV_total_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -6062,19 +6183,19 @@ class CBACalculator(ts.Cache):
                 -1049.82668685, -1080.52106775]])
         """
         return np.cumsum(
-            self.timed_total_diff_co2_flows_disc_value,
+            self.timed_total_diff_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_total_diff_co2_flows(self):
+    def chart_of_NPV_total_diff_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_total_diff_co2_flows
+        >>> c = o.chart_of_NPV_total_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6084,7 +6205,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_total_diff_co2_flows.T,
+            imas=self.NPV_total_diff_co2_flows_traj.T,
             labels=['diff-%s co2 total NPV [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6101,23 +6222,23 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_total_diff_co2_flows_per_cum_output_flows(self):
+    def NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
              ...
                 \ ...
-        -------->\ NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        -------->\ NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
                  ...
                     \ ...
-        ------------>\ NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows
+        ------------>\ NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         =============
-        ------------->\ NPV_total_diff_co2_flows_per_cum_output_flows
+        ------------->\ NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).NPV_total_diff_co2_flows_per_cum_output_flows
+        ... ).NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -6125,18 +6246,18 @@ class CBACalculator(ts.Cache):
         array([[-762.87114529, -436.18411902, -314.87746748, -253.6967252 ,
                 -216.57865016, -216.10421355]])
         """
-        return self.NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows\
-        + self.NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        return self.NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj\
+        + self.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
 
     @property
-    def chart_of_NPV_total_diff_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_total_diff_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6146,7 +6267,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_total_diff_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['diff-%s co2 total NPV [%s][%s/TONNE]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6163,22 +6284,22 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_total_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonnes_to_MJs_computer
                   ...
                      \ ...
-        ------------->\ NPV_total_diff_co2_flows_per_cum_output_flows
+        ------------->\ NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj
         ==============
-        -------------->\ NPV_total_diff_co2_flows_per_cum_MJs_output_flows
+        -------------->\ NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=2, td=2
-        ... ).NPV_total_diff_co2_flows_per_cum_MJs_output_flows
+        ... ).NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -6186,20 +6307,20 @@ class CBACalculator(ts.Cache):
         array([[-0.02856247, -0.01633106, -0.01178925, -0.0094986 , -0.00810887,
                 -0.00809111]])
         """
-        return self.NPV_total_diff_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output, 1.
         )
 
     @property
-    def chart_of_NPV_total_diff_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_total_diff_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -6209,7 +6330,7 @@ class CBACalculator(ts.Cache):
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_total_diff_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['diff-%s co2 total NPV [%s][%s/MJ]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6229,7 +6350,7 @@ class CBACalculator(ts.Cache):
     #---------------------------------------------< UNIF >---------------------------------------------
 
     @ts.Cache._property
-    def timed_vg_unif_co2_flows_value(self):
+    def timed_vg_unif_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -6239,33 +6360,33 @@ class CBACalculator(ts.Cache):
                \ ...
         ------->\ vgco2_unif_flows_traj
         =========
-        -------->\ timed_vg_unif_co2_flows_value
+        -------->\ timed_vg_unif_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
-        ... ).timed_vg_unif_co2_flows_value
+        ... ).timed_vg_unif_co2_flows_traj_values
         array([[-142.61940926, -142.61940926,    0.        ,    0.        ,
                    0.        ,    0.        ]])
         """
         return self.vgco2_unif_flows_traj*self.co2_prices_traj
 
     @property
-    def chart_of_vg_unif_co2_flows_value(self):
+    def chart_of_vg_unif_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_vg_unif_co2_flows_value
+        >>> c = o.chart_of_vg_unif_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_vg_unif_co2_flows_value.T,
+            imas=self.timed_vg_unif_co2_flows_traj_values.T,
             labels=['unif-%s co2 vg value [%s][%s]'%(
                 self.output,self.co2_prices_scenario,
                 self.final_currency
@@ -6281,7 +6402,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_vg_unif_co2_flows_disc_value(self):
+    def timed_vg_unif_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -6289,35 +6410,35 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
              ...
                 \ ...
-        -------->\ timed_vg_unif_co2_flows_value
+        -------->\ timed_vg_unif_co2_flows_traj_values
         ==========
-        --------->\ timed_vg_unif_co2_flows_disc_value
+        --------->\ timed_vg_unif_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
-        ... ).timed_vg_unif_co2_flows_disc_value
+        ... ).timed_vg_unif_co2_flows_traj_disc_values
         array([[-142.61940926, -138.46544589,    0.        ,    0.        ,
                    0.        ,    0.        ]])
         """
-        return self.timed_vg_unif_co2_flows_value*self.discounting_factors
+        return self.timed_vg_unif_co2_flows_traj_values*self.discounting_factors
 
     @property
-    def chart_of_vg_unif_co2_flows_disc_value(self):
+    def chart_of_vg_unif_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_vg_unif_co2_flows_disc_value
+        >>> c = o.chart_of_vg_unif_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_vg_unif_co2_flows_disc_value.T,
+            imas=self.timed_vg_unif_co2_flows_traj_disc_values.T,
             labels=['unif-%s co2 vg value-d [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6334,43 +6455,43 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_vg_unif_co2_flows(self):
+    def NPV_vg_unif_co2_flows_traj(self):
         """
         Resolution order:
               ...
                  \ ...
-        --------->\ timed_vg_unif_co2_flows_disc_value
+        --------->\ timed_vg_unif_co2_flows_traj_disc_values
         ===========
-        ---------->\ NPV_vg_unif_co2_flows
+        ---------->\ NPV_vg_unif_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
-        ... ).NPV_vg_unif_co2_flows
+        ... ).NPV_vg_unif_co2_flows_traj
         array([[-142.61940926, -281.08485515, -281.08485515, -281.08485515,
                 -281.08485515, -281.08485515]])
         """
         return np.cumsum(
-            self.timed_vg_unif_co2_flows_disc_value,
+            self.timed_vg_unif_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_vg_unif_co2_flows(self):
+    def chart_of_NPV_vg_unif_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_vg_unif_co2_flows
+        >>> c = o.chart_of_NPV_vg_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_vg_unif_co2_flows.T,
+            imas=self.NPV_vg_unif_co2_flows_traj.T,
             labels=['unif-%s co2 vg NPV [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6387,7 +6508,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_vg_unif_co2_flows_per_cum_output_flows(self):
+    def NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
          ...
@@ -6395,38 +6516,38 @@ class CBACalculator(ts.Cache):
         ---->\ timed_C_cum_output_flows_traj
                ...
                   \ ...
-        ---------->\ NPV_vg_unif_co2_flows
+        ---------->\ NPV_vg_unif_co2_flows_traj
         ============
-        ----------->\ NPV_vg_unif_co2_flows_per_cum_output_flows
+        ----------->\ NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
-        ... ).NPV_vg_unif_co2_flows_per_cum_output_flows
+        ... ).NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         array([[-142.61940926, -140.54242758,  -93.69495172,  -70.27121379,
                  -56.21697103,  -56.21697103]])
         """
         return np.nan_to_num(
-            self.NPV_vg_unif_co2_flows\
+            self.NPV_vg_unif_co2_flows_traj\
             /self.timed_C_cum_output_flows_traj
         )
 
     @property
-    def chart_of_NPV_vg_unif_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_vg_unif_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_vg_unif_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['unif-%s co2 vg NPV [%s][%s/TONNE]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6443,43 +6564,43 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_vg_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
                 ...
                    \ ...
-        ----------->\ NPV_vg_unif_co2_flows_per_cum_output_flows
+        ----------->\ NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         =============
-        ------------>\ NPV_vg_unif_co2_flows_per_cum_MJs_output_flows
+        ------------>\ NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
-        ... ).NPV_vg_unif_co2_flows_per_cum_MJs_output_flows
+        ... ).NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         array([[-0.00533978, -0.00526202, -0.00350801, -0.00263101, -0.00210481,
                 -0.00210481]])
         """
-        return self.NPV_vg_unif_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(self.output, 1. )
+        return self.NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(self.output, 1. )
 
     @property
-    def chart_of_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_vg_unif_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['unif-%s co2 vg NPV [%s][%s/MJ]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6496,7 +6617,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_so_unif_co2_flows_value(self):
+    def timed_so_unif_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -6506,13 +6627,13 @@ class CBACalculator(ts.Cache):
                \ ...
         ------->\ soco2_unif_flows_traj
         =========
-        -------->\ timed_so_unif_co2_flows_value
+        -------->\ timed_so_unif_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
-        ... ).timed_so_unif_co2_flows_value
+        ... ).timed_so_unif_co2_flows_traj_values
         array([[-145.33891077, -145.33891077, -145.33891077,    0.        ,
                    0.        ,    0.        ]])
         """
@@ -6520,20 +6641,20 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_so_unif_co2_flows_value(self):
+    def chart_of_so_unif_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_so_unif_co2_flows_value
+        >>> c = o.chart_of_so_unif_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_so_unif_co2_flows_value.T,
+            imas=self.timed_so_unif_co2_flows_traj_values.T,
             labels=['unif-%s co2 so value [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6550,7 +6671,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_so_unif_co2_flows_disc_value(self):
+    def timed_so_unif_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -6558,35 +6679,35 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
              ...
                 \ ...
-        -------->\ timed_so_unif_co2_flows_value
+        -------->\ timed_so_unif_co2_flows_traj_values
         ==========
-        --------->\ timed_so_unif_co2_flows_disc_value
+        --------->\ timed_so_unif_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
-        ... ).timed_so_unif_co2_flows_disc_value
+        ... ).timed_so_unif_co2_flows_traj_disc_values
         array([[-145.33891077, -141.10573861, -136.99586273,    0.        ,
                    0.        ,    0.        ]])
         """
-        return self.timed_so_unif_co2_flows_value*self.discounting_factors
+        return self.timed_so_unif_co2_flows_traj_values*self.discounting_factors
 
     @property
-    def chart_of_so_unif_co2_flows_disc_value(self):
+    def chart_of_so_unif_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_so_unif_co2_flows_disc_value
+        >>> c = o.chart_of_so_unif_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_so_unif_co2_flows_disc_value.T,
+            imas=self.timed_so_unif_co2_flows_traj_disc_values.T,
             labels=['unif-%s co2 so value-d [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6603,42 +6724,42 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_unif_co2_flows(self):
+    def NPV_so_unif_co2_flows_traj(self):
         """
         Resolution order:
               ...
                  \ ...
-        --------->\ timed_so_unif_co2_flows_disc_value
+        --------->\ timed_so_unif_co2_flows_traj_disc_values
         ===========
-        ---------->\ NPV_so_unif_co2_flows
+        ---------->\ NPV_so_unif_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
-        ... ).NPV_so_unif_co2_flows
+        ... ).NPV_so_unif_co2_flows_traj
         array([[-145.33891077, -286.44464938, -423.4405121 , -423.4405121 ,
                 -423.4405121 , -423.4405121 ]])
         """
         return np.cumsum(
-            self.timed_so_unif_co2_flows_disc_value, axis=1
+            self.timed_so_unif_co2_flows_traj_disc_values, axis=1
         )
 
     @property
-    def chart_of_NPV_so_unif_co2_flows(self):
+    def chart_of_NPV_so_unif_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_unif_co2_flows
+        >>> c = o.chart_of_NPV_so_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_unif_co2_flows.T,
+            imas=self.NPV_so_unif_co2_flows_traj.T,
             labels=['unif-%s co2 so NPV [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6655,7 +6776,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_unif_co2_flows_per_cum_output_flows(self):
+    def NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
          ...
@@ -6663,38 +6784,38 @@ class CBACalculator(ts.Cache):
         ---->\ timed_C_cum_output_flows_traj
                ...
                   \ ...
-        ---------->\ NPV_so_unif_co2_flows
+        ---------->\ NPV_so_unif_co2_flows_traj
         ============
-        ----------->\ NPV_so_unif_co2_flows_per_cum_output_flows
+        ----------->\ NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
-        ... ).NPV_so_unif_co2_flows_per_cum_output_flows
+        ... ).NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj
         array([[-145.33891077, -143.22232469, -141.14683737, -105.86012803,
                  -84.68810242,  -84.68810242]])
         """
         return np.nan_to_num(
-            self.NPV_so_unif_co2_flows\
+            self.NPV_so_unif_co2_flows_traj\
             /self.timed_C_cum_output_flows_traj
         )
 
     @property
-    def chart_of_NPV_so_unif_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_unif_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_unif_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['unif-%s co2 so NPV [%s][%s/TONNE]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6711,43 +6832,43 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
                 ...
                    \ ...
-        ----------->\ NPV_so_unif_co2_flows_per_cum_output_flows
+        ----------->\ NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj
         =============
-        ------------>\ NPV_so_unif_co2_flows_per_cum_MJs_output_flows
+        ------------>\ NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
-        ... ).NPV_so_unif_co2_flows_per_cum_MJs_output_flows
+        ... ).NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         array([[-0.0054416 , -0.00536235, -0.00528464, -0.00396348, -0.00317079,
                 -0.00317079]])
         """
-        return self.NPV_so_unif_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(self.output, 1.)
+        return self.NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(self.output, 1.)
 
     @property
-    def chart_of_NPV_so_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_unif_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_unif_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['unif-%s co2 so NPV [%s][%s/MJ]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6766,7 +6887,7 @@ class CBACalculator(ts.Cache):
 
 
     @ts.Cache._property
-    def timed_so_plus_vg_unif_co2_flows_value(self):
+    def timed_so_plus_vg_unif_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -6776,33 +6897,33 @@ class CBACalculator(ts.Cache):
                \ ...
         ------->\ unif_co2_flows_traj
         =========
-        -------->\ timed_so_plus_vg_unif_co2_flows_value
+        -------->\ timed_so_plus_vg_unif_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).timed_so_plus_vg_unif_co2_flows_value
+        ... ).timed_so_plus_vg_unif_co2_flows_traj_values
         array([[-287.95832003, -287.95832003, -145.33891077,    0.        ,
                    0.        ,    0.        ]])
         """
         return self.unif_co2_flows_traj*self.co2_prices_traj
 
     @property
-    def chart_of_so_plus_vg_unif_co2_flows_value(self):
+    def chart_of_so_plus_vg_unif_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_so_plus_vg_unif_co2_flows_value
+        >>> c = o.chart_of_so_plus_vg_unif_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_so_plus_vg_unif_co2_flows_value.T,
+            imas=self.timed_so_plus_vg_unif_co2_flows_traj_values.T,
             labels=['unif-%s co2 so+vg value [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6819,7 +6940,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_so_plus_vg_unif_co2_flows_disc_value(self):
+    def timed_so_plus_vg_unif_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         ..
@@ -6827,36 +6948,36 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
              ...
                 \ ...
-        -------->\ timed_so_plus_vg_unif_co2_flows_value
+        -------->\ timed_so_plus_vg_unif_co2_flows_traj_values
         ==========
-        --------->\ timed_so_plus_vg_unif_co2_flows_disc_value
+        --------->\ timed_so_plus_vg_unif_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).timed_so_plus_vg_unif_co2_flows_disc_value
+        ... ).timed_so_plus_vg_unif_co2_flows_traj_disc_values
         array([[-287.95832003, -279.5711845 , -136.99586273,    0.        ,
                    0.        ,    0.        ]])
         """
-        return self.timed_so_plus_vg_unif_co2_flows_value\
+        return self.timed_so_plus_vg_unif_co2_flows_traj_values\
         *self.discounting_factors
 
     @property
-    def chart_of_so_plus_vg_unif_co2_flows_disc_value(self):
+    def chart_of_so_plus_vg_unif_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_so_plus_vg_unif_co2_flows_disc_value
+        >>> c = o.chart_of_so_plus_vg_unif_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_so_plus_vg_unif_co2_flows_disc_value.T,
+            imas=self.timed_so_plus_vg_unif_co2_flows_traj_disc_values.T,
             labels=['unif-%s co2 so+vg value-d [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6873,43 +6994,43 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_plus_vg_unif_co2_flows(self):
+    def NPV_so_plus_vg_unif_co2_flows_traj(self):
         """
         Resolution order:
               ...
                  \ ...
-        --------->\ timed_so_plus_vg_unif_co2_flows_disc_value
+        --------->\ timed_so_plus_vg_unif_co2_flows_traj_disc_values
         ===========
-        ---------->\ NPV_so_plus_vg_unif_co2_flows
+        ---------->\ NPV_so_plus_vg_unif_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).NPV_so_plus_vg_unif_co2_flows
+        ... ).NPV_so_plus_vg_unif_co2_flows_traj
         array([[-287.95832003, -567.52950453, -704.52536726, -704.52536726,
                 -704.52536726, -704.52536726]])
         """
         return np.cumsum(
-            self.timed_so_plus_vg_unif_co2_flows_disc_value,
+            self.timed_so_plus_vg_unif_co2_flows_traj_disc_values,
             axis=1
         )
 
     @property
-    def chart_of_NPV_so_plus_vg_unif_co2_flows(self):
+    def chart_of_NPV_so_plus_vg_unif_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_plus_vg_unif_co2_flows.T,
+            imas=self.NPV_so_plus_vg_unif_co2_flows_traj.T,
             labels=['unif-%s co2 so+vg NPV [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6926,44 +7047,44 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows(self):
+    def NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
                 ...
                    \ ...
-        ----------->\ NPV_so_unif_co2_flows_per_cum_output_flows
+        ----------->\ NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj
                 ...
                    \ ...
-        ----------->\ NPV_vg_unif_co2_flows_per_cum_output_flows
+        ----------->\ NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         =============
-        ------------>\ NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows
+        ------------>\ NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows
+        ... ).NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         array([[-287.95832003, -283.76475227, -234.84178909, -176.13134181,
                 -140.90507345, -140.90507345]])
         """
-        return self.NPV_so_unif_co2_flows_per_cum_output_flows\
-        + self.NPV_vg_unif_co2_flows_per_cum_output_flows
+        return self.NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj\
+        + self.NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
 
     @property
-    def chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['unif-%s co2 so+vg NPV [%s][%s/TONNE]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -6980,43 +7101,43 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonne_to_MJs
                  ...
                     \ ...
-        ------------>\ NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows
+        ------------>\ NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         ==============
-        ------------->\ NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows
+        ------------->\ NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows
+        ... ).NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         array([[-0.01078138, -0.01062437, -0.00879265, -0.00659449, -0.00527559,
                 -0.00527559]])
         """
-        return self.NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(self.output, 1. )
+        return self.NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(self.output, 1. )
 
     @property
-    def chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['unif-%s co2 so+vg NPV [%s][%s/MJ]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -7041,10 +7162,10 @@ class CBACalculator(ts.Cache):
         |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
          ...                                                               |
             \ ...                                                          |
-        ---->\ timed_processed_input_co2eq_flows_traj                      |
+        ---->\ timed_proc_input_co2eq_flows_traj                      |
          ...                                                               |
             \ ...                                                          |
-        ---->\ timed_cultivated_input_co2eq_flows_traj                     |
+        ---->\ timed_cult_input_co2eq_flows_traj                     |
               \------------------------------------------------------------|
             ...
                \ ...
@@ -7060,19 +7181,19 @@ class CBACalculator(ts.Cache):
         array([[-8.239348  , -9.128928  , -5.56344277, -1.92997   , -1.92997   ,
                 -0.88958   ]])
         """
-        return self.timed_processed_input_co2eq_flows_traj\
-        + self.timed_cultivated_input_co2eq_flows_traj\
+        return self.timed_proc_input_co2eq_flows_traj\
+        + self.timed_cult_input_co2eq_flows_traj\
         + self.unif_co2_flows_traj
 
     @property
-    def chart_of_total_unif_co2_flows(self):
+    def chart_of_total_unif_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_total_unif_co2_flows
+        >>> c = o.chart_of_total_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7086,7 +7207,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_total_unif_co2_flows_value(self):
+    def timed_total_unif_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -7096,13 +7217,13 @@ class CBACalculator(ts.Cache):
                 \ ...
         -------->\ timed_total_unif_co2_flows_traj
         ==========
-        --------->\ timed_total_unif_co2_flows_value
+        --------->\ timed_total_unif_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).timed_total_unif_co2_flows_value
+        ... ).timed_total_unif_co2_flows_traj_values
         array([[-329.57392003, -365.15712003, -222.53771077,  -77.1988    ,
                  -77.1988    ,  -35.5832    ]])
         """
@@ -7110,20 +7231,20 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_total_unif_co2_flows_value(self):
+    def chart_of_total_unif_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_total_unif_co2_flows_value
+        >>> c = o.chart_of_total_unif_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_total_unif_co2_flows_value.T,
+            imas=self.timed_total_unif_co2_flows_traj_values.T,
             labels=['unif-%s co2 total value [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -7140,7 +7261,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_total_unif_co2_flows_disc_value(self):
+    def timed_total_unif_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         .
@@ -7148,35 +7269,35 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
               ...
                  \ ...
-        --------->\ timed_total_unif_co2_flows_value
+        --------->\ timed_total_unif_co2_flows_traj_values
         ===========
-        ---------->\ timed_total_unif_co2_flows_disc_value
+        ---------->\ timed_total_unif_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).timed_total_unif_co2_flows_disc_value
+        ... ).timed_total_unif_co2_flows_traj_disc_values
         array([[-329.57392003, -354.52147576, -209.7631358 ,  -70.64783793,
                  -68.59013391,  -30.6943809 ]])
         """
-        return self.timed_total_unif_co2_flows_value*self.discounting_factors
+        return self.timed_total_unif_co2_flows_traj_values*self.discounting_factors
 
     @property
-    def chart_of_total_unif_co2_flows_disc_value(self):
+    def chart_of_total_unif_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_total_unif_co2_flows_disc_value
+        >>> c = o.chart_of_total_unif_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_total_unif_co2_flows_disc_value.T,
+            imas=self.timed_total_unif_co2_flows_traj_disc_values.T,
             labels=['unif-%s co2 total value-d [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -7193,42 +7314,42 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_total_unif_co2_flows(self):
+    def NPV_total_unif_co2_flows_traj(self):
         """
         Resolution order:
                ...
                   \ ...
-        ---------->\ timed_total_unif_co2_flows_disc_value
+        ---------->\ timed_total_unif_co2_flows_traj_disc_values
         ===========
-        ---------->| NPV_total_unif_co2_flows
+        ---------->| NPV_total_unif_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).NPV_total_unif_co2_flows
+        ... ).NPV_total_unif_co2_flows_traj
         array([[ -329.57392003,  -684.09539579,  -893.85853159,  -964.50636952,
                 -1033.09650344, -1063.79088433]])
         """
         return np.cumsum(
-            self.timed_total_unif_co2_flows_disc_value, axis=1
+            self.timed_total_unif_co2_flows_traj_disc_values, axis=1
         )
 
     @property
-    def chart_of_NPV_total_unif_co2_flows(self):
+    def chart_of_NPV_total_unif_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_total_unif_co2_flows
+        >>> c = o.chart_of_NPV_total_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_total_unif_co2_flows.T,
+            imas=self.NPV_total_unif_co2_flows_traj.T,
             labels=['unif-%s co2 total NPV [%s][%s]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -7245,44 +7366,44 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_total_unif_co2_flows_per_cum_output_flows(self):
+    def NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Resolution order:
              ...
                 \ ...
-        -------->\ NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        -------->\ NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
                  ...
                     \ ...
-        ------------>\ NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows
+        ------------>\ NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         =============
-        ------------->\ NPV_total_unif_co2_flows_per_cum_output_flows
+        ------------->\ NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).NPV_total_unif_co2_flows_per_cum_output_flows
+        ... ).NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj
         array([[-329.57392003, -359.32109595, -309.30073968, -249.51417934,
                 -213.23261348, -212.75817687]])
         """
-        return self.NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows\
-        + self.NPV_proc_plus_cult_co2_flows_per_cum_output_flows
+        return self.NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj\
+        + self.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
 
     @property
-    def chart_of_NPV_total_unif_co2_flows_per_cum_output_flows(self):
+    def chart_of_NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_total_unif_co2_flows_per_cum_output_flows
+        >>> c = o.chart_of_NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_total_unif_co2_flows_per_cum_output_flows.T,
+            imas=self.NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj.T,
             labels=['unif-%s co2 total NPV [%s][%s/TONNE]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -7299,43 +7420,43 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_total_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Resolution order:
 
         >| tonnes_to_MJs_computer
                   ...
                      \ ...
-        ------------->\ NPV_total_unif_co2_flows_per_cum_output_flows
+        ------------->\ NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj
         ==============
-        -------------->\ NPV_total_unif_co2_flows_per_cum_MJs_output_flows
+        -------------->\ NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
-        ... ).NPV_total_unif_co2_flows_per_cum_MJs_output_flows
+        ... ).NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         array([[-0.0123395 , -0.01345325, -0.01158045, -0.009342  , -0.00798359,
                 -0.00796583]])
         """
-        return self.NPV_total_unif_co2_flows_per_cum_output_flows\
-        /self.output_flows_converter.tonnes_to_MJs_computer(self.output, 1.)
+        return self.NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj\
+        /self.output_flows_traj_converter.tonnes_to_MJs_computer(self.output, 1.)
 
     @property
-    def chart_of_NPV_total_unif_co2_flows_per_cum_MJs_output_flows(self):
+    def chart_of_NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_total_unif_co2_flows_per_cum_MJs_output_flows
+        >>> c = o.chart_of_NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_total_unif_co2_flows_per_cum_MJs_output_flows.T,
+            imas=self.NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj.T,
             labels=['unif-%s co2 total NPV [%s][%s/MJ]'%(
                 self.output,
                 self.co2_prices_scenario,
@@ -7354,7 +7475,7 @@ class CBACalculator(ts.Cache):
 
     """**[BLACK*OUTPUT*CO2*FLOWS*&*VALUE]***********************************************************"""
     @ts.Cache._property
-    def output_flows_converter(self):
+    def output_flows_traj_converter(self):
         """ Instantiated class-like object whose methodes and properties will
         be used for conversions to equivalent "black output" flows of the
         scenarized trajectory of "green output" flows.
@@ -7362,7 +7483,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=0)
-        >>> type(o.output_flows_converter)
+        >>> type(o.output_flows_traj_converter)
         <class '__main__.BlackOutputAndSubstitutesSpecificities'>
         """
         return BlackOutputAndSubstitutesSpecificities()
@@ -7384,7 +7505,7 @@ class CBACalculator(ts.Cache):
         ... ).output_MJs_flows_traj
         array([[26708.86076, 26708.86076, 26708.86076, 26708.86076, 26708.86076]])
         """
-        return self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output,self.output_flows_traj
         )
 
@@ -7405,7 +7526,7 @@ class CBACalculator(ts.Cache):
         ... ).timed_output_MJs_flows_traj
         array([[    0.     , 26708.86076, 26708.86076, 26708.86076, 26708.86076]])
         """
-        return self.output_flows_converter.tonnes_to_MJs_computer(
+        return self.output_flows_traj_converter.tonnes_to_MJs_computer(
             self.output,self.timed_output_flows_traj
         )
 
@@ -7427,7 +7548,7 @@ class CBACalculator(ts.Cache):
         ... ).timed_black_output_flows_traj
         array([[0.        , 0.58683364, 0.58683364, 0.58683364, 0.58683364]])
         """
-        return self.output_flows_converter.MJs_to_tonnes_computer(
+        return self.output_flows_traj_converter.MJs_to_tonnes_computer(
             self.black_output,
             self.timed_output_MJs_flows_traj
         )
@@ -7472,14 +7593,14 @@ class CBACalculator(ts.Cache):
         return np.cumsum(self.timed_output_MJs_flows_traj, axis=1)
 
     @property
-    def chart_of_black_output_flows(self):
+    def chart_of_black_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_black_output_flows
+        >>> c = o.chart_of_black_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7519,7 +7640,7 @@ class CBACalculator(ts.Cache):
         ... ).black_output_co2eq_flows_traj
         array([[-2.33168354, -2.33168354, -2.33168354, -2.33168354, -2.33168354]])
         """
-        return self.output_flows_converter.co2eq_emissions_per_MJ[self.black_output]\
+        return self.output_flows_traj_converter.co2eq_emissions_per_MJ[self.black_output]\
         *self.output_MJs_flows_traj\
         *ts.dict_time_serie_as_row_array(
             self.co2eq_computer.co2eq_yields_GWP_traj_computer(
@@ -7551,14 +7672,14 @@ class CBACalculator(ts.Cache):
         ))[:, :(-_D_ if _D_ else None)]
 
     @property
-    def chart_of_black_output_co2_flows(self):
+    def chart_of_black_output_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_black_output_co2_flows
+        >>> c = o.chart_of_black_output_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
@@ -7574,7 +7695,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_black_output_co2_flows_value(self):
+    def timed_black_output_co2_flows_traj_values(self):
         """
         Resolution order:
         ..
@@ -7584,13 +7705,13 @@ class CBACalculator(ts.Cache):
              \ ...
         ----->\ timed_black_output_co2eq_flows_traj
         ======
-        ------>\ timed_black_output_co2_flows_value
+        ------>\ timed_black_output_co2_flows_traj_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4
-        ... ).timed_black_output_co2_flows_value
+        ... ).timed_black_output_co2_flows_traj_values
         array([[  0.        , -93.26734177, -93.26734177, -93.26734177,
                 -93.26734177]])
         """
@@ -7598,20 +7719,20 @@ class CBACalculator(ts.Cache):
         *self.co2_prices_traj
 
     @property
-    def chart_of_black_output_co2_flows_value(self):
+    def chart_of_black_output_co2_flows_traj_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_black_output_co2_flows_value
+        >>> c = o.chart_of_black_output_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_black_output_co2_flows_value.T,
+            imas=self.timed_black_output_co2_flows_traj_values.T,
             labels=['%s co2 total value [%s][%s]'%(
                 self.black_output,
                 self.co2_prices_scenario,
@@ -7628,7 +7749,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def timed_black_output_co2_flows_disc_value(self):
+    def timed_black_output_co2_flows_traj_disc_values(self):
         """
         Resolution order:
         .
@@ -7636,35 +7757,35 @@ class CBACalculator(ts.Cache):
         ->| discounting_factors
            ...
               \ ...
-        ------>\ timed_black_output_co2_flows_value
+        ------>\ timed_black_output_co2_flows_traj_values
         =======
-        ------->\ timed_black_output_co2_flows_disc_value
+        ------->\ timed_black_output_co2_flows_traj_disc_values
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4
-        ... ).timed_black_output_co2_flows_disc_value
+        ... ).timed_black_output_co2_flows_traj_disc_values
         array([[  0.        , -90.55081726, -87.91341481, -85.35282991,
                 -82.86682516]])
         """
-        return self.timed_black_output_co2_flows_value*self.discounting_factors
+        return self.timed_black_output_co2_flows_traj_values*self.discounting_factors
 
     @property
-    def chart_of_black_output_co2_flows_disc_value(self):
+    def chart_of_black_output_co2_flows_traj_disc_values(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_black_output_co2_flows_disc_value
+        >>> c = o.chart_of_black_output_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.timed_black_output_co2_flows_disc_value.T,
+            imas=self.timed_black_output_co2_flows_traj_disc_values.T,
             labels=['%s co2 total value-d [%s][%s]'%(
                 self.black_output,
                 self.co2_prices_scenario,
@@ -7681,42 +7802,42 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_black_output_co2_flows(self):
+    def NPV_black_output_co2_flows_traj(self):
         """
         Resolution order:
             ...
                \ ...
-        ------->\ timed_black_output_co2_flows_disc_value
+        ------->\ timed_black_output_co2_flows_traj_disc_values
         ========
-        ------->| NPV_black_output_co2_flows
+        ------->| NPV_black_output_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4
-        ... ).NPV_black_output_co2_flows
+        ... ).NPV_black_output_co2_flows_traj
         array([[   0.        ,  -90.55081726, -178.46423207, -263.81706198,
                 -346.68388714]])
         """
         return np.cumsum(
-            self.timed_black_output_co2_flows_disc_value, axis=1
+            self.timed_black_output_co2_flows_traj_disc_values, axis=1
         )
 
     @property
-    def chart_of_NPV_black_output_co2_flows(self):
+    def chart_of_NPV_black_output_co2_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_black_output_co2_flows
+        >>> c = o.chart_of_NPV_black_output_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_black_output_co2_flows.T,
+            imas=self.NPV_black_output_co2_flows_traj.T,
             labels=['%s co2 total NPV [%s][%s]'%(
                 self.black_output,
                 self.co2_prices_scenario,
@@ -7733,7 +7854,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_black_output_co2_flows_per_cum_black_output_flows(self):
+    def NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj(self):
         """
         Resolution order:
          ...
@@ -7741,38 +7862,38 @@ class CBACalculator(ts.Cache):
         ---->| cum_black_output_flows_traj
             ...
                \ ...
-        ------->| NPV_black_output_co2_flows
+        ------->| NPV_black_output_co2_flows_traj
         ========
-        -------->\ NPV_black_output_co2_flows_per_cum_black_output_flows
+        -------->\ NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4
-        ... ).NPV_black_output_co2_flows_per_cum_black_output_flows
+        ... ).NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj
         array([[   0.        , -154.30406716, -152.05692055, -149.85340786,
                 -147.69257591]])
         """
         return np.nan_to_num(
-            self.NPV_black_output_co2_flows\
+            self.NPV_black_output_co2_flows_traj\
             /self.cum_black_output_flows_traj
         )
     
     @property
-    def chart_of_NPV_black_output_co2_flows_per_cum_black_output_flows(self):
+    def chart_of_NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_black_output_co2_flows_per_cum_black_output_flows
+        >>> c = o.chart_of_NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_black_output_co2_flows_per_cum_black_output_flows.T,
+            imas=self.NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj.T,
             labels=['%s co2 total NPV [%s][%s/TONNE]'%(
                 self.black_output,
                 self.co2_prices_scenario,
@@ -7789,7 +7910,7 @@ class CBACalculator(ts.Cache):
         )
 
     @ts.Cache._property
-    def NPV_black_output_co2_flows_per_cum_MJs_black_output_flows(self):
+    def NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj(self):
         """
         Resolution order:
          ...
@@ -7797,37 +7918,37 @@ class CBACalculator(ts.Cache):
         ---->| cum_MJs_black_output_flows_traj
             ...
                \ ...
-        ------->| NPV_black_output_co2_flows
+        ------->| NPV_black_output_co2_flows_traj
         ========
-        -------->\ NPV_black_output_co2_flows_per_cum_MJs_black_output_flows
+        -------->\ NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4
-        ... ).NPV_black_output_co2_flows_per_cum_MJs_black_output_flows
+        ... ).NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj
         array([[ 0.        , -0.00339029, -0.00334092, -0.0032925 , -0.00324503]])
         """
         return np.nan_to_num(
-            self.NPV_black_output_co2_flows\
+            self.NPV_black_output_co2_flows_traj\
             /self.cum_MJs_black_output_flows_traj
         )
 
     @property
-    def chart_of_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows(self):
+    def chart_of_NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj(self):
         """
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
         ...     rn='.tmp', return_plts=True
         ... )
-        >>> c = o.chart_of_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows
+        >>> c = o.chart_of_NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj
         >>> c.show()  # doctest: +SKIP
         >>> c.close()
         """
         return self.dashboard.plot(
             abs_=self.horizon,
-            imas=self.NPV_black_output_co2_flows_per_cum_MJs_black_output_flows.T,
+            imas=self.NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj.T,
             labels=['%s co2 total NPV [%s][%s/MJ]'%(
                 self.black_output,
                 self.co2_prices_scenario,
@@ -7847,23 +7968,23 @@ class CBACalculator(ts.Cache):
 
     """**[PAYBACK*RELATED-OBJECTS]******************************************************************"""
     @ts.Cache._property
-    def NPV_total_diff_minus_black_output_co2_flows(self):
+    def NPV_total_diff_minus_black_output_co2_flows_traj(self):
         """
         Resolution order:
                ...
                   \ ...
-        ---------->\ NPV_total_diff_co2_flows
+        ---------->\ NPV_total_diff_co2_flows_traj
                ...
                   \ ...
-        ---------->\ NPV_black_output_co2_flows
+        ---------->\ NPV_black_output_co2_flows_traj
         ===========
-        ---------->| NPV_total_diff_minus_black_output_co2_flows
+        ---------->| NPV_total_diff_minus_black_output_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4, ts=3, td=2
-        ... ).NPV_total_diff_minus_black_output_co2_flows
+        ... ).NPV_total_diff_minus_black_output_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.0613595]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
@@ -7871,8 +7992,8 @@ class CBACalculator(ts.Cache):
         array([[-762.87111418, -747.27062377, -732.12448203, -717.41949005,
                 -666.16787721]])
         """
-        return self.NPV_total_diff_co2_flows\
-        - self.NPV_black_output_co2_flows
+        return self.NPV_total_diff_co2_flows_traj\
+        - self.NPV_black_output_co2_flows_traj
 
     @ts.Cache._property
     def diff_payback_period(self):
@@ -7890,34 +8011,34 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[0.000000e+00][***]
         45
         """
-        s_ = np.sign(self.NPV_total_diff_minus_black_output_co2_flows)
+        s_ = np.sign(self.NPV_total_diff_minus_black_output_co2_flows_traj)
         s  = ((np.roll(s_, 1) - s_) != 0).astype(int) 
         z  = np.where(s.flatten()==1)[0]
         return z[1] if len(z) else z
 
     @ts.Cache._property
-    def NPV_total_unif_minus_black_output_co2_flows(self):
+    def NPV_total_unif_minus_black_output_co2_flows_traj(self):
         """
         Resolution order:
                ...
                   \ ...
-        ---------->\ NPV_total_unif_co2_flows
+        ---------->\ NPV_total_unif_co2_flows_traj
                ...
                   \ ...
-        ---------->\ NPV_black_output_co2_flows
+        ---------->\ NPV_black_output_co2_flows_traj
         ===========
-        ---------->| NPV_total_unif_minus_black_output_co2_flows
+        ---------->| NPV_total_unif_minus_black_output_co2_flows_traj
 
         Testing/Example
         ---------------
         >>> CBACalculator._testing_instancer(
         ...     ph=4, ts=3, tu=2
-        ... ).NPV_total_unif_minus_black_output_co2_flows
+        ... ).NPV_total_unif_minus_black_output_co2_flows_traj
         array([[-329.57392003, -593.54457854, -715.39429952, -700.68930754,
                 -649.4376947 ]])
         """
-        return self.NPV_total_unif_co2_flows\
-        - self.NPV_black_output_co2_flows
+        return self.NPV_total_unif_co2_flows_traj\
+        - self.NPV_black_output_co2_flows_traj
 
     @ts.Cache._property
     def unif_payback_period(self):
@@ -7931,7 +8052,7 @@ class CBACalculator(ts.Cache):
         ... ).unif_payback_period
         49
         """
-        s_ = np.sign(self.NPV_total_unif_minus_black_output_co2_flows)
+        s_ = np.sign(self.NPV_total_unif_minus_black_output_co2_flows_traj)
         s  = ((np.roll(s_, 1) - s_) != 0).astype(int) 
         z  = np.where(s.flatten()==1)[0]
         return z[1] if len(z) else z
@@ -7959,8 +8080,8 @@ class CBACalculator(ts.Cache):
             self.unif_co2_flows_traj,
             self.diff_co2_flows_traj,
 
-            self.timed_cultivated_input_co2eq_flows_traj,
-            self.timed_processed_input_co2eq_flows_traj,
+            self.timed_cult_input_co2eq_flows_traj,
+            self.timed_proc_input_co2eq_flows_traj,
             self.timed_output_flows_traj,
             self.timed_output_MJs_flows_traj,
             self.timed_black_output_flows_traj,
@@ -7976,94 +8097,94 @@ class CBACalculator(ts.Cache):
             self.economic_horizon,
 
             self.co2_prices_traj,
-            self.timed_cult_co2_flows_value,
-            self.timed_proc_co2_flows_value,
-            self.timed_proc_plus_cult_co2_flows_value,
+            self.timed_cult_co2_flows_traj_values,
+            self.timed_proc_co2_flows_traj_values,
+            self.timed_proc_plus_cult_co2_flows_traj_values,
 
-            self.timed_so_diff_co2_flows_value,
-            self.timed_vg_diff_co2_flows_value,
-            self.timed_so_plus_vg_diff_co2_flows_value,
+            self.timed_so_diff_co2_flows_traj_values,
+            self.timed_vg_diff_co2_flows_traj_values,
+            self.timed_so_plus_vg_diff_co2_flows_traj_values,
 
-            self.timed_so_unif_co2_flows_value,
-            self.timed_vg_unif_co2_flows_value,
-            self.timed_so_plus_vg_unif_co2_flows_value,
+            self.timed_so_unif_co2_flows_traj_values,
+            self.timed_vg_unif_co2_flows_traj_values,
+            self.timed_so_plus_vg_unif_co2_flows_traj_values,
 
-            self.timed_total_diff_co2_flows_value,
-            self.timed_total_unif_co2_flows_value,
-            self.timed_black_output_co2_flows_value,
+            self.timed_total_diff_co2_flows_traj_values,
+            self.timed_total_unif_co2_flows_traj_values,
+            self.timed_black_output_co2_flows_traj_values,
 
             self.discounting_factors,#@@V#
 
             self.co2_disc_prices_traj,
-            self.timed_cult_co2_flows_disc_value,
-            self.timed_proc_co2_flows_disc_value,
-            self.timed_proc_plus_cult_co2_flows_disc_value,
+            self.timed_cult_co2_flows_traj_disc_values,
+            self.timed_proc_co2_flows_traj_disc_values,
+            self.timed_proc_plus_cult_co2_flows_traj_disc_values,
 
-            self.timed_so_diff_co2_flows_disc_value,
-            self.timed_vg_diff_co2_flows_disc_value,
-            self.timed_so_plus_vg_diff_co2_flows_disc_value,
+            self.timed_so_diff_co2_flows_traj_disc_values,
+            self.timed_vg_diff_co2_flows_traj_disc_values,
+            self.timed_so_plus_vg_diff_co2_flows_traj_disc_values,
 
-            self.timed_so_unif_co2_flows_disc_value,
-            self.timed_vg_unif_co2_flows_disc_value,
-            self.timed_so_plus_vg_unif_co2_flows_disc_value,
+            self.timed_so_unif_co2_flows_traj_disc_values,
+            self.timed_vg_unif_co2_flows_traj_disc_values,
+            self.timed_so_plus_vg_unif_co2_flows_traj_disc_values,
 
-            self.timed_total_diff_co2_flows_disc_value,
-            self.timed_total_unif_co2_flows_disc_value,
-            self.timed_black_output_co2_flows_disc_value,
+            self.timed_total_diff_co2_flows_traj_disc_values,
+            self.timed_total_unif_co2_flows_traj_disc_values,
+            self.timed_black_output_co2_flows_traj_disc_values,
         ]
         n_listed_content = [
             self.horizon,
             self.economic_horizon,
 
-            self.NPV_cult_co2_flows,
-            self.NPV_proc_co2_flows,
-            self.NPV_proc_plus_cult_co2_flows,
+            self.NPV_cult_co2_flows_traj,
+            self.NPV_proc_co2_flows_traj,
+            self.NPV_proc_plus_cult_co2_flows_traj,
 
-            self.NPV_so_diff_co2_flows,
-            self.NPV_vg_diff_co2_flows,
-            self.NPV_so_plus_vg_diff_co2_flows,
+            self.NPV_so_diff_co2_flows_traj,
+            self.NPV_vg_diff_co2_flows_traj,
+            self.NPV_so_plus_vg_diff_co2_flows_traj,
 
-            self.NPV_so_unif_co2_flows,
-            self.NPV_vg_unif_co2_flows,
-            self.NPV_so_plus_vg_unif_co2_flows,
+            self.NPV_so_unif_co2_flows_traj,
+            self.NPV_vg_unif_co2_flows_traj,
+            self.NPV_so_plus_vg_unif_co2_flows_traj,
 
-            self.NPV_total_diff_co2_flows,
-            self.NPV_total_unif_co2_flows,
-            self.NPV_black_output_co2_flows,
-            self.NPV_total_diff_minus_black_output_co2_flows,
-            self.NPV_total_unif_minus_black_output_co2_flows,
+            self.NPV_total_diff_co2_flows_traj,
+            self.NPV_total_unif_co2_flows_traj,
+            self.NPV_black_output_co2_flows_traj,
+            self.NPV_total_diff_minus_black_output_co2_flows_traj,
+            self.NPV_total_unif_minus_black_output_co2_flows_traj,
 
-            self.NPV_cult_co2_flows_per_cum_output_flows,
-            self.NPV_proc_co2_flows_per_cum_output_flows,
-            self.NPV_proc_plus_cult_co2_flows_per_cum_output_flows,
+            self.NPV_cult_co2_flows_traj_per_cum_output_flows_traj,
+            self.NPV_proc_co2_flows_traj_per_cum_output_flows_traj,
+            self.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj,
 
-            self.NPV_so_diff_co2_flows_per_cum_output_flows,
-            self.NPV_vg_diff_co2_flows_per_cum_output_flows,
-            self.NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows,    #@@N#
+            self.NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj,
+            self.NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj,
+            self.NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj,    #@@N#
 
-            self.NPV_so_unif_co2_flows_per_cum_output_flows,
-            self.NPV_vg_unif_co2_flows_per_cum_output_flows,
-            self.NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows,
+            self.NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj,
+            self.NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj,
+            self.NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj,
 
-            self.NPV_total_diff_co2_flows_per_cum_output_flows,
-            self.NPV_total_unif_co2_flows_per_cum_output_flows,
-            self.NPV_black_output_co2_flows_per_cum_black_output_flows,
+            self.NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj,
+            self.NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj,
+            self.NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj,
 
-            self.NPV_cult_co2_flows_per_cum_MJs_output_flows,
-            self.NPV_proc_co2_flows_per_cum_MJs_output_flows,
-            self.NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows,
+            self.NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj,
+            self.NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj,
+            self.NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj,
 
-            self.NPV_so_diff_co2_flows_per_cum_MJs_output_flows,
-            self.NPV_vg_diff_co2_flows_per_cum_MJs_output_flows,
-            self.NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows,
+            self.NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj,
+            self.NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj,
+            self.NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj,
 
-            self.NPV_so_unif_co2_flows_per_cum_MJs_output_flows,
-            self.NPV_vg_unif_co2_flows_per_cum_MJs_output_flows,
-            self.NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows,
+            self.NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj,
+            self.NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj,
+            self.NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj,
 
-            self.NPV_total_diff_co2_flows_per_cum_MJs_output_flows,
-            self.NPV_total_unif_co2_flows_per_cum_MJs_output_flows,
-            self.NPV_black_output_co2_flows_per_cum_MJs_black_output_flows,
+            self.NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj,
+            self.NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj,
+            self.NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj,
         ]
         q_content_heads   = [
             'horizon',
@@ -8083,8 +8204,8 @@ class CBACalculator(ts.Cache):
             'unif_co2_flows_traj',
             'diff_co2_flows_traj',
 
-            'timed_cultivated_input_co2eq_flows_traj',
-            'timed_processed_input_co2eq_flows_traj',
+            'timed_cult_input_co2eq_flows_traj',
+            'timed_proc_input_co2eq_flows_traj',
             'timed_output_flows_traj',
             'timed_output_MJs_flows_traj',
             'timed_black_output_flows_traj',
@@ -8100,94 +8221,94 @@ class CBACalculator(ts.Cache):
             'economic_horizon',
 
             'co2_prices_traj',
-            'timed_cult_co2_flows_value',
-            'timed_proc_co2_flows_value',
-            'timed_proc_plus_cult_co2_flows_value',
+            'timed_cult_co2_flows_traj_values',
+            'timed_proc_co2_flows_traj_values',
+            'timed_proc_plus_cult_co2_flows_traj_values',
 
-            'timed_so_diff_co2_flows_value',
-            'timed_vg_diff_co2_flows_value',
-            'timed_so_plus_vg_diff_co2_flows_value',
+            'timed_so_diff_co2_flows_traj_values',
+            'timed_vg_diff_co2_flows_traj_values',
+            'timed_so_plus_vg_diff_co2_flows_traj_values',
 
-            'timed_so_unif_co2_flows_value',
-            'timed_vg_unif_co2_flows_value',
-            'timed_so_plus_vg_unif_co2_flows_value',
+            'timed_so_unif_co2_flows_traj_values',
+            'timed_vg_unif_co2_flows_traj_values',
+            'timed_so_plus_vg_unif_co2_flows_traj_values',
 
-            'timed_total_diff_co2_flows_value',
-            'timed_total_unif_co2_flows_value',
-            'timed_black_output_co2_flows_value',
+            'timed_total_diff_co2_flows_traj_values',
+            'timed_total_unif_co2_flows_traj_values',
+            'timed_black_output_co2_flows_traj_values',
 
             'discounting_factors',  #@@V#
 
             'co2_disc_prices_traj',
-            'timed_cult_co2_flows_disc_value',
-            'timed_proc_co2_flows_disc_value',
-            'timed_proc_plus_cult_co2_flows_disc_value',
+            'timed_cult_co2_flows_traj_disc_values',
+            'timed_proc_co2_flows_traj_disc_values',
+            'timed_proc_plus_cult_co2_flows_traj_disc_values',
 
-            'timed_so_diff_co2_flows_disc_value',
-            'timed_vg_diff_co2_flows_disc_value',
-            'timed_so_plus_vg_diff_co2_flows_disc_value',
+            'timed_so_diff_co2_flows_traj_disc_values',
+            'timed_vg_diff_co2_flows_traj_disc_values',
+            'timed_so_plus_vg_diff_co2_flows_traj_disc_values',
 
-            'timed_so_unif_co2_flows_disc_value',
-            'timed_vg_unif_co2_flows_disc_value',
-            'timed_so_plus_vg_unif_co2_flows_disc_value',
+            'timed_so_unif_co2_flows_traj_disc_values',
+            'timed_vg_unif_co2_flows_traj_disc_values',
+            'timed_so_plus_vg_unif_co2_flows_traj_disc_values',
 
-            'timed_total_diff_co2_flows_disc_value',
-            'timed_total_unif_co2_flows_disc_value',
-            'timed_black_output_co2_flows_disc_value',
+            'timed_total_diff_co2_flows_traj_disc_values',
+            'timed_total_unif_co2_flows_traj_disc_values',
+            'timed_black_output_co2_flows_traj_disc_values',
         ]
         n_content_heads = [
             'horizon',
             'economic_horizon',
 
-            'NPV_cult_co2_flows',
-            'NPV_proc_co2_flows',
-            'NPV_proc_plus_cult_co2_flows',
+            'NPV_cult_co2_flows_traj',
+            'NPV_proc_co2_flows_traj',
+            'NPV_proc_plus_cult_co2_flows_traj',
 
-            'NPV_so_diff_co2_flows',
-            'NPV_vg_diff_co2_flows',
-            'NPV_so_plus_vg_diff_co2_flows',
+            'NPV_so_diff_co2_flows_traj',
+            'NPV_vg_diff_co2_flows_traj',
+            'NPV_so_plus_vg_diff_co2_flows_traj',
 
-            'NPV_so_unif_co2_flows',
-            'NPV_vg_unif_co2_flows',
-            'NPV_so_plus_vg_unif_co2_flows',
+            'NPV_so_unif_co2_flows_traj',
+            'NPV_vg_unif_co2_flows_traj',
+            'NPV_so_plus_vg_unif_co2_flows_traj',
 
-            'NPV_total_diff_co2_flows',
-            'NPV_total_unif_co2_flows',
-            'NPV_black_output_co2_flows',
-            'NPV_total_diff_minus_black_output_co2_flows',
-            'NPV_total_unif_minus_black_output_co2_flows',
+            'NPV_total_diff_co2_flows_traj',
+            'NPV_total_unif_co2_flows_traj',
+            'NPV_black_output_co2_flows_traj',
+            'NPV_total_diff_minus_black_output_co2_flows_traj',
+            'NPV_total_unif_minus_black_output_co2_flows_traj',
 
-            'ut_NPV_cult_co2_flows_per_cum_output_flows',
-            'ut_NPV_proc_co2_flows_per_cum_output_flows',
-            'ut_NPV_proc_plus_cult_co2_flows_per_cum_output_flows',
+            'ut_NPV_cult_co2_flows_traj_per_cum_output_flows_traj',
+            'ut_NPV_proc_co2_flows_traj_per_cum_output_flows_traj',
+            'ut_NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj',
 
-            'ut_NPV_so_diff_co2_flows_per_cum_output_flows',
-            'ut_NPV_vg_diff_co2_flows_per_cum_output_flows',
-            'ut_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows',#@@N#
+            'ut_NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj',
+            'ut_NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj',
+            'ut_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj',#@@N#
 
-            'ut_NPV_so_unif_co2_flows_per_cum_output_flows',
-            'ut_NPV_vg_unif_co2_flows_per_cum_output_flows',
-            'ut_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows',
+            'ut_NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj',
+            'ut_NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj',
+            'ut_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj',
 
-            'ut_NPV_total_diff_co2_flows_per_cum_output_flows',
-            'ut_NPV_total_unif_co2_flows_per_cum_output_flows',
-            'ut_NPV_black_output_co2_flows_per_cum_black_output_flows',
+            'ut_NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj',
+            'ut_NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj',
+            'ut_NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj',
 
-            'um_NPV_cult_co2_flows_per_cum_MJs_output_flows',
-            'um_NPV_proc_co2_flows_per_cum_MJs_output_flows',
-            'um_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows',
+            'um_NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj',
+            'um_NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj',
+            'um_NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj',
 
-            'um_NPV_so_diff_co2_flows_per_cum_MJs_output_flows',
-            'um_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows',
-            'um_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows',
+            'um_NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
+            'um_NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
+            'um_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
 
-            'um_NPV_so_unif_co2_flows_per_cum_MJs_output_flows',
-            'um_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows',
-            'um_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows',
+            'um_NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
+            'um_NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
+            'um_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
 
-            'um_NPV_total_diff_co2_flows_per_cum_MJs_output_flows',
-            'um_NPV_total_unif_co2_flows_per_cum_MJs_output_flows',
-            'um_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows',
+            'um_NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
+            'um_NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
+            'um_NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj',
         ]
 
         ts.xlsx_file_writer(
@@ -8224,93 +8345,93 @@ class CBACalculator(ts.Cache):
         return True
     
     _charts_keys = [
-        'chart_of_NPV_black_output_co2_flows',
-        'chart_of_NPV_black_output_co2_flows_per_cum_MJs_black_output_flows',
-        'chart_of_NPV_black_output_co2_flows_per_cum_black_output_flows',
-        'chart_of_NPV_cult_co2_flows',
-        'chart_of_NPV_cult_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_cult_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_proc_co2_flows',
-        'chart_of_NPV_proc_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_proc_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_proc_plus_cult_co2_flows',
-        'chart_of_NPV_proc_plus_cult_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_proc_plus_cult_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_so_diff_co2_flows',
-        'chart_of_NPV_so_diff_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_so_diff_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_so_plus_vg_diff_co2_flows',
-        'chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_so_plus_vg_diff_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_so_plus_vg_unif_co2_flows',
-        'chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_so_plus_vg_unif_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_so_unif_co2_flows',
-        'chart_of_NPV_so_unif_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_so_unif_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_total_diff_co2_flows',
-        'chart_of_NPV_total_diff_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_total_diff_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_total_unif_co2_flows',
-        'chart_of_NPV_total_unif_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_total_unif_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_vg_diff_co2_flows',
-        'chart_of_NPV_vg_diff_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_vg_diff_co2_flows_per_cum_output_flows',
-        'chart_of_NPV_vg_unif_co2_flows',
-        'chart_of_NPV_vg_unif_co2_flows_per_cum_MJs_output_flows',
-        'chart_of_NPV_vg_unif_co2_flows_per_cum_output_flows',
-        'chart_of_black_output_co2_flows',
-        'chart_of_black_output_co2_flows_disc_value',
-        'chart_of_black_output_co2_flows_value',
-        'chart_of_black_output_flows',
-        'chart_of_co2_disc_prices',
-        'chart_of_co2_prices',
-        'chart_of_cult_co2_flows_disc_value',
-        'chart_of_cult_co2_flows_value',
-        'chart_of_cultivated_input_co2eq_flows',
-        'chart_of_cultivated_unitary_input_co2eq_flows_traj',
-        'chart_of_diff_carbon_flows',
-        'chart_of_diff_co2_flows',
-        'chart_of_input_flows',
-        'chart_of_land_surface_flows',
-        'chart_of_output_flows',
-        'chart_of_proc_co2_flows_disc_value',
-        'chart_of_proc_co2_flows_value',
-        'chart_of_proc_plus_cult_co2_flows_disc_value',
-        'chart_of_proc_plus_cult_co2_flows_value',
-        'chart_of_processed_input_co2eq_flows',
-        'chart_of_processed_unitary_input_co2eq_flows_traj',
-        'chart_of_so_diff_co2_flows_disc_value',
-        'chart_of_so_diff_co2_flows_value',
-        'chart_of_so_plus_vg_diff_co2_flows_disc_value',
-        'chart_of_so_plus_vg_diff_co2_flows_value',
-        'chart_of_so_plus_vg_unif_co2_flows_disc_value',
-        'chart_of_so_plus_vg_unif_co2_flows_value',
-        'chart_of_so_unif_co2_flows_disc_value',
-        'chart_of_so_unif_co2_flows_value',
-        'chart_of_soc_diff_flows',
-        'chart_of_soc_unif_flows',
-        'chart_of_soc_unitary_diff_flows',
-        'chart_of_soc_unitary_unif_flows',
-        'chart_of_soco2_diff_flows',
-        'chart_of_soco2_unif_flows',
-        'chart_of_total_diff_co2_flows',
-        'chart_of_total_diff_co2_flows_disc_value',
-        'chart_of_total_diff_co2_flows_value',
-        'chart_of_total_unif_co2_flows',
-        'chart_of_total_unif_co2_flows_disc_value',
-        'chart_of_total_unif_co2_flows_value',
-        'chart_of_unif_carbon_flows',
-        'chart_of_unif_co2_flows',
-        'chart_of_vg_diff_co2_flows_disc_value',
-        'chart_of_vg_diff_co2_flows_value',
-        'chart_of_vg_unif_co2_flows_disc_value',
-        'chart_of_vg_unif_co2_flows_value',
-        'chart_of_vgc_diff_flows',
-        'chart_of_vgc_unif_flows',
-        'chart_of_vgco2_diff_flows',
-        'chart_of_vgco2_unif_flows',
+        'chart_of_NPV_black_output_co2_flows_traj',
+        'chart_of_NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj',
+        'chart_of_NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj',
+        'chart_of_NPV_cult_co2_flows_traj',
+        'chart_of_NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_cult_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_proc_co2_flows_traj',
+        'chart_of_NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_proc_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_proc_plus_cult_co2_flows_traj',
+        'chart_of_NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_so_diff_co2_flows_traj',
+        'chart_of_NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_so_plus_vg_diff_co2_flows_traj',
+        'chart_of_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_so_plus_vg_unif_co2_flows_traj',
+        'chart_of_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_so_unif_co2_flows_traj',
+        'chart_of_NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_total_diff_co2_flows_traj',
+        'chart_of_NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_total_unif_co2_flows_traj',
+        'chart_of_NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_vg_diff_co2_flows_traj',
+        'chart_of_NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_NPV_vg_unif_co2_flows_traj',
+        'chart_of_NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
+        'chart_of_NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj',
+        'chart_of_black_output_co2_flows_traj',
+        'chart_of_black_output_co2_flows_traj_disc_values',
+        'chart_of_black_output_co2_flows_traj_values',
+        'chart_of_black_output_flows_traj',
+        'chart_of_co2_disc_prices_traj',
+        'chart_of_co2_prices_traj',
+        'chart_of_cult_co2_flows_traj_disc_values',
+        'chart_of_cult_co2_flows_traj_values',
+        'chart_of_cult_input_co2eq_flows_traj',
+        'chart_of_cult_unit_input_co2eq_flows_traj',
+        'chart_of_diff_carbon_flows_traj',
+        'chart_of_diff_co2_flows_traj',
+        'chart_of_input_flows_traj',
+        'chart_of_land_surface_flows_traj',
+        'chart_of_output_flows_traj',
+        'chart_of_proc_co2_flows_traj_disc_values',
+        'chart_of_proc_co2_flows_traj_values',
+        'chart_of_proc_plus_cult_co2_flows_traj_disc_values',
+        'chart_of_proc_plus_cult_co2_flows_traj_values',
+        'chart_of_proc_input_co2eq_flows_traj',
+        'chart_of_proc_unit_input_co2eq_flows_traj',
+        'chart_of_so_diff_co2_flows_traj_disc_values',
+        'chart_of_so_diff_co2_flows_traj_values',
+        'chart_of_so_plus_vg_diff_co2_flows_traj_disc_values',
+        'chart_of_so_plus_vg_diff_co2_flows_traj_values',
+        'chart_of_so_plus_vg_unif_co2_flows_traj_disc_values',
+        'chart_of_so_plus_vg_unif_co2_flows_traj_values',
+        'chart_of_so_unif_co2_flows_traj_disc_values',
+        'chart_of_so_unif_co2_flows_traj_values',
+        'chart_of_soc_diff_flows_traj',
+        'chart_of_soc_unif_flows_traj',
+        'chart_of_soc_unit_diff_flows_traj',
+        'chart_of_soc_unit_unif_flows_traj',
+        'chart_of_soco2_diff_flows_traj',
+        'chart_of_soco2_unif_flows_traj',
+        'chart_of_total_diff_co2_flows_traj',
+        'chart_of_total_diff_co2_flows_traj_disc_values',
+        'chart_of_total_diff_co2_flows_traj_values',
+        'chart_of_total_unif_co2_flows_traj',
+        'chart_of_total_unif_co2_flows_traj_disc_values',
+        'chart_of_total_unif_co2_flows_traj_values',
+        'chart_of_unif_carbon_flows_traj',
+        'chart_of_unif_co2_flows_traj',
+        'chart_of_vg_diff_co2_flows_traj_disc_values',
+        'chart_of_vg_diff_co2_flows_traj_values',
+        'chart_of_vg_unif_co2_flows_traj_disc_values',
+        'chart_of_vg_unif_co2_flows_traj_values',
+        'chart_of_vgc_diff_flows_traj',
+        'chart_of_vgc_unif_flows_traj',
+        'chart_of_vgco2_diff_flows_traj',
+        'chart_of_vgco2_unif_flows_traj',
     ]
 
 
@@ -8337,7 +8458,7 @@ class CBAParametersEndogenizer(object):
 
     """**[OBJECTIVES]******************************************************************************"""
     @property
-    def OBJECTIVE_NPV_total_unif_co2_flows_VS_NPV_total_diff_co2_flows(self):
+    def OBJECTIVE_NPV_total_unif_co2_flows_traj_VS_NPV_total_diff_co2_flows_traj(self):
         """ Method which computes the objective of the discount rate
         endogenizing process.
 
@@ -8350,18 +8471,18 @@ class CBAParametersEndogenizer(object):
         ... )
         >>> CBAParametersEndogenizer(
         ...     CBACalculator_instance = cba
-        ... ).OBJECTIVE_NPV_total_unif_co2_flows_VS_NPV_total_diff_co2_flows
+        ... ).OBJECTIVE_NPV_total_unif_co2_flows_traj_VS_NPV_total_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         array([2.22044605e-16])
         """
-        return -1. + self._CBAcI.NPV_total_unif_co2_flows[:,-1]\
-        /self._CBAcI.NPV_total_diff_co2_flows[:,-1]
+        return -1. + self._CBAcI.NPV_total_unif_co2_flows_traj[:,-1]\
+        /self._CBAcI.NPV_total_diff_co2_flows_traj[:,-1]
 
     """**[DISCOUNT*RATE]***************************************************************************"""
-    def _ENDOGENIZER_of_the_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows(self, _disc_rate_):
+    def _ENDOGENIZER_of_the_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj(self, _disc_rate_):
         """ Semi-private method used by the solver when endogenizing the discount rate."""
         self._CBAcI.discount_rate = _disc_rate_
 
@@ -8370,15 +8491,15 @@ class CBAParametersEndogenizer(object):
 
         self._CBAcI._cache['endogenizing'] = True
 
-        _obj_ = self.OBJECTIVE_NPV_total_unif_co2_flows_VS_NPV_total_diff_co2_flows
+        _obj_ = self.OBJECTIVE_NPV_total_unif_co2_flows_traj_VS_NPV_total_diff_co2_flows_traj
 
         return _obj_ + pow(_obj_, 3.) - pow(_obj_, 3.)
 
     @property
-    def endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows(self):
+    def endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj(self):
         """
         Returns a CBACalculator instance configured with the discount rate
-        which equates NPV_total_unif_co2_flows TO NPV_total_diff_co2_flows.
+        which equates NPV_total_unif_co2_flows_traj TO NPV_total_diff_co2_flows_traj.
 
         Testing/Example
         ---------------
@@ -8388,24 +8509,24 @@ class CBAParametersEndogenizer(object):
         >>> o = CBAParametersEndogenizer(
         ...     CBACalculator_instance = cba
         ... )
-        >>> o.endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows.discount_rate[0]
+        >>> o.endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj.discount_rate[0]
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
-        ---- endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_tot sol=[0.03847488]
+        ---- disc rate equating unif- and diff-based NPVs sol=[0.03847488]
         ---- [***]The solution converged.[2.220446e-16][***]
         0.038474875757994256
         """
         _S_ = self._ENDOGENIZER(
-            _key_   = 'endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows',
-            _method_= self._ENDOGENIZER_of_the_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows,
+            _key_   = 'disc rate equating unif- and diff-based NPVs',
+            _method_= self._ENDOGENIZER_of_the_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj,
             _ci_    = [.0]
         )
         self._CBAcI.discount_rate = _S_
         self._CBAcI.msg = '_ENDOGENIZER finally says sol=%s \n\t\t\t  obj(sol)=%s'%(
             self._CBAcI.discount_rate[0],
-            self.OBJECTIVE_NPV_total_unif_co2_flows_VS_NPV_total_diff_co2_flows
+            self.OBJECTIVE_NPV_total_unif_co2_flows_traj_VS_NPV_total_diff_co2_flows_traj
         )
         return self._CBAcI
 

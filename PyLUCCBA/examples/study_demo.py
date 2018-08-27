@@ -18,7 +18,7 @@ cba = cc.CBACalculator(
     input_flows_scenario   = ['IFP','DOE'][0],
     **cs.other_parameters
 )
-##cba = cc.CBAParametersEndogenizer(cba).endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows
+##cba = cc.CBAParametersEndogenizer(cba).endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj
 cba.all_charts
 objects[cba.run_name] = {'summary':cba.summary_args,'object':cba}
 

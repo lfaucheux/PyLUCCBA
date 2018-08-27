@@ -79,7 +79,11 @@ def get_file_as_list_of_lines(fname):
 
     Example
     -------
-    >>> get_file_as_list_of_lines('./resources/yields/Output/ETH_yields_FR.txt')[:2]
+    >>> get_file_as_list_of_lines(
+    ...     fname = os.path.join(
+    ...         'resources', 'yields', 'Output', 'ETH_yields_FR.txt'
+    ...     ),
+    ... )[:2]
     ['O:unit:tonne[Output]/tonne[Output]', 'O:yrb:2007']
     """
     with open(fname, 'r') as f:
@@ -808,8 +812,8 @@ class DataReader(Cache):
     def __init__(self, **kwargs):
         super(DataReader, self).__init__()
         self.country          = country_from_kwargs_specifier(kwargs)
-        self.local_folder     = os.path.dirname(__file__)
-        self.resources_folder = os.path.join(self.local_folder, 'resources')
+        self.package_folder   = os.path.dirname(__file__)
+        self.resources_folder = os.path.join(self.package_folder, 'resources')
 
     def show_resources_tree(self):
         """ Method that prints the nested structure of the dictionary
@@ -934,7 +938,7 @@ class DataReader(Cache):
 ##    ═╩╝┴ ┴└─┘┴ ┴└─┘└─┘┴ ┴┴└──┴┘
 class Dashboard(object):
     def __init__(self, **kws):
-        self.dashB        = plt
+        self.canvas       = plt
         self._return_plts = kws.get('return_plts', False)
         self.prop         = FontProperties()
         self.prop.set_size(10)
@@ -984,14 +988,14 @@ class Dashboard(object):
             abs_.shape = (lenabs_, 1)
         imas = imas.T.tolist()
 
-        self.dashB.clf()
+        self.canvas.clf()
         for ima, label,color in zip(imas, labels,colors):
             if type(ima).__module__ != np.__name__:
                 lenOrd    = len(ima)
                 ima       = np.array(ima)
                 ima.shape = (lenOrd,1)
             if bar:
-                self.dashB.bar(
+                self.canvas.bar(
                     abs_, ima,
                     align='center',
                     label=label.upper(),
@@ -999,12 +1003,12 @@ class Dashboard(object):
                     linewidth=0
                 )
             else:
-                self.dashB.plot(
+                self.canvas.plot(
                     abs_, ima,
                     label=label.upper(),
                     color=color
                 )
-        self.dashB.legend(
+        self.canvas.legend(
             prop=self.prop,
             loc = 'upper right',
             labelspacing = 0.2,
@@ -1016,22 +1020,22 @@ class Dashboard(object):
             save=save
         )
 
-        self.dashB.xticks(
+        self.canvas.xticks(
             np.arange(min(abs_), max(abs_)+1, 1.0),
             rotation=70
         )
         if self._return_plts:
-            return self.dashB
+            return self.canvas
         else:
-            self.dashB.savefig(
+            self.canvas.savefig(
                 os.path.join(
                     save_dir,
                     '%s.png'%file_name
                 ),
                 bbox_inches=0,
                 dpi=200
-            ) if save else self.dashB.show()
-            self.dashB.close()
+            ) if save else self.canvas.show()
+            self.canvas.close()
 
 if __name__ == '__main__':
     import doctest

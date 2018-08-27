@@ -28,7 +28,7 @@ co2_prices_scenarios = [
 objects = {}
 for s_name in co2_prices_scenarios:    
     cba = scenarizer(s_name)
-    cba = cc.CBAParametersEndogenizer(cba).endogenous_disc_rate_which_equates_NPV_total_unif_co2_flows_TO_NPV_total_diff_co2_flows
+    cba = cc.CBAParametersEndogenizer(cba).endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj
     objects[cba.run_name] = {'summary':cba.summary_args,'object':cba}
 
 
