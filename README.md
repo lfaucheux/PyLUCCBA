@@ -153,13 +153,21 @@ Finally the total emissions following a change in land use from improved grassla
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bunif-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bdiff-ETH%5D.png?raw=true" width="50%"/><img></p>
 
-which, when monetized with a non-zero discount rate and compared in terms of deviations from gasoline valorized CO2 emissions, lead to sensitivly different profile of profitability, see rather
+which, when monetized with a non-zero discount rate and compared in terms of absolute deviations from gasoline's valorized CO2 flows, lead to sensitivly different profile for the values of the project, see rather
 
     >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
     >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
 
+Actually, it looks like extending the horizon of the project may be a good idea to see whether one those two temporal profiles exhibit positive values over the long run.
+
+    >>> cba._cache.clear() # we clear the cache of our instance since we are going to change three calculation parameters.
+    >>> cba.T_vg_unif = cba.T_so = cba.project_horizon = 40 # double the project horizon
+    >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
+    >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
+    
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
 ...
 
