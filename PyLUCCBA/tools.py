@@ -39,6 +39,7 @@ import re
 
 VERBOSE_DTESTS = False
 OS_SEP = os.sep
+__name__eq__main__ = __name__ == '__main__'
 
 ##******************************************
 ##    ┌─┐┌─┐┌─┐┌┬┐
@@ -838,6 +839,10 @@ class DataReader(Cache):
                 src = os.path.join(self.package_folder, 'resources'),
                 dst = os.path.join(self.local_folder, 'resources')
             )
+            if not __name__eq__main__:
+                print("'resources' folder copied to {}".format(
+                    self.local_folder
+                ))
 
     @Cache._property
     def resources_folder_dir(self):
@@ -1105,6 +1110,6 @@ class Dashboard(object):
             ) if save else self.canvas.show()
             self.canvas.close()
 
-if __name__ == '__main__':
+if __name__eq__main__:
     import doctest
     doctest.testmod(verbose=VERBOSE_DTESTS)
