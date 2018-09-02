@@ -59,7 +59,7 @@ The following table enumerates all parameters that can be used to create an inst
 
  Parameter's name         | and description
  ------------------------ | -------
- `run_name`               | name of the folder that will contain the generated results and charts, *e.g.* `'introduction example 1'`.
+ `run_name`               | name of the folder that will contain the generated results and charts, *e.g.* `'Example-1'`.
  `country`                | name of the country under study. Only *one* possible choice currently: `France`.
  `project_first_year`     | first year of the project.
  `project_horizon`        | duration of the biofuel production project (years).
@@ -183,6 +183,16 @@ Put differently,
     35 # years
 
 
+## Data customization/addition
+
+You may want to add your own scenarii regarding, say, how CO2 prices evolve, the trajectory of output flows to produce annually, the necessary quantity of input that is required to produce 1 tonne of output, etc...
+Given that data are stored (in txt and csv formats) according to a hard-to-guess directory tree, the easiest way to work with custom data is to imitate the package-native data that are contained in the [*resources*](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. Let's thus start with a local copy of this folder:
+
+    >>> import PyLUCCBA as cc
+    >>> cc.data_resources_copier()
+    'resources' folder copied to C:\Users\username\foldername
+    
+Now, to explore the data, simply go to `C:\Users\username\foldername`, where you wil see a folder named `resources` that is the exact copy of the data used in Dupoux 2018.
 
 ## Paper's results replication
 
