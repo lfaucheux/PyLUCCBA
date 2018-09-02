@@ -5,9 +5,9 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www
 
 |  Module  | statements | missing | excluded | coverage |
 | -------- | ---------- | ------- | -------- | -------- |
-| core.py  | 858        | 27      | 0        | 97%      |
-| tools.py | 294        | 58      | 0        | 80%      |
-| Total    | 1152       | 85      | 0        | 93%      |
+| core.py  | 860        | 27      | 0        | 97%      |
+| tools.py | 306        | 62      | 0        | 80%      |
+| Total    | 1166       | 89      | 0        | 92%      |
 
 ## Installation
 
