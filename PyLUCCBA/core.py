@@ -29,6 +29,7 @@ __all__ = [
     '__pyLUCCBA__',
     'BlackOutputAndSubstitutesSpecificities',
     'CBACalculator',
+    'data_resources_copier',
     'CBAParametersEndogenizer',
     'CarbonAndCo2FlowsAnnualizer',
     'Co2Prices',
@@ -2158,6 +2159,8 @@ class Co2Prices(ts.Cache):
 ##    ╔═╗╔╗ ╔═╗╔═╗┌─┐┬  ┌─┐┬ ┬┬  ┌─┐┌┬┐┌─┐┬─┐
 ##    ║  ╠╩╗╠═╣║  ├─┤│  │  │ ││  ├─┤ │ │ │├┬┘
 ##    ╚═╝╚═╝╩ ╩╚═╝┴ ┴┴─┘└─┘└─┘┴─┘┴ ┴ ┴ └─┘┴└─
+data_resources_copier = ts.DataReader()._resources_folder_copier
+
 class CBACalculator(ts.Cache):
 
     @staticmethod
@@ -2178,6 +2181,7 @@ class CBACalculator(ts.Cache):
             project_first_year     = kws.pop('y0', 2020),
             polat_repeated_pattern = kws.pop('pr', True),
             change_rates           = kws.pop('cr', {'EUR':{'USD/EUR':1.14}}),
+            from_local_data        = kws.pop('ld', False),
             **kws
         )  
 
@@ -2228,6 +2232,7 @@ class CBACalculator(ts.Cache):
             save_charts            =True,
             GWP_horizon            =100, #[!!!] EXOGENOUS DATA IMPLICITLY IMPLY GWP100 [!!!]
             GWP_static             =True,#[!!!] EXOGENOUS DATA IMPLICITLY IMPLY STATIC [!!!]
+            from_local_data        =False,
             **kwargs
         ):
         
@@ -2237,29 +2242,34 @@ class CBACalculator(ts.Cache):
             verbose=kwargs.get('verbose')
         ).delay_between_luc_and_production
 
-        self.discount_rate          = discount_rate
-
-        self.country                = country.upper()
-        self.output                 = output.upper()
-        self.black_output           = black_output.upper()
-        self.initial_landuse        = initial_landuse.upper()
-        self.final_landuse          = final_landuse.upper()
-        self.project_timing         = self.delay_between_luc_and_production\
-                                      .get(self.final_landuse, 0)
-        self._project_horizon       = project_horizon + self.project_timing
-        self.T_so                   = T_so
-        self.T_vg_diff              = T_vg_diff
-        self.T_vg_unif              = T_vg_unif
-        self._GWP_horizon           = 100
-        self._GWP_static            = True
+        self.discount_rate    = discount_rate
+        self.country          = country.upper()
+        self.output           = output.upper()
+        self.black_output     = black_output.upper()
+        self.initial_landuse  = initial_landuse.upper()
+        self.final_landuse    = final_landuse.upper()
+        self.project_timing   = self.delay_between_luc_and_production.get(
+            self.final_landuse, 0
+        )
+        self._project_horizon = project_horizon + self.project_timing
+        self.T_so             = T_so
+        self.T_vg_diff        = T_vg_diff
+        self.T_vg_unif        = T_vg_unif
+        self._GWP_horizon     = 100
+        self._GWP_static      = True
         if GWP_horizon != 100 or GWP_static != True:
-            raise '\n'.join([
-                '`GWP_horizon` and `GWP_static` must be set to 100 years'
-                'and `True` respectively. The only reason behind this is'
-                'that these two parameters are implictly assumed to be such',
-                'in data reported in attribute `ghgs_emissions_per_tonne_of_eth`',
-                'of the class named `VegetationsAndSoilSpecificities`.'
-            ])
+            raise type(
+                'NoDescripterError',
+                (BaseException,), {}
+            )(
+                '\n'.join([
+                    '`GWP_horizon` and `GWP_static` must be set to 100 years',
+                    'and `True` respectively. The only reason behind this is',
+                    'that these two parameters are implictly assumed to be such',
+                    'in data reported in attribute `ghgs_emissions_per_tonne_of_eth`',
+                    'of the class named `VegetationsAndSoilSpecificities`.'
+                ])
+            )
             
         self.project_first_year     = project_first_year
         self.polat_repeated_pattern = polat_repeated_pattern
@@ -2269,6 +2279,7 @@ class CBACalculator(ts.Cache):
         self.final_currency         = final_currency.upper()
         self.change_rates           = change_rates[self.final_currency]
         self.dashboard              = ts.Dashboard(**kwargs)
+        self.from_local_data        = from_local_data
         self.save_charts            = save_charts
         self.pre_run_name           = run_name.replace(' ', '_')
         self.msg                    = None
@@ -2538,7 +2549,8 @@ class CBACalculator(ts.Cache):
             initial_landuse = self.initial_landuse,
             final_landuse   = self.final_landuse,
             country         = self.country,
-            verbose         = self.verbose
+            verbose         = self.verbose,
+            from_local_data = self.from_local_data
         )
         #self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
@@ -2610,7 +2622,8 @@ class CBACalculator(ts.Cache):
             T_so            = self.T_so,
             T_vg_diff       = self.T_vg_diff,
             T_vg_unif       = self.T_vg_unif,
-            verbose         = self.verbose
+            verbose         = self.verbose,
+            from_local_data = self.from_local_data
         )
         self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
@@ -3558,7 +3571,8 @@ class CBACalculator(ts.Cache):
             repeated_pattern_polation = self.polat_repeated_pattern,
             final_currency            = self.final_currency,
             country                   = self.country,
-            verbose                   = self.verbose
+            verbose                   = self.verbose,
+            from_local_data           = self.from_local_data
         )
         self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
@@ -3710,7 +3724,8 @@ class CBACalculator(ts.Cache):
             project_horizon           = self.project_horizon,
             repeated_pattern_polation = self.polat_repeated_pattern,
             country                   = self.country,
-            verbose                   = self.verbose
+            verbose                   = self.verbose,
+            from_local_data           = self.from_local_data
         )
         self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
@@ -3882,7 +3897,8 @@ class CBACalculator(ts.Cache):
             project_horizon           = self.project_horizon,
             repeated_pattern_polation = self.polat_repeated_pattern,
             country                   = self.country,
-            verbose                   = self.verbose
+            verbose                   = self.verbose,
+            from_local_data           = self.from_local_data
         )
         self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
@@ -3994,7 +4010,8 @@ class CBACalculator(ts.Cache):
             project_horizon = self.project_horizon,
             GWP_horizon     = self.GWP_horizon,
             static          = self.GWP_static,
-            verbose         = self.verbose
+            verbose         = self.verbose,
+            from_local_data = self.from_local_data
         )
         self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):
@@ -4266,7 +4283,8 @@ class CBACalculator(ts.Cache):
             project_horizon           = self.project_horizon,
             repeated_pattern_polation = self.polat_repeated_pattern,
             country                   = self.country,
-            verbose                   = self.verbose
+            verbose                   = self.verbose,
+            from_local_data           = self.from_local_data
         )
         self.__caobjs.append(obj)
         if self._cache.get('endogenizing', False):

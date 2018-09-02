@@ -12,7 +12,6 @@ __all__ = [
     'InMindWithCorrespondingUnit',
     'cast',
     'change_rate_extractor',
-    'country_from_kwargs_specifier',
     'csv_dicter',
     'dict_time_serie_as_row_array',
     'get_file_as_list_of_lines',
@@ -32,6 +31,7 @@ from scipy.optimize import fsolve
 import matplotlib.pyplot as plt
 import functools as ft
 import openpyxl as xl
+import shutil as sh
 import numpy as np
 import sys
 import os
@@ -166,7 +166,10 @@ def txt_dicter(fname):
     elif os.path.isfile(txt_fName_b):
         txt_fName = txt_fName_b
     else:
-        raise(
+        raise type(
+            'NoDescripterError',
+            (BaseException,), {}
+        )(
             '[!!!] No txt file descripter present [!!!] '
             '\n\t Look what the problem is @ \n\t\t %s '%filepath
         )
@@ -793,30 +796,6 @@ def xlsx_file_writer(listed_content, save_dir='', file_name=''):
     return True
 
 ##******************************************
-##    ┌─┐┌─┐┬ ┬┌┐┌┌┬┐┬─┐┬ ┬   ┌─┐┬─┐┌─┐┌┬┐    ┬┌─┬ ┬┌─┐┬─┐┌─┐┌─┐    ┌─┐┌─┐┌─┐┌─┐┬┌─┐┬┌─┐┬─┐
-##    │  │ ││ ││││ │ ├┬┘└┬┘   ├┤ ├┬┘│ ││││    ├┴┐│││├─┤├┬┘│ ┬└─┐    └─┐├─┘├┤ │  │├┤ │├┤ ├┬┘
-##    └─┘└─┘└─┘┘└┘ ┴ ┴└─ ┴────└  ┴└─└─┘┴ ┴────┴ ┴└┴┘┴ ┴┴└─└─┘└─┘────└─┘┴  └─┘└─┘┴└  ┴└─┘┴└─
-def country_from_kwargs_specifier(kwargs):
-    """ Function which trivially returns country-codes (a priori arbitrary) for
-    a given country.
-
-    Example
-    -------
-    >>> country_from_kwargs_specifier({
-    ...     'country':'fRAnce'
-    ... })
-    '_FR'
-    
-    >>> country_from_kwargs_specifier({
-    ...     'country':'usa'
-    ... })
-    '_US'
-
-    """
-    return '_%s'%kwargs['country'][:2].upper()\
-           if 'country' in kwargs else ''
-
-##******************************************
 ##    ╔╦╗┌─┐┌┬┐┌─┐╦═╗┌─┐┌─┐┌┬┐┌─┐┬─┐
 ##     ║║├─┤ │ ├─┤╠╦╝├┤ ├─┤ ││├┤ ├┬┘
 ##    ═╩╝┴ ┴ ┴ ┴ ┴╩╚═└─┘┴ ┴─┴┘└─┘┴└─
@@ -824,13 +803,88 @@ class DataReader(Cache):
     """ Class which maps directories and files needed for computations."""
     def __init__(self, **kwargs):
         super(DataReader, self).__init__()
-        self.country          = country_from_kwargs_specifier(kwargs)
-        self.package_folder   = os.path.dirname(__file__)
-        self.resources_folder = os.path.join(self.package_folder, 'resources')
+        self.country         = '_%s'%kwargs.get('country', 'FR')[:2].upper()
+        self.package_folder  = os.path.dirname(__file__)
+        self.local_folder    = os.getcwd()
+        self.from_local_data = kwargs.get('from_local_data', False)
+
+    def _resources_folder_copier(self):
+        """ Method used to copy the resource folder locally.
+
+        Testing/Example
+        ---------------
+        >>> dr = DataReader(
+        ...     from_local_data = True
+        ... )
+        >>> os.path.exists(
+        ...     os.path.join(dr.package_folder, 'resources')
+        ... )
+        True
+        >>> tmp_folder = os.path.join(dr.package_folder, '.tmp')
+        >>> dr.local_folder = tmp_folder
+        >>> dr._resources_folder_copier()
+        >>> sorted(dr.resources.keys())
+        ['dluc', 'prices', 'yields']
+        >>> tmp_exists = lambda : os.path.exists(tmp_folder)
+        >>> tmp_exists()
+        True
+        >>> while tmp_exists():
+        ...     sh.rmtree(tmp_folder, ignore_errors=True)
+        >>> tmp_exists()
+        False
+        """
+        if self.local_folder != self.package_folder:
+            sh.copytree(
+                src = os.path.join(self.package_folder, 'resources'),
+                dst = os.path.join(self.local_folder, 'resources')
+            )
+
+    @Cache._property
+    def resources_folder_dir(self):
+        """ Memoized directory of the folder that contain the resources data
+        used to conduct studies."""
+        return os.path.join(
+            self.local_folder if self.from_local_data else self.package_folder,
+            'resources'
+        )
+
+    @property
+    def resources(self):
+        """ Wraper of `_resources` used to check whether resources data are
+        available where they are said to be so.
+
+        Testing
+        -------
+        >>> dr = DataReader(country = 'fra')
+        >>> os.path.exists(
+        ...     os.path.join(dr.package_folder, 'resources')
+        ... )
+        True
+        >>> sorted(dr.resources.keys())
+        ['dluc', 'prices', 'yields']
+        """
+        copy_dir = self.resources_folder_dir
+        if not os.path.exists(copy_dir):
+            raise type(
+                'DataFolderError',
+                (BaseException,), {}
+            )(
+                '\n'.join([
+                    'You have set the parameter `from_local_data` to '
+                    "`True` but you don't have such a folder in your "
+                    'working directory. Please first consider making '
+                    'a local copy of a folder whose structure will be '
+                    'interpretable by PyLUCCBA i.e.',
+                    '    >>> from PyLUCCBA import data_resources_copier',
+                    '    >>> data_resources_copier()',
+                    'You may then want to modify data as you like.'
+                ])
+            )
+        return self._resources
 
     def show_resources_tree(self):
         """ Method that prints the nested structure of the dictionary
-        returned by the method `resources_mapper`.
+        returned by the method `_resources_mapper`.
 
         Example
         -------
@@ -866,7 +920,7 @@ class DataReader(Cache):
                     via `data['yields']['Output']['ETH_yields']`
                      resources\yields\Output\ETH_yields_FR.csv
         """
-        for key, obj in sorted(self.resources_mapper().items()):
+        for key, obj in sorted(self._resources_mapper().items()):
             print(12*'-', key)
             for subkey, subobj in sorted(obj.items()):
                 print(6*' ' + 6*'-', subkey)
@@ -885,7 +939,7 @@ class DataReader(Cache):
                     print(12*' ' + 'via', datapath)
                     print(12*' ', os.path.relpath(subobj))
 
-    def resources_mapper(self):
+    def _resources_mapper(self):
         """ Creates a nested dictionary that represents the folder structure
         of resources.
 
@@ -895,7 +949,7 @@ class DataReader(Cache):
         
         >>> ress = DataReader(
         ...     country = 'fRANce'
-        ... ).resources_mapper()
+        ... )._resources_mapper()
 
         >>> print_(ress['dluc']['CS_yields'])
         resources\dluc\CS_yields_FR.csv
@@ -923,8 +977,9 @@ class DataReader(Cache):
 
         """
         dir_    = {}
-        rootdir = self.resources_folder.rstrip(OS_SEP)
-        start   = self.resources_folder.rfind(OS_SEP) + 1
+        rfolder = self.resources_folder_dir
+        rootdir = rfolder.rstrip(OS_SEP)
+        start   = rfolder.rfind(OS_SEP) + 1
         for path, dirs, files in os.walk(rootdir):
             folders = path[start:].split(OS_SEP)
             subdir  = {
@@ -941,9 +996,9 @@ class DataReader(Cache):
         return dir_['resources']
 
     @Cache._property
-    def resources(self):
-        """ Memoizing wrapper of `resources_mapper`."""
-        return self.resources_mapper()
+    def _resources(self):
+        """ Memoizing wrapper of `_resources_mapper`."""
+        return self._resources_mapper()
 
 ##******************************************
 ##    ╔╦╗┌─┐┌─┐┬ ┬┌┐ ┌─┐┌─┐┬─┐┌┬┐
