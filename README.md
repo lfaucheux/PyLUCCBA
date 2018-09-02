@@ -194,6 +194,29 @@ Given that data are stored (in txt and csv formats) according to a hard-to-guess
     
 Now, to explore the data, simply go to `C:\Users\username\foldername`, where you wil see a folder named `resources` that is the exact copy of the data used in Dupoux 2018.
 
+#### Adding new CO2 prices (or output flows) trajectory
+
+To add a scenario of CO2 prices, go to the folder `resources\prices\Exput`. There, you will find two files, namely `CO2_prices_FR.csv` and `Exput.txt`. First, open the csv file, add a scenario's name, *e.g.* `customPricesScenario`, in the first line and prices in the just-named column. Remember that your newly-added trajectory can be sparse and that the tool with retro/intra/extrapolate missing prices. Second, open the txt file and add two lines related to `customScenario`, as shown below:
+
+    customPricesScenario:unit:EUR/tonne
+    customPricesScenario:yrb:none
+    
+The first line tells the tool in which currency the prices are expressed. Note that the tool is actually not capable of dealing with other mass-units than `tonne`, so stick to it. The second line is not mandatory, and is simply here to simplify the potential future improvements of the tool, if ever. Finally, to imply this trajectory of prices in your calculations, simply instantiate `CBACalculator` with `'customPricesScenario'`, *i.e.*
+
+    >>> cba = cc.CBACalculator(
+            # ...
+            co2_prices_scenario = 'customPricesScenario', # not case sensitive
+            # ...
+        )
+        
+Note that to add a new trajectory of annual output flows, the approach is exactly the same as that described for CO2 prices. This time, files are stored in the folder `resources\yields\Output`.
+
+#### Adding new dluc or input yields related data
+
+Please, contact me if you are interested in doing so.
+
+
+
 ## Paper's results replication
 
 All the results presented in Dupoux (2018) can easily be reproduced. To do so, first type
