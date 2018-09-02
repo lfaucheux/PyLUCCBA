@@ -178,7 +178,7 @@ def txt_dicter(fname):
     l    = get_file_as_list_of_lines(txt_fName)
     dico = {}
     for element in l:
-        key, descrip_key, descrip_val = element.split(':')
+        key, descrip_key, descrip_val = element.split(':')[:3]
         key = key.lower()
         if key not in dico:
             dico[key] = {}
