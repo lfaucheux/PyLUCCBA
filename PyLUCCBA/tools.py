@@ -875,6 +875,7 @@ class DataReader(Cache):
                 (BaseException,), {}
             )(
                 '\n'.join([
+                    22*"=",
                     'You have set the parameter `from_local_data` to '
                     "`True` but you don't have such a folder in your "
                     'working directory. Please first consider making '
