@@ -185,7 +185,7 @@ Put differently,
 
 ## Data customization/addition
 
-You may want to add your own scenarii regarding, say, how CO2 prices evolve, the trajectory of output flows to produce annually, the necessary quantity of input that is required to produce 1 tonne of output, etc...
+You may want to add your own scenarii regarding, say, how the price CO2 evolves, the trajectory of output flows to produce annually, the necessary quantity of input that is required to produce 1 tonne of output, etc...
 Given that data are stored (in txt and csv formats) according to a hard-to-guess directory tree, the easiest way to work with custom data is to imitate the package-native data that are contained in the [*resources*](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. Let's thus start with a local copy of this folder:
 
     >>> import PyLUCCBA as cc
@@ -196,12 +196,12 @@ Now, to explore the data, simply go to `C:\Users\username\foldername`, where you
 
 #### Adding new CO2 prices (or output flows) trajectory
 
-To add a scenario of CO2 prices, go to the folder `resources\prices\Exput`. There, you will find two files, namely `CO2_prices_FR.csv` and `Exput.txt`. First, open the csv file, add a scenario's name, *e.g.* `customPricesScenario`, in the first line and prices in the just-named column. Remember that your newly-added trajectory can be sparse and that the tool with retro/intra/extrapolate missing prices. Second, open the txt file and add two lines related to `customScenario`, as shown below:
+To add a scenario of CO2 prices, go to the folder `resources\prices\Exput` of your local copy. There, you will find two files, namely `CO2_prices_FR.csv` and `Exput.txt`. First, open the csv file, add a scenario's name in the first line, *e.g.* `customPricesScenario`, and prices in the just-named column. Remember that your newly-added trajectory can be sparse and that the tool will retro/intra/extrapolate missing prices. Second, open the txt file and add two lines related to `customPricesScenario`, as shown below:
 
     customPricesScenario:unit:EUR/tonne
     customPricesScenario:yrb:none
     
-The first line tells the tool in which currency the prices are expressed. Note that the tool is actually not capable of dealing with other mass-units than `tonne`, so stick to it. The second line is not mandatory, and is simply here to simplify the potential future improvements of the tool, if ever. Finally, to imply this trajectory of prices in your calculations, simply instantiate `CBACalculator` with `'customPricesScenario'`, *i.e.*
+The first line tells the tool in which currency the prices are expressed. Note that the tool is actually not capable of dealing with other mass-units than `tonne`, so stick to it. The second line is not mandatory, and is simply here to simplify the potential future improvements of the tool. Finally, to imply this trajectory of prices in your calculations, simply instantiate `CBACalculator` with `'customPricesScenario'`, *i.e.*
 
     >>> cba = cc.CBACalculator(
             # ...
@@ -209,7 +209,7 @@ The first line tells the tool in which currency the prices are expressed. Note t
             # ...
         )
         
-Note that to add a new trajectory of annual output flows, the approach is exactly the same as that described for CO2 prices. This time, files are stored in the folder `resources\yields\Output`.
+Note that to add a new trajectory of annual output flows, the approach is exactly the same as that described for CO2 prices. This time, the files are stored in the folder `resources\yields\Output` of your local copy.
 
 #### Adding new dluc or input yields related data
 
@@ -255,19 +255,19 @@ All the results presented in Dupoux (2018) can easily be reproduced. To do so, f
   
 •	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder in which the dluc calculations are reported (see calculations in the provided “Data” Excel file). The .txt file indicates the units of data.
 
-•	The [prices](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices) folder which includes the carbon price trajectories scenarios. When only one-time prices are provided, such as in the World Energy Outlook, there is an automatic process which extrapolates the values for each year in an exponential way. For example, if prices are provided at year 2020 and 2025, then the prices at 2021, 2022, 2023 and 2024 are generated in an exponential way. The .txt file provides the unit and year base for the monetary used in scenarios (e.g. EUR 2012).
+•	The [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) folder which includes the carbon price trajectories scenarios. When only two-time prices are provided, such as in the World Energy Outlook, there is an automatic process which extrapolates the values for each year in an exponential way. For example, if prices are provided at year 2020 and 2025, then the prices at 2021, 2022, 2023 and 2024 are generated in an exponential way. The .txt file provides the unit and year base for the monetary used in scenarios (e.g. EUR 2012).
 
 •	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders. The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to the calculations: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare. The second folder, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), is only instrumental and tautologically states than one tonne of biofuel is produced per tonne of output.
 
 #### Generated results
 
-  The generated results consists of three .xlsx files, namely [\_quantities.xlsx], [\_values.xlsx]  and [\_NPVs.xlsx] all three located in a folder that is named (by default) according to the arguments involved in the computation:
+  The generated results consists of three .xlsx files, namely [\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), [\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx)  and [\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) all three located in a folder that is named (by default) according to the arguments involved in the computation:
   
-•	[\_quantities.xlsx], which only displays the quantities associated to each flow, among which, emissions from the process of production, emissions from the cultivation of the feedstock, land use change impact from soil, land use change impact from biomass, etc.
+•	[\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), which only displays the quantities associated to each flow, among which, emissions from the process of production, emissions from the cultivation of the feedstock, land use change impact from soil, land use change impact from biomass, etc.
 
-•	[\_values.xlsx] which displays the monetary value of the different types of flows from both bioethanol and gasoline (“black”) depending of the carbon price scenario chosen in “study_case.py”.
+•	[\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx) which displays the monetary value of the different types of flows from both bioethanol and gasoline (“black”) depending of the carbon price scenario chosen in “study_case.py”.
 
-•	[\_NPVs.xlsx] which displays the net present values for both the uniform and the differentiated annualizations for the different types of flow again. All titles specify what is calculated. Note that “ut” refers to bioethanol quantities in tonne and “um” refers to bioethanol quantities in megajoules (MJ).
+•	[\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) which displays the net present values for both the uniform and the differentiated annualizations for the different types of flow again. All titles specify what is calculated. Note that “ut” refers to bioethanol quantities in tonne and “um” refers to bioethanol quantities in megajoules (MJ).
 
 Note that each column has a title that is very verbose -- so as to make things as explicit as possible -- regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
 
