@@ -116,7 +116,7 @@ We may also wonder which quantities trajectory of wheat is implied by that of bi
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20input%20%5BIFP%5D%5BWHEAT%5D.png?raw=true" width="60%"/><img></p>
 
-Note the abscence of input flow in 2040: this illustrates the delay that exists between the cultivation of wheat and its transformation into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040.
+Note the abscence of input flow in 2040: as explained previously, this illustrates the time delay that exists between the cultivation of wheat and its transformation into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol that is planned in 2040.
 
 The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of carbon dioxide emissions. These emissions clearly don't exhibit the same profile depending on how we choose to consider them over the project horizon. First, regarding soil carbon dioxide emissions:
 
