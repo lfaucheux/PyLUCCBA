@@ -4,7 +4,8 @@ A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www
 - [Code coverage](#code-coverage)
 - [Installation](#installation)
 - [Example usage](#example-usage)
-- [Materials and methods](#materials-and-methods)
+- [Data](#data)
+- [Format of results](#format-of-results)
 - [Data customization/addition](#data-customizationaddition)
 - [Paper's results replication](#papers-results-replication)
 
@@ -32,7 +33,7 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
 
 ## Example usage
     
-*The example that follows is done with the idea of reproducing the results presented in Dupoux (2018) via the Python Shell*.
+*The example that follows is done with the idea of showing how to reproduce the results presented in Dupoux (2018) via the Python Shell*.
 
 Let's first import the module `PyLUCCBA`
 
@@ -191,11 +192,7 @@ Put differently,
     35 # years
 
 
-## Materials and methods
-
-  The calculator, as such, is divided into two (tested and documented) python scripts, namely [core.py](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py) and another that contains non-thematic-specific functions and classes, [tools.py](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py). The scripts that must be used to obtain the *results* presented in [Dupoux (2016)](https://www.researchgate.net/publication/304170193_The_land_use_change_time-accounting_failure) are contained in the [example](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/examples) folder.
-
-#### Used data
+## Data
 
   The results are based on data located in the body of [core.py](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py) itself (under the form of python-native dictionary) and in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. The latter folder is composed of:
   
@@ -205,7 +202,9 @@ Put differently,
 
 •	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders. The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to the calculations: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare. The second folder, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), is only instrumental and tautologically states than one tonne of biofuel is produced per tonne of output.
 
-#### Generated results
+## Format of results
+
+  The scripts that must be used to obtain the *results* presented in [Dupoux (2016)](https://www.researchgate.net/publication/304170193_The_land_use_change_time-accounting_failure) are contained in the [example](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/examples) folder.
 
   The generated results consists of three .xlsx files, namely [\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), [\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx)  and [\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) all three located in a folder that is named (by default) according to the arguments involved in the computation:
   
@@ -216,6 +215,7 @@ Put differently,
 •	[\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) which displays the net present values for both the uniform and the differentiated annualizations for the different types of flow again. All titles specify what is calculated. Note that “ut” refers to bioethanol quantities in tonne and “um” refers to bioethanol quantities in megajoules (MJ).
 
 Note that each column has a title that is very verbose -- so as to make things as explicit as possible -- regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
+
 
 ## Data customization/addition
 
