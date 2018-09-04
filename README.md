@@ -182,9 +182,9 @@ Note the slop-change that occurs during the last year. This is due to the fact t
 
 Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two temporal profiles -- shown above -- exhibit positive values over the long run. Put differently, let's vizualize when the project exhibits positive carbon profitabilities for each annualization approach.
     
-•	*NB1: the project horizon must be long enough for such a period to exist. Hence the extension from 20 years to 50 years that is configured below.*
+•	*NB1: the project horizon must be long enough for such the payback period to exist. Hence the extension from 20 years to 50 years that is configured below.*
 
-•	*NB2: given that cultivation and its associated emission flows generally -- depending on the type of final land use -- end one year before the end of the project, projects' last years are structurally more environment-friendly, which increases projects' carbon profitabilities, in some cases to such an extent that this last year actually becomes the payback period, hence the NB1*.
+•	*NB2: given that cultivation and its associated flows of emission generally -- depending on the type of final land use -- finish before the end of the project, projects' last years are structurally more environment-friendly, which increases projects' carbon profitabilities, in some cases to such an extent that these last year actually become the payback period, hence the NB1*.
 
     >>> cba._clear_caches()         # we clear the cache of our instance since we are going to change a calculation parameter.
     GlobalWarmingPotential          # the tool enumerates the caches that have been cleaned.
@@ -249,14 +249,14 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
     initial_landuse         : IMPROVED GRASSLAND
     final_landuse/input     : WHEAT
     country                 : FRANCE
-    project_horizon         : 21
+    project_horizon         : 21 # because of the time delay between cultivation and processing, taken at t0 - 1.
     T_so                    : 20
     T_vg_diff               : 1
     T_vg_unif               : 20
     project_first_year      : 2020
     polat_repeated_pattern  : True
     co2_prices_scenario     : SPC
-    discount_rate           : [0.05420086]
+    discount_rate           : [0.05420086] # our endogenized compensatory rate
     diff_payback_period     : []
     unif_payback_period     : []
     final_currency          : EUR
