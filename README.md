@@ -181,11 +181,11 @@ which, when monetized with a non-zero discount rate and compared in terms of abs
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
 
-Note the slop-breaks that occur during the last year. This is due to the fact that cultivation and its associated emission flows generally – depending on the type of final land use – finish one year before the end of the project, which structurally increases projects' NPVs.
+Note the slope-breaks that occur during the last year. This is due to the fact that cultivation and its associated emission flows generally – depending on the type of final land use – finish one year before the end of the project, which structurally increases projects' NPVs.
 
 ### A note on the carbon profitability payback period
 
-Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two NPVs' profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize *when* the project exhibits positive carbon profitabilities (CP) for each annualization approach.
+Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two NPVs' profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize *when* the project exhibits positive carbon profitability (CP) for each annualization approach.
     
 •	*NB1: the project horizon must be long enough for such a payback period to exist. Hence the extension from 20 to 50 years configured below.*
 
