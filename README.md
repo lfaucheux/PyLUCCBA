@@ -269,7 +269,7 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
 
 Data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder, composed of the following subfolders:
   
-•	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder that includes *(i)* [BioGrace Excel tool - version 4c.xls](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/BioGrace%20Excel%20tool%20-%20version%204c.xls) cited in *(ii)* [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/Data_CarbonStocks_Emissions.xlsx), in which you can see how the carbon stock changes per type of LUC are calculated and *(iii)* csv and txt files in which the results of these calculations are reported. *NB:* some data that have been calculated with [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/Data_CarbonStocks_Emissions.xlsx) are stored in the body of core.py itself under the form of [python dictionary](https://www.w3schools.com/python/python_dictionaries.asp), see [process](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L151) and [cultivation](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L172).  
+•	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder that includes *(i)* [BioGrace Excel tool - version 4c.xls](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/BioGrace%20Excel%20tool%20-%20version%204c.xls) cited in *(ii)* [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/Data_CarbonStocks_Emissions.xlsx), in which you can see how the sequestrated carbon stock per type of land use are calculated and *(iii)* csv and txt files in which the results of these calculations are reported. *NB:* some data that have been calculated with [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/Data_CarbonStocks_Emissions.xlsx) are stored in the body of core.py itself under the form of [python dictionary](https://www.w3schools.com/python/python_dictionaries.asp), see [process](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L151) and [cultivation](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L172).  
 
 •	The [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) folder that includes the carbon price scenarios.
 
@@ -277,13 +277,13 @@ Data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/ma
 
 *NB: in the folders [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) and [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields), note that:*
 
-•	Csv files contain temporal trajectories (of prices, of quantities, of yields, ...). These trajectories can be sparse. Indeed, when sparse trajectories with more than one point are provided, say, CO2 prices such as in the scenario *WEO2015-CPS* – see [CO2_prices_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/prices/Exput/CO2_prices_FR.csv) –, the tool automatically retro/intra/extrapolates the values for each year in an exponential way. When both retro- and extrapolation are possible, retropolation is favoured and implied using the next period's rate of growth. Then, if the parameter `polat_repeated_pattern` is set to `True`, extrapolation is performed repeating the pattern of growth rates. If the parameter is set to `False`, the last known value in maintained constant. In the case of sparse trajectories containing only one value – see *e.g.* [WHEAT_yields_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) –, it is simply assumd to be constant over the project horizon.
+•	The csv files contain temporal trajectories (of prices, of quantities, of yields, ...). These trajectories can be sparse. Indeed, when sparse trajectories with more than one point are provided, say, CO2 prices such as in the scenario *WEO2015-CPS* – see [CO2_prices_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/prices/Exput/CO2_prices_FR.csv) –, the tool automatically retro/intra/extrapolates the values for each year in an exponential way. When both retro- and extrapolation are possible, retropolation is favoured and implied using the next period's rate of growth. Then, if the parameter `polat_repeated_pattern` is set to `True`, extrapolation is performed repeating the pattern of growth rates. If the parameter is set to `False`, the last known value in maintained constant. In the case of sparse trajectories that contain only one value – see *e.g.* [WHEAT_yields_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) –, it is assumed to be constant over the project horizon.
 
-•	Txt files contain informations related to the trajectories that are stored in csv files.
+•	The txt files contain informations related to the trajectories that are stored in csv files.
 
 ## Format of results
 
-  The scripts that must be used to obtain the *results* presented in [Dupoux (2018)](https://www.researchgate.net/publication/304170193_The_land_use_change_time-accounting_failure) are contained in the [example](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/examples) folder.
+ *The scripts that must be used to obtain the *results* presented in [Dupoux (2018)](https://www.researchgate.net/publication/304170193_The_land_use_change_time-accounting_failure) are contained in the [example](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/examples) folder.*
 
   The generated results consists of three .xlsx files, namely [\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), [\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx)  and [\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) all three located in a folder that is named (by default) according to the arguments involved in the computation:
   
@@ -302,7 +302,7 @@ You may want to add your own scenarii regarding, say, how the price CO2 evolves,
 Given that data are stored (in txt and csv formats) according to a hard-to-guess directory tree, the easiest way to work with custom data is to imitate the package-native data that are contained in the [*resources*](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. Let's thus start with a local copy of this folder:
 
     >>> import PyLUCCBA as cc
-    >>> cc.data_resources_copier()
+    >>> cc.folder_copier(name='resources')
     'resources' folder copied to C:\path\to\folder
     
 Now, to explore the data, go to `C:\path\to\folder`, where you wil see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf).
@@ -334,18 +334,26 @@ Please, contact me if you are interested in doing so.
 
 All the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) can easily be reproduced. To replicate a specific result, one has to `import` the associated script. Its importation will run the code that is required to generate the results. The table that follows makes the association between the python `import`-commands and the cases presented in the paper.
 
- Paper's section and page | Python command                                                     | Invoked python code
+ Paper's section and page | Python command                                                     | Invoked script
  ------------------------ | ------------------------------------------------------------------ | -------------------
- Subsection 3.2 page 11   | `from PyLUCCBA.examples import study_Forest_DiscountingEffect`     | [*(1)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_DiscountingEffect.py)
- Subsection 3.2 page 12   | `from PyLUCCBA.examples import study_Grassland_DiscountingEffect`  | [*(2)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_DiscountingEffect.py)
- Subsection 3.2 page 12   | `from PyLUCCBA.examples import study_Forest_CarbonPriceEffect`     | [*(3)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CarbonPriceEffect.py)
- Subsection 3.2 page 13   | `from PyLUCCBA.examples import study_Grassland_CarbonPriceEffect`  | [*(4)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CarbonPriceEffect.py)
- Subsection 3.2 page 13   | `from PyLUCCBA.examples import study_Forest_CombinedEffect`        | [*(5)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CombinedEffect.py)
- Subsection 3.2 page 14   | `from PyLUCCBA.examples import study_Grassland_CombinedEffect`     | [*(6)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CombinedEffect.py)
- Subsection 4.1 page 14   | `from PyLUCCBA.examples import study_Forest_CompensatoryRate`      | [*(7)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CompensatoryRate.py)
- Subsection 4.1 page 14   | `from PyLUCCBA.examples import study_Grassland_CompensatoryRate`   | [*(8)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py)
- Subsection 4.2 page 15   | `from PyLUCCBA.examples import study_Grassland_PaybackPeriod`      | [*(9)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_PaybackPeriod.py)
+ Subsection 3.2 page 11   | `from PyLUCCBA.examples import study_Forest_DiscountingEffect`     | [*study_Forest_DiscountingEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_DiscountingEffect.py)
+ Subsection 3.2 page 12   | `from PyLUCCBA.examples import study_Grassland_DiscountingEffect`  | [*study_Grassland_DiscountingEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_DiscountingEffect.py)
+ Subsection 3.2 page 12   | `from PyLUCCBA.examples import study_Forest_CarbonPriceEffect`     | [*study_Forest_CarbonPriceEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CarbonPriceEffect.py)
+ Subsection 3.2 page 13   | `from PyLUCCBA.examples import study_Grassland_CarbonPriceEffect`  | [*study_Grassland_CarbonPriceEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CarbonPriceEffect.py)
+ Subsection 3.2 page 13   | `from PyLUCCBA.examples import study_Forest_CombinedEffect`        | [*study_Forest_CombinedEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CombinedEffect.py)
+ Subsection 3.2 page 14   | `from PyLUCCBA.examples import study_Grassland_CombinedEffect`     | [*study_Grassland_CombinedEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CombinedEffect.py)
+ Subsection 4.1 page 14   | `from PyLUCCBA.examples import study_Forest_CompensatoryRate`      | [*study_Forest_CompensatoryRate.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CompensatoryRate.py)
+ Subsection 4.1 page 14   | `from PyLUCCBA.examples import study_Grassland_CompensatoryRate`   | [*study_Grassland_CompensatoryRate.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py)
+ Subsection 4.2 page 15   | `from PyLUCCBA.examples import study_Grassland_PaybackPeriod`      | [*study_Grassland_PaybackPeriod.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_PaybackPeriod.py)
 
+
+In case you want to modify those scripts instead of simply invoking them, you can first copy them to your working directory, typing
+
+    >>> import PyLUCCBA as cc
+    >>> cc.folder_copier(name='examples')
+    'examples' folder copied to C:\path\to\folder
+
+Second, go to `C:\path\to\folder`, where you wil see a folder named `examples` that contains the exact copies of the scripts enumerated in the above table. To edit one of those scripts, say, [*study_Grassland_CompensatoryRate.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py), right-click it and and select option *Edit with [IDLE](http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/idle.html#windows-in-idle)*. Modify anything you want. To execute the script, type **F5**.
 
 ## References
 
