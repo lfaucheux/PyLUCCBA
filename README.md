@@ -219,11 +219,20 @@ Please, contact me if you are interested in doing so.
 
 ## Paper's results replication
 
-All the results presented in Dupoux (2018) can easily be reproduced. To do so, first type
+All the results presented in Dupoux (2018) can easily be reproduced. The table that follows makes the association between python commands and studies cases presented in the paper.
 
-    >>> 
+ Paper's section and page | Python command                                                     | Invoked python code
+ ------------------------ | ------------------------------------------------------------------ | -------------------
+ Subsection 3.2 page 11   | `from PyLUCCBA.examples import study_Forest_DiscountingEffect`     | [*(1)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_DiscountingEffect.py)
+ Subsection 3.2 page 12   | `from PyLUCCBA.examples import study_Grassland_DiscountingEffect`  | [*(2)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_DiscountingEffect.py)
+ Subsection 3.2 page 12   | `from PyLUCCBA.examples import study_Forest_CarbonPriceEffect`     | [*(3)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CarbonPriceEffect.py)
+ Subsection 3.2 page 13   | `from PyLUCCBA.examples import study_Grassland_CarbonPriceEffect`  | [*(4)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CarbonPriceEffect.py)
+ Subsection 3.2 page 13   | `from PyLUCCBA.examples import study_Forest_CombinedEffect`        | [*(5)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CombinedEffect.py)
+ Subsection 3.2 page 14   | `from PyLUCCBA.examples import study_Grassland_CombinedEffect`     | [*(6)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CombinedEffect.py)
+ Subsection 4.1 page 14   | `from PyLUCCBA.examples import study_Forest_CompensatoryRate`      | [*(7)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Forest_CompensatoryRate.py)
+ Subsection 4.1 page 14   | `from PyLUCCBA.examples import study_Grassland_CompensatoryRate`   | [*(8)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py)
+ Subsection 4.2 page 15   | `from PyLUCCBA.examples import study_Grassland_PaybackPeriod`      | [*(9)*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_PaybackPeriod.py)
 
-...
 
 <details><summary><i>(...)</i></summary>
 <p>
