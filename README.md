@@ -354,13 +354,13 @@ Data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/ma
 
 •	The [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) folder that includes the carbon price scenarios.
 
-•	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders. The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to the conduct the study of the project: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare. The second folder, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), tautologically states than one tonne of biofuel is produced per tonne of output.
+•	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders. The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to conduct the study of the project: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare. The second folder, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), tautologically states than one tonne of biofuel is produced per tonne of output.
 
 *NB: in the folders [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) and [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields), note that:*
 
-•	The csv files contain temporal trajectories (of prices, of quantities, of yields, ...). These trajectories can be sparse. Indeed, when sparse trajectories with more than one point are provided, say, CO2 prices such as in the scenario *WEO2015-CPS* – see [CO2_prices_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/prices/Exput/CO2_prices_FR.csv) –, the tool automatically retro/intra/extrapolates the values for each year in an exponential way. When both retro- and extrapolation are possible, retropolation is favoured and implied using the next period's rate of growth. Then, if the parameter `polat_repeated_pattern` is set to `True`, extrapolation is performed repeating the entire anterior pattern of growth rates from the last known value. If the parameter is set to `False`, the last known value in maintained constant over the project horizon. In the case of sparse trajectories that contain only one value – see *e.g.* [WHEAT_yields_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) –, the dense trajectory is assumed to be flat over the project horizon.
+•	The csv files contain temporal trajectories (of prices, of quantities, of yields, ...). These trajectories can be sparse. Indeed, when sparse trajectories with more than one point are provided, say, CO2 prices such as in the scenario *WEO2015-CPS* – see [CO2_prices_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/prices/Exput/CO2_prices_FR.csv) –, the tool automatically retro/intra/extrapolates the values for each year in an exponential way. When both retro- and extrapolation are possible, retropolation is favored and implied using the next period's rate of growth. Then, if the parameter `polat_repeated_pattern` is set to `True`, extrapolation is performed repeating the entire anterior pattern of growth rates from the last known value. If the parameter is set to `False`, the last known value is maintained constant over the project horizon. In the case of sparse trajectories that contain only one value – see *e.g.* [WHEAT_yields_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) –, the dense trajectory is assumed to be flat over the project horizon.
 
-•	The txt files contain informations related to the trajectories that are stored in csv files.
+•	The txt files contain information related to the trajectories that are stored in csv files.
 
 
 <hr>
@@ -374,7 +374,7 @@ Given that data are stored (in txt and csv formats) according to a hard-to-guess
     >>> cc.folder_copier(name='resources')
     'resources' folder copied to C:\path\to\folder
     
-Now, to explore the data, go to `C:\path\to\folder`, where you wil see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf).
+Now, to explore the data, go to `C:\path\to\folder`, where you will see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf).
 
 #### Adding new CO2 prices (or output flows) trajectory
 
@@ -395,21 +395,19 @@ Note that to add a new trajectory of annual output flows, the approach is exactl
 
 #### Adding new dluc or input yields related data
 
-Please, contact me if you are interested in doing so.
+All the material required to add new dluc and/or input yields is provided with the package. However, these additions implies some substantive modifications. Please, contact me if you are interested in doing so.
 
 <hr>
 
 ## Format of results
 
- *The scripts that must be used to obtain the *results* presented in [Dupoux (2018)](https://www.researchgate.net/publication/304170193_The_land_use_change_time-accounting_failure) are contained in the [example](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/examples) folder.*
-
-  The generated results consists of three .xlsx files, namely [\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), [\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx)  and [\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) all three located in a folder that is named (by default) according to the arguments involved in the computation:
+  The generated results consist of three .xlsx files, namely [\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), [\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx)  and [\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) all three located in a folder that is named (by default) according to the arguments involved in the computation:
   
-•	[\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), which only displays the quantities associated to each flow, among which, emissions from the process of production, emissions from the cultivation of the feedstock, land use change impact from soil, land use change impact from biomass, etc.
+•	[\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx) displays the quantities associated to each flow, among which, emissions from the process of production, emissions from the cultivation of the feedstock, land use change impact from soil, land use change impact from biomass, etc.
 
-•	[\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx) which displays the monetary value of the different types of flows from both bioethanol and gasoline (“black”) depending of the carbon price scenario chosen in “study_case.py”.
+•	[\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx) displays the monetary value of the different types of flows from both bioethanol and gasoline (“black”) depending of the carbon price scenario that is chosen.
 
-•	[\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) which displays the net present values for both the uniform and the differentiated annualizations for the different types of flow again. All titles specify what is calculated. Note that “ut” refers to bioethanol quantities in tonne and “um” refers to bioethanol quantities in megajoules (MJ).
+•	[\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) displays the net present values for both the uniform and the differentiated annualizations for the different types of flow again.
 
 Note that each column has a title that is very verbose – so as to make things as explicit as possible – regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
 
@@ -438,7 +436,7 @@ In case you want to modify those scripts instead of simply invoking them, you ca
     >>> cc.folder_copier(name='examples')
     'examples' folder copied to C:\path\to\folder
 
-Second, go to `C:\path\to\folder`, where you wil see a folder named `examples` that contains the exact copies of the scripts enumerated in the above table. To edit one of those scripts, say, [*study_Grassland_CompensatoryRate.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py), right-click it and and select option *Edit with [IDLE](http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/idle.html#windows-in-idle)*. Modify anything you want. To execute the script, type **F5**.
+Second, go to `C:\path\to\folder`, where you will see a folder named `examples` that contains the exact copies of the scripts enumerated in the above table. To edit one of those scripts, say, [*study_Grassland_CompensatoryRate.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py), right-click it and select option *Edit with [IDLE](http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/idle.html#windows-in-idle)*. Modify anything you want. To execute the script, type **F5**.
 
 <hr>
 
