@@ -102,7 +102,7 @@ Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonde
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20ETH%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
-As it reads in the above chart, we are about to work with a constant level of production over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough wheat to produce biofuel.
+As it reads in the above chart, we are about to work with a constant level of production over the project horizon. Note the absence of flow in 2020: this illustrates the need for waiting one year before having enough wheat to produce biofuel.
 
 We may then wonder what is the counterfactual trajectory in terms of gasoline – targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis: 
 
@@ -122,9 +122,9 @@ We may also wonder which quantities trajectory of wheat is implied by that of bi
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20input%20%5BIFP%5D%5BWHEAT%5D.png?raw=true" width="60%"/><img></p>
 
-Note the abscence of input flow in 2040: as explained previously, this illustrates the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *e.g.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040.
+Note the absence of input flow in 2040: as explained previously, this illustrates the time delay that exists between the cultivation of wheat and its processing into bioethanol, *e.g.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040.
 
-The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of CO2 emissions. These emissions clearly don't exhibit the same profile depending on how we choose to consider them over the project horizon. First, regarding soil CO2 emissions:
+The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of CO2 emissions. These emissions clearly do not exhibit the same profile depending on how we choose to consider them over the project horizon. First, regarding soil CO2 emissions:
 
     >>> cba.carbon_and_co2_flows_traj_annualizer.so_emitting
     True
@@ -143,7 +143,7 @@ Of course, the comparison makes sense since the total emitted stocks are identic
     >>> np.sum(cba.soco2_diff_flows_traj)
     -10.90041830757967 # tonnes
     
-On the side of vegetation-related emissions, converting grassland into wheat field generates a loss of carbon since the latter is harvested annually while the former sequestrates carbon on a pertpetual basis. Here again, emissions' profiles are clearly different under differentiated or uniform anualization approach, see 
+On the side of vegetation-related emissions, converting grassland into wheat field generates a loss of carbon since the latter is harvested annually while the former sequestrates carbon on a pertpetual basis. Here again, emissions' profiles are clearly different under differentiated or uniform annualization approach, see 
 
     >>> cba.carbon_and_co2_flows_traj_annualizer.vg_emitting
     True
@@ -165,7 +165,7 @@ Independently of how we annualize the LUC-related CO2 emissions, the cultivation
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bcult-WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bproc-WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Once again, the two above charts unambiguously illustrate the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in year *t-1* is used for the production of bioethanol planned in year *t*. Also, note that these cultivation- and processing-related emissions are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using their relative global warming potentials – relatively to that of CO2 – as a basis of conversion. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
+Once again, the two above charts unambiguously illustrate the time delay that exists between the cultivation of wheat and its processing into bioethanol, *i.e.* wheat cultivated in year *t-1* is used for the production of bioethanol planned in year *t*. Also, note that these cultivation- and processing-related emissions are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using their relative global warming potentials – relatively to that of CO2 – as a basis of conversion. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
 
 Finally, under the two types of annualization approach, the total emissions following a change in land use from improved grassland into wheat field are:
 
@@ -185,7 +185,7 @@ Note the slope-breaks that occur during the last year. This is due to the fact t
 
 ### A note on the carbon profitability payback period
 
-Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two NPVs' profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize *when* the project exhibits positive carbon profitability (CP) for each annualization approach.
+Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two NPVs' profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize *when* the project exhibits positive NPV under each annualization approach.
     
 •	*NB1: the project horizon must be long enough for such a payback period to exist. Hence the extension from 20 to 50 years configured below.*
 
