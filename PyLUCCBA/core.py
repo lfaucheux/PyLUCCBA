@@ -2641,18 +2641,18 @@ class CBACalculator(ts.Cache):
         ->\ absolute_SOC_differential
         -->\ so_emitting
         --->| soc_unit_unif_flows_traj
-        \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
+        \------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
         >| scenarized_unit_land_surface_infos                              |
-        >| scenarized_unit_land_surface_flows_traj_sparse_traj                  |
-        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict           |
-        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)       |
-        >| scenarized_output_flows_traj_sparse_traj                                |
-        ->\ scenarized_output_flows_traj_full_traj_as_dict                         |
-        -->| scenarized_output_flows_traj_full_traj (as array)                     |
-        -->| output_flows_traj                                                |
-                                                                              |
-        ---->\ land_surface_flows_traj                                        |
-              \---------------------------------------------------------------|
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj             |
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict      |
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)  |
+        >| scenarized_output_flows_traj_sparse_traj                        |
+        ->\ scenarized_output_flows_traj_full_traj_as_dict                 |
+        -->| scenarized_output_flows_traj_full_traj (as array)             |
+        -->| output_flows_traj                                             |
+                                                                           |
+        ---->\ land_surface_flows_traj                                     |
+              \------------------------------------------------------------|
         =======
         ------>| soc_unif_flows_traj
 
@@ -2679,18 +2679,18 @@ class CBACalculator(ts.Cache):
         ->| a_parameter_which_solves_soc_chosen_CRF_constrained
         -->\ soc_unit_stock_traj
         --->| soc_unit_diff_flows_traj
-        \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-        >| scenarized_unit_land_surface_infos                              |
-        >| scenarized_unit_land_surface_flows_traj_sparse_traj                  |
-        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict           |
-        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)       |
-        >| scenarized_output_flows_traj_sparse_traj                                |
-        ->\ scenarized_output_flows_traj_full_traj_as_dict                         |
-        -->| scenarized_output_flows_traj_full_traj (as array)                     |
-        -->| output_flows_traj                                                |
-                                                                              |
-        ---->\ land_surface_flows_traj                                        |
-              \---------------------------------------------------------------|
+        \-----------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
+        >| scenarized_unit_land_surface_infos                             |
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj            |
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict     |
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array) |
+        >| scenarized_output_flows_traj_sparse_traj                       |
+        ->\ scenarized_output_flows_traj_full_traj_as_dict                |
+        -->| scenarized_output_flows_traj_full_traj (as array)            |
+        -->| output_flows_traj                                            |
+                                                                          |
+        ---->\ land_surface_flows_traj                                    |
+              \-----------------------------------------------------------|
         =======
         ------>| soc_diff_flows_traj
 
@@ -2842,18 +2842,18 @@ class CBACalculator(ts.Cache):
         ->\ absolute_VGC_differential
         -->\ vg_emitting
         --->| vgc_unit_unif_flows_traj
-        \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
+        \------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
         >| scenarized_unit_land_surface_infos                              |
-        >| scenarized_unit_land_surface_flows_traj_sparse_traj                  |
-        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict           |
-        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)       |
-        >| scenarized_output_flows_traj_sparse_traj                                |
-        ->\ scenarized_output_flows_traj_full_traj_as_dict                         |
-        -->| scenarized_output_flows_traj_full_traj (as array)                     |
-        -->| output_flows_traj                                                |
-                                                                              |
-        ---->\ land_surface_flows_traj                                        |
-              \---------------------------------------------------------------|
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj             |
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict      |
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)  |
+        >| scenarized_output_flows_traj_sparse_traj                        |
+        ->\ scenarized_output_flows_traj_full_traj_as_dict                 |
+        -->| scenarized_output_flows_traj_full_traj (as array)             |
+        -->| output_flows_traj                                             |
+                                                                           |
+        ---->\ land_surface_flows_traj                                     |
+              \------------------------------------------------------------|
         =======
         ------>| vgc_unif_flows_traj
 
@@ -2891,18 +2891,18 @@ class CBACalculator(ts.Cache):
         ->| a_parameter_which_solves_vgc_chosen_CRF_constrained
         -->\ vgc_unit_stock_traj
         --->| vgc_unit_diff_flows_traj
-        \---------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
+        \------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
         >| scenarized_unit_land_surface_infos                              |
-        >| scenarized_unit_land_surface_flows_traj_sparse_traj                  |
-        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict           |
-        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)       |
-        >| scenarized_output_flows_traj_sparse_traj                                |
-        ->\ scenarized_output_flows_traj_full_traj_as_dict                         |
-        -->| scenarized_output_flows_traj_full_traj (as array)                     |
-        -->| output_flows_traj                                                |
-                                                                              |
-        ---->\ land_surface_flows_traj                                        |
-              \---------------------------------------------------------------|
+        >| scenarized_unit_land_surface_flows_traj_sparse_traj             |
+        ->\ scenarized_unit_land_surface_flows_traj_full_traj_as_dict      |
+        -->| scenarized_unit_land_surface_flows_traj_full_traj (as array)  |
+        >| scenarized_output_flows_traj_sparse_traj                        |
+        ->\ scenarized_output_flows_traj_full_traj_as_dict                 |
+        -->| scenarized_output_flows_traj_full_traj (as array)             |
+        -->| output_flows_traj                                             |
+                                                                           |
+        ---->\ land_surface_flows_traj                                     |
+              \------------------------------------------------------------|
         =======
         ------>| vgc_diff_flows_traj
 
@@ -6060,14 +6060,14 @@ class CBACalculator(ts.Cache):
     def timed_total_diff_co2_flows_traj(self):
         """
         Resolution order:
-        |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-         ...                                                               |
-            \ ...                                                          |
-        ---->\ timed_proc_input_co2eq_flows_traj                      |
-         ...                                                               |
-            \ ...                                                          |
-        ---->\ timed_cult_input_co2eq_flows_traj                     |
-              \------------------------------------------------------------|
+        |-----------------------------------------|NON-ANNUALIZATION-SPECIFIC
+         ...                                      |
+            \ ...                                 |
+        ---->\ timed_proc_input_co2eq_flows_traj  |
+         ...                                      |
+            \ ...                                 |
+        ---->\ timed_cult_input_co2eq_flows_traj  |
+              \-----------------------------------|
             ...
                \ ...
         ------->\ diff_co2_flows_traj (implicitly timed)
@@ -7240,14 +7240,14 @@ class CBACalculator(ts.Cache):
     def timed_total_unif_co2_flows_traj(self):
         """
         Resolution order:
-        |------------------------------------------------------------------|NON-ANNUALIZATION-SPECIFIC
-         ...                                                               |
-            \ ...                                                          |
-        ---->\ timed_proc_input_co2eq_flows_traj                      |
-         ...                                                               |
-            \ ...                                                          |
-        ---->\ timed_cult_input_co2eq_flows_traj                     |
-              \------------------------------------------------------------|
+        |-----------------------------------------|NON-ANNUALIZATION-SPECIFIC
+         ...                                      |
+            \ ...                                 |
+        ---->\ timed_proc_input_co2eq_flows_traj  |
+         ...                                      |
+            \ ...                                 |
+        ---->\ timed_cult_input_co2eq_flows_traj  |
+              \-----------------------------------|
             ...
                \ ...
         ------->\ unif_co2_flows_traj (implicitly timed)
