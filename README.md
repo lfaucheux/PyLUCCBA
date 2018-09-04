@@ -64,7 +64,7 @@ But before using the calculator as such, let's define (and introduce) the set of
 
 The following table enumerates all parameters that can be used to create an instance of `CBACalculator`.
 
- Parameter's name         | and description
+ Parameter's name         | Description
  ------------------------ | -------
  `run_name`               | name of the folder that will contain the generated results and charts, *e.g.* `'Example-1'`.
  `country`                | name of the country under study. Only *one* possible choice currently: `France`.
@@ -224,9 +224,9 @@ Given that data are stored (in txt and csv formats) according to a hard-to-guess
 
     >>> import PyLUCCBA as cc
     >>> cc.data_resources_copier()
-    'resources' folder copied to C:\Users\username\foldername
+    'resources' folder copied to C:\path\to\folder
     
-Now, to explore the data, simply go to `C:\Users\username\foldername`, where you wil see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf).
+Now, to explore the data, go to `C:\path\to\folder`, where you wil see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf).
 
 #### Adding new CO2 prices (or output flows) trajectory
 
@@ -253,7 +253,7 @@ Please, contact me if you are interested in doing so.
 
 ## Paper's results replication
 
-All the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) can easily be reproduced. The table that follows makes the association between the python commands and the cases presented in the paper.
+All the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) can easily be reproduced. To replicate a specific result, one has to `import` the associated script. Its importation will run the code that is required to generate the results. The table that follows makes the association between the python `import`-commands and the cases presented in the paper.
 
  Paper's section and page | Python command                                                     | Invoked python code
  ------------------------ | ------------------------------------------------------------------ | -------------------
