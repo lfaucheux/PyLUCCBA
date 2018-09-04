@@ -6,7 +6,6 @@
 
 </details>
 
-- [Code coverage](#code-coverage)
 - [Installation](#installation)
 - [Example usage](#example-usage)
 - [Data](#data)
@@ -14,15 +13,8 @@
 - [Data customization/addition](#data-customizationaddition)
 - [Paper's results replication](#papers-results-replication)
 - [References](#references)
+- [Code coverage](#code-coverage)
 
-
-## Code coverage
-
-|  Module  | statements | missing | excluded | coverage |
-| -------- | ---------- | ------- | -------- | -------- |
-| core.py  | 860        | 27      | 0        | 97%      |
-| tools.py | 306        | 62      | 0        | 80%      |
-| Total    | 1166       | 89      | 0        | 92%      |
 
 ## Installation
 
@@ -290,3 +282,11 @@ The European Commission (2010). “[Commission decision of 10 June 2010 on guide
 
 Dupoux, M. “[The land use change time-accounting failure](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf)” (in press).
 
+
+## Code coverage
+
+|  Module  | statements | missing | excluded | coverage |
+| -------- | ---------- | ------- | -------- | -------- |
+| core.py  | 860        | 27      | 0        | 97%      |
+| tools.py | 306        | 62      | 0        | 80%      |
+| Total    | 1166       | 89      | 0        | 92%      |
