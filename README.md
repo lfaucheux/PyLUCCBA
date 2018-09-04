@@ -14,8 +14,8 @@
     - [A note on the compensatory rate](#a-note-on-the-compensatory-rate)
 - [Invoking documentation](#invoking-documentation)
 - [Data](#data)
-- [Format of results](#format-of-results)
 - [Data customization/addition](#data-customizationaddition)
+- [Format of results](#format-of-results)
 - [Paper's results replication](#papers-results-replication)
 - [References](#references)
 - [Code coverage](#code-coverage)
@@ -34,6 +34,8 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
     cd PyLUCCBA
     python setup.py install 
 
+
+<hr>
 
 ## Example usage
     
@@ -269,6 +271,8 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
     message                 : _ENDOGENIZER finally says sol=0.0542008612895724 
                               obj(sol)=[4.4408921e-16]
                               
+<hr>
+
 ## Invoking documentation
 
 You should abuse of the python-bultin [`help`](https://www.programiz.com/python-programming/methods/built-in/help) on any object defined in PyLUCCBA, as well as on any instantiated object, *e.g.*
@@ -340,6 +344,8 @@ You should abuse of the python-bultin [`help`](https://www.programiz.com/python-
 I invite you to test the function `help` on any of the following objects: `cc.BlackOutputAndSubstitutesSpecificities`, `cc.CBACalculator`, `cc.CBAParametersEndogenizer`, `cc.CarbonAndCo2FlowsAnnualizer`, `cc.Co2Prices`, `cc.GlobalWarmingPotential`, `cc.InputFlows`, `cc.LandSurfaceFlows`, `cc.OutputFlows`, `cc.VGCAndSOCDeltas`, `cc.VegetationsAndSoilSpecificities`.
 
 
+<hr>
+
 ## Data
 
 Data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder, composed of the following subfolders:
@@ -356,20 +362,8 @@ Data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/ma
 
 •	The txt files contain informations related to the trajectories that are stored in csv files.
 
-## Format of results
 
- *The scripts that must be used to obtain the *results* presented in [Dupoux (2018)](https://www.researchgate.net/publication/304170193_The_land_use_change_time-accounting_failure) are contained in the [example](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/examples) folder.*
-
-  The generated results consists of three .xlsx files, namely [\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), [\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx)  and [\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) all three located in a folder that is named (by default) according to the arguments involved in the computation:
-  
-•	[\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), which only displays the quantities associated to each flow, among which, emissions from the process of production, emissions from the cultivation of the feedstock, land use change impact from soil, land use change impact from biomass, etc.
-
-•	[\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx) which displays the monetary value of the different types of flows from both bioethanol and gasoline (“black”) depending of the carbon price scenario chosen in “study_case.py”.
-
-•	[\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) which displays the net present values for both the uniform and the differentiated annualizations for the different types of flow again. All titles specify what is calculated. Note that “ut” refers to bioethanol quantities in tonne and “um” refers to bioethanol quantities in megajoules (MJ).
-
-Note that each column has a title that is very verbose – so as to make things as explicit as possible – regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
-
+<hr>
 
 ## Data customization/addition
 
@@ -403,7 +397,23 @@ Note that to add a new trajectory of annual output flows, the approach is exactl
 
 Please, contact me if you are interested in doing so.
 
+<hr>
 
+## Format of results
+
+ *The scripts that must be used to obtain the *results* presented in [Dupoux (2018)](https://www.researchgate.net/publication/304170193_The_land_use_change_time-accounting_failure) are contained in the [example](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/examples) folder.*
+
+  The generated results consists of three .xlsx files, namely [\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), [\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx)  and [\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) all three located in a folder that is named (by default) according to the arguments involved in the computation:
+  
+•	[\_quantities.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_quantities.xlsx), which only displays the quantities associated to each flow, among which, emissions from the process of production, emissions from the cultivation of the feedstock, land use change impact from soil, land use change impact from biomass, etc.
+
+•	[\_values.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_values.xlsx) which displays the monetary value of the different types of flows from both bioethanol and gasoline (“black”) depending of the carbon price scenario chosen in “study_case.py”.
+
+•	[\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) which displays the net present values for both the uniform and the differentiated annualizations for the different types of flow again. All titles specify what is calculated. Note that “ut” refers to bioethanol quantities in tonne and “um” refers to bioethanol quantities in megajoules (MJ).
+
+Note that each column has a title that is very verbose – so as to make things as explicit as possible – regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
+
+<hr>
 
 ## Paper's results replication
 
@@ -430,6 +440,8 @@ In case you want to modify those scripts instead of simply invoking them, you ca
 
 Second, go to `C:\path\to\folder`, where you wil see a folder named `examples` that contains the exact copies of the scripts enumerated in the above table. To edit one of those scripts, say, [*study_Grassland_CompensatoryRate.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py), right-click it and and select option *Edit with [IDLE](http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/idle.html#windows-in-idle)*. Modify anything you want. To execute the script, type **F5**.
 
+<hr>
+
 ## References
 
 Hoefnagels, R., E. Smeets, and A. Faaij (2010). “[Greenhouse gas footprints of different biofuel production systems](https://www.sciencedirect.com/science/article/pii/S1364032110000535)”. _Renewable and Sustainable Energy Reviews_ 14.7, pp. 1661–1694.
@@ -444,6 +456,8 @@ The European Commission (2010). “[Commission decision of 10 June 2010 on guide
 
 Dupoux, M. “[The land use change time-accounting failure](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf)” (in press).
 
+
+<hr>
 
 ## Code coverage
 
