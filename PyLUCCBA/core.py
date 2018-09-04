@@ -29,10 +29,10 @@ __all__ = [
     '__pyLUCCBA__',
     'BlackOutputAndSubstitutesSpecificities',
     'CBACalculator',
-    'data_resources_copier',
     'CBAParametersEndogenizer',
     'CarbonAndCo2FlowsAnnualizer',
     'Co2Prices',
+    'folder_copier',
     'GlobalWarmingPotential',
     'InputFlows',
     'LandSurfaceFlows',
@@ -2159,7 +2159,7 @@ class Co2Prices(ts.Cache):
 ##    ╔═╗╔╗ ╔═╗╔═╗┌─┐┬  ┌─┐┬ ┬┬  ┌─┐┌┬┐┌─┐┬─┐
 ##    ║  ╠╩╗╠═╣║  ├─┤│  │  │ ││  ├─┤ │ │ │├┬┘
 ##    ╚═╝╚═╝╩ ╩╚═╝┴ ┴┴─┘└─┘└─┘┴─┘┴ ┴ ┴ └─┘┴└─
-data_resources_copier = ts.DataReader()._resources_folder_copier
+folder_copier = ts.DataReader()._folder_copier
 
 class CBACalculator(ts.Cache):
 

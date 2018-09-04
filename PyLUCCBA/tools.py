@@ -809,21 +809,24 @@ class DataReader(Cache):
         self.local_folder    = os.getcwd()
         self.from_local_data = kwargs.get('from_local_data', False)
 
-    def _resources_folder_copier(self):
+    def _folder_copier(self, foldername='resources'):
         """ Method used to copy the resource folder locally.
 
         Testing/Example
         ---------------
+        >>> foldername = 'resources'
         >>> dr = DataReader(
         ...     from_local_data = True
         ... )
         >>> os.path.exists(
-        ...     os.path.join(dr.package_folder, 'resources')
+        ...     os.path.join(dr.package_folder, foldername)
         ... )
         True
         >>> tmp_folder = os.path.join(dr.package_folder, '.tmp')
         >>> dr.local_folder = tmp_folder
-        >>> dr._resources_folder_copier()
+        >>> dr._folder_copier(
+        ...     foldername = foldername
+        ... )
         >>> sorted(dr.resources.keys())
         ['dluc', 'prices', 'yields']
         >>> tmp_exists = lambda : os.path.exists(tmp_folder)
@@ -836,11 +839,12 @@ class DataReader(Cache):
         """
         if self.local_folder != self.package_folder:
             sh.copytree(
-                src = os.path.join(self.package_folder, 'resources'),
-                dst = os.path.join(self.local_folder, 'resources')
+                src = os.path.join(self.package_folder, foldername),
+                dst = os.path.join(self.local_folder, foldername)
             )
             if not __name__eq__main__:
-                print("'resources' folder copied to {}".format(
+                print("'{}' folder copied to {}".format(
+                    foldername,
                     self.local_folder
                 ))
 
