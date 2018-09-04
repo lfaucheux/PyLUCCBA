@@ -8,6 +8,8 @@
 
 - [Installation](#installation)
 - [Example usage](#example-usage)
+    - [A note on the carbon profitability payback period](#a-note-on-the-carbon-profitability-payback-period)
+    - [A note on the compensatory rate](#a-note-on-the-compensatory-rate)
 - [Data](#data)
 - [Format of results](#format-of-results)
 - [Data customization/addition](#data-customizationaddition)
@@ -182,13 +184,55 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
-Put differently,
+### A note on the carbon profitability payback period
+
+Rather than vizualizing the NPV's profiles, note that the tool provides a precise way to know when a project will become *envionmentally* profitable -- referred to as *Carbon Profitability Payback Period* in [Dupoux](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) -- under each type of annualization approach.
 
     >>> cba.unif_payback_period
     40 # years
     >>> cba.diff_payback_period
     35 # years
 
+### A note on the compensatory rate
+
+We may wonder under which discount rate the annualization approach would lead to the same NPV over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA` -- aliased by `cc`--, namely `CBAParametersEndogenizer`. Let's continue out example and instantiate it:
+
+    >>> endogenizer = cc.CBAParametersEndogenizer(CBACalculator_instance = cba)
+
+With `endogenizer` in hand, we can now determine which discount rate equalizes our two NPVs, as follows:
+
+    >>> cba_eq = endogenizer.endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj
+    ---- disc rate equating unif- and diff-based NPVs sol=[0.05420086]
+    ---- [***]The solution converged.[1.554312e-15][***]
+    
+it reads above that, so configured, our project would have identical NPVs under the uniform and differentiated annualization approach for a discount rate of 5.42%.
+
+At anytime, we can have a quick look at what is meant exactly by "so configured", typing
+
+    >>> print(cba_eq.summary_args)
+    **************************************************************************************
+    run_name                : Example-1
+    output                  : ETH
+    black_output            : OIL
+    initial_landuse         : IMPROVED GRASSLAND
+    final_landuse/input     : WHEAT
+    country                 : FRANCE
+    project_horizon         : 41
+    T_so                    : 20
+    T_vg_diff               : 1
+    T_vg_unif               : 20
+    project_first_year      : 2020
+    polat_repeated_pattern  : True
+    co2_prices_scenario     : SPC
+    discount_rate           : [0.05420086]
+    diff_payback_period     : []
+    unif_payback_period     : []
+    final_currency          : EUR
+    change_rates            : {'USD/EUR': 1.14}
+    output_flows_scenario   : O
+    input_flows_scenario    : IFP
+    message                 : _ENDOGENIZER finally says sol=0.054200861289571536 
+                  obj(sol)=[1.55431223e-15]
 
 ## Data
 
