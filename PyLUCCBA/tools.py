@@ -809,7 +809,7 @@ class DataReader(Cache):
         self.local_folder    = os.getcwd()
         self.from_local_data = kwargs.get('from_local_data', False)
 
-    def _folder_copier(self, foldername='resources'):
+    def _folder_copier(self, name='resources'):
         """ Method used to copy the resource folder locally.
 
         Testing/Example
@@ -825,7 +825,7 @@ class DataReader(Cache):
         >>> tmp_folder = os.path.join(dr.package_folder, '.tmp')
         >>> dr.local_folder = tmp_folder
         >>> dr._folder_copier(
-        ...     foldername = foldername
+        ...     name = foldername
         ... )
         >>> sorted(dr.resources.keys())
         ['dluc', 'prices', 'yields']
@@ -839,13 +839,12 @@ class DataReader(Cache):
         """
         if self.local_folder != self.package_folder:
             sh.copytree(
-                src = os.path.join(self.package_folder, foldername),
-                dst = os.path.join(self.local_folder, foldername)
+                src = os.path.join(self.package_folder, name),
+                dst = os.path.join(self.local_folder, name)
             )
             if not __name__eq__main__:
                 print("'{}' folder copied to {}".format(
-                    foldername,
-                    self.local_folder
+                    name, self.local_folder
                 ))
 
     @Cache._property
