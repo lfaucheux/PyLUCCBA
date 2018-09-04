@@ -181,15 +181,15 @@ which, when monetized with a non-zero discount rate and compared in terms of abs
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
 
-Note the slop-breaks that occur during the last year. This is due to the fact that cultivation and its associated emission flows generally – depending on the type of final land use – finish one year before the end of the project, which structurally increases projects' carbon profitabilities.
+Note the slop-breaks that occur during the last year. This is due to the fact that cultivation and its associated emission flows generally – depending on the type of final land use – finish one year before the end of the project, which structurally increases projects' NPVs.
 
 ### A note on the carbon profitability payback period
 
-Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two temporal profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize *when* the project exhibits positive carbon profitabilities (CP) for each annualization approach.
+Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two NPVs' profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize *when* the project exhibits positive carbon profitabilities (CP) for each annualization approach.
     
 •	*NB1: the project horizon must be long enough for such a payback period to exist. Hence the extension from 20 to 50 years configured below.*
 
-•	*NB2: given that cultivation and its associated flows of emission generally – depending on the type of final land use – finish before the end of the project, projects' last years are structurally more environment-friendly, which increases projects' carbon profitabilities, in some cases to such an extent that these last years actually become the payback period, hence the NB1*.
+•	*NB2: given that cultivation and its associated flows of emission generally – depending on the type of final land use – finish before the end of the project, projects' last years are structurally more environment-friendly, which increases projects' NPVs, in some cases to such an extent that these last years actually become the payback period, hence the NB1*.
 
     >>> cba._clear_caches()    # we clear the cache of our instance since we are going to change a calculation parameter.
     GlobalWarmingPotential     # the tool enumerates objects whose cache have been cleaned.
@@ -228,11 +228,11 @@ Let's be precautious and go back to the project's settings of interest.
 
 ### A note on the compensatory rate
 
-We may wonder under which discount rate the two approaches of annualization – uniform *versus* differentiated – would lead to the same carbon profitability (CP) over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA`, namely `CBAParametersEndogenizer`. Let's continue our example and instantiate it:
+We may wonder under which discount rate the two approaches of annualization – uniform *versus* differentiated – would lead to the same NPV over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA`, namely `CBAParametersEndogenizer`. Let's continue our example and instantiate it:
 
     >>> gen = cc.CBAParametersEndogenizer(CBACalculator_instance = cba)
 
-With `gen` in hand, we can now determine which discount rate equalizes our two CPs, as follows:
+With `gen` in hand, we can now determine which discount rate equalizes our two NPVs, as follows:
 
     >>> cba_eq = gen.endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj
     ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -242,7 +242,7 @@ With `gen` in hand, we can now determine which discount rate equalizes our two C
     ---- disc rate equating unif- and diff-based NPVs sol=[0.05420086]
     ---- [***]The solution converged.[4.440892e-16][***]
     
-Note that `cba_eq` is the `disc_rate`-balanced counterpart of `cba`. It reads above that, "so configured", our project would have identical CPs under the uniform and differentiated annualization approaches for a discount rate of 5.42%.
+Note that `cba_eq` is the `disc_rate`-balanced counterpart of `cba`. It reads above that, "so configured", our project would have identical NPVs under the uniform and differentiated annualization approaches for a discount rate of 5.42%.
 
 At anytime, we can have a quick look at what is meant exactly by "so configured", typing
 
