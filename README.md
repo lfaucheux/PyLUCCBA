@@ -1,10 +1,12 @@
 # PyLUCCBA
+
 <details>
     <summary>A Land-Use-Change Cost-Benefit-Analysis calculator coded in Python.</summary>
+</details>
     
 *This package offers a compilation of environmental and economic data to generate environment-related net present values of any project with impacts to the environment (GHG emissions or sequestrations). It is coded in Python (compatible with both versions: 2 and 3). Python is a cross platform and a comprehensive extensible and editable language with a large community of users. The structure of the package is simple with accessible input data to which it is possible to add or suppress one’s own trajectories (of prices, carbon stocks, etc).*
 
-</details>
+<hr>
 
 - [Installation](#installation)
 - [Example usage](#example-usage)
@@ -17,6 +19,7 @@
 - [References](#references)
 - [Code coverage](#code-coverage)
 
+<hr>
 
 ## Installation
 
