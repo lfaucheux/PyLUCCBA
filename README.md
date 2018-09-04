@@ -267,13 +267,11 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
 
 ## Data
 
-  Raw data are first used in an independent excel file, namely [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Data_CarbonStocks_Emissions.xlsx), to calculate the carbon stock changes per type of LUC for the scenarios studied in the paper and emissions from the process and cultivation of bioethanol. 
+  Raw data are first used in an independent excel file, namely [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/Data_CarbonStocks_Emissions.xlsx), to calculate the carbon stock changes per type of LUC for the scenarios studied in the paper and emissions from the process and cultivation of bioethanol. 
  
 Once calculated, some data are stored in the body of core.py itself under the form of [python dictionary](https://www.w3schools.com/python/python_dictionaries.asp), see [process](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L151) and [cultivation](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L171).  Other data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. The latter folder is composed of:
   
-•	The [meta](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta) folder that includes *(i)* a downloadable version of [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf), *(ii)* [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Data_CarbonStocks_Emissions.xlsx) in which you can see how dluc calculations are made and in which *(iii)* [BioGrace Excel tool - version 4c.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/BioGrace%20Excel%20tool%20-%20version%204c.xls) is cited.
-  
-•	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder in which the dluc calculations are reported.
+•	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder that includes *(i)* [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/Data_CarbonStocks_Emissions.xlsx) in which you can see how dluc calculations are made, in which *(ii)* [BioGrace Excel tool - version 4c.xls](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/BioGrace%20Excel%20tool%20-%20version%204c.xls) is cited and *(iii)* csv and txt files in which calculations are reported.
 
 •	The [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) folder that includes the carbon price scenarios.
 
