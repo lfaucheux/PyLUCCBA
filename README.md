@@ -33,7 +33,7 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
 
 ## Example usage
     
-*The example that follows is done with the idea of showing how to reproduce the results presented in Dupoux (2018) via the Python Shell*.
+*The example that follows is done with the idea of showing how to reproduce the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) via the Python Shell*.
 
 Let's first import the module `PyLUCCBA`
 
@@ -196,7 +196,7 @@ Put differently,
 
   Raw data are first used in an independent excel file, namely [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Data_CarbonStocks_Emissions.xlsx), to generate *(i)* land use change carbon stock changes for the scenarios studied in the paper and *(ii)* emissions from the process and cultivation of bioethanol. These data are then stored in the body of [core.py](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py) itself (under the form of [python dictionary](https://www.w3schools.com/python/python_dictionaries.asp)) and in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. The latter folder is composed of:
   
-•	The [meta](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta) folder, simply here to provide you with a direct way to download [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Data_CarbonStocks_Emissions.xlsx), in which you can see how dluc calculations are made.
+•	The [meta](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta) folder that includes *(i)* a downloadable version of [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf), *(ii)* [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Data_CarbonStocks_Emissions.xlsx) in which you can see how dluc calculations are made and *(iii)* [BioGrace Excel tool - version 4c.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/BioGrace%20Excel%20tool%20-%20version%204c.xls) implied as a source data in [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Data_CarbonStocks_Emissions.xlsx).
   
 •	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder in which the dluc calculations are reported.
 
@@ -228,7 +228,7 @@ Given that data are stored (in txt and csv formats) according to a hard-to-guess
     >>> cc.data_resources_copier()
     'resources' folder copied to C:\Users\username\foldername
     
-Now, to explore the data, simply go to `C:\Users\username\foldername`, where you wil see a folder named `resources` that is the exact copy of the data used in Dupoux 2018.
+Now, to explore the data, simply go to `C:\Users\username\foldername`, where you wil see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf).
 
 #### Adding new CO2 prices (or output flows) trajectory
 
