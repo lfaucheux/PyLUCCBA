@@ -189,7 +189,7 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 •	*NB1: the project horizon must be long enough for such a payback period to exist. Hence the extension from 20 to 50 years configured below.*
 
-•	*NB2: given that cultivation and its associated flows of emission generally – depending on the type of final land use – finish before the end of the project, projects' last years are structurally more environment-friendly, which increases projects' NPVs, in some cases to such an extent that these last years actually become the payback period, hence the NB1*.
+•	*NB2: given that cultivation and its associated flows of emission generally – depending on the type of final land use – stop before the end of the project, the last year of the project is structurally more environment-friendly, which increases projects' NPVs (see the jump in the charts above), in some cases to such an extent that the last year actually becomes the payback period, hence the NB1*.
 
     >>> cba._clear_caches()    # we clear the cache of our instance since we are going to change a calculation parameter.
     GlobalWarmingPotential     # the tool enumerates objects whose cache have been cleaned.
@@ -208,14 +208,14 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
-Rather than vizualizing the NPVs' profiles we may use a precise way to know *when* a project will become *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) – for each type of annualization approach.
+Rather than vizualizing the NPVs' profiles, we may use a precise way to know *when* a project becomes *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) – for each type of annualization approach.
 
     >>> cba.unif_payback_period
     41 # years
     >>> cba.diff_payback_period
     35 # years
     
-Let's be precautious and go back to the project's settings of interest.
+Let's be precautious and go back to the project's settings of interest for the rest of the example.
 
     >>> cba._clear_caches()
     GlobalWarmingPotential
@@ -275,7 +275,7 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
 
 ## Invoking documentation
 
-You should abuse of the python-bultin [`help`](https://www.programiz.com/python-programming/methods/built-in/help) on any object defined in PyLUCCBA, as well as on any instantiated object, *e.g.*
+You should abuse of the python-bultin function [`help`](https://www.programiz.com/python-programming/methods/built-in/help) on any object defined in PyLUCCBA, as well as on any instantiated object, *e.g.*
     
     >>> import PyLUCCBA as cc
     >>> help(cc.CBAParametersEndogenizer)
