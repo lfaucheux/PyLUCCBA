@@ -3,6 +3,7 @@ from __future__ import print_function
 from PyLUCCBA.examples import studies_constant_settings as cs
 import PyLUCCBA as cc
 
+
 scenarizer = lambda rate : cc.CBACalculator(
     run_name               = 'Forest-Cropland_DR=%s_CP=O'%rate,
     project_horizon        = 20,
