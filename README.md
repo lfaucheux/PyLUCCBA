@@ -273,9 +273,15 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
   
 •	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder in which the dluc calculations are reported.
 
-•	The [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) folder that includes the carbon price trajectories scenarios. When only two-time prices are provided, such as in the World Energy Outlook, there is an automatic process which extrapolates the values for each year in an exponential way. For example, if prices are provided at year 2020 and 2025, then the prices at 2021, 2022, 2023 and 2024 are generated in an exponential way. The .txt file provides the unit and year base for the monetary used in scenarios (e.g. EUR 2012).
+•	The [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) folder that includes the carbon price scenarios.
 
-•	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders. The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to the calculations: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare. The second folder, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), is only instrumental and tautologically states than one tonne of biofuel is produced per tonne of output.
+•	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders. The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to the calculations: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare. The second folder, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), tautologically states than one tonne of biofuel is produced per tonne of output.
+
+*NB: in the folders [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) and [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields), note that:*
+
+•	Csv files contain temporal trajectories (of prices, of quantities, of yields, ...). These trajectories can be sparse. Indeed, when sparse trajectories are provided, say, CO2 prices such as in the scenario *WEO2015* – see [CO2_prices_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/prices/Exput/CO2_prices_FR.csv) –, the tool automatically retro/intra/extrapolates the values for each year in an exponential way. When both retro- and extrapolation are possible, retropolation is favoured and it retropolates using the next period's rate of growth. Then, depending on whether the parameter `polat_repeated_pattern` is set to `True` ...
+
+•	Txt files contain informations related to the trajectories that are stored in csv files.
 
 ## Format of results
 
