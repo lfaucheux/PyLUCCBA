@@ -171,10 +171,21 @@ which, when monetized with a non-zero discount rate and compared in terms of abs
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
 
-Actually, it looks like extending the horizon of the project may be a good idea to see whether one of those two temporal profiles exhibit positive values over the long run.
+### A note on the carbon profitability payback period
 
-    >>> cba._cache.clear() # we clear the cache of our instance since we are going to change a calculation parameter.
-    >>> cba.project_horizon = 40 # double the project horizon
+Actually, it looks like extending the horizon of the project may be a good idea to see whether one of those two temporal profiles exhibit positive values over the long run.
+    
+*NB1: the project horizon must be long enough for such a period to exist. Hence the extension from 20 years to 50 years that is done below.*
+*NB2: given that cultivation and its associated emission flows often -- depending on the type of final land use -- end one year before the end of the project, projects' last years are structurally more enviroment-friendly, which may increase project's carbon profitability in some cases to such an extent that this last year actually becomes the payback period, hence the NB1*.
+
+    >>> cba._clear_caches()         # we clear the cache of our instance since we are going to change a calculation parameter.
+    GlobalWarmingPotential          # the tool enumerates the caches that have been cleaned.
+    OutputFlows
+    CarbonAndCo2FlowsAnnualizer
+    LandSurfaceFlows
+    Co2Prices
+    CBACalculator
+    >>> cba.project_horizon = 50    # we set a long project horizon
     >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
     >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
     ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -184,28 +195,39 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
-### A note on the carbon profitability payback period
-
-Rather than vizualizing the NPV's profiles, note that the tool provides a precise way to know when a project will become *environmentally* profitable -- referred to as *Carbon Profitability Payback Period* in [Dupoux](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) -- under each type of annualization approach.
+Rather than vizualizing the NPV's profiles we may use a precise way to know when a project will become *environmentally* profitable -- referred to as *Carbon Profitability Payback Period* in [Dupoux](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) -- for each type of annualization approach.
 
     >>> cba.unif_payback_period
-    40 # years
+    41 # years
     >>> cba.diff_payback_period
     35 # years
     
-*NB:* the project horizon must be long enough for a such a period to exist. Hence the extension from 20 years to 40 years that has been done just above.
+Let's be precautious and go back to the project's settings of interest.
+
+    >>> cba._clear_caches()
+    GlobalWarmingPotential
+    OutputFlows
+    CarbonAndCo2FlowsAnnualizer
+    LandSurfaceFlows
+    Co2Prices
+    CBACalculator
+    >>> cba.project_horizon = 20    # let's go back to our initial settings !
 
 ### A note on the compensatory rate
 
-We may wonder under which discount rate the annualization approach would lead to the same NPV over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA` -- aliased by `cc`--, namely `CBAParametersEndogenizer`. Let's continue out example and instantiate it:
+We may wonder under which discount rate the annualization approach would lead to the same carbon profitability over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA` -- aliased by `cc`--, namely `CBAParametersEndogenizer`. Let's continue our example and instantiate it:
 
     >>> endogenizer = cc.CBAParametersEndogenizer(CBACalculator_instance = cba)
 
 With `endogenizer` in hand, we can now determine which discount rate equalizes our two NPVs, as follows:
 
     >>> cba_eq = endogenizer.endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj
+    ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
+    ---- [***]The solution converged.[0.000000e+00][***]
+    ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
+    ---- [***]The solution converged.[0.000000e+00][***]
     ---- disc rate equating unif- and diff-based NPVs sol=[0.05420086]
-    ---- [***]The solution converged.[1.554312e-15][***]
+    ---- [***]The solution converged.[4.440892e-16][***]
     
 it reads above that, so configured, our project would have identical NPVs under the uniform and differentiated annualization approach for a discount rate of 5.42%.
 
@@ -219,7 +241,7 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
     initial_landuse         : IMPROVED GRASSLAND
     final_landuse/input     : WHEAT
     country                 : FRANCE
-    project_horizon         : 41
+    project_horizon         : 21
     T_so                    : 20
     T_vg_diff               : 1
     T_vg_unif               : 20
@@ -233,8 +255,8 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
     change_rates            : {'USD/EUR': 1.14}
     output_flows_scenario   : O
     input_flows_scenario    : IFP
-    message                 : _ENDOGENIZER finally says sol=0.054200861289571536 
-                  obj(sol)=[1.55431223e-15]
+    message                 : _ENDOGENIZER finally says sol=0.0542008612895724 
+                              obj(sol)=[4.4408921e-16]
 
 ## Data
 
