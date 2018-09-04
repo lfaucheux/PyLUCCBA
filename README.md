@@ -116,7 +116,7 @@ We may also wonder which quantities trajectory of wheat is implied by that of bi
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20input%20%5BIFP%5D%5BWHEAT%5D.png?raw=true" width="60%"/><img></p>
 
-Note the abscence of input flow in 2040: as explained previously, this illustrates the time delay that exists between the cultivation of wheat and its transformation into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol that is planned in 2040.
+Note the abscence of input flow in 2040: as explained previously, this illustrates the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040.
 
 The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of carbon dioxide emissions. These emissions clearly don't exhibit the same profile depending on how we choose to consider them over the project horizon. First, regarding soil carbon dioxide emissions:
 
@@ -159,9 +159,10 @@ Independently of how we annualize the LUC-related carbon dioxide emissions, the 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bcult-WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bproc-WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Note that the emissions shown above are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using as a basis of conversion, their global warming potentials relatively to that of *CO2*. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
+Once again, the two above charts unambiguously illustrate the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040. Also, note that these cultivation- and processing-related emissions are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using their relative global warming potentials -- relatively to that of *CO2* -- as a basis of conversion. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
 
-Finally the total emissions following a change in land use from improved grassland into wheat field are -- under the two types of annualization approach:
+Finally the total emissions following a change in land use from improved grassland into wheat field are 
+under the two types of annualization approach:
 
     >>> cba.chart_of_total_unif_co2_flows_traj.show()
     >>> cba.chart_of_total_diff_co2_flows_traj.show()
