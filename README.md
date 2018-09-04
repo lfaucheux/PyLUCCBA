@@ -194,7 +194,7 @@ Put differently,
 
 ## Data
 
-  Raw data are first used in an independent excel file, namely “Data_CarbonStocks_Emissions.xlsx”, to generate *(i)* land use change carbon stock changes for the scenarios studied in the paper and *(ii)* emissions from the process and cultivation of bioethanol. These data are then stored in the body of [core.py](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py) itself (under the form of python-native dictionary) and in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. The latter folder is composed of:
+  Raw data are first used in an independent excel file, namely “Data_CarbonStocks_Emissions.xlsx”, to generate *(i)* land use change carbon stock changes for the scenarios studied in the paper and *(ii)* emissions from the process and cultivation of bioethanol. These data are then stored in the body of [core.py](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py) itself (under the form of [python dictionary](https://www.w3schools.com/python/python_dictionaries.asp)) and in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. The latter folder is composed of:
   
 •	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder in which the dluc calculations are reported (see calculations in the provided “Data” Excel file). The .txt file indicates the units of data.
 
