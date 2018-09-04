@@ -98,19 +98,19 @@ Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonde
 
 As it reads in the above chart, we are about to work with a constant level of production over the project horizon. Note the abscence of flow in 2020: this illustrates the need for waiting one year before having enough wheat to produce biofuel.
 
-We may then wonder what is the counterfactual trajectory in terms of gasoline -- targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis: 
+We may then wonder what is the counterfactual trajectory in terms of gasoline – targeting the same [energy efficiency](https://en.wikipedia.org/wiki/Energy_conversion_efficiency) (in joule) as conversion basis: 
 
     >>> cba.chart_of_black_output_flows_traj.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20OIL%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
-Now, let's see which trajectory of carbon dioxide prices is behind the name `'SPC'` -- which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
+Now, let's see which trajectory of carbon dioxide prices is behind the name `'SPC'` – which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
 
     >>> cba.chart_of_co2_prices_traj.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/PRICES%20co2%20%5BSPC%5D.png?raw=true" width="60%"/><img></p>
 
-We may also wonder which quantities trajectory of wheat is implied by that of biofuel on the one hand, and by the value we set for the parameter `input_flows_scenario`, that is `'IFP'` , on the other hand -- where *I.F.P* stands for *Institut Français du Pétrole énergies nouvelles* -- which made a report in [2013](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) in which it reads that, with 1 tonne of wheat, one can produce [0.2844](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) tonnes of bioethanol. Let's vizualize that:
+We may also wonder which quantities trajectory of wheat is implied by that of biofuel on the one hand, and by the value we set for the parameter `input_flows_scenario`, that is `'IFP'` , on the other hand – where *I.F.P* stands for *Institut Français du Pétrole énergies nouvelles* – which made a report in [2013](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) in which it reads that, with 1 tonne of wheat, one can produce [0.2844](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) tonnes of bioethanol. Let's vizualize that:
 
     >>> cba.chart_of_input_flows_traj.show()
 
@@ -159,32 +159,31 @@ Independently of how we annualize the LUC-related carbon dioxide emissions, the 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bcult-WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bproc-WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Once again, the two above charts unambiguously illustrate the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040. Also, note that these cultivation- and processing-related emissions are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using their relative global warming potentials -- relatively to that of *CO2* -- as a basis of conversion. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
+Once again, the two above charts unambiguously illustrate the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040. Also, note that these cultivation- and processing-related emissions are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using their relative global warming potentials – relatively to that of *CO2* – as a basis of conversion. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
 
-Finally the total emissions following a change in land use from improved grassland into wheat field are 
-under the two types of annualization approach:
+Finally, under the two types of annualization approach, the total emissions following a change in land use from improved grassland into wheat field are:
 
     >>> cba.chart_of_total_unif_co2_flows_traj.show()
     >>> cba.chart_of_total_diff_co2_flows_traj.show()
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bunif-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bdiff-ETH%5D.png?raw=true" width="50%"/><img></p>
 
-which, when monetized with a non-zero discount rate and compared in terms of absolute deviations from gasoline's valorized CO2 flows, lead to sensitivly different profile for the values of the project, see rather
+which, when monetized with a non-zero discount rate and compared in terms of absolute deviations from gasoline's valorized CO2 flows, lead to sensitivly different profiles for the values of the project, see rather
 
     >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
     >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
 
-Note the slop-change that occurs during the last year. This is due to the fact that cultivation and its associated emission flows generally -- depending on the type of final land use -- end one year before the end of the project, which structurally increases projects' carbon profitabilities.
+Note the slop-change that occurs during the last year. This is due to the fact that cultivation and its associated emission flows generally – depending on the type of final land use – finish one year before the end of the project, which structurally increases projects' carbon profitabilities.
 
 ### A note on the carbon profitability payback period
 
-Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two temporal profiles -- shown above -- exhibit positive values over the long run. Put differently, let's vizualize when the project exhibits positive carbon profitabilities for each annualization approach.
+Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two temporal profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize when the project exhibits positive carbon profitabilities for each annualization approach.
     
 •	*NB1: the project horizon must be long enough for such the payback period to exist. Hence the extension from 20 years to 50 years that is configured below.*
 
-•	*NB2: given that cultivation and its associated flows of emission generally -- depending on the type of final land use -- finish before the end of the project, projects' last years are structurally more environment-friendly, which increases projects' carbon profitabilities, in some cases to such an extent that these last year actually become the payback period, hence the NB1*.
+•	*NB2: given that cultivation and its associated flows of emission generally – depending on the type of final land use – finish before the end of the project, projects' last years are structurally more environment-friendly, which increases projects' carbon profitabilities, in some cases to such an extent that these last year actually become the payback period, hence the NB1*.
 
     >>> cba._clear_caches()         # we clear the cache of our instance since we are going to change a calculation parameter.
     GlobalWarmingPotential          # the tool enumerates the caches that have been cleaned.
@@ -203,7 +202,7 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
-Rather than vizualizing the NPV's profiles we may use a precise way to know when a project will become *environmentally* profitable -- referred to as *Carbon Profitability Payback Period* in [Dupoux](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) -- for each type of annualization approach.
+Rather than vizualizing the NPV's profiles we may use a precise way to know when a project will become *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) – for each type of annualization approach.
 
     >>> cba.unif_payback_period
     41 # years
@@ -223,7 +222,7 @@ Let's be precautious and go back to the project's settings of interest.
 
 ### A note on the compensatory rate
 
-We may wonder under which discount rate the annualization approach would lead to the same carbon profitability (CP) over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA` -- aliased by `cc`--, namely `CBAParametersEndogenizer`. Let's continue our example and instantiate it:
+We may wonder under which discount rate the annualization approach would lead to the same carbon profitability (CP) over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA` – aliased by `cc`–, namely `CBAParametersEndogenizer`. Let's continue our example and instantiate it:
 
     >>> endogenizer = cc.CBAParametersEndogenizer(CBACalculator_instance = cba)
 
@@ -290,7 +289,7 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
 
 •	[\_NPVs.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/examples/Example-1/_NPVs.xlsx) which displays the net present values for both the uniform and the differentiated annualizations for the different types of flow again. All titles specify what is calculated. Note that “ut” refers to bioethanol quantities in tonne and “um” refers to bioethanol quantities in megajoules (MJ).
 
-Note that each column has a title that is very verbose -- so as to make things as explicit as possible -- regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
+Note that each column has a title that is very verbose – so as to make things as explicit as possible – regarding what is calculated. When the prefix **ut_** appears in the title it means that it is calculated for one unit tonne of biofuel. When the prefix **um_** appears in the title, it means that it is calculated for one unit megajoule of biofuel. When nothing is specified, it takes into account the total quantity of biofuel produced.
 
 
 ## Data customization/addition
