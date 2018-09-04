@@ -194,7 +194,7 @@ Put differently,
 
 ## Data
 
-  The results are based on data located in the body of [core.py](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py) itself (under the form of python-native dictionary) and in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. The latter folder is composed of:
+  Raw data are first used in an independent excel file, namely “Data_CarbonStocks_Emissions.xlsx”, to generate *(i)* land use change carbon stock changes for the scenarios studied in the paper and *(ii)* emissions from the process and cultivation of bioethanol. These data are then stored in the body of [core.py](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py) itself (under the form of python-native dictionary) and in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. The latter folder is composed of:
   
 •	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder in which the dluc calculations are reported (see calculations in the provided “Data” Excel file). The .txt file indicates the units of data.
 
@@ -282,11 +282,6 @@ All the results presented in Dupoux (2018) can easily be reproduced. The table t
 •	The compensatory rate (see the paper for more information) can be calculated easily with the tool.
 
 •	Note that constant returns to scale (biofuel production) are assumed in the tool.
-
-
-## Data
-
-  Raw data from the public repository as listed above are first used in the “Data_CarbonStocks_Emissions” Excel file to generate (i) land use change carbon stock changes for the scenarios studied in the paper, and (ii) emissions from the process and cultivation of bioethanol. This data is then directly used in the tool (either in the “resources” folder or the code) which is described below. The output data is not directly provided but as explained below, it can be generated easily with the “ready-to-use” study cases provided.
 
 
 ## Acknowledgements
