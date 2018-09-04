@@ -1,7 +1,14 @@
 # PyLUCCBA
 A Land-Use-Change Cost-Benefit-Analysis calculator coded in [Python](https://www.python.org/downloads/).
 
-#### Code coverage
+- [Code coverage](#code-coverage)
+- [Installation](#installation)
+- [Example usage](#example-usage)
+- [Data customization/addition](#data-customizationaddition)
+- [Paper's results replication](#papers-results-replication)
+
+
+## Code coverage
 
 |  Module  | statements | missing | excluded | coverage |
 | -------- | ---------- | ------- | -------- | -------- |
