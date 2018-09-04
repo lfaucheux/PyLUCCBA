@@ -33,7 +33,7 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
 
 ## Example usage
     
-*The example that follows is done with the idea of showing how to reproduce the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) via the Python Shell*.
+*The example that follows is done with the idea of showing how to reproduce the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) via the Python Shell*.
 
 Let's first import the module `PyLUCCBA`
 
@@ -202,7 +202,7 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
-Rather than vizualizing the NPV's profiles we may use a precise way to know *when* a project will become *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) – for each type of annualization approach.
+Rather than vizualizing the NPV's profiles we may use a precise way to know *when* a project will become *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) – for each type of annualization approach.
 
     >>> cba.unif_payback_period
     41 # years
@@ -271,7 +271,7 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
  
 Once calculated, some data are stored in the body of core.py itself under the form of [python dictionary](https://www.w3schools.com/python/python_dictionaries.asp), see [process](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L151) and [cultivation](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L171).  Other data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. The latter folder is composed of:
   
-•	The [meta](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta) folder that includes *(i)* a downloadable version of [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf), *(ii)* [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Data_CarbonStocks_Emissions.xlsx) in which you can see how dluc calculations are made and in which *(iii)* [BioGrace Excel tool - version 4c.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/BioGrace%20Excel%20tool%20-%20version%204c.xls) is cited.
+•	The [meta](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta) folder that includes *(i)* a downloadable version of [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf), *(ii)* [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Data_CarbonStocks_Emissions.xlsx) in which you can see how dluc calculations are made and in which *(iii)* [BioGrace Excel tool - version 4c.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/BioGrace%20Excel%20tool%20-%20version%204c.xls) is cited.
   
 •	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder in which the dluc calculations are reported.
 
@@ -309,7 +309,7 @@ Given that data are stored (in txt and csv formats) according to a hard-to-guess
     >>> cc.data_resources_copier()
     'resources' folder copied to C:\path\to\folder
     
-Now, to explore the data, go to `C:\path\to\folder`, where you wil see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf).
+Now, to explore the data, go to `C:\path\to\folder`, where you wil see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf).
 
 #### Adding new CO2 prices (or output flows) trajectory
 
@@ -336,7 +336,7 @@ Please, contact me if you are interested in doing so.
 
 ## Paper's results replication
 
-All the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) can easily be reproduced. To replicate a specific result, one has to `import` the associated script. Its importation will run the code that is required to generate the results. The table that follows makes the association between the python `import`-commands and the cases presented in the paper.
+All the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) can easily be reproduced. To replicate a specific result, one has to `import` the associated script. Its importation will run the code that is required to generate the results. The table that follows makes the association between the python `import`-commands and the cases presented in the paper.
 
  Paper's section and page | Python command                                                     | Invoked python code
  ------------------------ | ------------------------------------------------------------------ | -------------------
@@ -363,7 +363,7 @@ Poeplau, C., A. Don, L. Vesterdal, J. Leifeld, B. VanWesemael, J. Schumacher, an
 
 The European Commission (2010). “[Commission decision of 10 June 2010 on guidelines for the calculation of land carbon stocks for the purpose of Annex V to Directive 2009/28/EC](https://www.emissions-euets.com/component/content/article/261-commission-decision-of-10-june-2010-on-guidelines-for-the-calculation-of-land-carbon-stocks-for-the-purpose-of-annex-v-to-directive-200928ec)”. _Official Journal of The European Union_ 2010/335/E.
 
-Dupoux, M. “[The land use change time-accounting failure](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf)” (in press).
+Dupoux, M. “[The land use change time-accounting failure](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf)” (in press).
 
 
 ## Code coverage
