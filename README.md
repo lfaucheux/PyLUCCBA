@@ -12,6 +12,7 @@
 - [Example usage](#example-usage)
     - [A note on the carbon profitability payback period](#a-note-on-the-carbon-profitability-payback-period)
     - [A note on the compensatory rate](#a-note-on-the-compensatory-rate)
+- [Invoking documentation](#invoking-documentation)
 - [Data](#data)
 - [Format of results](#format-of-results)
 - [Data customization/addition](#data-customizationaddition)
@@ -87,11 +88,11 @@ The following table enumerates all parameters that can be used to create an inst
  `T_vg_diff`              | period over which vegetation carbon emissions due to LUC are considered in the differentiated annualization approach.
  `T_vg_unif`              | period over which vegetation carbon emissions due to LUC are considered in the uniform annualization approach.
  `polat_repeated_pattern` | if `True`, retro/extra-polation pattern is repeated before/after the first/last mentioned value. Otherwise, it is maintained constant.
- `final_currency`         | currency used to convert transitories and express the results. The current choices are `'EUR'` or `'USD'`. Set to `'EUR'` by default.
- `change_rates`           | `final_currency`-dependent exchange rate value to consider in calculations, *e.g.* `{'EUR':{'USD/EUR':1.14,}}` *(or `{'EUR':{'EUR/USD':0.8772,}}` since the tool ensures dimensional homogeneity)*.
+ `final_currency`         | currency used to conduct the study and express the results. The current choices are `'EUR'` or `'USD'`. Set to `'EUR'` by default.
+ `change_rates`           | `final_currency`-dependent exchange rate to consider in calculations, *e.g.* `{'EUR':{'USD/EUR':1.14,}}` *(or `{'EUR':{'EUR/USD':0.8772,}}` since the tool ensures dimensional homogeneity)*.
  `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved or shown to users depending on the value set for `save_charts`. Set to `False` by default.
  `save_charts`            | if `True`, charts are saved on the disk. Otherwise, they are shown to users. Set to `True` by default. **NB**: `return_plts=True` has priority over `save_charts`.
- `from_local_data`        | if `True`, scenarized trajectories (*e.g.* of CO2 prices, of output flows quantities, of yields) are read from the 'resources' folder that is next to the working script. If `False`, those are read from the 'resources' folder natively contained in the package directory. Set to `False` by default.
+ `from_local_data`        | if `True`, scenarized trajectories (*e.g.* of CO2 prices, of output flows quantities, of yields) are read from the 'resources' folder that is located next to the working script. If `False`, those are read from the 'resources' folder natively contained in the package directory. Set to `False` by default.
 
 Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonder what are the scenarized trajectories over which we are about to conduct our study, *e.g.* of CO2 prices, produced quantities of biofuel, etc. In this case, we can simply type:
 
@@ -119,7 +120,7 @@ We may also wonder which quantities trajectory of wheat is implied by that of bi
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20input%20%5BIFP%5D%5BWHEAT%5D.png?raw=true" width="60%"/><img></p>
 
-Note the abscence of input flow in 2040: as explained previously, this illustrates the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040.
+Note the abscence of input flow in 2040: as explained previously, this illustrates the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *e.g.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040.
 
 The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of CO2 emissions. These emissions clearly don't exhibit the same profile depending on how we choose to consider them over the project horizon. First, regarding soil CO2 emissions:
 
@@ -162,7 +163,7 @@ Independently of how we annualize the LUC-related CO2 emissions, the cultivation
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bcult-WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2eq%20%5Bproc-WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Once again, the two above charts unambiguously illustrate the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040. Also, note that these cultivation- and processing-related emissions are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using their relative global warming potentials – relatively to that of *CO2* – as a basis of conversion. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
+Once again, the two above charts unambiguously illustrate the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in year *t-1* is used for the production of bioethanol planned in year *t*. Also, note that these cultivation- and processing-related emissions are in *CO2eq* since *CH4* and *N2O* flows are considered as well, using their relative global warming potentials – relatively to that of CO2 – as a basis of conversion. See calculation details at [PyGWP](https://github.com/lfaucheux/PyGWP). 
 
 Finally, under the two types of annualization approach, the total emissions following a change in land use from improved grassland into wheat field are:
 
@@ -171,7 +172,7 @@ Finally, under the two types of annualization approach, the total emissions foll
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bunif-ETH%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20total%20%5Bdiff-ETH%5D.png?raw=true" width="50%"/><img></p>
 
-which, when monetized with a non-zero discount rate and compared in terms of absolute deviations from gasoline's valorized CO2 flows, lead to sensitivly different profiles for the values of the project, see rather
+which, when monetized with a non-zero discount rate and compared in terms of absolute deviations from gasoline's valorized CO2 flows, lead to sensitivly different profiles for the values of the environmental component of the project, see rather
 
     >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
     >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
@@ -182,14 +183,14 @@ Note the slop-breaks that occur during the last year. This is due to the fact th
 
 ### A note on the carbon profitability payback period
 
-Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two temporal profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize *when* the project exhibits positive carbon profitabilities for each annualization approach.
+Actually, it looks like extending the horizon of the project may be a good idea to see whether one of the two temporal profiles – shown above – exhibit positive values over the long run. Put differently, let's vizualize *when* the project exhibits positive carbon profitabilities (CP) for each annualization approach.
     
-•	*NB1: the project horizon must be long enough for such the payback period to exist. Hence the extension from 20 years to 50 years that is configured below.*
+•	*NB1: the project horizon must be long enough for such a payback period to exist. Hence the extension from 20 to 50 years configured below.*
 
 •	*NB2: given that cultivation and its associated flows of emission generally – depending on the type of final land use – finish before the end of the project, projects' last years are structurally more environment-friendly, which increases projects' carbon profitabilities, in some cases to such an extent that these last years actually become the payback period, hence the NB1*.
 
-    >>> cba._clear_caches()         # we clear the cache of our instance since we are going to change a calculation parameter.
-    GlobalWarmingPotential          # the tool enumerates the caches that have been cleaned.
+    >>> cba._clear_caches()    # we clear the cache of our instance since we are going to change a calculation parameter.
+    GlobalWarmingPotential     # the tool enumerates objects whose cache have been cleaned.
     OutputFlows
     CarbonAndCo2FlowsAnnualizer
     LandSurfaceFlows
@@ -205,7 +206,7 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
-Rather than vizualizing the NPV's profiles we may use a precise way to know *when* a project will become *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) – for each type of annualization approach.
+Rather than vizualizing the NPVs' profiles we may use a precise way to know *when* a project will become *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) – for each type of annualization approach.
 
     >>> cba.unif_payback_period
     41 # years
@@ -225,13 +226,13 @@ Let's be precautious and go back to the project's settings of interest.
 
 ### A note on the compensatory rate
 
-We may wonder under which discount rate the two approaches of annualization – uniform *versus* differentiated – would lead to the same carbon profitability (CP) over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA` – aliased by `cc`–, namely `CBAParametersEndogenizer`. Let's continue our example and instantiate it:
+We may wonder under which discount rate the two approaches of annualization – uniform *versus* differentiated – would lead to the same carbon profitability (CP) over the project horizon. To do so, we have to use another object that is defined in `PyLUCCBA`, namely `CBAParametersEndogenizer`. Let's continue our example and instantiate it:
 
-    >>> endogenizer = cc.CBAParametersEndogenizer(CBACalculator_instance = cba)
+    >>> gen = cc.CBAParametersEndogenizer(CBACalculator_instance = cba)
 
-With `endogenizer` in hand, we can now determine which discount rate equalizes our two CPs, as follows:
+With `gen` in hand, we can now determine which discount rate equalizes our two CPs, as follows:
 
-    >>> cba_eq = endogenizer.endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj
+    >>> cba_eq = gen.endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj
     ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
     ---- [***]The solution converged.[0.000000e+00][***]
     ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -239,7 +240,7 @@ With `endogenizer` in hand, we can now determine which discount rate equalizes o
     ---- disc rate equating unif- and diff-based NPVs sol=[0.05420086]
     ---- [***]The solution converged.[4.440892e-16][***]
     
-Note that `cba_eq` is the `disc_rate`-balanced counterpart of `cba`. It reads above that, "so configured", our project would have identical NPVs under the uniform and differentiated annualization approaches for a discount rate of 5.42%.
+Note that `cba_eq` is the `disc_rate`-balanced counterpart of `cba`. It reads above that, "so configured", our project would have identical CPs under the uniform and differentiated annualization approaches for a discount rate of 5.42%.
 
 At anytime, we can have a quick look at what is meant exactly by "so configured", typing
 
@@ -267,6 +268,77 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
     input_flows_scenario    : IFP
     message                 : _ENDOGENIZER finally says sol=0.0542008612895724 
                               obj(sol)=[4.4408921e-16]
+                              
+## Invoking documentation
+
+You should abuse of the python-bultin [`help`](https://www.programiz.com/python-programming/methods/built-in/help) on any object defined in PyLUCCBA, as well as on any instantiated object, *e.g.*
+    
+    >>> import PyLUCCBA as cc
+    >>> help(cc.CBAParametersEndogenizer)
+    Help on CBAParametersEndogenizer in module PyLUCCBA.core object:
+
+    class CBAParametersEndogenizer(builtins.object)
+     |  Class object designed to handle a CBACalculator instances and to
+     |  endogenize some of its parameter.
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, CBACalculator_instance)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  OBJECTIVE_NPV_total_unif_co2_flows_traj_VS_NPV_total_diff_co2_flows_traj
+     |      Method which computes the objective of the discount rate
+     |      endogenizing process.
+     |      
+     |      Testing/Example
+     |      ---------------
+     |      >>> _dr_ = 0.03847487575799428 ## the solution
+     |      >>> cba = CBACalculator._testing_instancer(
+     |      ...     dr = _dr_, 
+     |      ...     sc = 'WEO2015-CPS',
+     |      ... )
+     |      >>> CBAParametersEndogenizer(
+     |      ...     CBACalculator_instance = cba
+     |      ... ).OBJECTIVE_NPV_total_unif_co2_flows_traj_VS_NPV_total_diff_co2_flows_traj
+     |      ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
+     |      ---- [***]The solution converged.[0.000000e+00][***]
+     |      ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
+     |      ---- [***]The solution converged.[0.000000e+00][***]
+     |      array([2.22044605e-16])
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj
+     |      Returns a CBACalculator instance configured with the discount rate
+     |      which equates NPV_total_unif_co2_flows_traj TO NPV_total_diff_co2_flows_traj.
+     |      
+     |      Testing/Example
+     |      ---------------
+     |      >>> cba = CBACalculator._testing_instancer(
+     |      ...     sc = 'WEO2015-CPS',
+     |      ... )
+     |      >>> o = CBAParametersEndogenizer(
+     |      ...     CBACalculator_instance = cba
+     |      ... )
+     |      >>> o.endo_disc_rate_which_eqs_NPV_total_unif_co2_flows_traj_to_NPV_total_diff_co2_flows_traj.discount_rate[0]
+     |      ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
+     |      ---- [***]The solution converged.[0.000000e+00][***]
+     |      ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
+     |      ---- [***]The solution converged.[0.000000e+00][***]
+     |      ---- disc rate equating unif- and diff-based NPVs sol=[0.03847488]
+     |      ---- [***]The solution converged.[2.220446e-16][***]
+     |      0.038474875757994256
+     
+
+I invite you to test the function `help` on any of the following objects: `cc.BlackOutputAndSubstitutesSpecificities`, `cc.CBACalculator`, `cc.CBAParametersEndogenizer`, `cc.CarbonAndCo2FlowsAnnualizer`, `cc.Co2Prices`, `cc.GlobalWarmingPotential`, `cc.InputFlows`, `cc.LandSurfaceFlows`, `cc.OutputFlows`, `cc.VGCAndSOCDeltas`, `cc.VegetationsAndSoilSpecificities`.
+
 
 ## Data
 
