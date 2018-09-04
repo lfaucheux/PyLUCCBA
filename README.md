@@ -186,12 +186,14 @@ Actually, it looks like extending the horizon of the project may be a good idea 
 
 ### A note on the carbon profitability payback period
 
-Rather than vizualizing the NPV's profiles, note that the tool provides a precise way to know when a project will become *envionmentally* profitable -- referred to as *Carbon Profitability Payback Period* in [Dupoux](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) -- under each type of annualization approach.
+Rather than vizualizing the NPV's profiles, note that the tool provides a precise way to know when a project will become *environmentally* profitable -- referred to as *Carbon Profitability Payback Period* in [Dupoux](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) -- under each type of annualization approach.
 
     >>> cba.unif_payback_period
     40 # years
     >>> cba.diff_payback_period
     35 # years
+    
+*NB:* the project horizon must be long enough for a such a period to exist. Hence the extension from 20 years to 40 years that has been done just above.
 
 ### A note on the compensatory rate
 
