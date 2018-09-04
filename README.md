@@ -253,7 +253,7 @@ Please, contact me if you are interested in doing so.
 
 ## Paper's results replication
 
-All the results presented in Dupoux (2018) can easily be reproduced. The table that follows makes the association between python commands and studies cases presented in the paper.
+All the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/meta/Dupoux_Sept2018.pdf) can easily be reproduced. The table that follows makes the association between the python commands and the cases presented in the paper.
 
  Paper's section and page | Python command                                                     | Invoked python code
  ------------------------ | ------------------------------------------------------------------ | -------------------
