@@ -23,7 +23,7 @@
 
 ## Installation
 
-First, you need Python installed, either [Python2.7.+](https://www.python.org/downloads/) or [Python3.+](https://www.python.org/downloads/). Either versions are good for our purpose. Then, we are going to use a package management system to install [PyLUCCBA](https://github.com/lfaucheux/PyLUCCBA), namely [pip](https://en.wikipedia.org/wiki/Pip_(package_manager)), _already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4_. Open a session in your OS shell prompt and type
+First, you need Python installed, either [Python2.7.+](https://www.python.org/downloads/) or [Python3.+](https://www.python.org/downloads/). Either versions are good for our purpose. Then, we are going to use a package management system to install [PyLUCCBA](https://github.com/lfaucheux/PyLUCCBA), namely [pip](https://en.wikipedia.org/wiki/Pip_(package_manager)), _already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4_. Open a session in your OS [shell](https://en.wikipedia.org/wiki/Shell_(computing)) prompt and type
 
     pip install pyluccba
 
@@ -36,7 +36,7 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
 
 ## Example usage
     
-*The example that follows is done with the idea of showing how to reproduce the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) via the Python Shell*.
+*The example that follows is done with the idea of showing how to go beyond the replication of the results presented in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) via the Python Shell*.
 
 Let's first import the module `PyLUCCBA`
 
@@ -44,7 +44,7 @@ Let's first import the module `PyLUCCBA`
 
 The alias of `PyLUCCBA`, namely `cc`, actually contains many objects definitions, such as that of the calculator that we are going to use in examples. The name of the calculator is `CBACalculator`.
 
-But before using the calculator as such, let's define (and introduce) the set of parameters that we are going to use to configure `CBACalculator`. As can be expected when performing a cost benefit analysis, these parameters are related to: *(i)* the horizon of the project, *(ii)* the discount rate that we want to use in our calculations, *(iii)* the scenarized price trajectory of carbon dioxide, *(iv)* the scenarized trajectory of quantities of bio-ethanol to produce annually and *(...)* so on. Let's introduce them all in practice:
+But before using the calculator as such, let's define (and introduce) the set of parameters that we are going to use to configure `CBACalculator`. As can be expected when performing a cost benefit analysis, these parameters are related to: *(i)* the horizon of the project, *(ii)* the discount rate that we want to use in our calculations, *(iii)* the scenarized price trajectory of carbon dioxide (CO2), *(iv)* the scenarized trajectory of quantities of bio-ethanol to produce annually and *(...)* so on. Let's introduce them all in practice:
 
     >>> cba = cc.CBACalculator(
             run_name               = 'Example-1',
@@ -76,7 +76,7 @@ The following table enumerates all parameters that can be used to create an inst
  `project_first_year`     | first year of the project.
  `project_horizon`        | duration of the biofuel production project (years).
  `discount_rate`          | rate involved in the calculations of net present values. Set to `0.` by default.
- `co2_prices_scenario`    | name of the trajectory of carbon (dioxide) prices. The current choices are `'A'`, `'B'`, `'C'`, `'DEBUG'`, `'O'`, `'SPC'`, `'WEO2015-450S'`, `'WEO2015-CPS'` or `'WEO2015-NPS'`.
+ `co2_prices_scenario`    | name of the trajectory of CO2 prices. The current choices are `'A'`, `'B'`, `'C'`, `'DEBUG'`, `'O'`, `'SPC'`, `'WEO2015-450S'`, `'WEO2015-CPS'` or `'WEO2015-NPS'`.
  `output`                 | name of the produced biofuel. Set to `'eth'` by default. Only *one* possible choice currently: `'eth'`. ***NB***: `'eth'` actually stands for **bio**ethanol.
  `black_output`           | name of the counterfactual produced output. Serves as the reference according to which the production of bioethanol (`'eth'`) is considered (or not) as pro-environmental. Set to `'oil'` by default. Only *one* possible choice currently: `'oil'`. ***NB***: `'oil'` actually stands for gasoline.
  `output_flows_scenario`  | name of the trajectory of annually produced quantities of biofuel. The current choices are `'DEBUG'` or `'O'`.
@@ -87,13 +87,13 @@ The following table enumerates all parameters that can be used to create an inst
  `T_vg_diff`              | period over which vegetation carbon emissions due to LUC are considered in the differentiated annualization approach.
  `T_vg_unif`              | period over which vegetation carbon emissions due to LUC are considered in the uniform annualization approach.
  `polat_repeated_pattern` | if `True`, retro/extra-polation pattern is repeated before/after the first/last mentioned value. Otherwise, it is maintained constant.
- `final_currency`         | currency used to express the results. The current choices are `'EUR'` or `'USD'`. Set to `'EUR'` by default.
+ `final_currency`         | currency used to convert transitories and express the results. The current choices are `'EUR'` or `'USD'`. Set to `'EUR'` by default.
  `change_rates`           | `final_currency`-dependent exchange rate value to consider in calculations, *e.g.* `{'EUR':{'USD/EUR':1.14,}}` *(or `{'EUR':{'EUR/USD':0.8772,}}` since the tool ensures dimensional homogeneity)*.
  `return_plts`            | if `True`, charts are returned (for interactive use). Otherwise, they are saved or shown to users depending on the value set for `save_charts`. Set to `False` by default.
  `save_charts`            | if `True`, charts are saved on the disk. Otherwise, they are shown to users. Set to `True` by default. **NB**: `return_plts=True` has priority over `save_charts`.
  `from_local_data`        | if `True`, scenarized trajectories (*e.g.* of CO2 prices, of output flows quantities, of yields) are read from the 'resources' folder that is next to the working script. If `False`, those are read from the 'resources' folder natively contained in the package directory. Set to `False` by default.
 
-Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonder what are the scenarized trajectories over which we are about to conduct our study, *e.g.* of carbon dioxide prices, produced quantities of biofuel, etc. In this case, we can simply type:
+Once we have our instance of `CBACalculator` in hand, *i.e.* `cba`, we may wonder what are the scenarized trajectories over which we are about to conduct our study, *e.g.* of CO2 prices, produced quantities of biofuel, etc. In this case, we can simply type:
 
     >>> cba.chart_of_output_flows_traj.show()
 
@@ -107,7 +107,7 @@ We may then wonder what is the counterfactual trajectory in terms of gasoline �
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20OIL%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
-Now, let's see which trajectory of carbon dioxide prices is behind the name `'SPC'` – which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
+Now, let's see which trajectory of CO2 prices is behind the name `'SPC'` – which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
 
     >>> cba.chart_of_co2_prices_traj.show()
 
@@ -121,7 +121,7 @@ We may also wonder which quantities trajectory of wheat is implied by that of bi
 
 Note the abscence of input flow in 2040: as explained previously, this illustrates the time delay that exists between the cultivation of wheat and its proccesing into bioethanol, *i.e.* wheat cultivated in 2039 is used for the production of bioethanol planned in 2040.
 
-The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of carbon dioxide emissions. These emissions clearly don't exhibit the same profile depending on how we choose to consider them over the project horizon. First, regarding soil carbon dioxide emissions:
+The land use change from `initial_landuse='improved grassland'` to `final_landuse='wheat'` has effects in terms of CO2 emissions. These emissions clearly don't exhibit the same profile depending on how we choose to consider them over the project horizon. First, regarding soil CO2 emissions:
 
     >>> cba.carbon_and_co2_flows_traj_annualizer.so_emitting
     True
@@ -155,7 +155,7 @@ On the side of vegetation-related emissions, converting grassland into wheat fie
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20vg%20%5Bunif-IMPROVED%20GRASSLAND~WHEAT%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20co2%20vg%20%5Bdiff-IMPROVED%20GRASSLAND~WHEAT%5D.png?raw=true" width="50%"/><img></p>
 
-Independently of how we annualize the LUC-related carbon dioxide emissions, the cultivation and the processing of wheat generate emissions annually as well. See
+Independently of how we annualize the LUC-related CO2 emissions, the cultivation and the processing of wheat generate emissions annually as well. See
 
     >>> cba.chart_of_cult_input_co2eq_flows_traj.show()
     >>> cba.chart_of_proc_input_co2eq_flows_traj.show()
