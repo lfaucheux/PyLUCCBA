@@ -175,8 +175,9 @@ which, when monetized with a non-zero discount rate and compared in terms of abs
 
 Actually, it looks like extending the horizon of the project may be a good idea to see whether one of those two temporal profiles exhibit positive values over the long run.
     
-*NB1: the project horizon must be long enough for such a period to exist. Hence the extension from 20 years to 50 years that is done below.*
-*NB2: given that cultivation and its associated emission flows often -- depending on the type of final land use -- end one year before the end of the project, projects' last years are structurally more enviroment-friendly, which may increase project's carbon profitability in some cases to such an extent that this last year actually becomes the payback period, hence the NB1*.
+•	*NB1: the project horizon must be long enough for such a period to exist. Hence the extension from 20 years to 50 years that is done below.*
+
+•	*NB2: given that cultivation and its associated emission flows often -- depending on the type of final land use -- end one year before the end of the project, projects' last years are structurally more enviroment-friendly, which may increase project's carbon profitability in some cases to such an extent that this last year actually becomes the payback period, hence the NB1*.
 
     >>> cba._clear_caches()         # we clear the cache of our instance since we are going to change a calculation parameter.
     GlobalWarmingPotential          # the tool enumerates the caches that have been cleaned.
