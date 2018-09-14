@@ -6,10 +6,11 @@
     
 *This package offers a compilation of environmental and economic data to generate environment-related net present values of any project with impacts to the environment (GHG emissions or sequestrations). It is coded in Python (compatible with both versions: 2 and 3). Python is a cross platform and a comprehensive extensible and editable language with a large community of users. The structure of the package is simple with accessible input data to which it is possible to add or suppress one’s own trajectories (of prices, carbon stocks, etc).*
 
-*NB: In the following description we use the expression project's Net Present Value (NPV) multiple times. Note that this use is abusive since it actually refers to the environmental compoment of projects. For more details, see [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf)*
+*NB: In the following description we use the expression project's Net Present Value (NPV) multiple times. Note that this use is abusive since it actually refers to the environmental component of projects. For more details, see [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf)*
 
 <hr>
 
+- [Code coverage](#code-coverage)
 - [Installation](#installation)
 - [Example usage](#example-usage)
     - [A note on the carbon profitability payback period](#a-note-on-the-carbon-profitability-payback-period)
@@ -20,7 +21,16 @@
 - [Format of results](#format-of-results)
 - [Paper's results replication](#papers-results-replication)
 - [References](#references)
-- [Code coverage](#code-coverage)
+
+<hr>
+
+## Code coverage
+
+|  Module  | statements | missing | excluded | coverage |
+| -------- | ---------- | ------- | -------- | -------- |
+| core.py  | 860        | 27      | 0        | 97%      |
+| tools.py | 306        | 62      | 0        | 80%      |
+| Total    | 1166       | 89      | 0        | 92%      |
 
 <hr>
 
@@ -455,14 +465,3 @@ Poeplau, C., A. Don, L. Vesterdal, J. Leifeld, B. VanWesemael, J. Schumacher, an
 The European Commission (2010). “[Commission decision of 10 June 2010 on guidelines for the calculation of land carbon stocks for the purpose of Annex V to Directive 2009/28/EC](https://www.emissions-euets.com/component/content/article/261-commission-decision-of-10-june-2010-on-guidelines-for-the-calculation-of-land-carbon-stocks-for-the-purpose-of-annex-v-to-directive-200928ec)”. _Official Journal of The European Union_ 2010/335/E.
 
 Dupoux, M. “[The land use change time-accounting failure](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf)” (in press).
-
-
-<hr>
-
-## Code coverage
-
-|  Module  | statements | missing | excluded | coverage |
-| -------- | ---------- | ------- | -------- | -------- |
-| core.py  | 860        | 27      | 0        | 97%      |
-| tools.py | 306        | 62      | 0        | 80%      |
-| Total    | 1166       | 89      | 0        | 92%      |
