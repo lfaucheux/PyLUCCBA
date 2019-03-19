@@ -67,7 +67,7 @@ But before using the calculator as such, let's define (and introduce) the set of
             project_first_year     = 2020,
             project_horizon        = 20,
             discount_rate          = .03,
-            co2_prices_scenario    = 'SPC',
+            co2_prices_scenario    = 'SPC2009',
             output_flows_scenario  = 'O',
             initial_landuse        = 'improved grassland',
             final_landuse          = 'wheat',
@@ -91,7 +91,7 @@ The following table enumerates all parameters that can be used to create an inst
  `project_first_year`     | first year of the project.
  `project_horizon`        | duration of the biofuel production project (years).
  `discount_rate`          | rate involved in the calculations of net present values. Set to `0.` by default.
- `co2_prices_scenario`    | name of the trajectory of CO2 prices. The current choices are `'A'`, `'B'`, `'C'`, `'DEBUG'`, `'O'`, `'SPC'`, `'WEO2015-450S'`, `'WEO2015-CPS'` or `'WEO2015-NPS'`.
+ `co2_prices_scenario`    | name of the trajectory of CO2 prices. The current choices are `'A'`, `'B'`, `'C'`, `'DEBUG'`, `'O'`, `'OECD2018'`, `'SPC2009'`, `'SPC2019'`, `'WEO2015-450S'`, `'WEO2015-CPS'`, `'WEO2018-CPS'`, `'WEO2015-NPS'`, `'WEO2018-NPS'` or `'WEO2018-SDS'`.
  `output`                 | name of the produced biofuel. Set to `'eth'` by default. Only *one* possible choice currently: `'eth'`. ***NB***: `'eth'` actually stands for **bio**ethanol.
  `black_output`           | name of the counterfactual produced output. Serves as the reference according to which the production of bioethanol (`'eth'`) is considered (or not) as pro-environmental. Set to `'oil'` by default. Only *one* possible choice currently: `'oil'`. ***NB***: `'oil'` actually stands for gasoline.
  `output_flows_scenario`  | name of the trajectory of annually produced quantities of biofuel. The current choices are `'DEBUG'` or `'O'`.
@@ -122,11 +122,11 @@ We may then wonder what is the counterfactual trajectory in terms of gasoline �
 
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/FLOWS%20TONNES%20OIL%20%5BO%5D.png?raw=true" width="60%"/><img></p>
 
-Now, let's see which trajectory of CO2 prices is behind the name `'SPC'` – which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
+Now, let's see which trajectory of CO2 prices is behind the name `'SPC2009'` – which stands for [Quinet (2009)](http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/094000195.pdf)'s shadow price of carbon:
 
     >>> cba.chart_of_co2_prices_traj.show()
 
-<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/PRICES%20co2%20%5BSPC%5D.png?raw=true" width="60%"/><img></p>
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/PRICES%20co2%20%5BSPC2009%5D.png?raw=true" width="60%"/><img></p>
 
 We may also wonder which quantities trajectory of wheat is implied by that of biofuel on the one hand, and by the value we set for the parameter `input_flows_scenario`, that is `'IFP'` , on the other hand – where *I.F.P* stands for *Institut Français du Pétrole énergies nouvelles* – which made a report in [2013](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/Input.txt) in which it reads that, with 1 tonne of wheat, one can produce [0.2844](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) tonnes of bioethanol. Let's vizualize that:
 
@@ -191,7 +191,7 @@ which, when monetized with a non-zero discount rate and compared in terms of abs
     >>> cba.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs.show()
     >>> cba.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs.show()
     
-<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC2009-ETHvsOIL%5D.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC2009-ETHvsOIL%5D.png?raw=true" width="50%"/><img></p>
 
 Note the slope-breaks that occur during the last year. This is due to the fact that cultivation and its associated emission flows generally – depending on the type of final land use – finish one year before the end of the project, which structurally increases projects' NPVs.
 
@@ -218,7 +218,7 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
     ---- [***]The solution converged.[0.000000e+00][***]
     
-<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
+<p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC2009-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC2009-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
 Rather than vizualizing the NPVs' profiles, we may use a precise way to know *when* a project becomes *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf) – for each type of annualization approach.
 
@@ -272,7 +272,7 @@ At anytime, we can have a quick look at what is meant exactly by "so configured"
     T_vg_unif               : 20
     project_first_year      : 2020
     polat_repeated_pattern  : True
-    co2_prices_scenario     : SPC
+    co2_prices_scenario     : SPC2009
     discount_rate           : [0.05420086] # our endogenized compensatory rate
     diff_payback_period     : []
     unif_payback_period     : []

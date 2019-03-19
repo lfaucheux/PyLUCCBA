@@ -4,6 +4,12 @@ WEO2015-NPS:unit:USD/tonne
 WEO2015-NPS:yrb:2014
 WEO2015-450S:unit:USD/tonne
 WEO2015-450S:yrb:2014
+WEO2018-CPS:unit:USD/tonne
+WEO2018-CPS:yrb:2017
+WEO2018-NPS:unit:USD/tonne
+WEO2018-NPS:yrb:2017
+WEO2018-SDS:unit:USD/tonne
+WEO2018-SDS:yrb:2017
 O:unit:EUR/tonne
 O:yrb:none
 A:unit:EUR/tonne
@@ -12,7 +18,11 @@ B:unit:EUR/tonne
 B:yrb:none
 C:unit:EUR/tonne
 C:yrb:none
-SPC:unit:EUR/tonne
-SPC:yrb:none
+SPC2009:unit:EUR/tonne
+SPC2009:yrb:2008
+SPC2019:unit:EUR/tonne
+SPC2019:yrb:2018
+OECD2018:unit:USD/tonne
+OECD2018:yrb:2016
 DEBUG:unit:EUR/tonne
 DEBUG:yrb:none
