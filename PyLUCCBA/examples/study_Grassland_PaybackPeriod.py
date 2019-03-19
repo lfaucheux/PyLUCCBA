@@ -5,12 +5,12 @@ import PyLUCCBA as cc
 
 
 scenarizer = lambda name : cc.CBACalculator(
-    run_name               = 'Grassland-Cropland_DR=0.03_CP=%s_PbLookup'%name,
+    run_name               = 'Grassland-Cropland_DR=0.045_CP=%s_PbLookup'%name,
     project_horizon        = 150,
     T_so                   = 20,
     T_vg_diff              = 1,
     T_vg_unif              = 20,
-    discount_rate          = .03,
+    discount_rate          = .045,
     co2_prices_scenario    = name,
     initial_landuse        = 'improved grassland',
     final_landuse          = 'wheat',
@@ -19,11 +19,11 @@ scenarizer = lambda name : cc.CBACalculator(
 )
 
 co2_prices_scenarios = [
-    'WEO2015-CPS',
-    'WEO2015-NPS',
-    'WEO2015-450S',
-    'SPC',
-    'O'
+    'WEO2018-CPS',
+    'WEO2018-NPS',
+    'WEO2018-SDS',
+    'SPC2019',
+    'OECD2018',
 ]
 
 objects = {}

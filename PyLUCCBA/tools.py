@@ -111,8 +111,8 @@ def csv_dicter(wkey, fname, pop):
     ...     pop   = True,
     ... )
     >>> csv_as_dict[2050]['O']
-    40
-    >>> csv_as_dict[2050]['SPC']
+    87
+    >>> csv_as_dict[2050]['SPC2009']
     219.1123143
     """
     dico = {}
@@ -149,9 +149,9 @@ def txt_dicter(fname):
     ...     ),
     ... )
     
-    >>> scenario_name = 'spc'
+    >>> scenario_name = 'spc2009'
     >>> sorted(txt_as_dict[scenario_name].items())
-    [('unit', 'EUR/tonne'), ('yrb', 'none')]
+    [('unit', 'EUR/tonne'), ('yrb', 2008)]
     
     >>> scenario_name = 'weo2015-450s'
     >>> sorted(txt_as_dict[scenario_name].items())

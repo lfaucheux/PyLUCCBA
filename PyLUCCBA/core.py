@@ -1964,8 +1964,22 @@ class Co2Prices(ts.Cache):
         to show that, if required for instantiation, those values are not
         involved within the present example.
 
-        >>> o.eligible_scenarios
-        ['A', 'B', 'C', 'DEBUG', 'O', 'SPC', 'WEO2015-450S', 'WEO2015-CPS', 'WEO2015-NPS']
+        >>> for eligible_scenario in o.eligible_scenarios:
+        ...     print(eligible_scenario)
+        A
+        B
+        C
+        DEBUG
+        O
+        OECD2018
+        SPC2009
+        SPC2019
+        WEO2015-450S
+        WEO2015-CPS
+        WEO2015-NPS
+        WEO2018-CPS
+        WEO2018-NPS
+        WEO2018-SDS
         """
         return [s for s in sorted(
             self.co2_prices_and_infos\
@@ -2195,7 +2209,7 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-698.15962588, -736.06138037, -728.6245138 , -676.94620099]])
+        array([[-1518.4971863 , -1600.9335023 , -1584.75831751, -1472.35798716]])
         >>> o._clear_caches()
         GlobalWarmingPotential
         OutputFlows
@@ -2210,29 +2224,29 @@ class CBACalculator(ts.Cache):
         self.__caobjs = []
 
     def __init__(self,
-            run_name               ='',
-            discount_rate          =.0,
-            output                 ='eth',
-            black_output           ='oIl',
-            final_currency         ='EUR',
-            change_rates           ={'EUR':{'USD/EUR':float('nan')}},
+            run_name               = '',
+            discount_rate          = .0,
+            output                 = 'eth',
+            black_output           = 'oIl',
+            final_currency         = 'EUR',
+            change_rates           = {'EUR':{'USD/EUR':float('nan')}},
 
-            initial_landuse        ='none',
-            final_landuse          ='none',
-            country                ='none',
-            project_horizon        =float('nan'),
-            T_so                   =float('nan'),
-            T_vg_diff              =float('nan'),
-            T_vg_unif              =float('nan'),
-            project_first_year     =float('nan'),
-            co2_prices_scenario    ='none',
-            output_flows_scenario  ='none',
-            input_flows_scenario   ='none',
-            polat_repeated_pattern =True,
-            save_charts            =True,
-            GWP_horizon            =100, #[!!!] EXOGENOUS DATA IMPLICITLY IMPLY GWP100 [!!!]
-            GWP_static             =True,#[!!!] EXOGENOUS DATA IMPLICITLY IMPLY STATIC [!!!]
-            from_local_data        =False,
+            initial_landuse        = 'none',
+            final_landuse          = 'none',
+            country                = 'none',
+            project_horizon        = float('nan'),
+            T_so                   = float('nan'),
+            T_vg_diff              = float('nan'),
+            T_vg_unif              = float('nan'),
+            project_first_year     = float('nan'),
+            co2_prices_scenario    = 'none',
+            output_flows_scenario  = 'none',
+            input_flows_scenario   = 'none',
+            polat_repeated_pattern = True,
+            save_charts            = True,
+            GWP_horizon            = 100, #[!!!] EXOGENOUS DATA IMPLICITLY IMPLY GWP100 [!!!]
+            GWP_static             = True,#[!!!] EXOGENOUS DATA IMPLICITLY IMPLY STATIC [!!!]
+            from_local_data        = False,
             **kwargs
         ):
         
@@ -2366,7 +2380,7 @@ class CBACalculator(ts.Cache):
         co2_prices_scenario     : O
         discount_rate           : 0.03
         diff_payback_period     : []
-        unif_payback_period     : []
+        unif_payback_period     : 139
         final_currency          : EUR
         change_rates            : {'USD/EUR': 1.14}
         output_flows_scenario   : O
@@ -4385,7 +4399,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=1)
         >>> o.timed_proc_co2_flows_traj_values
-        array([[  0.    , -35.5832]])
+        array([[  0.     , -77.39346]])
         """
         return self.timed_proc_input_co2eq_flows_traj\
         *self.co2_prices_traj
@@ -4437,7 +4451,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=1)
         >>> o.timed_proc_co2_flows_traj_disc_values
-        array([[  0.        , -34.54679612]])
+        array([[  0.        , -75.13928155]])
         """
         return self.timed_proc_co2_flows_traj_values*self.discounting_factors
 
@@ -4489,7 +4503,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.timed_cult_co2_flows_traj_values
-        array([[-41.6156, -41.6156,   0.    ]])
+        array([[-90.51393, -90.51393,   0.     ]])
         """
         return self.timed_cult_input_co2eq_flows_traj\
         *self.co2_prices_traj
@@ -4541,7 +4555,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.timed_cult_co2_flows_traj_disc_values
-        array([[-41.6156    , -40.40349515,   0.        ]])
+        array([[-90.51393   , -87.87760194,   0.        ]])
         """
         return self.timed_cult_co2_flows_traj_values*self.discounting_factors
 
@@ -4589,7 +4603,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_cult_co2_flows_traj
-        array([[-41.6156    , -82.01909515, -82.01909515]])
+        array([[ -90.51393   , -178.39153194, -178.39153194]])
         """
         return np.cumsum(
             self.timed_cult_co2_flows_traj_disc_values,
@@ -4643,7 +4657,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_cult_co2_flows_traj_per_cum_output_flows_traj
-        array([[-41.6156    , -41.00954757, -41.00954757]])
+        array([[-90.51393   , -89.19576597, -89.19576597]])
         """
         return np.nan_to_num(
             self.NPV_cult_co2_flows_traj/self.timed_C_cum_output_flows_traj
@@ -4694,7 +4708,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
-        array([[-0.00155812, -0.00153543, -0.00153543]])
+        array([[-0.00338891, -0.00333956, -0.00333956]])
         """
         return self.NPV_cult_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(
@@ -4751,7 +4765,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.timed_proc_plus_cult_co2_flows_traj_values
-        array([[-41.6156, -77.1988, -35.5832]])
+        array([[ -90.51393, -167.90739,  -77.39346]])
         """
         return (
             self.timed_proc_input_co2eq_flows_traj\
@@ -4801,7 +4815,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_proc_co2_flows_traj
-        array([[  0.        , -34.54679612, -68.08737487]])
+        array([[   0.        ,  -75.13928155, -148.09004034]])
         """
         return np.cumsum(
             self.timed_proc_co2_flows_traj_disc_values,
@@ -4855,7 +4869,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_proc_co2_flows_traj_per_cum_output_flows_traj
-        array([[  0.        , -34.54679612, -34.04368744]])
+        array([[  0.        , -75.13928155, -74.04502017]])
         """
         return np.nan_to_num(
             self.NPV_proc_co2_flows_traj/self.timed_P_cum_output_flows_traj
@@ -4906,7 +4920,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj
-        array([[ 0.        , -0.00129346, -0.00127462]])
+        array([[ 0.        , -0.00281327, -0.0027723 ]])
         """
         return self.NPV_proc_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(
@@ -4960,7 +4974,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.timed_proc_plus_cult_co2_flows_traj_disc_values
-        array([[-41.6156    , -74.95029126, -33.54057875]])
+        array([[ -90.51393   , -163.0168835 ,  -72.95075879]])
         """
         return self.timed_proc_plus_cult_co2_flows_traj_values\
         *self.discounting_factors
@@ -5009,7 +5023,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_proc_plus_cult_co2_flows_traj
-        array([[ -41.6156    , -116.56589126, -150.10647002]])
+        array([[ -90.51393   , -253.5308135 , -326.48157228]])
         """
         return np.cumsum(
             self.timed_proc_plus_cult_co2_flows_traj_disc_values,
@@ -5063,7 +5077,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
-        array([[-41.6156    , -75.55634369, -75.05323501]])
+        array([[ -90.51393   , -164.33504752, -163.24078614]])
         """
         return self.NPV_proc_co2_flows_traj_per_cum_output_flows_traj\
         + self.NPV_cult_co2_flows_traj_per_cum_output_flows_traj
@@ -5114,7 +5128,7 @@ class CBACalculator(ts.Cache):
         ---------------
         >>> o = CBACalculator._testing_instancer(ph=2)
         >>> o.NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
-        array([[-0.00155812, -0.00282889, -0.00281005]])
+        array([[-0.00338891, -0.00615283, -0.00611186]])
         """
         return self.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(
@@ -5173,15 +5187,15 @@ class CBACalculator(ts.Cache):
         ... ).timed_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-285.23881853,    0.        ,    0.        ,    0.        ,
-                   0.        ,    0.        ]])
+        array([[-620.3944303,    0.       ,    0.       ,    0.       ,
+                   0.       ,    0.       ]])
 
         >>> CBACalculator._testing_instancer(
         ...     ph=5, td=2
         ... ).timed_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-2.85238818e+02, -2.05665410e-07,  0.00000000e+00,
+        array([[-6.20394430e+02, -4.47322267e-07,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
         return self.vgco2_diff_flows_traj\
@@ -5239,7 +5253,7 @@ class CBACalculator(ts.Cache):
         ... ).timed_vg_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-2.85238818e+02, -1.99675156e-07,  0.00000000e+00,
+        array([[-6.20394430e+02, -4.34293463e-07,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
         return self.timed_vg_diff_co2_flows_traj_values\
@@ -5294,8 +5308,8 @@ class CBACalculator(ts.Cache):
         ... ).NPV_vg_diff_co2_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-285.23881832, -285.23881852, -285.23881852, -285.23881852,
-                -285.23881852, -285.23881852]])
+        array([[-620.39442985, -620.39443029, -620.39443029, -620.39443029,
+                -620.39443029, -620.39443029]])
         """
         return np.cumsum(
             self.timed_vg_diff_co2_flows_traj_disc_values,
@@ -5354,8 +5368,8 @@ class CBACalculator(ts.Cache):
         ... ).NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-285.23881832, -142.61940926,  -95.07960617,  -71.30970463,
-                 -57.0477637 ,  -57.0477637 ]])
+        array([[-620.39442985, -310.19721514, -206.79814343, -155.09860757,
+                -124.07888606, -124.07888606]])
         """
         return np.nan_to_num(
             self.NPV_vg_diff_co2_flows_traj
@@ -5413,8 +5427,8 @@ class CBACalculator(ts.Cache):
         ... ).NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-0.01067956, -0.00533978, -0.00355985, -0.00266989, -0.00213591,
-                -0.00213591]])
+        array([[-0.02322804, -0.01161402, -0.00774268, -0.00580701, -0.00464561,
+                -0.00464561]])
         """
         return self.NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(
@@ -5472,7 +5486,7 @@ class CBACalculator(ts.Cache):
         ... ).timed_so_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
-        array([[-4.36016727e+02, -5.33429544e-06,  0.00000000e+00,
+        array([[-9.48336381e+02, -1.16020926e-05,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
         return self.soco2_diff_flows_traj\
@@ -5530,7 +5544,7 @@ class CBACalculator(ts.Cache):
         ... ).timed_so_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
-        array([[-4.36016727e+02, -5.17892761e-06,  0.00000000e+00,
+        array([[-9.48336381e+02, -1.12641675e-05,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
         return self.timed_so_diff_co2_flows_traj_values\
@@ -5585,8 +5599,8 @@ class CBACalculator(ts.Cache):
         ... ).NPV_so_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
-        array([[-436.01672697, -436.01673215, -436.01673215, -436.01673215,
-                -436.01673215, -436.01673215]])
+        array([[-948.33638116, -948.33639242, -948.33639242, -948.33639242,
+                -948.33639242, -948.33639242]])
         """
         return np.cumsum(
             self.timed_so_diff_co2_flows_traj_disc_values,
@@ -5645,8 +5659,8 @@ class CBACalculator(ts.Cache):
         ... ).NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
-        array([[-436.01672697, -218.00836607, -145.33891072, -109.00418304,
-                 -87.20334643,  -87.20334643]])
+        array([[-948.33638116, -474.16819621, -316.11213081, -237.08409811,
+                -189.66727848, -189.66727848]])
         """
         return np.nan_to_num(
             self.NPV_so_diff_co2_flows_traj
@@ -5704,8 +5718,8 @@ class CBACalculator(ts.Cache):
         ... ).NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.05488765]
         ---- [***]The solution converged.[3.552714e-15][***]
-        array([[-0.0163248 , -0.0081624 , -0.0054416 , -0.0040812 , -0.00326496,
-                -0.00326496]])
+        array([[-0.03550643, -0.01775322, -0.01183548, -0.00887661, -0.00710129,
+                -0.00710129]])
         """
         return self.NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(
@@ -5766,7 +5780,7 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-7.21255545e+02, -5.53996085e-06,  0.00000000e+00,
+        array([[-1.56873081e+03, -1.20494148e-05,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
         return self.diff_co2_flows_traj\
@@ -5828,7 +5842,7 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-7.21255545e+02, -5.37860276e-06,  0.00000000e+00,
+        array([[-1.56873081e+03, -1.16984610e-05,  0.00000000e+00,
                  0.00000000e+00,  0.00000000e+00,  0.00000000e+00]])
         """
         return self.timed_so_plus_vg_diff_co2_flows_traj_values\
@@ -5887,8 +5901,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-721.25554529, -721.25555067, -721.25555067, -721.25555067,
-                -721.25555067, -721.25555067]])
+        array([[-1568.73081101, -1568.73082271, -1568.73082271, -1568.73082271,
+                -1568.73082271, -1568.73082271]])
         """
         return np.cumsum(
             self.timed_so_plus_vg_diff_co2_flows_traj_disc_values,
@@ -5951,8 +5965,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-721.25554529, -360.62777534, -240.41851689, -180.31388767,
-                -144.25111013, -144.25111013]])
+        array([[-1568.73081101,  -784.36541136,  -522.91027424,  -392.18270568,
+                 -313.74616454,  -313.74616454]])
         """
         return self.NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj\
         + self.NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
@@ -6012,8 +6026,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-0.02700435, -0.01350218, -0.00900145, -0.00675109, -0.00540087,
-                -0.00540087]])
+        array([[-0.05873447, -0.02936724, -0.01957816, -0.01468362, -0.01174689,
+                -0.01174689]])
         """
         return self.NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(
@@ -6139,8 +6153,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-762.87114529,  -77.19880554,  -77.1988    ,  -77.1988    ,
-                 -77.1988    ,  -35.5832    ]])
+        array([[-1659.24474101,  -167.90740205,  -167.90739   ,  -167.90739   ,
+                 -167.90739   ,   -77.39346   ]])
         """
         return self.timed_total_diff_co2_flows_traj\
         *self.co2_prices_traj
@@ -6201,8 +6215,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-762.87114529,  -74.95029664,  -72.76727307,  -70.64783793,
-                 -68.59013391,  -30.6943809 ]])
+        array([[-1659.24474101,  -163.01689519,  -158.26881893,  -153.6590475 ,
+                 -149.18354126,   -66.76027845]])
         """
         return self.timed_total_diff_co2_flows_traj_values\
         *self.discounting_factors
@@ -6260,8 +6274,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[ -762.87114529,  -837.82144193,  -910.588715  ,  -981.23655294,
-                -1049.82668685, -1080.52106775]])
+        array([[-1659.24474101, -1822.26163621, -1980.53045513, -2134.18950263,
+                -2283.3730439 , -2350.13332235]])
         """
         return np.cumsum(
             self.timed_total_diff_co2_flows_traj_disc_values,
@@ -6324,8 +6338,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-762.87114529, -436.18411902, -314.87746748, -253.6967252 ,
-                -216.57865016, -216.10421355]])
+        array([[-1659.24474101,  -948.70045888,  -684.85849177,  -551.7903773 ,
+                 -471.05856411,  -470.02666447]])
         """
         return self.NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj\
         + self.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
@@ -6385,8 +6399,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[3.552714e-15][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-0.02856247, -0.01633106, -0.01178925, -0.0094986 , -0.00810887,
-                -0.00809111]])
+        array([[-0.06212338, -0.03552006, -0.02564162, -0.02065945, -0.01763679,
+                -0.01759815]])
         """
         return self.NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(
@@ -6448,7 +6462,7 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
         ... ).timed_vg_unif_co2_flows_traj_values
-        array([[-142.61940926, -142.61940926,    0.        ,    0.        ,
+        array([[-310.19721515, -310.19721515,    0.        ,    0.        ,
                    0.        ,    0.        ]])
         """
         return self.vgco2_unif_flows_traj*self.co2_prices_traj
@@ -6500,7 +6514,7 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
         ... ).timed_vg_unif_co2_flows_traj_disc_values
-        array([[-142.61940926, -138.46544589,    0.        ,    0.        ,
+        array([[-310.19721515, -301.16234481,    0.        ,    0.        ,
                    0.        ,    0.        ]])
         """
         return self.timed_vg_unif_co2_flows_traj_values*self.discounting_factors
@@ -6550,8 +6564,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
         ... ).NPV_vg_unif_co2_flows_traj
-        array([[-142.61940926, -281.08485515, -281.08485515, -281.08485515,
-                -281.08485515, -281.08485515]])
+        array([[-310.19721515, -611.35955996, -611.35955996, -611.35955996,
+                -611.35955996, -611.35955996]])
         """
         return np.cumsum(
             self.timed_vg_unif_co2_flows_traj_disc_values,
@@ -6606,8 +6620,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
         ... ).NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
-        array([[-142.61940926, -140.54242758,  -93.69495172,  -70.27121379,
-                 -56.21697103,  -56.21697103]])
+        array([[-310.19721515, -305.67977998, -203.78651999, -152.83988999,
+                -122.27191199, -122.27191199]])
         """
         return np.nan_to_num(
             self.NPV_vg_unif_co2_flows_traj\
@@ -6661,8 +6675,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, tu=2
         ... ).NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
-        array([[-0.00533978, -0.00526202, -0.00350801, -0.00263101, -0.00210481,
-                -0.00210481]])
+        array([[-0.01161402, -0.01144488, -0.00762992, -0.00572244, -0.00457795,
+                -0.00457795]])
         """
         return self.NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(self.output, 1. )
@@ -6715,7 +6729,7 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
         ... ).timed_so_unif_co2_flows_traj_values
-        array([[-145.33891077, -145.33891077, -145.33891077,    0.        ,
+        array([[-316.11213092, -316.11213092, -316.11213092,    0.        ,
                    0.        ,    0.        ]])
         """
         return self.soco2_unif_flows_traj\
@@ -6769,7 +6783,7 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
         ... ).timed_so_unif_co2_flows_traj_disc_values
-        array([[-145.33891077, -141.10573861, -136.99586273,    0.        ,
+        array([[-316.11213092, -306.90498148, -297.96600143,    0.        ,
                    0.        ,    0.        ]])
         """
         return self.timed_so_unif_co2_flows_traj_values*self.discounting_factors
@@ -6819,8 +6833,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
         ... ).NPV_so_unif_co2_flows_traj
-        array([[-145.33891077, -286.44464938, -423.4405121 , -423.4405121 ,
-                -423.4405121 , -423.4405121 ]])
+        array([[-316.11213092, -623.0171124 , -920.98311383, -920.98311383,
+                -920.98311383, -920.98311383]])
         """
         return np.cumsum(
             self.timed_so_unif_co2_flows_traj_disc_values, axis=1
@@ -6874,8 +6888,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
         ... ).NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj
-        array([[-145.33891077, -143.22232469, -141.14683737, -105.86012803,
-                 -84.68810242,  -84.68810242]])
+        array([[-316.11213092, -311.5085562 , -306.99437128, -230.24577846,
+                -184.19662277, -184.19662277]])
         """
         return np.nan_to_num(
             self.NPV_so_unif_co2_flows_traj\
@@ -6929,8 +6943,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3
         ... ).NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
-        array([[-0.0054416 , -0.00536235, -0.00528464, -0.00396348, -0.00317079,
-                -0.00317079]])
+        array([[-0.01183548, -0.01166312, -0.0114941 , -0.00862058, -0.00689646,
+                -0.00689646]])
         """
         return self.NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(self.output, 1.)
@@ -6985,7 +6999,7 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).timed_so_plus_vg_unif_co2_flows_traj_values
-        array([[-287.95832003, -287.95832003, -145.33891077,    0.        ,
+        array([[-626.30934607, -626.30934607, -316.11213092,    0.        ,
                    0.        ,    0.        ]])
         """
         return self.unif_co2_flows_traj*self.co2_prices_traj
@@ -7038,7 +7052,7 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).timed_so_plus_vg_unif_co2_flows_traj_disc_values
-        array([[-287.95832003, -279.5711845 , -136.99586273,    0.        ,
+        array([[-626.30934607, -608.06732628, -297.96600143,    0.        ,
                    0.        ,    0.        ]])
         """
         return self.timed_so_plus_vg_unif_co2_flows_traj_values\
@@ -7089,8 +7103,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).NPV_so_plus_vg_unif_co2_flows_traj
-        array([[-287.95832003, -567.52950453, -704.52536726, -704.52536726,
-                -704.52536726, -704.52536726]])
+        array([[ -626.30934607, -1234.37667235, -1532.34267379, -1532.34267379,
+                -1532.34267379, -1532.34267379]])
         """
         return np.cumsum(
             self.timed_so_plus_vg_unif_co2_flows_traj_disc_values,
@@ -7145,8 +7159,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj
-        array([[-287.95832003, -283.76475227, -234.84178909, -176.13134181,
-                -140.90507345, -140.90507345]])
+        array([[-626.30934607, -617.18833618, -510.78089126, -383.08566845,
+                -306.46853476, -306.46853476]])
         """
         return self.NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj\
         + self.NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
@@ -7198,8 +7212,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
-        array([[-0.01078138, -0.01062437, -0.00879265, -0.00659449, -0.00527559,
-                -0.00527559]])
+        array([[-0.0234495 , -0.023108  , -0.01912402, -0.01434302, -0.01147441,
+                -0.01147441]])
         """
         return self.NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(self.output, 1. )
@@ -7305,8 +7319,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).timed_total_unif_co2_flows_traj_values
-        array([[-329.57392003, -365.15712003, -222.53771077,  -77.1988    ,
-                 -77.1988    ,  -35.5832    ]])
+        array([[-716.82327607, -794.21673607, -484.01952092, -167.90739   ,
+                -167.90739   ,  -77.39346   ]])
         """
         return self.timed_total_unif_co2_flows_traj\
         *self.co2_prices_traj
@@ -7359,8 +7373,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).timed_total_unif_co2_flows_traj_disc_values
-        array([[-329.57392003, -354.52147576, -209.7631358 ,  -70.64783793,
-                 -68.59013391,  -30.6943809 ]])
+        array([[-716.82327607, -771.08420978, -456.23482036, -153.6590475 ,
+                -149.18354126,  -66.76027845]])
         """
         return self.timed_total_unif_co2_flows_traj_values*self.discounting_factors
 
@@ -7409,8 +7423,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).NPV_total_unif_co2_flows_traj
-        array([[ -329.57392003,  -684.09539579,  -893.85853159,  -964.50636952,
-                -1033.09650344, -1063.79088433]])
+        array([[ -716.82327607, -1487.90748585, -1944.14230621, -2097.80135371,
+                -2246.98489497, -2313.74517342]])
         """
         return np.cumsum(
             self.timed_total_unif_co2_flows_traj_disc_values, axis=1
@@ -7464,8 +7478,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj
-        array([[-329.57392003, -359.32109595, -309.30073968, -249.51417934,
-                -213.23261348, -212.75817687]])
+        array([[-716.82327607, -781.5233837 , -672.72910879, -542.69334007,
+                -463.78093432, -462.74903468]])
         """
         return self.NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj\
         + self.NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
@@ -7517,8 +7531,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=5, ts=3, tu=2
         ... ).NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
-        array([[-0.0123395 , -0.01345325, -0.01158045, -0.009342  , -0.00798359,
-                -0.00796583]])
+        array([[-0.02683841, -0.02926083, -0.02518749, -0.02031885, -0.01736431,
+                -0.01732567]])
         """
         return self.NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj\
         /self.output_flows_traj_converter.tonnes_to_MJs_computer(self.output, 1.)
@@ -7793,8 +7807,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=4
         ... ).timed_black_output_co2_flows_traj_values
-        array([[  0.        , -93.26734177, -93.26734177, -93.26734177,
-                -93.26734177]])
+        array([[   0.        , -202.85646836, -202.85646836, -202.85646836,
+                -202.85646836]])
         """
         return self.timed_black_output_co2eq_flows_traj\
         *self.co2_prices_traj
@@ -7847,8 +7861,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=4
         ... ).timed_black_output_co2_flows_traj_disc_values
-        array([[  0.        , -90.55081726, -87.91341481, -85.35282991,
-                -82.86682516]])
+        array([[   0.        , -196.94802753, -191.21167722, -185.64240506,
+                -180.23534472]])
         """
         return self.timed_black_output_co2_flows_traj_values*self.discounting_factors
 
@@ -7897,8 +7911,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=4
         ... ).NPV_black_output_co2_flows_traj
-        array([[   0.        ,  -90.55081726, -178.46423207, -263.81706198,
-                -346.68388714]])
+        array([[   0.        , -196.94802753, -388.15970475, -573.80210981,
+                -754.03745453]])
         """
         return np.cumsum(
             self.timed_black_output_co2_flows_traj_disc_values, axis=1
@@ -7952,8 +7966,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=4
         ... ).NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj
-        array([[   0.        , -154.30406716, -152.05692055, -149.85340786,
-                -147.69257591]])
+        array([[   0.        , -335.61134608, -330.7238022 , -325.93116209,
+                -321.23135261]])
         """
         return np.nan_to_num(
             self.NPV_black_output_co2_flows_traj\
@@ -8008,7 +8022,7 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=4
         ... ).NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj
-        array([[ 0.        , -0.00339029, -0.00334092, -0.0032925 , -0.00324503]])
+        array([[ 0.        , -0.00737388, -0.0072665 , -0.0071612 , -0.00705793]])
         """
         return np.nan_to_num(
             self.NPV_black_output_co2_flows_traj\
@@ -8070,8 +8084,8 @@ class CBACalculator(ts.Cache):
         ---- [***]The solution converged.[0.000000e+00][***]
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.04750517]
         ---- [***]The solution converged.[0.000000e+00][***]
-        array([[-762.87111418, -747.27062377, -732.12448203, -717.41949005,
-                -666.16787721]])
+        array([[-1659.24467335, -1625.3136067 , -1592.37074841, -1560.38739085,
+                -1448.91513293]])
         """
         return self.NPV_total_diff_co2_flows_traj\
         - self.NPV_black_output_co2_flows_traj
@@ -8095,7 +8109,7 @@ class CBACalculator(ts.Cache):
         return self.dashboard.plot(
             abs_=self.horizon,
             imas=self.NPV_total_diff_minus_black_output_co2_flows_trajs.T,
-			labels=['DIFF %s minus %s NPVs [%s][%s]'%(
+            labels=['DIFF %s minus %s NPVs [%s][%s]'%(
                 self.output,
                 self.black_output,
                 self.co2_prices_scenario,
@@ -8151,8 +8165,8 @@ class CBACalculator(ts.Cache):
         >>> CBACalculator._testing_instancer(
         ...     ph=4, ts=3, tu=2
         ... ).NPV_total_unif_minus_black_output_co2_flows_trajs
-        array([[-329.57392003, -593.54457854, -715.39429952, -700.68930754,
-                -649.4376947 ]])
+        array([[ -716.82327607, -1290.95945832, -1555.98260146, -1523.9992439 ,
+                -1412.52698598]])
         """
         return self.NPV_total_unif_co2_flows_traj\
         - self.NPV_black_output_co2_flows_traj
@@ -8521,11 +8535,11 @@ class CBACalculator(ts.Cache):
         'chart_of_NPV_total_diff_co2_flows_traj',
         'chart_of_NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
         'chart_of_NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj',
-		'chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs',
+        'chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs',
         'chart_of_NPV_total_unif_co2_flows_traj',
         'chart_of_NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj',
         'chart_of_NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj',
-		'chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs',
+        'chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs',
         'chart_of_NPV_vg_diff_co2_flows_traj',
         'chart_of_NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj',
         'chart_of_NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj',

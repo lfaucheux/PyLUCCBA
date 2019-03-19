@@ -18,7 +18,7 @@ scenarizer = lambda name : cc.CBACalculator(
     **cs.other_parameters
 )
 
-co2_prices_scenarios = ['O', 'A', 'B', 'C', 'SPC']
+co2_prices_scenarios = ['O', 'A', 'B', 'C', 'SPC2019']
 
 objects = {}
 for s_name in co2_prices_scenarios:    

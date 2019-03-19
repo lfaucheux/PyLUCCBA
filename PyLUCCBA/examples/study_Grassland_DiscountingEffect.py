@@ -18,7 +18,7 @@ scenarizer = lambda rate : cc.CBACalculator(
     **cs.other_parameters
 )
 
-discount_rates = [.0, .01, .03, .05]
+discount_rates = [.0, .03, .045]
 
 objects = {}
 for d_rate in discount_rates:    

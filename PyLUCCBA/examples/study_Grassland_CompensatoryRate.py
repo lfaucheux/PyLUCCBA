@@ -19,10 +19,11 @@ scenarizer = lambda name : cc.CBACalculator(
 )
 
 co2_prices_scenarios = [
-    'WEO2015-CPS',
-    'WEO2015-NPS',
-    'WEO2015-450S',
-    'SPC'
+    'WEO2018-CPS',
+    'WEO2018-NPS',
+    'WEO2018-SDS',
+    'SPC2019',
+    'OECD2018',
 ]
 
 objects = {}
