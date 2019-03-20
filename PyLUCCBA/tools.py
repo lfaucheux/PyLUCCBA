@@ -1016,7 +1016,7 @@ class DataReader(Cache):
 class Dashboard(object):
     def __init__(self, **kws):
         self.canvas       = plt
-        self._return_plts = kws.get('return_plts', False)
+        self._return_plts = kws.get('return_plts', True)
         self.prop         = FontProperties()
         self.prop.set_size(10)
         self.prop.set_stretch('ultra-expanded')
@@ -1025,6 +1025,11 @@ class Dashboard(object):
         self.prop.set_weight('book')
         self.prop.set_family('fantasy')
 
+    _mocked_meth = lambda s:print(
+        '!!! Your instance has `return_plts` '
+        'set to `False`.\nDo `<your_instance>.'
+        'return_plts = True` and retry.'
+    )
     def plot(self,
             abs_, imas, labels, colors,
             save=False, save_dir='', file_name='', bar=False
@@ -1056,7 +1061,16 @@ class Dashboard(object):
         ...     colors = cols,
         ... )
         >>> pltobj.show() # doctest: +SKIP
-        >>> pltobj.close()
+        >>> pltobj.close() 
+        >>> pltobj = Dashboard(return_plts=False).plot(
+        ...     abs_   = x.T,
+        ...     imas   = ys.T,
+        ...     labels = labs,
+        ...     colors = cols,
+        ... )
+        >>> pltobj.show()
+        !!! Your instance has `return_plts` set to `False`.
+        Do `<your_instance>.return_plts = True` and retry.
 
         """
         if type(abs_).__module__ != np.__name__:
@@ -1101,18 +1115,25 @@ class Dashboard(object):
             np.arange(min(abs_), max(abs_)+1, 1.0),
             rotation=70
         )
-        if self._return_plts:
-            return self.canvas
-        else:
+
+        if save:
             self.canvas.savefig(
                 os.path.join(
-                    save_dir,
-                    '%s.png'%file_name
+                    save_dir, '%s.png'%file_name
                 ),
-                bbox_inches=0,
-                dpi=200
-            ) if save else self.canvas.show()
-            self.canvas.close()
+                bbox_inches=0, dpi=200
+            )
+        
+        if self._return_plts:
+            return self.canvas
+
+        self.canvas.close()
+        return type(
+            'msger', (object,),{
+                'show' : self._mocked_meth,
+                'close': self._mocked_meth,
+            }
+        )
 
 if __name__eq__main__:
     import doctest
