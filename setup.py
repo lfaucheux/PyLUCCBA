@@ -4,7 +4,7 @@ from setuptools import setup
 import pathlib as pa
 import codecs as cd
 
-package_version = '0.9.06'
+package_version = '0.9.10'
 package_name    = 'PyLUCCBA'
 
 with pa.Path('requirements.txt').open() as requirements:

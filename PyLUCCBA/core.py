@@ -1380,7 +1380,8 @@ class OutputFlows(ts.Cache):
             year : price for year, price
             in ts.poler(
                 self.scenarized_output_flows_traj_sparse_traj,
-                self.repeated_pattern_polation
+                self.repeated_pattern_polation,
+                yT = self.last_year + 10
             ).items() if self.first_year<=year<=self.last_year
         }
 
@@ -1610,7 +1611,8 @@ class InputFlows(ts.Cache):
         return {
             year : price for year, price in ts.poler(
                 self.scenarized_unit_input_flows_traj_sparse_traj,
-                self.repeated_pattern_polation
+                self.repeated_pattern_polation,
+                yT = self.last_year + 10
             ).items() if self.first_year<=year<=self.last_year
         }
     
@@ -1835,7 +1837,8 @@ class LandSurfaceFlows(ts.Cache):
             year : price for year, price
             in ts.poler(
                 self.scenarized_unit_land_surface_flows_traj_sparse_traj,
-                self.repeated_pattern_polation
+                self.repeated_pattern_polation,
+                yT = self.last_year + 10
             ).items() if self.first_year<=year<=self.last_year
         }
 
@@ -2080,7 +2083,8 @@ class Co2Prices(ts.Cache):
             year : price for year, price
             in ts.poler(
                 self.scenarized_co2_prices_sparse_traj,
-                self.repeated_pattern_polation
+                self.repeated_pattern_polation,
+                yT = self.last_year + 10
             ).items() if self.first_year<year<=self.last_year
         }
 
