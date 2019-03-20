@@ -42,6 +42,7 @@ __all__ = [
 ]
 
 import os
+import copy
 import pprint as pp
 import warnings;warnings.filterwarnings('ignore')
 import numpy as np;np.seterr(divide='ignore', invalid='ignore')
@@ -8609,11 +8610,13 @@ class CBAParametersEndogenizer(object):
     endogenize some of its parameter."""
 
     def __init__(self, CBACalculator_instance):
-        self._CBAcI          = CBACalculator_instance
-        self._caches_cleaner = lambda k: self._CBAcI._cache.pop(k, None)\
-                               if k.split('_')[-1] not in [
-                                   'annualizer', 'computer'
-                                ] else None
+        self._CBAcI          = copy.copy(CBACalculator_instance)
+        self._caches_cleaner = lambda k:(
+            self._CBAcI._cache.pop(k, None)
+            if k.split('_')[-1] not in [
+                'annualizer', 'computer'
+            ] else None
+        )
 
     def _ENDOGENIZER(self, _key_, _method_, _ci_):
         """ Generic method used to wrapp the solving phase."""
