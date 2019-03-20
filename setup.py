@@ -4,7 +4,7 @@ from setuptools import setup
 import pathlib as pa
 import codecs as cd
 
-package_version = '0.9.03'
+package_version = '0.9.04'
 package_name    = 'PyLUCCBA'
 
 with pa.Path('requirements.txt').open() as requirements:
@@ -28,7 +28,8 @@ setup(
         ]
     },
     description      =  "A Land-Use-Change Cost-Benefit-Analysis calculator coded in Python27&3, %s."%package_name,
-    long_description = readme,
+    long_description              = readme,
+    long_description_content_type = 'text/markdown',
     author       = 'Laurent Faucheux',
     author_email = "laurent.faucheux@hotmail.fr",
     url          = 'https://github.com/lfaucheux/%s'%package_name,
