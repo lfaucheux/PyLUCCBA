@@ -42,7 +42,6 @@ __all__ = [
 ]
 
 import os
-import copy
 import pprint as pp
 import warnings;warnings.filterwarnings('ignore')
 import numpy as np;np.seterr(divide='ignore', invalid='ignore')
@@ -2345,7 +2344,7 @@ class CBACalculator(ts.Cache):
     @property
     def summary_args(self):
         """ Attributes which consists of parameters used for simulation
-        exercies.
+        exercices.
 
         Example
         -------
@@ -2355,7 +2354,7 @@ class CBACalculator(ts.Cache):
         ...     T_vg_diff              = 1,
         ...     T_vg_unif              = 20,
         ...     discount_rate          = .03,
-        ...     co2_prices_scenario    = 'O',
+        ...     co2_prices_scenario    = 'WEO2018-SDS',
         ...     initial_landuse        = 'improved grassland',
         ...     final_landuse          = 'wheat',
         ...     input_flows_scenario   = 'IFP',
@@ -2370,7 +2369,7 @@ class CBACalculator(ts.Cache):
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
         ---- [***]The solution converged.[0.000000e+00][***]
         **************************************************************************************
-        run_name                : [ETH(O)][IMPROVEDGRASSLAND~WHEAT(IFP)][T151Y2020D1][Tvgd1Tvgu20Tso20][Tgwp100STATIC][CO2p(O)DR(0.03)]VS[OIL][EUR]
+        run_name                : [ETH(O)][IMPROVEDGRASSLAND~WHEAT(IFP)][T151Y2020D1][Tvgd1Tvgu20Tso20][Tgwp100STATIC][CO2p(WEO2018-SDS)DR(0.03)]VS[OIL][EUR]
         output                  : ETH
         black_output            : OIL
         initial_landuse         : IMPROVED GRASSLAND
@@ -2382,10 +2381,10 @@ class CBACalculator(ts.Cache):
         T_vg_unif               : 20
         project_first_year      : 2020
         polat_repeated_pattern  : True
-        co2_prices_scenario     : O
+        co2_prices_scenario     : WEO2018-SDS
         discount_rate           : 0.03
-        diff_payback_period     : []
-        unif_payback_period     : 139
+        diff_payback_period     : 33
+        unif_payback_period     : 41
         final_currency          : EUR
         change_rates            : {'USD/EUR': 1.14}
         output_flows_scenario   : O
@@ -8614,7 +8613,8 @@ class CBAParametersEndogenizer(object):
     endogenize some of its parameter."""
 
     def __init__(self, CBACalculator_instance):
-        self._CBAcI          = copy.copy(CBACalculator_instance)
+        self._CBAcI          = CBACalculator_instance
+        self._CBAcI._cache   = CBACalculator_instance._cache.copy()
         self._caches_cleaner = lambda k:(
             self._CBAcI._cache.pop(k, None)
             if k.split('_')[-1] not in [
