@@ -42,6 +42,7 @@ __all__ = [
 ]
 
 import os
+import copy
 import pprint as pp
 import warnings;warnings.filterwarnings('ignore')
 import numpy as np;np.seterr(divide='ignore', invalid='ignore')
@@ -2730,7 +2731,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_soc_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -2766,7 +2767,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_soc_unit_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -2791,7 +2792,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_soc_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -2829,7 +2830,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_soc_unit_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -2953,7 +2954,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_vgc_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -2977,7 +2978,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_vgc_diff_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -3084,7 +3085,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_unif_carbon_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -3108,7 +3109,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_diff_carbon_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -3228,7 +3229,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_soco2_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -3252,7 +3253,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_soco2_diff_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -3370,7 +3371,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_vgco2_unif_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -3394,7 +3395,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_vgco2_diff_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -3520,7 +3521,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -3545,7 +3546,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -3648,7 +3649,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_co2_prices_traj
         >>> c.show()  # doctest: +SKIP
@@ -3701,7 +3702,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_co2_disc_prices_traj
         >>> c.show()  # doctest: +SKIP
@@ -3806,7 +3807,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -3989,7 +3990,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_input_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4069,7 +4070,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_cult_unit_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4143,7 +4144,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_cult_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4194,7 +4195,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_proc_unit_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4266,7 +4267,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_proc_input_co2eq_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4364,7 +4365,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_land_surface_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4414,7 +4415,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_proc_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
@@ -4465,7 +4466,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_proc_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
@@ -4518,7 +4519,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_cult_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
@@ -4569,7 +4570,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_cult_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
@@ -4620,7 +4621,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_cult_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4673,7 +4674,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_cult_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4725,7 +4726,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4782,7 +4783,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_proc_plus_cult_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
@@ -4832,7 +4833,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_proc_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4885,7 +4886,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_proc_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4937,7 +4938,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_proc_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -4989,7 +4990,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_proc_plus_cult_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
@@ -5040,7 +5041,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -5092,7 +5093,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -5145,7 +5146,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_proc_plus_cult_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -5211,7 +5212,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5269,7 +5270,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_vg_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5326,7 +5327,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_vg_diff_co2_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5386,7 +5387,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5445,7 +5446,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_vgc_chosen_CRF_constrained sol=[0.02458071]
@@ -5502,7 +5503,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_so_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -5560,7 +5561,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_so_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -5617,7 +5618,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -5677,7 +5678,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -5736,7 +5737,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -5796,7 +5797,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_so_plus_vg_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -5858,7 +5859,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_so_plus_vg_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -5919,7 +5920,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -5981,7 +5982,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -6044,7 +6045,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_plus_vg_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -6114,7 +6115,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_total_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -6169,7 +6170,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_total_diff_co2_flows_traj_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -6231,7 +6232,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_total_diff_co2_flows_traj_disc_values
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -6292,7 +6293,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_total_diff_co2_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -6354,7 +6355,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_total_diff_co2_flows_traj_per_cum_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -6417,7 +6418,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_total_diff_co2_flows_traj_per_cum_MJs_output_flows_traj
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -6477,7 +6478,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_vg_unif_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
@@ -6529,7 +6530,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_vg_unif_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
@@ -6582,7 +6583,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_vg_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -6638,7 +6639,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -6691,7 +6692,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -6745,7 +6746,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_so_unif_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
@@ -6798,7 +6799,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_so_unif_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
@@ -6850,7 +6851,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -6906,7 +6907,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_unif_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -6959,7 +6960,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7014,7 +7015,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_so_plus_vg_unif_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
@@ -7068,7 +7069,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_so_plus_vg_unif_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
@@ -7121,7 +7122,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7175,7 +7176,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7228,7 +7229,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_so_plus_vg_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7290,7 +7291,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_total_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7335,7 +7336,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_total_unif_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
@@ -7388,7 +7389,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_total_unif_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
@@ -7440,7 +7441,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_total_unif_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7494,7 +7495,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_total_unif_co2_flows_traj_per_cum_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7547,7 +7548,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_total_unif_co2_flows_traj_per_cum_MJs_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7697,7 +7698,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_black_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7776,7 +7777,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_black_output_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7823,7 +7824,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_black_output_co2_flows_traj_values
         >>> c.show()  # doctest: +SKIP
@@ -7876,7 +7877,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_black_output_co2_flows_traj_disc_values
         >>> c.show()  # doctest: +SKIP
@@ -7928,7 +7929,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_black_output_co2_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -7984,7 +7985,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_black_output_co2_flows_traj_per_cum_black_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -8039,7 +8040,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_black_output_co2_flows_traj_per_cum_MJs_black_output_flows_traj
         >>> c.show()  # doctest: +SKIP
@@ -8100,7 +8101,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_total_diff_minus_black_output_co2_flows_trajs
         ---- a_parameter_which_solves_soc_chosen_CRF_constrained sol=[0.52418009]
@@ -8181,7 +8182,7 @@ class CBACalculator(ts.Cache):
         Testing/Example
         ---------------
         >>> o = CBACalculator._testing_instancer(
-        ...     rn='.doctests', return_plts=True
+        ...     rn='.doctests', return_charts=True
         ... )
         >>> c = o.chart_of_NPV_total_unif_minus_black_output_co2_flows_trajs
         >>> c.show()  # doctest: +SKIP
@@ -8610,10 +8611,10 @@ class CBACalculator(ts.Cache):
 ##    ╚═╝╚═╝╩ ╩╩  ┴ ┴┴└─┴ ┴┴ ┴└─┘ ┴ └─┘┴└─└─┘╚═╝┘└┘─┴┘└─┘└─┘└─┘┘└┘┴└─┘└─┘┴└─
 class CBAParametersEndogenizer(object):
     """ Class object designed to handle a CBACalculator instances and to
-    endogenize some of its parameter."""
+    endogenize some of its parameters."""
 
     def __init__(self, CBACalculator_instance):
-        self._CBAcI          = CBACalculator_instance
+        self._CBAcI          = copy.copy(CBACalculator_instance)
         self._CBAcI._cache   = CBACalculator_instance._cache.copy()
         self._caches_cleaner = lambda k:(
             self._CBAcI._cache.pop(k, None)

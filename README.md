@@ -78,7 +78,7 @@ But before using the calculator as such, let's define (and introduce) the set of
             polat_repeated_pattern = True,
             final_currency         = 'EUR',
             change_rates           = {'EUR':{'USD/EUR':1.14}}, # https://www.google.fr/#q=EUR+USD
-            return_plts            = True,
+            return_charts          = True,
             save_charts            = True,
             from_local_data        = False,
         )
@@ -105,7 +105,7 @@ The following table enumerates all parameters that can be used to create an inst
  `polat_repeated_pattern` | if `True`, retro/extra-polation pattern is repeated before/after the first/last mentioned value. Otherwise, it is maintained constant.
  `final_currency`         | currency used to conduct the study and express the results. The current choices are `'EUR'` or `'USD'`. Set to `'EUR'` by default.
  `change_rates`           | `final_currency`-dependent exchange rate to consider in calculations, *e.g.* `{'EUR':{'USD/EUR':1.14,}}` *(or `{'EUR':{'EUR/USD':0.8772,}}` since the tool ensures dimensional homogeneity)*.
- `return_plts`            | if `True`, charts are returned (for interactive use, e.g. hovering). Set to `True` by default.
+ `return_charts`          | if `True`, charts are returned (for interactive use, e.g. hovering). Set to `True` by default.
  `save_charts`            | if `True`, charts are saved on the disk. Set to `True` by default.
  `from_local_data`        | if `True`, scenarized trajectories (*e.g.* of CO2 prices, of output flows quantities, of yields) are read from the 'resources' folder that is located next to the working script. If `False`, those are read from the 'resources' folder natively contained in the package directory. Set to `False` by default.
 

@@ -1015,9 +1015,9 @@ class DataReader(Cache):
 ##    ═╩╝┴ ┴└─┘┴ ┴└─┘└─┘┴ ┴┴└──┴┘
 class Dashboard(object):
     def __init__(self, **kws):
-        self.canvas       = plt
-        self._return_plts = kws.get('return_plts', True)
-        self.prop         = FontProperties()
+        self.canvas         = plt
+        self._return_charts = kws.get('return_charts', True)
+        self.prop           = FontProperties()
         self.prop.set_size(10)
         self.prop.set_stretch('ultra-expanded')
         self.prop.set_style('oblique')
@@ -1026,9 +1026,9 @@ class Dashboard(object):
         self.prop.set_family('fantasy')
 
     _mocked_meth = lambda s:print(
-        '!!! Your instance has `return_plts` '
+        '!!! Your instance has `return_charts` '
         'set to `False`.\nDo `<your_instance>.'
-        'return_plts = True` and retry.'
+        'return_charts = True` and retry.'
     )
     def plot(self,
             abs_, imas, labels, colors,
@@ -1054,7 +1054,7 @@ class Dashboard(object):
         >>> cols = [
         ...     'red', 'blue', 'black'
         ... ]   
-        >>> pltobj = Dashboard(return_plts=True).plot(
+        >>> pltobj = Dashboard(return_charts=True).plot(
         ...     abs_   = x.T,
         ...     imas   = ys.T,
         ...     labels = labs,
@@ -1062,15 +1062,15 @@ class Dashboard(object):
         ... )
         >>> pltobj.show() # doctest: +SKIP
         >>> pltobj.close() 
-        >>> pltobj = Dashboard(return_plts=False).plot(
+        >>> pltobj = Dashboard(return_charts=False).plot(
         ...     abs_   = x.T,
         ...     imas   = ys.T,
         ...     labels = labs,
         ...     colors = cols,
         ... )
         >>> pltobj.show()
-        !!! Your instance has `return_plts` set to `False`.
-        Do `<your_instance>.return_plts = True` and retry.
+        !!! Your instance has `return_charts` set to `False`.
+        Do `<your_instance>.return_charts = True` and retry.
 
         """
         if type(abs_).__module__ != np.__name__:
@@ -1124,7 +1124,7 @@ class Dashboard(object):
                 bbox_inches=0, dpi=200
             )
         
-        if self._return_plts:
+        if self._return_charts:
             return self.canvas
 
         self.canvas.close()
