@@ -28,9 +28,9 @@
 
 |  Module  | statements | missing | excluded | coverage |
 | -------- | ---------- | ------- | -------- | -------- |
-| core.py  | 860        | 27      | 0        | 97%      |
-| tools.py | 306        | 62      | 0        | 80%      |
-| Total    | 1166       | 89      | 0        | 92%      |
+| core.py  | 880        | 26      | 0        | 97%      |
+| tools.py | 308        | 60      | 0        | 81%      |
+| Total    | 1188       | 86      | 0        | 93%      |
 
 <hr>
 

@@ -12,7 +12,7 @@ u"""
 *                                                                                                   *
 * Conceived by Marion Dupoux                                                                        *
 * Institut Français du Pétrole et des Énergies Nouvelles (IFPEN)                                    *
-* marion.dupoux@gu.se                                                                               *
+* marion.dupoux@economics.gu.se                                                                     *
 *****************************************************************************************************
 * Coded by Laurent Faucheux                                                         * ╔═╗╦╦═╗╔═╗╔╦╗ *
 * Centre International de Recherche sur l'Environnement et le Développement (CIRED) * ║  ║╠╦╝║╣  ║║ *
@@ -42,11 +42,14 @@ __all__ = [
 ]
 
 import os
+import sys
 import copy
 import pprint as pp
 import warnings;warnings.filterwarnings('ignore')
 import numpy as np;np.seterr(divide='ignore', invalid='ignore')
-if __name__ == '__main__':
+
+__name__eq__main__ = __name__ == '__main__'
+if __name__eq__main__:
     import tools as ts
 else:
     from . import tools as ts
@@ -59,136 +62,271 @@ VERBOSE_DTESTS = False
 ##    ╔╗ ┬  ┌─┐┌─┐┬┌─╔═╗┬ ┬┌┬┐┌─┐┬ ┬┌┬┐╔═╗┌┐┌┌┬┐╔═╗┬ ┬┌┐ ┌─┐┌┬┐┬┌┬┐┬ ┬┌┬┐┌─┐┌─┐╔═╗┌─┐┌─┐┌─┐┬┌─┐┬┌─┐┬┌┬┐┬┌─┐┌─┐
 ##    ╠╩╗│  ├─┤│  ├┴┐║ ║│ │ │ ├─┘│ │ │ ╠═╣│││ ││╚═╗│ │├┴┐└─┐ │ │ │ │ │ │ ├┤ └─┐╚═╗├─┘├┤ │  │├┤ ││  │ │ │├┤ └─┐
 ##    ╚═╝┴─┘┴ ┴└─┘┴ ┴╚═╝└─┘ ┴ ┴  └─┘ ┴ ╩ ╩┘└┘─┴┘╚═╝└─┘└─┘└─┘ ┴ ┴ ┴ └─┘ ┴ └─┘└─┘╚═╝┴  └─┘└─┘┴└  ┴└─┘┴ ┴ ┴└─┘└─┘
-class BlackOutputAndSubstitutesSpecificities(object):
+class BlackOutputAndSubstitutesSpecificities(ts.Cache):
     """ Class object representing specificities of fuel and of its
     substitues."""
+
+    def __init__(self, **kwargs):
+        super(BlackOutputAndSubstitutesSpecificities, self).__init__(
+            **{k:(0 if k=='verbose' else v) for k,v in kwargs.items()}
+        )
+        self.resources = ts.DataReader(**kwargs).resources
+
+    @ts.Cache._property
+    def substitutes_specificities(self):    
+        """ Substitutes-related specificities.
+
+        Example
+        -------
+        >>> o = BlackOutputAndSubstitutesSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> o.substitutes_specificities['energy']['infos']
+        {'unit': 'mj/tonne[output]'}
+        >>> o.substitutes_specificities['emission']['infos']
+        {'unit': 'tonne[co2eq]/mj'}
+        """
+        return ts.InMindWithCorrespondingUnit(
+            "", self.resources['output']['subs_yields']
+        ).values_and_infos_per_key
     
     @property
     def tonne_to_MJs(self):
-        """ Megajoules (MJs) per tonne of final product."""
-        return {
-            'ETH': 26708.86076,
-            'OIL': 45513.51351,
-        }
+        """ Megajoules (MJs) per tonne of final product.
 
-    def tonnes_to_MJs_computer(self, key, val_in_tonnes):
-        """ Method which computes the conversion from tonnes to megajoules
-        (based on self.tonne_to_MJs)."""
-        return val_in_tonnes*self.tonne_to_MJs[key]
-
-    def MJs_to_tonnes_computer(self, key, val_in_MJs):
-        """ Method which computes the conversion from megajoules to tonnes
-        (based on self.tonne_to_MJs)."""
-        return val_in_MJs/self.tonne_to_MJs[key]
+        Example
+        -------
+        >>> o = BlackOutputAndSubstitutesSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> o.tonne_to_MJs['OIL']
+        45513.51351
+        >>> o.tonne_to_MJs['ETH']
+        26708.86076
+        """
+        return self.substitutes_specificities['energy']['values']
 
     @property
     def co2eq_emissions_per_MJ(self):
         """ Co2equivalent tonnes per MJ of final product. In an economic point
         of view, note the sign, negative. An emission is seen as a social cost.
-        """
-        return {
-            'ETH': '[!!!] CO2eq DEDUCED FROM CBA RESULTS [!!!]',
-            'OIL': -87.3*1.e-6,
-        }
 
+        Example
+        -------
+        >>> o = BlackOutputAndSubstitutesSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> o.substitutes_specificities['emission']['values']['OIL']
+        -8.73e-05
+        >>> o.substitutes_specificities['emission']['values']['ETH']
+        '[!!!] deduced from cba results [!!!]'
+        """
+        return self.substitutes_specificities['emission']['values']
+
+    def tonnes_to_MJs_computer(self, key, val_in_tonnes):
+        """ Method which computes the conversion from tonnes to megajoules
+        (based on self.tonne_to_MJs).
+
+        Example
+        -------
+        >>> o = BlackOutputAndSubstitutesSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> o.tonnes_to_MJs_computer('ETH', 1)
+        26708.86076
+        """
+        return val_in_tonnes*self.tonne_to_MJs[key]
+
+    def MJs_to_tonnes_computer(self, key, val_in_MJs):
+        """ Method which computes the conversion from megajoules to tonnes
+        (based on self.tonne_to_MJs).
+
+        Example
+        -------
+        >>> o = BlackOutputAndSubstitutesSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> o.MJs_to_tonnes_computer('ETH', 26708.86076)
+        1.0
+        """
+        return val_in_MJs/self.tonne_to_MJs[key]
 
 ##******************************************
 ##    ╦  ╦┌─┐┌─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌┐┌┌─┐╔═╗┌┐┌┌┬┐╔═╗┌─┐┬┬  ╔═╗┌─┐┌─┐┌─┐┬┌─┐┬┌─┐┬┌┬┐┬┌─┐┌─┐
 ##    ╚╗╔╝├┤ │ ┬├┤  │ ├─┤ │ ││ ││││└─┐╠═╣│││ ││╚═╗│ │││  ╚═╗├─┘├┤ │  │├┤ ││  │ │ │├┤ └─┐
 ##     ╚╝ └─┘└─┘└─┘ ┴ ┴ ┴ ┴ ┴└─┘┘└┘└─┘╩ ╩┘└┘─┴┘╚═╝└─┘┴┴─┘╚═╝┴  └─┘└─┘┴└  ┴└─┘┴ ┴ ┴└─┘└─┘
 class VegetationsAndSoilSpecificities(ts.Cache):
-    """ Class object representing specificities of vegetations (VEG) and soil (SO)."""
+    """ Class object representing specificities of vegetations (VEG)
+    and soil (SO) related phenomena."""
 
     def __init__(self, **kwargs):
         super(VegetationsAndSoilSpecificities, self).__init__(
-            verbose=kwargs.pop('verbose', VERBOSE), **kwargs
+            **{k:(0 if k=='verbose' else v) for k,v in kwargs.items()}
         )
-        self.resources = ts.DataReader(**kwargs).resources['dluc']
+        self.resources = ts.DataReader(**kwargs).resources
 
     @property
-    def delay_between_luc_and_production(self):
-        """ Index of the year at which first ghg emissions occur. """
-        return {
-            'MISCANTHUS' : 1,
-            'SWITCHGRASS': 1,
-            'WHEAT'      : 1,
-            'CORN'       : 1,
-            'SUGARBEET'  : 1,
+    def dluc_and_production_specificities(self):    
+        """ Vegetation-biomass-related specificities.
 
-            'DEBUG'      : 1,
-        }
+        Example
+        -------
+        >>> o = VegetationsAndSoilSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> delays_specs = o.dluc_and_production_specificities['delay']
+        >>> delays_specs['infos']
+        {'unit': 'year'}
+        """
+        return ts.InMindWithCorrespondingUnit(
+            "", self.resources['output']['cult_to_proc_delays']
+        ).values_and_infos_per_key
+
+    @ts.Cache._property
+    def delay_between_dluc_and_production(self):
+        """ Delay (in years) per type of final land use at
+        which first ghg emissions occur. 
+
+        Example
+        -------
+        >>> o = VegetationsAndSoilSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> o.delay_between_dluc_and_production['DEBUG']
+        0
+        """
+        return self.dluc_and_production_specificities['delay']['values']
+
     @property
+    def vg_biomass_specificities(self):    
+        """ Vegetation-biomass-related specificities.
+
+        Example
+        -------
+        >>> o = VegetationsAndSoilSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> o.vg_biomass_specificities['debug']['infos']
+        {'unit': 'none'}
+        """
+        return ts.InMindWithCorrespondingUnit(
+            u"", self.resources['dluc']['vg_ghgs_shares']
+        ).values_and_infos_per_key
+
+    @property
+    def so_biomass_specificities(self):    
+        """ Soil-biomass-related specificities.
+
+        Example
+        -------
+        >>> o = VegetationsAndSoilSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> o.so_biomass_specificities['debug']['infos']
+        {'unit': 'none'}
+        """
+        return ts.InMindWithCorrespondingUnit(
+            u"", self.resources['dluc']['so_ghgs_shares']
+        ).values_and_infos_per_key
+
+    @ts.Cache._property
     def biomass_share_translating_in_ghg_flow(self):
-        """ Share of biomass which translates in ghg flow.
+        """ Share of biomass which translates into ghg flow.
         Recalling that flow can be either emissions (positive)
         or sequestration (negative).
-        """
-        return  {
-            'ANNUAL CROPLAND'               :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'DEGRADED GRASSLAND'            :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'FORESTLAND30'                  :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'FORESTPLANTATIONS>20YRS'       :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'FORESTPLANTATIONS>20YRS'       :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'IMPROVED GRASSLAND'            :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'MISCANTHUS'                    :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'PERENNIAL CROPLAND'            :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'SWITCHGRASS'                   :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'SUGARBEET'                     :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'WHEAT'                         :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'WHEATSTRAW'                    :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'WOODR'                         :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
-            'WOODRESIDUES'                  :{'vg':{'emi':.9, 'seq':1.}, 'so':{'emi':.3, 'seq':.3}},
 
-            'DEBUG'                         :{'vg':{'emi':1., 'seq':1.}, 'so':{'emi':1., 'seq':1.}},
+        Example
+        -------
+        >>> o = VegetationsAndSoilSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        """
+        return {
+            'vg':{
+                k.upper():v['values'] for k,v
+                in self.vg_biomass_specificities.items()
+            },
+            'so':{
+                k.upper():v['values'] for k,v
+                in self.so_biomass_specificities.items()
+            },
         }
 
     @property
+    def cult_ghgs_emissions_specificities(self):
+        """ Cultivation-related greenhouse gases emissions specificities.
+
+        Example
+        -------
+        >>> o = VegetationsAndSoilSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> cult_infos = o.cult_ghgs_emissions_specificities['debug']['infos']
+        >>> cult_infos['unit']
+        'tonne/tonne[output]'
+        >>> cult_infos['notabene']
+        'data must comply with the unit mentioned above.'
+        """
+        return ts.InMindWithCorrespondingUnit(
+            u"", self.resources['externality']['cult_ghgs_yields']
+        ).values_and_infos_per_key
+
+    @property
+    def proc_ghgs_emissions_specificities(self):
+        """ Process-related greenhouse gases emissions specificities.
+
+        Example
+        -------
+        >>> o = VegetationsAndSoilSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> proc_infos = o.proc_ghgs_emissions_specificities['debug']['infos']
+        >>> proc_infos['unit']
+        'tonne/tonne[output]'
+        >>> proc_infos['notabene']
+        'data must comply with the unit mentioned above.'
+        """
+        return ts.InMindWithCorrespondingUnit(
+            u"", self.resources['externality']['proc_ghgs_yields']
+        ).values_and_infos_per_key        
+
+    @ts.Cache._property
     def ghgs_emissions_per_tonne_of_eth(self):
         """ GHGs tonnes per tonne of ethanol, related to a given production
-        phase. In an economic point of view, note the sign, which is negative.
-        I.e. an emission is seen as a social cost.
+        phase. Note that primary data from which this attribute derives must
+        originally be provded as tonne of ghg per tonne of bioethanol.
+
+        Example
+        -------
+        >>> o = VegetationsAndSoilSpecificities(
+        ...     country = 'france',
+        ...     verbose = False,
+        ... )
+        >>> sorted(o.ghgs_emissions_per_tonne_of_eth['process']['CORN'].items())
+        [('CH4', -0.0024), ('CO2', -0.901518987), ('N2O', 0)]
+        >>> sorted(o.ghgs_emissions_per_tonne_of_eth['culture']['CORN'].items())
+        [('CH4', 0), ('CO2', -0.827974684), ('N2O', -0.000576938)]
         """
         return {
             'process':{
-                'CORN'            :{'CO2':-0.901518987, 'N2O':-0          , 'CH4':-0.0024},
-                'CORNSTOVER'      :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'CORNSTRAW'       :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'MISCANTHUS'      :{'CO2':-0.20566    , 'N2O':-0          , 'CH4':-0},
-                'POPLAR'          :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'RAPESEEDSTRAW'   :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'SUGARBEET'       :{'CO2':-0.95644    , 'N2O':-0          , 'CH4':-0.00267},
-                'SUNFLOWERSTRAW'  :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'SWITCHGRASS'     :{'CO2':-0.400632911, 'N2O':-0          , 'CH4':-0},
-                'TRITICALE'       :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'TRITICALESTRAW'  :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'WHEAT'           :{'CO2':-0.82958    , 'N2O':-0          , 'CH4':-0.0024},
-                'ANNUAL CROPLAND' :{'CO2':-0.82958    , 'N2O':-0          , 'CH4':-0.0024},
-                'WHEATSTRAW'      :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'WILLOW'          :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'WOODR'           :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-                'WOODRESIDUES'    :{'CO2':-0.5        , 'N2O':-0          , 'CH4':-0},
-
-                'DEBUG'           :{'CO2':-1.         , 'N2O':-0          , 'CH4':-0},
+                k.upper():v['values'] for k,v
+                in self.proc_ghgs_emissions_specificities.items()
             },
             'culture':{
-                'CORN'            :{'CO2':-0.827974684, 'N2O':-0.000576938, 'CH4':-0},
-                'CORNSTOVER'      :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'CORNSTRAW'       :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'MISCANTHUS'      :{'CO2':-0.04006    , 'N2O':-0.00027    , 'CH4':-0},
-                'POPLAR'          :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'RAPESEEDSTRAW'   :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'SUGARBEET'       :{'CO2':-0.19204    , 'N2O':-0.0008     , 'CH4':-0.00027},
-                'SUNFLOWERSTRAW'  :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'SWITCHGRASS'     :{'CO2':-0.34721519 , 'N2O':-0.000185647, 'CH4':-0},
-                'TRITICALE'       :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'TRITICALESTRAW'  :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'WHEAT'           :{'CO2':-0.46313    , 'N2O':-0.00187    , 'CH4':-0.0008},
-                'WHEATSTRAW'      :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'WILLOW'          :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'WOODR'           :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-                'WOODRESIDUES'    :{'CO2':-0.05       , 'N2O':-0          , 'CH4':-0},
-
-                'DEBUG'           :{'CO2':-1.         , 'N2O':-0          , 'CH4':-0},
+                k.upper():v['values'] for k,v
+                in self.cult_ghgs_emissions_specificities.items()
             },
         }
 
@@ -204,15 +342,15 @@ class VegetationsAndSoilSpecificities(ts.Cache):
         ... )
         >>> soc_spec = o.carbon_stock_specificities['soc']
         >>> soc_spec['infos']
-        {'unit': 'Tonne/ha'}
+        {'unit': 'tonne/ha'}
         >>> soc_spec['values']['DEBUG']
         51.33333333
         """
         return ts.InMindWithCorrespondingUnit(
-            u"", self.resources['CS_yields']
+            u"", self.resources['dluc']['cs_yields']
         ).values_and_infos_per_key
     
-    @ts.Cache._property
+    @property
     def soil_carbon_stock_specificities(self):
         """ Carbon stocks specificities of soil """
         return self.carbon_stock_specificities['soc']
@@ -222,7 +360,6 @@ class VegetationsAndSoilSpecificities(ts.Cache):
         """ Carbon stocks specificities of vegetation """
         return self.carbon_stock_specificities['cveg']
 
-
 ##******************************************
 ##    ╔═╗┬  ┌─┐┌┐ ┌─┐┬  ╦ ╦┌─┐┬─┐┌┬┐┬┌┐┌┌─┐╔═╗┌─┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┬  
 ##    ║ ╦│  │ │├┴┐├─┤│  ║║║├─┤├┬┘││││││││ ┬╠═╝│ │ │ ├┤ │││ │ │├─┤│  
@@ -231,14 +368,20 @@ class GlobalWarmingPotential(ts.Cache):
     """
     References
     ----------
-    .. [1] Solomon S., D. Qin, M. Manning, Z. Chen, M. Marquis, K.B. Averyt, M. Tignor, H.L. Miller (2007)
-        "Climate Change 2007: The Physical Science Basis. Contribution of Working Group I to the Fourth Assessment
-        Report of the Intergovernmental Panel on Climate Change".
-        Cambridge University Press 2007, Chapter 2, Section 2.10.2, Table 2.14, pp 211-213.
-    .. [2] Annie Levasseur, Pascal Lesage, Manuele Margni, Louise Deschênes, Réjean Samson (2010)
-        "Considering Time in LCA: Dynamic LCA and Its Application to Global Warming Impact Assessments".
+    .. [1] Solomon S., D. Qin, M. Manning, Z. Chen, M. Marquis, K.B. Averyt,
+           M. Tignor, H.L. Miller (2007)
+        "Climate Change 2007: The Physical Science Basis. Contribution of Working
+         Group I to the Fourth Assessment Report of the Intergovernmental Panel
+         on Climate Change".
+        Cambridge University Press 2007, Chapter 2, Section 2.10.2, Table 2.14,
+        pp 211-213.
+    .. [2] Annie Levasseur, Pascal Lesage, Manuele Margni, Louise Deschênes,
+           Réjean Samson (2010)
+        "Considering Time in LCA: Dynamic LCA and Its Application to Global Warming
+         Impact Assessments".
         Environmental Science & Technology, 2010, 44 (8), pp 3169–3174.
     """
+    
     def __init__(self,
             first_year=2020, project_horizon=20, GWP_horizon=None, static=True,
             **kwargs
@@ -246,16 +389,17 @@ class GlobalWarmingPotential(ts.Cache):
         super(GlobalWarmingPotential, self).__init__(
             verbose=kwargs.pop('verbose', VERBOSE), **kwargs
         )
-        self.first_year       = first_year
-        self.project_horizon  = project_horizon
-        self.last_year        = first_year + self.project_horizon
-        self.GWP_horizon      = float(GWP_horizon) if GWP_horizon\
-                                else float(self.project_horizon)
-        self.other_ghgs       = ['N2O', 'CH4']
-        self.static           = static
+        self.first_year      = first_year
+        self.project_horizon = project_horizon
+        self.last_year       = first_year + self.project_horizon
+        self.GWP_horizon     = float(GWP_horizon) if GWP_horizon\
+                               else float(self.project_horizon)
+        self.other_ghgs      = ['N2O', 'CH4']
+        self.static          = static
         # --------------------#
-        self.biomass_ghgs_specificities = VegetationsAndSoilSpecificities()\
-                                          .ghgs_emissions_per_tonne_of_eth
+        self.ghgs_emissions_per_tonne_of_eth = VegetationsAndSoilSpecificities(
+            **kwargs
+        ).ghgs_emissions_per_tonne_of_eth
 
     @ts.Cache._property
     def ghgs_specificities(self):
@@ -369,7 +513,7 @@ class GlobalWarmingPotential(ts.Cache):
                 
         return _ck
 
-    def co2eq_yields_GWP_traj_computer(self, ghgs_yield):
+    def co2eq_yields_GWP_traj_computer(self, ghgs_yields):
         """
         Method which computes the total quantity of CO2eq associated with each
         GHG emission tonne per tonne of ethanol.
@@ -420,7 +564,7 @@ class GlobalWarmingPotential(ts.Cache):
             _c_[year] = 0
             _y_       = _y0 if _st else year
             for ghg in self.ghgs_specificities.keys():
-                _c_[year] += _gs[ghg]['trajectories']['GWP'][_y_]*ghgs_yield[ghg]
+                _c_[year] += _gs[ghg]['trajectories']['GWP'][_y_]*ghgs_yields[ghg]
         return _c_
 
 ##******************************************
@@ -448,7 +592,7 @@ class VGCAndSOCDeltas(ts.Cache):
         ...     verbose         = False
         ... )
         >>> o.vegetation_carbon_stock_infos
-        {'unit': 'Tonne/ha'}
+        {'unit': 'tonne/ha'}
 
         """
         return self.vegetations_and_so_specificities\
@@ -471,7 +615,7 @@ class VGCAndSOCDeltas(ts.Cache):
         show that the value is actually not involved within the present example.
         
         >>> o.soil_carbon_stock_infos
-        {'unit': 'Tonne/ha'}
+        {'unit': 'tonne/ha'}
         """
         return self.vegetations_and_so_specificities\
         .soil_carbon_stock_specificities['infos']
@@ -589,9 +733,7 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         self.delta_vgc       = delta_vgc
         self.project_horizon = float(project_horizon)
         self.final_landuse   = final_landuse.upper()
-        self.vg_and_so_spec  = VegetationsAndSoilSpecificities(
-            verbose=kwargs.pop('verbose', VERBOSE)
-        )
+        self.vg_and_so_specs = VegetationsAndSoilSpecificities(**kwargs)
         self.T_so_diff       = T_so or self.project_horizon
         self.T_vg_diff       = T_vg_diff or self.project_horizon
         self.T_so_unif       = T_so or self.project_horizon
@@ -1064,11 +1206,11 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
 
     """**[VGC+TO*VGCO2][SOC*TO*VGCO2]***************************************************************"""
     def vg_and_so_co2_unit_x_flows_trajecter(self, key, traj):
-        return traj*self.vg_and_so_spec.biomass_share_translating_in_ghg_flow[
+        return self.vg_and_so_specs.biomass_share_translating_in_ghg_flow[key][
             self.final_landuse
-        ][key][
+        ][
             'emi' if getattr(self, '%s_emitting'%key) else 'seq'
-        ]*(44./12.)
+        ]*(44./12.)*traj
         
     @ts.Cache._property
     def vgco2_unit_unif_flows_traj(self):
@@ -1264,8 +1406,6 @@ class CarbonAndCo2FlowsAnnualizer(ts.Cache):
         return 1.*self.soco2_unit_diff_flows_traj\
                + 1.*self.vgco2_unit_diff_flows_traj
 
-
-
 ##******************************************
 ##    ╔═╗┬ ┬┌┬┐┌─┐┬ ┬┌┬┐╔═╗┬  ┌─┐┬ ┬┌─┐
 ##    ║ ║│ │ │ ├─┘│ │ │ ╠╣ │  │ ││││└─┐
@@ -1277,7 +1417,7 @@ class OutputFlows(ts.Cache):
             scenario='none', repeated_pattern_polation=False, **kwargs
         ):
         super(OutputFlows, self).__init__(**kwargs)
-        self.resources = ts.DataReader(**kwargs).resources['yields']['Output']
+        self.resources = ts.DataReader(**kwargs).resources['output']
         self.output = output.upper()
         self.first_year = first_year
         self.project_horizon = project_horizon - 1
@@ -1291,8 +1431,8 @@ class OutputFlows(ts.Cache):
         which the wanted one is chosen. To add an other selectable scenario,
         edit the following files:
           <output>_yields_<country>.csv
-          <output>_yields_<country>.txt or Output.txt
-        Originally both in ./resources/yields/Output.
+          <output>_yields_<country>.txt or output.txt
+        Originally both in ./resources/yields/output.
 
         Example
         -------
@@ -1309,10 +1449,11 @@ class OutputFlows(ts.Cache):
         >>> os.path.relpath(
         ...     o.output_flows_traj_and_infos.fname
         ... )
-        'resources\\yields\\Output\\ETH_yields_FR.csv'
+        'resources\\output\\eth_yields_fr.csv'
         """
         return ts.InMindWithCorrespondingUnit(
-            'year', self.resources['%s_yields'%self.output], pop=False
+            'year', self.resources['%s_yields'%self.output.lower()],
+            pop=False
         )
 
     @ts.Cache._property
@@ -1424,7 +1565,7 @@ class OutputFlows(ts.Cache):
         involved within the present example.
         
         >>> sorted(o.scenarized_output_infos.items())
-        [('unit', 'tonne[Output]/tonne[Output]'), ('yrb', 2007)]
+        [('unit', 'tonne[output]/tonne[output]'), ('yrb', 2007)]
         """
         return self.output_flows_traj_and_infos\
                .keys_and_infos[self.output_flows_scenario.lower()]
@@ -1442,7 +1583,7 @@ class InputFlows(ts.Cache):
             scenario='none', repeated_pattern_polation=False, **kwargs
         ):
         super(InputFlows, self).__init__(**kwargs)
-        self.resources = ts.DataReader(**kwargs).resources['yields']['Input']
+        self.resources = ts.DataReader(**kwargs).resources['input']
         self.final_landuse = final_landuse.upper()
         self.input_flows_scenario = scenario.upper()
         self.repeated_pattern_polation = repeated_pattern_polation
@@ -1491,8 +1632,8 @@ class InputFlows(ts.Cache):
         (times or per tonne of output) among which the wanted one is chosen.
         To add an other selectable scenario, edit the following files:
           <input>_yields_<country>.csv
-          <input>_yields_<country>.txt or Input.txt
-        Originally both in ./resources/yields/Input.
+          <input>_yields_<country>.txt or input.txt
+        Originally both in ./resources/yields/input.
 
         Example
         -------
@@ -1510,7 +1651,7 @@ class InputFlows(ts.Cache):
         >>> os.path.relpath(
         ...     o.input_flows_traj_and_infos.fname
         ... )
-        'resources\\yields\\Input\\MISCANTHUS_yields_FR.csv'
+        'resources\\input\\miscanthus_yields_fr.csv'
         
         Let's figure out what the possible scenrii are when
         `final_landuse = 'miscanthus'`.
@@ -1535,7 +1676,7 @@ class InputFlows(ts.Cache):
         >>> os.path.relpath(
         ...     o.input_flows_traj_and_infos.fname
         ... )
-        'resources\\yields\\Input\\WHEAT_yields_FR.csv'
+        'resources\\input\\wheat_yields_fr.csv'
 
         Let's figure out what the possible scenrii are when
         `final_landuse = 'wheat'`.
@@ -1556,7 +1697,8 @@ class InputFlows(ts.Cache):
         'IFP'
         """
         return ts.InMindWithCorrespondingUnit(
-            'year', self.resources['%s_yields'%self.final_landuse], pop=False
+            'year', self.resources['%s_yields'%self.final_landuse.lower()],
+            pop=False
         )
 
     @ts.Cache._property
@@ -1660,12 +1802,12 @@ class InputFlows(ts.Cache):
         ... )
         ['power', 'unit', 'yrb']
         >>> o.scenarized_unit_input_infos['unit']
-        'tonne[Output]/tonne[Input]'
+        'tonne[output]/tonne[input]'
         >>> o.scenarized_unit_input_infos['power']
         -1.0
 
         The value associated with the key `'power'` is not manually filled.
-        It is deduced from `'unit'`, depending on whether `'tonne[Output]'`
+        It is deduced from `'unit'`, depending on whether `'tonne[output]'`
         is in the numerator or in the denominator.
         
         >>> o.scenarized_unit_input_infos['yrb']
@@ -1676,7 +1818,7 @@ class InputFlows(ts.Cache):
         """
         _info_ = self.input_flows_traj_and_infos\
                  .keys_and_infos[self.input_flows_scenario.lower()]
-        _info_['power'] = 1. if 'Output' in _info_['unit'].split('/')[1]\
+        _info_['power'] = 1. if 'output' in _info_['unit'].split('/')[1]\
                           else -1.
         return _info_
 
@@ -1692,7 +1834,7 @@ class LandSurfaceFlows(ts.Cache):
             output='eth', repeated_pattern_polation=False, **kwargs
         ):
         super(LandSurfaceFlows, self).__init__(**kwargs)
-        self.resources = ts.DataReader(**kwargs).resources['yields']['Input']
+        self.resources = ts.DataReader(**kwargs).resources['input']
         self.output = output
         self.land_input = ('ha%s'%output).upper()
         self.final_landuse = final_landuse.upper()
@@ -1708,7 +1850,7 @@ class LandSurfaceFlows(ts.Cache):
         To add an other selectable scenario, edit the following files:
           HA<output>_yields_<country>.csv
           HA<output>_yields_<country>.txt
-        Originally both in ./resources/yields/Input.
+        Originally both in ./resources/yields/input.
 
         Example
         -------
@@ -1726,10 +1868,11 @@ class LandSurfaceFlows(ts.Cache):
         >>> os.path.relpath(
         ...     o.land_surface_flows_traj_and_infos.fname
         ... )
-        'resources\\yields\\Input\\HAETH_yields_FR.csv'
+        'resources\\input\\haeth_yields_fr.csv'
         """
         return ts.InMindWithCorrespondingUnit(
-            'year', self.resources['%s_yields'%self.land_input], pop=False
+            'year', self.resources['%s_yields'%self.land_input.lower()],
+            pop=False
         )
 
     @ts.Cache._property
@@ -1885,19 +2028,19 @@ class LandSurfaceFlows(ts.Cache):
         ... )
         ['power', 'unit']
         >>> o.scenarized_unit_land_surface_infos['unit']
-        'Tonne[Output]/ha'
+        'tonne[output]/ha'
         
         >>> o.scenarized_unit_land_surface_infos['power']
         -1.0
 
         The value associated with the key `'power'` is not manually filled.
-        It is deduced from `'unit'`, depending on whether `'Tonne[Output]'`
+        It is deduced from `'unit'`, depending on whether `'Tonne[output]'`
         is in the numerator or in the denominator.
         """
         _infos_ = self.land_surface_flows_traj_and_infos.keys_and_infos
         _info_  = _infos_[self.final_landuse.lower()]\
                   if self.final_landuse.lower() in _infos_ else _infos_['*']
-        _info_['power'] = 1. if 'Output' in _info_['unit'].split('/')[1]\
+        _info_['power'] = 1. if 'output' in _info_['unit'].split('/')[1]\
                           else -1.
         return _info_
 
@@ -1918,16 +2061,16 @@ class Co2Prices(ts.Cache):
         self.final_currency = final_currency.upper()
         self.first_year = first_year
         self.last_year = first_year + project_horizon
-        self.resources = ts.DataReader(**kwargs).resources['prices']['Exput']
+        self.resources = ts.DataReader(**kwargs).resources['externality']
 
     @ts.Cache._property
     def co2_prices_and_infos(self):
         r""" All scenarized trajectories of CO2 prices per tonne among which the
         wanted one is chosen. To add an other selectable scenario, edit the
         following files:
-          <exput>_prices_<country>.csv
-          <exput>_prices_<country>.txt or Exput.txt
-        Originally both in ./resources/prices/Exput.
+          CO2_prices_<country>.csv
+          CO2_prices_<country>.txt
+        Originally both in ./resources/prices.
 
         Example
         -------
@@ -1945,10 +2088,10 @@ class Co2Prices(ts.Cache):
         >>> os.path.relpath(
         ...     o.co2_prices_and_infos.fname
         ... )
-        'resources\\prices\\Exput\\CO2_prices_FR.csv'
+        'resources\\externality\\co2_prices_fr.csv'
         """
         return ts.InMindWithCorrespondingUnit(
-            'year', self.resources['CO2_prices'], pop=False
+            'year', self.resources['co2_prices'], pop=False
         )
 
     @ts.Cache._property
@@ -2157,7 +2300,7 @@ class Co2Prices(ts.Cache):
         involved within the present example.
         
         >>> sorted(o.scenarized_co2_infos.items())
-        [('toConvert', False), ('unit', 'EUR/tonne'), ('yrb', 'none')]
+        [('toConvert', False), ('unit', 'eur/tonne'), ('yrb', 'none')]
         
         The value associated with the key `'toConvert'` is not manually filled.
         It is deduced depending on whether the value set for `final_currency`
@@ -2184,6 +2327,45 @@ class CBACalculator(ts.Cache):
 
     @staticmethod
     def _testing_instancer(**kws):
+        """
+        A static method used as a shorcut preset-instancer.
+
+        Example
+        -------
+        >>> o = CBACalculator._testing_instancer()
+        >>> o.run_name[:69]
+        '[ETH(O)][IMPROVEDGRASSLAND~WHEAT(IFP)][T21Y2020D1][Tvgd1Tvgu20Tso20]['
+        >>> o.project_horizon
+        21
+        >>> o.T_so
+        20
+        >>> o.T_vg_diff
+        1
+        >>> o.T_vg_unif
+        20
+        >>> o.discount_rate
+        0.03
+        >>> o.initial_landuse
+        'IMPROVED GRASSLAND'
+        >>> o.final_landuse
+        'WHEAT'
+        >>> o.co2_prices_scenario
+        'O'
+        >>> o.input_flows_scenario
+        'IFP'
+        >>> o.output_flows_scenario
+        'O'
+        >>> o.country
+        'FRANCE'
+        >>> o.project_first_year
+        2020
+        >>> o.polat_repeated_pattern
+        True
+        >>> o.change_rates
+        {'USD/EUR': 1.14}
+        >>> o.from_local_data
+        False
+        """
         return CBACalculator(
             run_name               = kws.pop('rn', ''),
             project_horizon        = kws.pop('ph', 20),
@@ -2202,7 +2384,7 @@ class CBACalculator(ts.Cache):
             change_rates           = kws.pop('cr', {'EUR':{'USD/EUR':1.14}}),
             from_local_data        = kws.pop('ld', False),
             **kws
-        )  
+        )
 
     def _clear_caches(self):
         """
@@ -2254,12 +2436,86 @@ class CBACalculator(ts.Cache):
             from_local_data        = False,
             **kwargs
         ):
+        """ Core object of the present script, that offers a compilation of
+        environmental and economic data to generate environment-related net
+        present values of any biofuel project with impacts on the environment
+        (GHG emissions or sequestrations). It has the particularity of
+        permitting the modelization of land use change impacts under different
+        temporal profile assumptions (e.g. uniform vs differentiated).
+
+        Example
+        -------
+        >>> cba = CBACalculator(
+        ...     run_name               = 'Example-1',
+        ...     country                = 'france',
+        ...     project_first_year     = 2020,
+        ...     project_horizon        = 20,
+        ...     discount_rate          = .03,
+        ...     co2_prices_scenario    = 'SPC2009',
+        ...     output_flows_scenario  = 'O',
+        ...     initial_landuse        = 'improved grassland',
+        ...     final_landuse          = 'wheat',
+        ...     input_flows_scenario   = 'IFP',
+        ...     T_so                   = 20,
+        ...     T_vg_diff              = 1,
+        ...     T_vg_unif              = 20,
+        ...     polat_repeated_pattern = True,
+        ...     final_currency         = 'EUR',
+        ...     change_rates           = {'EUR':{'USD/EUR':1.14}}, # https://www.google.fr/#q=EUR+USD
+        ...     return_charts          = True,
+        ...     from_local_data        = False,
+        ... )
+
+        Some argument's values of instantiation are illegal, see
+        >>> cba = CBACalculator(
+        ...     run_name               = 'Example-1',
+        ...     country                = 'france',
+        ...     project_first_year     = 2020,
+        ...     project_horizon        = 20,
+        ...     discount_rate          = .03,
+        ...     co2_prices_scenario    = 'SPC2009',
+        ...     output_flows_scenario  = 'O',
+        ...     initial_landuse        = 'improved grassland',
+        ...     final_landuse          = 'wheat',
+        ...     input_flows_scenario   = 'IFP',
+        ...     T_so                   = 20,
+        ...     T_vg_diff              = 1,
+        ...     T_vg_unif              = 20,
+        ...     polat_repeated_pattern = True,
+        ...     final_currency         = 'EUR',
+        ...     change_rates           = {'EUR':{'USD/EUR':1.14}}, # https://www.google.fr/#q=EUR+USD
+        ...     return_charts          = True,
+        ...     from_local_data        = False,
+        ...     GWP_horizon            = 20,      # <-----------
+        ...     GWP_static             = False    # <-----------
+        ... )
+        `GWP_horizon` and `GWP_static` must be set to 100 years and `True` respectively.
+        The only reason behind this is that these two parameters are implictly assumed
+        to be such in data exposed by attribute `ghgs_emissions_per_tonne_of_eth` of
+        the class named `VegetationsAndSoilSpecificities`.
+        """
+        self._GWP_horizon = GWP_horizon
+        self._GWP_static  = GWP_static
+        if GWP_horizon != 100 or not GWP_static:
+            print(
+                '`GWP_horizon` and `GWP_static` must be set to 100 years '
+                'and `True` respectively.\nThe only reason behind this is '
+                'that these two parameters are implictly assumed\nto be such '
+                'in data exposed by attribute `ghgs_emissions_per_tonne_of_eth` '
+                'of\nthe class named `VegetationsAndSoilSpecificities`.'
+            )
+            return
+        
         
         self.__caobjs = []
         super(CBACalculator, self).__init__(**kwargs)
-        self.delay_between_luc_and_production = VegetationsAndSoilSpecificities(
-            verbose=kwargs.get('verbose')
-        ).delay_between_luc_and_production
+        self.dluc_delays = VegetationsAndSoilSpecificities(
+            **kwargs
+        ).delay_between_dluc_and_production
+
+        self.output_flows_traj_converter = BlackOutputAndSubstitutesSpecificities(
+            **kwargs
+        )        
 
         self.discount_rate    = discount_rate
         self.country          = country.upper()
@@ -2267,28 +2523,13 @@ class CBACalculator(ts.Cache):
         self.black_output     = black_output.upper()
         self.initial_landuse  = initial_landuse.upper()
         self.final_landuse    = final_landuse.upper()
-        self.project_timing   = self.delay_between_luc_and_production.get(
+        self.project_timing   = self.dluc_delays.get(
             self.final_landuse, 0
         )
         self._project_horizon = project_horizon + self.project_timing
         self.T_so             = T_so
         self.T_vg_diff        = T_vg_diff
         self.T_vg_unif        = T_vg_unif
-        self._GWP_horizon     = 100
-        self._GWP_static      = True
-        if GWP_horizon != 100 or GWP_static != True:
-            raise type(
-                'NoDescripterError',
-                (BaseException,), {}
-            )(
-                '\n'.join([
-                    '`GWP_horizon` and `GWP_static` must be set to 100 years',
-                    'and `True` respectively. The only reason behind this is',
-                    'that these two parameters are implictly assumed to be such',
-                    'in data reported in attribute `ghgs_emissions_per_tonne_of_eth`',
-                    'of the class named `VegetationsAndSoilSpecificities`.'
-                ])
-            )
             
         self.project_first_year     = project_first_year
         self.polat_repeated_pattern = polat_repeated_pattern
@@ -2395,7 +2636,7 @@ class CBACalculator(ts.Cache):
         (of 150) and that that is returned above. The difference between the two
         values is that the latter integrates the "ante-project" years needed to
         prepare lands. The number of years that are needed to do so are set within
-        the attribute `delay_between_luc_and_production` of the class defined in
+        the attribute `delay_between_dluc_and_production` of the class defined in
         the present script and named `VegetationsAndSoilSpecificities`.
         """
         return '\n'.join([
@@ -3791,7 +4032,7 @@ class CBACalculator(ts.Cache):
         >>> o.timed_output_flows_traj
         array([[0., 1., 1., 1., 1., 1.]])
 
-        The attribute `delay_between_luc_and_production` of the class defined in
+        The attribute `delay_between_dluc_and_production` of the class defined in
         the present script and named `VegetationsAndSoilSpecificities` is the
         reason behind this prepended 0.
         """
@@ -4059,9 +4300,9 @@ class CBACalculator(ts.Cache):
         ... )
         [(2020, -1.04039), (2021, -1.04039), (2022, -1.04039), (2023, -1.04039)]
         """
+        ghgs_yields = self.co2eq_computer.ghgs_emissions_per_tonne_of_eth['culture']
         return self.co2eq_computer.co2eq_yields_GWP_traj_computer(
-            self.co2eq_computer\
-            .biomass_ghgs_specificities['culture'][self.final_landuse]
+            ghgs_yields[self.final_landuse]
         )
             
     @property
@@ -4183,10 +4424,9 @@ class CBACalculator(ts.Cache):
         ... )
         [(2020, -0.8895799999999999), (2021, -0.8895799999999999), (2022, -0.8895799999999999), (2023, -0.8895799999999999)]
         """
-        ghgs_yield = self.co2eq_computer\
-                     .biomass_ghgs_specificities['process'][self.final_landuse]
+        ghgs_yields = self.co2eq_computer.ghgs_emissions_per_tonne_of_eth['process']
         return self.co2eq_computer.co2eq_yields_GWP_traj_computer(
-            ghgs_yield
+            ghgs_yields[self.final_landuse]
         )
         
     @property
@@ -7575,20 +7815,6 @@ class CBACalculator(ts.Cache):
 
     """**[BLACK*OUTPUT*CO2*FLOWS*&*VALUE]***********************************************************"""
     @ts.Cache._property
-    def output_flows_traj_converter(self):
-        """ Instantiated class-like object whose methodes and properties will
-        be used for conversions to equivalent "black output" flows of the
-        scenarized trajectory of "green output" flows.
-
-        Testing/Example
-        ---------------
-        >>> o = CBACalculator._testing_instancer(ph=0)
-        >>> type(o.output_flows_traj_converter)
-        <class '__main__.BlackOutputAndSubstitutesSpecificities'>
-        """
-        return BlackOutputAndSubstitutesSpecificities()
-
-    @ts.Cache._property
     def output_MJs_flows_traj(self):
         """
         Resolution order:
@@ -8229,7 +8455,14 @@ class CBACalculator(ts.Cache):
     """**[FINALIZE]*********************************************************************************"""
     @ts.Cache._property
     def all_XLSXed(self):
-        """ XLSX file of all computed data, stored in `self.save_dir`."""
+        """ XLSX file of all computed data, stored in `self.save_dir`.
+
+        Example
+        -------
+        >>  CBACalculator._testing_instancer(
+        ..      ph=60, sc='WEO2015-CPS'
+        ..  ).all_XLSXed
+        """
         q_listed_content = [
             self.horizon,
             self.economic_horizon,
@@ -8604,7 +8837,6 @@ class CBACalculator(ts.Cache):
         'chart_of_vgco2_unif_flows_traj',
     ]
 
-
 ##******************************************
 ##    ╔═╗╔╗ ╔═╗╔═╗┌─┐┬─┐┌─┐┌┬┐┌─┐┌┬┐┌─┐┬─┐┌─┐╔═╗┌┐┌┌┬┐┌─┐┌─┐┌─┐┌┐┌┬┌─┐┌─┐┬─┐
 ##    ║  ╠╩╗╠═╣╠═╝├─┤├┬┘├─┤│││├┤  │ ├┤ ├┬┘└─┐║╣ │││ │││ ││ ┬├┤ ││││┌─┘├┤ ├┬┘
@@ -8704,7 +8936,7 @@ class CBAParametersEndogenizer(object):
         return self._CBAcI
 
 
-if __name__ == '__main__':
+if __name__eq__main__:
     import doctest
     np.set_printoptions(
         precision = 8,

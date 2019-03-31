@@ -1,0 +1,2 @@
+energy:unit:mj/tonne[output]
+emission:unit:tonne[co2eq]/mj

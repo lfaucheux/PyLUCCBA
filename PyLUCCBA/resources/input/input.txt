@@ -1,0 +1,8 @@
+IFP:unit:tonne[Output]/tonne[Input]
+IFP:yrb:2013
+DOE:unit:tonne[Output]/tonne[Input]
+DOE:yrb:2012
+O:unit:tonne[Output]/ha[Input]
+O:yrb:none
+DEBUG:unit:tonne[Output]/tonne[Input]
+DEBUG:yrb:none

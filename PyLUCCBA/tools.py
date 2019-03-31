@@ -49,7 +49,6 @@ def cast(s):
     """ Function which clarifies the implicit type of
     strings, a priori coming from csv-like files.
 
-
     Example
     -------
     >>> cast('1')
@@ -58,7 +57,11 @@ def cast(s):
     1.0
     >>> cast('1E+0')
     1.0
+    >>> cast('1E+1')
+    10.0
     >>> cast('one')
+    'one'
+    >>> cast('One')
     'one'
     """
     s = str(s)
@@ -69,7 +72,7 @@ def cast(s):
         else:
             return int(s)
     except:
-        return s
+        return s.lower()
 
 ##******************************************
 ##    ┌─┐┌─┐┌┬┐   ┌─┐┬┬  ┌─┐    ┌─┐┌─┐    ┬  ┬┌─┐┌┬┐   ┌─┐┌─┐  ┬  ┬┌┐┌┌─┐┌─┐
@@ -82,7 +85,7 @@ def get_file_as_list_of_lines(fname):
     -------
     >>> get_file_as_list_of_lines(
     ...     fname = os.path.join(
-    ...         'resources', 'yields', 'Output', 'ETH_yields_FR.txt'
+    ...         'resources', 'output', 'eth_yields_fr.txt'
     ...     ),
     ... )[:2]
     ['O:unit:tonne[Output]/tonne[Output]', 'O:yrb:2007']
@@ -97,16 +100,16 @@ def get_file_as_list_of_lines(fname):
 ##    ┌─┐┌─┐┬  ┬   ┬┌┐┌╔╦╗┬┌┐┌┌┬┐
 ##    │  └─┐└┐┌┘   ││││║║║││││ ││
 ##    └─┘└─┘ └┘────┴┘└┘╩ ╩┴┘└┘─┴┘
-def csv_dicter(wkey, fname, pop):
+def csv_dicter(pkey, fname, pop):
     """ Function which gets the content of a given file as dict whose file-lines
-    are identifyed via `wkey`. NB : fname a full path and name of the given file.
+    are identifyed via `pkey`. NB : fname a full path and name of the given file.
 
     Testing/Example
     ---------------
     >>> csv_as_dict = csv_dicter(
-    ...     wkey  = 'year',
+    ...     pkey  = 'year',
     ...     fname = os.path.join(
-    ...         'resources', 'prices', 'Exput', 'CO2_prices_FR.csv'
+    ...         'resources', 'externality', 'co2_prices_fr.csv'
     ...     ),
     ...     pop   = True,
     ... )
@@ -122,11 +125,11 @@ def csv_dicter(wkey, fname, pop):
     for i_l, line in enumerate(l[1:]):
         values    = [cast(v) for v in line.split(';')]
         dic       = dict(zip(keys, values))
-        wid       = dic[wkey]
+        wid       = dic[pkey]
         wid       = wid.lower() if isinstance(wid, str) else wid
         dico[wid] = dic
         if pop:
-            dico[wid].pop(wkey)
+            dico[wid].pop(pkey)
 
     return dico
 
@@ -145,17 +148,17 @@ def txt_dicter(fname):
     ---------------
     >>> txt_as_dict = txt_dicter(
     ...     fname = os.path.join(
-    ...         'resources', 'prices', 'Exput', 'Exput.txt'
+    ...         'resources', 'externality', 'co2_prices_fr.txt'
     ...     ),
     ... )
     
     >>> scenario_name = 'spc2009'
     >>> sorted(txt_as_dict[scenario_name].items())
-    [('unit', 'EUR/tonne'), ('yrb', 2008)]
+    [('unit', 'eur/tonne'), ('yrb', 2008)]
     
     >>> scenario_name = 'weo2015-450s'
     >>> sorted(txt_as_dict[scenario_name].items())
-    [('unit', 'USD/tonne'), ('yrb', 2014)]
+    [('unit', 'usd/tonne'), ('yrb', 2014)]
     """
     splitted_fName   = fname.split(OS_SEP)[:-1]
     containing_foler = splitted_fName[-1]
@@ -197,10 +200,7 @@ def taber(msg, size):
     >>> taber(msg='Example string', size=42)
     'Example string                            '
     """
-    try:
-        return msg + (size - len(msg))*' '
-    except:
-        return str(msg) + (size - len(str(msg)))*' '
+    return str(msg) + (size - len(str(msg)))*' '
 
 ##******************************************
 ##    ┌─┐┌─┐┬ ┬  ┬┌─┐┬─┐    ┌┬┐┌─┐┌─┐┬─┐
@@ -665,9 +665,9 @@ class InMindWithCorrespondingUnit(Cache):
       * csv files for numerical data
       * txt files for information about numerical data."""
 
-    def __init__(self, wkey, fname, pop=True):
+    def __init__(self, pkey, fname, pop=True):
         super(InMindWithCorrespondingUnit, self).__init__()
-        self.wkey  = wkey
+        self.pkey  = pkey
         self.fname = fname
         self.pop   = pop
 
@@ -677,15 +677,15 @@ class InMindWithCorrespondingUnit(Cache):
         Testing/Example
         ---------------
         >>> o = InMindWithCorrespondingUnit(
-        ...     wkey  = 'year',
+        ...     pkey  = 'year',
         ...     fname = os.path.join(
-        ...         'resources', 'yields', 'Output', 'ETH_yields_FR.csv'
+        ...         'resources', 'output', 'eth_yields_fr.csv'
         ...     ),
         ... )
         >>> o.keys_and_values[2040]['DEBUG']
         1
         """
-        return csv_dicter(self.wkey, self.fname, pop=self.pop)
+        return csv_dicter(self.pkey, self.fname, pop=self.pop)
 
     @Cache._property
     def keys_and_infos(self):
@@ -693,16 +693,27 @@ class InMindWithCorrespondingUnit(Cache):
         Testing/Example
         ---------------
         >>> o = InMindWithCorrespondingUnit(
-        ...     wkey  = '',
+        ...     pkey  = '',
         ...     fname = os.path.join(
-        ...         'resources', 'prices', 'Exput', 'Exput.txt'
+        ...         'resources', 'externality', 'co2_prices_fr.txt'
         ...     )
         ... )
         >>> kinf = o.keys_and_infos['weo2015-nps']
         >>> kinf['yrb']
         2014
         >>> kinf['unit']
-        'USD/tonne'
+        'usd/tonne'
+
+        
+        >>> o = InMindWithCorrespondingUnit(
+        ...     pkey  = '',
+        ...     fname = os.path.join(
+        ...         'resources', 'input', 'haeth_yields_fr.txt'
+        ...     )
+        ... )
+        >>> kinf = o.keys_and_infos['*']
+        >>> kinf['unit']
+        'tonne[output]/ha'
         """
         return txt_dicter(self.fname)
 
@@ -712,14 +723,14 @@ class InMindWithCorrespondingUnit(Cache):
         Testing/Example
         ---------------
         >>> o = InMindWithCorrespondingUnit(
-        ...     wkey  = '',
+        ...     pkey  = '',
         ...     fname = os.path.join(
-        ...         'resources', 'dluc', 'CS_yields_FR.csv'
+        ...         'resources', 'dluc', 'cs_yields_fr.csv'
         ...     ),
         ... )
         >>> soc = o.values_and_infos_per_key['soc']
         >>> soc['infos']
-        {'unit': 'Tonne/ha'}
+        {'unit': 'tonne/ha'}
         >>> sorted(
         ...     soc['values'].items()
         ... )[:3]
@@ -728,7 +739,9 @@ class InMindWithCorrespondingUnit(Cache):
         return {
             key: {
                 'values':self.keys_and_values.get(key),
-                'infos' :self.keys_and_infos.get(key),
+                'infos' :self.keys_and_infos.get(
+                    key, self.keys_and_infos.get('*')
+                ),
             } for key in self.keys_and_values.keys()
         }
 
@@ -804,7 +817,7 @@ class DataReader(Cache):
     """ Class which maps directories and files needed for computations."""
     def __init__(self, **kwargs):
         super(DataReader, self).__init__()
-        self.country         = '_%s'%kwargs.get('country', 'FR')[:2].upper()
+        self.country         = '_%s'%kwargs.get('country', 'fr')[:2].lower()
         self.package_folder  = os.path.dirname(__file__)
         self.local_folder    = os.getcwd()
         self.from_local_data = kwargs.get('from_local_data', False)
@@ -828,7 +841,7 @@ class DataReader(Cache):
         ...     name = foldername
         ... )
         >>> sorted(dr.resources.keys())
-        ['dluc', 'prices', 'yields']
+        ['__meta__', 'dluc', 'externality', 'input', 'output']
         >>> tmp_exists = lambda : os.path.exists(tmp_folder)
         >>> tmp_exists()
         True
@@ -869,7 +882,7 @@ class DataReader(Cache):
         ... )
         True
         >>> sorted(dr.resources.keys())
-        ['dluc', 'prices', 'yields']
+        ['__meta__', 'dluc', 'externality', 'input', 'output']
         """
         copy_dir = self.resources_folder_dir
         if not os.path.exists(copy_dir):
@@ -892,42 +905,59 @@ class DataReader(Cache):
         return self._resources
 
     def show_resources_tree(self):
-        """ Method that prints the nested structure of the dictionary
+        r""" Method that prints the nested structure of the dictionary
         returned by the method `_resources_mapper`.
 
         Example
         -------
-        >> DataReader(country = 'fRANce').show_resources_tree()
+        >>> DataReader(country = 'fRANce').show_resources_tree()
+        ------------ __meta__
         ------------ dluc
-              ------ CS_yields
-                    via `data['dluc']['CS_yields']`
-                     resources\dluc\CS_yields_FR.csv
-        ------------ prices
-              ------ Exput
-                 --- CO2_prices
-                    via `data['prices']['Exput']['CO2_prices']`
-                     resources\prices\Exput\CO2_prices_FR.csv
-        ------------ yields
-              ------ Input
-                 --- DEBUG_yields
-                    via `data['yields']['Input']['DEBUG_yields']`
-                     resources\yields\Input\DEBUG_yields_FR.csv
-                 --- HAETH_yields
-                    via `data['yields']['Input']['HAETH_yields']`
-                     resources\yields\Input\HAETH_yields_FR.csv
-                 --- MISCANTHUS_yields
-                    via `data['yields']['Input']['MISCANTHUS_yields']`
-                     resources\yields\Input\MISCANTHUS_yields_FR.csv
-                 --- SUGARBEET_yields
-                    via `data['yields']['Input']['SUGARBEET_yields']`
-                     resources\yields\Input\SUGARBEET_yields_FR.csv
-                 --- WHEAT_yields
-                    via `data['yields']['Input']['WHEAT_yields']`
-                     resources\yields\Input\WHEAT_yields_FR.csv
-              ------ Output
-                 --- ETH_yields
-                    via `data['yields']['Output']['ETH_yields']`
-                     resources\yields\Output\ETH_yields_FR.csv
+              ------ cs_yields
+                    via `data['dluc']['cs_yields']`
+                     resources\dluc\cs_yields_fr.csv
+              ------ so_ghgs_shares
+                    via `data['dluc']['so_ghgs_shares']`
+                     resources\dluc\so_ghgs_shares_fr.csv
+              ------ vg_ghgs_shares
+                    via `data['dluc']['vg_ghgs_shares']`
+                     resources\dluc\vg_ghgs_shares_fr.csv
+        ------------ externality
+              ------ co2_prices
+                    via `data['externality']['co2_prices']`
+                     resources\externality\co2_prices_fr.csv
+              ------ cult_ghgs_yields
+                    via `data['externality']['cult_ghgs_yields']`
+                     resources\externality\cult_ghgs_yields_fr.csv
+              ------ proc_ghgs_yields
+                    via `data['externality']['proc_ghgs_yields']`
+                     resources\externality\proc_ghgs_yields_fr.csv
+        ------------ input
+              ------ debug_yields
+                    via `data['input']['debug_yields']`
+                     resources\input\debug_yields_fr.csv
+              ------ haeth_yields
+                    via `data['input']['haeth_yields']`
+                     resources\input\haeth_yields_fr.csv
+              ------ miscanthus_yields
+                    via `data['input']['miscanthus_yields']`
+                     resources\input\miscanthus_yields_fr.csv
+              ------ sugarbeet_yields
+                    via `data['input']['sugarbeet_yields']`
+                     resources\input\sugarbeet_yields_fr.csv
+              ------ wheat_yields
+                    via `data['input']['wheat_yields']`
+                     resources\input\wheat_yields_fr.csv
+        ------------ output
+              ------ cult_to_proc_delays
+                    via `data['output']['cult_to_proc_delays']`
+                     resources\output\cult_to_proc_delays_fr.csv
+              ------ eth_yields
+                    via `data['output']['eth_yields']`
+                     resources\output\eth_yields_fr.csv
+              ------ subs_yields
+                    via `data['output']['subs_yields']`
+                     resources\output\subs_yields_fr.csv
         """
         for key, obj in sorted(self._resources_mapper().items()):
             print(12*'-', key)
@@ -960,29 +990,29 @@ class DataReader(Cache):
         ...     country = 'fRANce'
         ... )._resources_mapper()
 
-        >>> print_(ress['dluc']['CS_yields'])
-        resources\dluc\CS_yields_FR.csv
-
-        >>> print_(ress['prices']['Exput']['CO2_prices'])
-        resources\prices\Exput\CO2_prices_FR.csv
+        >>> print_(ress['externality']['co2_prices'])
+        resources\externality\co2_prices_fr.csv
         
-        >>> print_(ress['yields']['Input']['DEBUG_yields'])
-        resources\yields\Input\DEBUG_yields_FR.csv
+        >>> print_(ress['dluc']['cs_yields'])
+        resources\dluc\cs_yields_fr.csv
         
-        >>> print_(ress['yields']['Input']['HAETH_yields'])
-        resources\yields\Input\HAETH_yields_FR.csv
+        >>> print_(ress['input']['debug_yields'])
+        resources\input\debug_yields_fr.csv
         
-        >>> print_(ress['yields']['Input']['MISCANTHUS_yields'])
-        resources\yields\Input\MISCANTHUS_yields_FR.csv
+        >>> print_(ress['input']['haeth_yields'])
+        resources\input\haeth_yields_fr.csv
         
-        >>> print_(ress['yields']['Input']['SUGARBEET_yields'])
-        resources\yields\Input\SUGARBEET_yields_FR.csv
+        >>> print_(ress['input']['miscanthus_yields'])
+        resources\input\miscanthus_yields_fr.csv
         
-        >>> print_(ress['yields']['Input']['WHEAT_yields'])
-        resources\yields\Input\WHEAT_yields_FR.csv
+        >>> print_(ress['input']['sugarbeet_yields'])
+        resources\input\sugarbeet_yields_fr.csv
         
-        >>> print_(ress['yields']['Output']['ETH_yields'])
-        resources\yields\Output\ETH_yields_FR.csv
+        >>> print_(ress['input']['wheat_yields'])
+        resources\input\wheat_yields_fr.csv
+        
+        >>> print_(ress['output']['eth_yields'])
+        resources\output\eth_yields_fr.csv
 
         """
         dir_    = {}
