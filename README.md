@@ -363,17 +363,19 @@ I invite you to test the function `help` on any of the following objects: `cc.Bl
 
 Data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder, composed of the following subfolders:
   
-•	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) folder that includes *(i)* [BioGrace Excel tool - version 4c.xls](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/BioGrace%20Excel%20tool%20-%20version%204c.xls) cited in *(ii)* [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/Data_CarbonStocks_Emissions.xlsx), in which you can see how the sequestrated carbon stock per type of land use are calculated and *(iii)* csv and txt files in which the results of these calculations are reported. *NB:* some data that have been calculated with [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/dluc/Data_CarbonStocks_Emissions.xlsx) are stored in the body of core.py itself under the form of [python dictionary](https://www.w3schools.com/python/python_dictionaries.asp), see [process](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L151) and [cultivation](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/core.py#L172).  
+•	The [__meta__](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/__meta__) folder that includes [BioGrace Excel tool - version 4c.xls](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/__meta__/BioGrace%20Excel%20tool%20-%20version%204c.xls) cited in [Data_CarbonStocks_Emissions.xlsx](https://github.com/lfaucheux/PyLUCCBA/raw/master/PyLUCCBA/resources/__meta__/Data_CarbonStocks_Emissions.xlsx), in which you can see how the sequestrated carbon stock per type of land use are calculated.
+  
+•	The [dluc](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/dluc) that includes three datafiles, namely *(i) cs_changes_fr.csv* relative the carbon stock associated to some types of land use, *(ii) so_ghgs_shares_fr.csv* relative to the share of soil carbon that translate to actual emissions/sequestrations and *(iii) vg_ghgs_shares_fr.csv* relative to the share of vegetation carbon that translate to actual emissions/sequestrations. Each of these csv file possesses a txt counterpart that has the same name, namely *cs_changes_fr.txt*, *so_ghgs_shares_fr.txt* and *vg_ghgs_shares_fr.txt*, which provide mandatory information regarding, e.g., the units of data.
 
-•	The [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) folder that includes the carbon price scenarios.
+•	The [externality](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/externality) folder that includes three datafiles, namely *(i) co2_prices_fr.csv* relative to the CO2 price-trajectory scenarios, *(ii) cult_ghgs_fr.csv* relative to the quantity of GHG emissions associated to the cultivation of land as such and *(iii) proc_ghgs_fr.csv* relative to the processing of what grows on these lands. Each of these csv file possesses a txt counterpart that has the same name, namely *co2_prices_fr.txt*, *cult_ghgs_fr.txt* and *proc_ghgs_fr.txt*, which provide mandatory information regarding, e.g., the units of data.
 
-•	The [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields) folder which has two folders. The first, named [Input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Input), contains the yields necessary to conduct the study of the project: how much biofuel is produced from one tonne of feedstock (miscanthus or wheat) and how much biofuel can be produced per hectare. The second folder, named [Output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields/Output), tautologically states than one tonne of biofuel is produced per tonne of output.
+•	The [input](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/input) folder that includes four datafiles, namely *(i) haeth_yields_fr.csv* relative to the per-hectar trajectory of output-productivity and *(ii) miscanthus_yields_fr.csv*, *sugarbeet_yields_fr.csv* and *wheat_yields_fr.csv* relative to the trajectories of biofuel produced from one tonne of feedstock. As before, alsmost each of these csv files has a txt counterpart that provides mandatory information on data. In the case of datafiles having no txt counterpart, the tool actually checks for information in a txt file having the same name as the parent folder, i.e. *input.txt* in this case.
 
-*NB: in the folders [prices/Exput](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/prices/Exput) and [yields](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/yields), note that:*
+•	The [output](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources/output) folder that includes three datafiles, namely *(i) eth_yields_fr.csv* that tautologically states than one tonne of biofuel is produced per tonne of output, *(ii) cult_to_proc_delays_fr.csv* relative to the time delay that is required between cultivation and processing of feedstock and *(iii) subs_intensities_fr.csv* relative to the amount of energy and emission associated to bioethanol and oil. Once again, each of these csv files has a txt counterpart that provides mandatory information on data. 
 
-•	The csv files contain temporal trajectories (of prices, of quantities, of yields, ...). These trajectories can be sparse. Indeed, when sparse trajectories with more than one point are provided, say, CO2 prices such as in the scenario *WEO2015-CPS* – see [CO2_prices_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/prices/Exput/CO2_prices_FR.csv) –, the tool automatically retro/intra/extrapolates the values for each year in an exponential way. When both retro- and extrapolation are possible, retropolation is favored and implied using the next period's rate of growth. Then, if the parameter `polat_repeated_pattern` is set to `True`, extrapolation is performed repeating the entire anterior pattern of growth rates from the last known value. If the parameter is set to `False`, the last known value is maintained constant over the project horizon. In the case of sparse trajectories that contain only one value – see *e.g.* [WHEAT_yields_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/yields/Input/WHEAT_yields_FR.csv) –, the dense trajectory is assumed to be flat over the project horizon.
+*NB1*: all files whose name contains either *_yields* or *_prices* contain temporal trajectories. These trajectories can be sparse. Indeed, when sparse trajectories with more than one point are provided, say, CO2 prices such as in the scenario *WEO2015-CPS* – see [CO2_prices_FR.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/externality/co2_prices_fr.csv) –, the tool automatically retro/intra/extrapolates the values for each year in an exponential way. When both retro- and extrapolation are possible, retropolation is favored and implied using the next period's rate of growth. Then, if the parameter `polat_repeated_pattern` is set to `True`, extrapolation is performed by repeating the entire anterior pattern of growth rates from the last known value. If the parameter is set to `False`, the last known value is maintained constant over the project horizon. In the case of sparse trajectories that contain only one value – see *e.g.* [wheat_yields_fr.csv](https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/resources/input/wheat_yields_fr.csv) –, the dense trajectory is assumed to be flat over the project horizon.
 
-•	The txt files contain information related to the trajectories that are stored in csv files.
+*NB2*: all files whose name contains either *_yields* or *_prices* must possess a txt files counterpart providing information on their unit. Indeed, they are read and interpreted in the intention of ensuring the dimensional homogenity of calculations. Put differently, if, say, *tonne/ha* are required for calculation and that data unit is *ha/tonne*, the reverse of data is computed prior to core-calculations.
 
 
 <hr>
@@ -381,7 +383,7 @@ Data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/ma
 ## Data customization/addition
 
 You may want to add your own scenarii regarding, say, how the price CO2 evolves, the trajectory of output flows to produce annually, the necessary quantity of input that is required to produce 1 tonne of output, etc...
-Given that data are stored (in txt and csv formats) according to a hard-to-guess directory tree, the easiest way to work with custom data is to imitate the package-native data that are contained in the [*resources*](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. Let's thus start with a local copy of this folder:
+The easiest way to work with custom data is to imitate the package-native data that are contained in the [*resources*](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. Let's thus start with a local copy of this folder:
 
     >>> import PyLUCCBA as cc
     >>> cc.folder_copier(name='resources')
@@ -391,7 +393,7 @@ Now, to explore the data, go to `C:\path\to\folder`, where you will see a folder
 
 #### Adding new CO2 prices (or output flows) trajectory
 
-To add a scenario of CO2 prices, go to the folder `resources\prices\Exput` of your local copy. There, you will find two files, namely `CO2_prices_FR.csv` and `Exput.txt`. First, open the csv file, add a scenario's name in the first line, *e.g.* `customPricesScenario`, and prices in the just-named column. Remember that your newly-added trajectory can be sparse and that the tool will retro/intra/extrapolate missing prices. Second, open the txt file and add two lines related to `customPricesScenario`, as shown below:
+To add a scenario of CO2 prices, go to the folder `resources\externality` of your local copy. There, you will find two files, namely `co2_prices_fr.csv` and `co2_prices_fr.txt`. First, open the csv file, add a scenario's name in the first line, *e.g.* `customPricesScenario`, and prices in the just-named column. Remember that your newly-added trajectory can be sparse and that the tool will retro/intra/extrapolate missing prices. Second, open the txt file and add two lines related to `customPricesScenario`, as shown below:
 
     customPricesScenario:unit:EUR/tonne
     customPricesScenario:yrb:none
@@ -401,14 +403,15 @@ The first line tells the tool in which currency the prices are expressed. Note t
     >>> cba = cc.CBACalculator(
             # ...
             co2_prices_scenario = 'customPricesScenario', # not case sensitive
+            from_local_data     = True, # [!!!]
             # ...
         )
         
-Note that to add a new trajectory of annual output flows, the approach is exactly the same as that described for CO2 prices. This time, the files are stored in the folder `resources\yields\Output` of your local copy.
+Note that to add a new trajectory of annual output flows, or of yields trajectory, the approach is exactly the same as that described for CO2 prices. Simply enrich/modify you local copy.
 
 #### Adding new dluc or input yields related data
 
-All the material required to add new dluc and/or input yields is provided with the package. However, these additions implies some substantive modifications. Please, contact me if you are interested in doing so.
+All the material required to add new dluc and/or input yields is provided with the package.
 
 <hr>
 

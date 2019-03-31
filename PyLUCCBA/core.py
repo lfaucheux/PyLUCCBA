@@ -88,7 +88,7 @@ class BlackOutputAndSubstitutesSpecificities(ts.Cache):
         {'unit': 'tonne[co2eq]/mj'}
         """
         return ts.InMindWithCorrespondingUnit(
-            "", self.resources['output']['subs_yields']
+            "", self.resources['output']['subs_intensities']
         ).values_and_infos_per_key
     
     @property
@@ -279,7 +279,7 @@ class VegetationsAndSoilSpecificities(ts.Cache):
         'data must comply with the unit mentioned above.'
         """
         return ts.InMindWithCorrespondingUnit(
-            u"", self.resources['externality']['cult_ghgs_yields']
+            u"", self.resources['externality']['cult_ghgs']
         ).values_and_infos_per_key
 
     @property
@@ -299,7 +299,7 @@ class VegetationsAndSoilSpecificities(ts.Cache):
         'data must comply with the unit mentioned above.'
         """
         return ts.InMindWithCorrespondingUnit(
-            u"", self.resources['externality']['proc_ghgs_yields']
+            u"", self.resources['externality']['proc_ghgs']
         ).values_and_infos_per_key        
 
     @ts.Cache._property
@@ -347,7 +347,7 @@ class VegetationsAndSoilSpecificities(ts.Cache):
         51.33333333
         """
         return ts.InMindWithCorrespondingUnit(
-            u"", self.resources['dluc']['cs_yields']
+            u"", self.resources['dluc']['cs_changes']
         ).values_and_infos_per_key
     
     @property

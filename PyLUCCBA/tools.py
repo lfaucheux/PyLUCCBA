@@ -725,7 +725,7 @@ class InMindWithCorrespondingUnit(Cache):
         >>> o = InMindWithCorrespondingUnit(
         ...     pkey  = '',
         ...     fname = os.path.join(
-        ...         'resources', 'dluc', 'cs_yields_fr.csv'
+        ...         'resources', 'dluc', 'cs_changes_fr.csv'
         ...     ),
         ... )
         >>> soc = o.values_and_infos_per_key['soc']
@@ -913,9 +913,9 @@ class DataReader(Cache):
         >>> DataReader(country = 'fRANce').show_resources_tree()
         ------------ __meta__
         ------------ dluc
-              ------ cs_yields
-                    via `data['dluc']['cs_yields']`
-                     resources\dluc\cs_yields_fr.csv
+              ------ cs_changes
+                    via `data['dluc']['cs_changes']`
+                     resources\dluc\cs_changes_fr.csv
               ------ so_ghgs_shares
                     via `data['dluc']['so_ghgs_shares']`
                      resources\dluc\so_ghgs_shares_fr.csv
@@ -926,12 +926,12 @@ class DataReader(Cache):
               ------ co2_prices
                     via `data['externality']['co2_prices']`
                      resources\externality\co2_prices_fr.csv
-              ------ cult_ghgs_yields
-                    via `data['externality']['cult_ghgs_yields']`
-                     resources\externality\cult_ghgs_yields_fr.csv
-              ------ proc_ghgs_yields
-                    via `data['externality']['proc_ghgs_yields']`
-                     resources\externality\proc_ghgs_yields_fr.csv
+              ------ cult_ghgs
+                    via `data['externality']['cult_ghgs']`
+                     resources\externality\cult_ghgs_fr.csv
+              ------ proc_ghgs
+                    via `data['externality']['proc_ghgs']`
+                     resources\externality\proc_ghgs_fr.csv
         ------------ input
               ------ debug_yields
                     via `data['input']['debug_yields']`
@@ -955,9 +955,9 @@ class DataReader(Cache):
               ------ eth_yields
                     via `data['output']['eth_yields']`
                      resources\output\eth_yields_fr.csv
-              ------ subs_yields
-                    via `data['output']['subs_yields']`
-                     resources\output\subs_yields_fr.csv
+              ------ subs_intensities
+                    via `data['output']['subs_intensities']`
+                     resources\output\subs_intensities_fr.csv
         """
         for key, obj in sorted(self._resources_mapper().items()):
             print(12*'-', key)
@@ -993,8 +993,8 @@ class DataReader(Cache):
         >>> print_(ress['externality']['co2_prices'])
         resources\externality\co2_prices_fr.csv
         
-        >>> print_(ress['dluc']['cs_yields'])
-        resources\dluc\cs_yields_fr.csv
+        >>> print_(ress['dluc']['cs_changes'])
+        resources\dluc\cs_changes_fr.csv
         
         >>> print_(ress['input']['debug_yields'])
         resources\input\debug_yields_fr.csv
