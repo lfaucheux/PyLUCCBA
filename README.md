@@ -382,8 +382,8 @@ Data are stored in the [resources](https://github.com/lfaucheux/PyLUCCBA/tree/ma
 
 ## Data customization/addition
 
-You may want to add your own scenarii regarding, say, how the price CO2 evolves, the trajectory of output flows to produce annually, the necessary quantity of input that is required to produce 1 tonne of output, etc...
-The easiest way to work with custom data is to imitate the package-native data that are contained in the [*resources*](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. Let's thus start with a local copy of this folder:
+You may want to add your own scenarii regarding, e.g., how the price of CO2 evolves over time, the trajectory of output flows produced annually, the quantity of input that is required to produce 1 tonne of output, etc...
+The easiest way of working with custom data is to imitate the package-native data contained in the [*resources*](https://github.com/lfaucheux/PyLUCCBA/tree/master/PyLUCCBA/resources) folder. Let's start with a local copy of this folder:
 
     >>> import PyLUCCBA as cc
     >>> cc.folder_copier(name='resources')
@@ -391,14 +391,14 @@ The easiest way to work with custom data is to imitate the package-native data t
     
 Now, to explore the data, go to `C:\path\to\folder`, where you will see a folder named `resources` that is the exact copy of the data used in [Dupoux (2018)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_Sept2018.pdf).
 
-#### Adding new CO2 prices (or output flows) trajectory
+#### Adding new data
 
-To add a scenario of CO2 prices, go to the folder `resources\externality` of your local copy. There, you will find two files, namely `co2_prices_fr.csv` and `co2_prices_fr.txt`. First, open the csv file, add a scenario's name in the first line, *e.g.* `customPricesScenario`, and prices in the just-named column. Remember that your newly-added trajectory can be sparse and that the tool will retro/intra/extrapolate missing prices. Second, open the txt file and add two lines related to `customPricesScenario`, as shown below:
+To add new data, e.g. a scenario of CO2 prices, go to the folder `resources\externality` of your local copy. There, you will find two files, namely `co2_prices_fr.csv` and `co2_prices_fr.txt`. First, open the csv file, add a scenario's name in the first line, *e.g.* `customPricesScenario`, and prices in the just-named column. Remember that your newly-added trajectory can be sparse and that the tool will retro/intra/extrapolate missing prices. Second, open the txt file and add two lines related to `customPricesScenario`, as shown below:
 
     customPricesScenario:unit:EUR/tonne
     customPricesScenario:yrb:none
     
-The first line tells the tool in which currency the prices are expressed. Note that the tool is actually not capable of dealing with other mass-units than `tonne`, so stick to it. The second line is not mandatory, and is simply here to simplify the potential future improvements of the tool. Finally, to imply this trajectory of prices in your calculations, simply instantiate `CBACalculator` with `'customPricesScenario'`, *i.e.*
+The first line specifies the currency in which prices are expressed. Note that the tool is actually not capable of dealing with other mass-units than `tonne`, so stick to it. The second line is not mandatory. It only allows you to simplify the potential future improvements of the tool. Finally, to imply the just-added trajectory of prices in your calculations, simply instantiate `CBACalculator` with `'customPricesScenario'`, *i.e.*
 
     >>> cba = cc.CBACalculator(
             # ...
@@ -407,11 +407,7 @@ The first line tells the tool in which currency the prices are expressed. Note t
             # ...
         )
         
-Note that to add a new trajectory of annual output flows, or of yields trajectory, the approach is exactly the same as that described for CO2 prices. Simply enrich/modify you local copy.
-
-#### Adding new dluc or input yields related data
-
-All the material required to add new dluc and/or input yields is provided with the package.
+Note that to add a new trajectory of annual output flows or one of yields, the approach is exactly the same as that described for CO2 prices. Simply enrich/modify your local copy.
 
 <hr>
 
