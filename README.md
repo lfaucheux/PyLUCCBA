@@ -6,7 +6,7 @@
     
 *This package offers a compilation of environmental and economic data to generate environment-related net present values of any biofuel project with impacts to the environment (GHG emissions or sequestrations). It is coded in Python (compatible with both versions: 2 and 3). Python is a cross platform and a comprehensive extensible and editable language with a large community of users. The structure of the package is simple with accessible input data to which it is possible to add or suppress one’s own trajectories (of prices, carbon stocks, etc).*
 
-*NB: In the following description we use the expression project's Net Present Value (NPV) multiple times. Note that this use is abusive since it actually refers to the environmental component of projects. For more details, see [Dupoux (In press)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_inpress.pdf)*
+*NB: In the following description we use the expression project's Net Present Value (NPV) multiple times. Note that this use is abusive since it actually refers to the environmental component of projects. For more details, see [Dupoux (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0921800918313971)*
 
 <hr>
 
@@ -51,7 +51,7 @@ Or using a non-python-builtin approach, namely [git](https://git-scm.com/downloa
 
 ## Example usage
     
-*The example that follows is done with the idea of showing how to go beyond the replication of the results presented in [Dupoux (In press)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_inpress.pdf) via the Python Shell*.
+*The example that follows is done with the idea of showing how to go beyond the replication of the results presented in [Dupoux (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0921800918313971) via the Python Shell*.
 
 Let's first import the module `PyLUCCBA`
 
@@ -221,7 +221,7 @@ Actually, it looks like extending the horizon of the project may be a good idea 
     
 <p align="center"><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bunif-SPC2009-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img><img src="https://github.com/lfaucheux/PyLUCCBA/blob/master/PyLUCCBA/examples/Example-1/dNPV%20co2%20total%20%5Bdiff-SPC2009-ETHvsOIL%5D-extended.png?raw=true" width="50%"/><img></p>
 
-Rather than vizualizing the NPVs' profiles, we may use a precise way to know *when* a project becomes *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (In press)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_inpress.pdf) – for each type of annualization approach.
+Rather than vizualizing the NPVs' profiles, we may use a precise way to know *when* a project becomes *environmentally* profitable – referred to as *Carbon Profitability Payback Period* in [Dupoux (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0921800918313971) – for each type of annualization approach.
 
     >>> cba.unif_payback_period
     41 # years
@@ -389,7 +389,7 @@ The easiest way of working with custom data is to imitate the package-native dat
     >>> cc.folder_copier(name='resources')
     'resources' folder copied to C:\path\to\folder
     
-Now, to explore the data, go to `C:\path\to\folder`, where you will see a folder named *resources* that is the exact copy of the data used in [Dupoux (In press)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_inpress.pdf).
+Now, to explore the data, go to `C:\path\to\folder`, where you will see a folder named *resources* that is the exact copy of the data used in [Dupoux (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0921800918313971).
 
 #### Adding new data
 
@@ -427,15 +427,15 @@ Note that each column has a title that is very verbose – so as to make things 
 
 ## Paper's results replication
 
-All the results presented in [Dupoux (In press)](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_inpress.pdf) can easily be reproduced. To replicate a specific result, one has to `import` the associated script. Its importation will run the code that is required to generate the results. The table that follows makes the association between the python `import`-commands and the cases presented in the paper.
+All the results presented in [Dupoux (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0921800918313971) can easily be reproduced. To replicate a specific result, one has to `import` the associated script. Its importation will run the code that is required to generate the results. The table that follows makes the association between the python `import`-commands and the cases presented in the paper.
 
  Paper's section and page | Python command                                                     | Invoked script
  ------------------------ | ------------------------------------------------------------------ | -------------------
- Subsection 3.2 page 12   | `from PyLUCCBA.examples import study_Grassland_DiscountingEffect`  | [*study_Grassland_DiscountingEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_DiscountingEffect.py)
- Subsection 3.2 page 13   | `from PyLUCCBA.examples import study_Grassland_CarbonPriceEffect`  | [*study_Grassland_CarbonPriceEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CarbonPriceEffect.py)
- Subsection 3.2 page 14   | `from PyLUCCBA.examples import study_Grassland_CombinedEffect`     | [*study_Grassland_CombinedEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CombinedEffect.py)
- Subsection 4.1 page 14   | `from PyLUCCBA.examples import study_Grassland_CompensatoryRate`   | [*study_Grassland_CompensatoryRate.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py)
- Subsection 4.2 page 15   | `from PyLUCCBA.examples import study_Grassland_PaybackPeriod`      | [*study_Grassland_PaybackPeriod.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_PaybackPeriod.py)
+ Subsection 3.2.4 page 6   | `from PyLUCCBA.examples import study_Grassland_DiscountingEffect`  | [*study_Grassland_DiscountingEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_DiscountingEffect.py)
+ Subsection 3.2.4 page 6   | `from PyLUCCBA.examples import study_Grassland_CarbonPriceEffect`  | [*study_Grassland_CarbonPriceEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CarbonPriceEffect.py)
+ Subsection 3.2.4 page 6   | `from PyLUCCBA.examples import study_Grassland_CombinedEffect`     | [*study_Grassland_CombinedEffect.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CombinedEffect.py)
+ Subsection 4.1 page 8   | `from PyLUCCBA.examples import study_Grassland_CompensatoryRate`   | [*study_Grassland_CompensatoryRate.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_CompensatoryRate.py)
+ Subsection 4.2 page 8   | `from PyLUCCBA.examples import study_Grassland_PaybackPeriod`      | [*study_Grassland_PaybackPeriod.py*](https://raw.githubusercontent.com/lfaucheux/PyLUCCBA/master/PyLUCCBA/examples/study_Grassland_PaybackPeriod.py)
 
 
 In case you want to modify those scripts instead of simply invoking them, you can first copy them to your working directory, typing
@@ -460,4 +460,4 @@ Poeplau, C., A. Don, L. Vesterdal, J. Leifeld, B. VanWesemael, J. Schumacher, an
 
 The European Commission (2010). “[Commission decision of 10 June 2010 on guidelines for the calculation of land carbon stocks for the purpose of Annex V to Directive 2009/28/EC](https://www.emissions-euets.com/component/content/article/261-commission-decision-of-10-june-2010-on-guidelines-for-the-calculation-of-land-carbon-stocks-for-the-purpose-of-annex-v-to-directive-200928ec)”. _Official Journal of The European Union_ 2010/335/E.
 
-Dupoux, M. “[The land use change time-accounting failure](https://github.com/lfaucheux/PyLUCCBA/raw/master/Dupoux_inpress.pdf)” (in press).
+Dupoux, M (2019). “[The land use change time-accounting failure](https://www.sciencedirect.com/science/article/abs/pii/S0921800918313971)”. _Ecological Economics_ 164.
